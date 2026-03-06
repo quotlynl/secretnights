@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Beheer – Secretnights</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--gold:#c8a96e;--gl:#e8d5a3;--black:#0a0a0a;--bs:#111111;--bm:#181818;--bc:#141414;--white:#f5f0e8;--wd:rgba(245,240,232,.65);--fd:'Cormorant Garamond',serif;--fb:'Montserrat',sans-serif;--green:#4caf82;--red:#e05252;--orange:#e08c52}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--fb);font-weight:300;min-height:100vh}
+
+/* LOGIN SCREEN */
+#loginScreen{position:fixed;inset:0;z-index:1000;background:var(--black);display:flex;align-items:center;justify-content:center}
+#loginScreen.hidden{display:none}
+.login-box{background:var(--bs);border:1px solid rgba(200,169,110,.2);padding:52px 48px;width:100%;max-width:420px;text-align:center}
+.l-logo{font-family:var(--fd);font-size:1.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.l-logo span{font-style:italic;color:var(--white)}
+.l-sub{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:36px;display:block}
+.l-label{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;text-align:left;margin-bottom:7px}
+.l-input{width:100%;background:var(--black);border:1px solid rgba(200,169,110,.25);color:var(--white);padding:13px 16px;font-family:var(--fb);font-size:.82rem;outline:none;transition:border-color .3s;margin-bottom:16px;border-radius:0;-webkit-appearance:none}
+.l-input:focus{border-color:var(--gold)}
+.l-btn{width:100%;background:var(--gold);color:var(--black);border:none;padding:14px;font-family:var(--fb);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:4px}
+.l-btn:hover{background:var(--gl)}
+.l-err{font-size:.68rem;color:var(--red);margin-top:12px;min-height:20px}
+
+/* MAIN APP */
+#app{display:none;min-height:100vh}
+#app.visible{display:block}
+
+/* TOP BAR */
+.topbar{background:var(--bs);border-bottom:1px solid rgba(200,169,110,.15);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100}
+.tb-logo{font-family:var(--fd);font-size:1.2rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+.tb-logo span{font-style:italic;color:var(--white)}
+.tb-badge{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.28);margin-left:10px}
+.tb-right{display:flex;align-items:center;gap:18px}
+.tb-user{font-size:.62rem;color:var(--wd)}
+.logout-btn{background:transparent;border:1px solid rgba(200,169,110,.25);color:var(--gold);padding:7px 16px;font-family:var(--fb);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.logout-btn:hover{background:rgba(200,169,110,.1)}
+
+/* LAYOUT */
+.app-body{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 60px)}
+
+/* SIDEBAR */
+.sidebar{background:var(--bs);border-right:1px solid rgba(200,169,110,.1);padding:28px 0}
+.nav-item{display:flex;align-items:center;gap:11px;padding:12px 24px;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.45);cursor:pointer;transition:all .3s;border-left:2px solid transparent}
+.nav-item:hover{color:var(--white);background:rgba(200,169,110,.05)}
+.nav-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(200,169,110,.07)}
+.nav-icon{font-size:1rem;width:20px;text-align:center}
+.nav-section{font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,240,232,.18);padding:20px 24px 8px;margin-top:8px}
+
+/* MAIN */
+.main{padding:32px;overflow:auto}
+.page{display:none}
+.page.active{display:block}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:32px}
+.stat-card{background:var(--bs);border:1px solid rgba(200,169,110,.13);padding:24px 22px;position:relative;overflow:hidden}
+.stat-card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px}
+.stat-card.gold::after{background:var(--gold)}
+.stat-card.green::after{background:var(--green)}
+.stat-card.blue::after{background:#5294e2}
+.stat-card.orange::after{background:var(--orange)}
+.stat-label{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.38);margin-bottom:10px;display:block}
+.stat-value{font-family:var(--fd);font-size:2.6rem;font-weight:300;line-height:1;color:var(--white)}
+.stat-sub{font-size:.6rem;color:rgba(245,240,232,.28);margin-top:6px}
+
+/* PAGE HEADER */
+.page-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.page-hd h1{font-family:var(--fd);font-size:1.8rem;font-weight:300}
+.page-hd h1 em{font-style:italic;color:var(--gold)}
+
+/* FILTERS */
+.filters{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.filter-btn{background:var(--bc);border:1px solid rgba(200,169,110,.18);color:var(--wd);padding:7px 16px;font-family:var(--fb);font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.filter-btn:hover,.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--black)}
+.search-box{background:var(--bc);border:1px solid rgba(200,169,110,.18);color:var(--white);padding:7px 14px;font-family:var(--fb);font-size:.72rem;outline:none;margin-left:auto;width:200px;transition:border-color .3s}
+.search-box:focus{border-color:var(--gold)}
+.search-box::placeholder{color:rgba(245,240,232,.25)}
+
+/* TABLE */
+.table-wrap{background:var(--bs);border:1px solid rgba(200,169,110,.12);overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:800px}
+thead{background:var(--bc)}
+th{padding:12px 16px;font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;text-align:left;white-space:nowrap}
+td{padding:14px 16px;font-size:.72rem;color:var(--wd);border-top:1px solid rgba(200,169,110,.07);vertical-align:middle}
+tr:hover td{background:rgba(200,169,110,.03);color:var(--white)}
+.badge{display:inline-block;padding:3px 10px;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.badge.bevestigd{background:rgba(76,175,130,.12);color:var(--green);border:1px solid rgba(76,175,130,.2)}
+.badge.geannuleerd{background:rgba(224,82,82,.1);color:var(--red);border:1px solid rgba(224,82,82,.15)}
+.badge.afgerond{background:rgba(200,169,110,.1);color:var(--gold);border:1px solid rgba(200,169,110,.2)}
+.badge.nature-one{background:rgba(82,148,226,.1);color:#5294e2;border:1px solid rgba(82,148,226,.2)}
+.badge.nature-two{background:rgba(224,140,82,.1);color:var(--orange);border:1px solid rgba(224,140,82,.2)}
+
+/* ACTION BTNS */
+.action-btns{display:flex;gap:6px}
+.act-btn{background:transparent;border:1px solid rgba(200,169,110,.2);color:var(--wd);padding:5px 10px;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s;white-space:nowrap}
+.act-btn:hover{border-color:var(--gold);color:var(--gold)}
+.act-btn.danger:hover{border-color:var(--red);color:var(--red)}
+.act-btn.success:hover{border-color:var(--green);color:var(--green)}
+
+/* DETAIL MODAL */
+.det-ov{position:fixed;inset:0;z-index:500;background:rgba(10,10,10,.92);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
+.det-ov.open{display:flex}
+.det-modal{background:var(--bs);border:1px solid rgba(200,169,110,.22);width:100%;max-width:600px;max-height:90vh;overflow-y:auto;animation:slideUp .3s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.det-hd{padding:24px 28px;border-bottom:1px solid rgba(200,169,110,.12);display:flex;justify-content:space-between;align-items:center}
+.det-hd h2{font-family:var(--fd);font-size:1.5rem;font-weight:300}
+.det-hd h2 em{font-style:italic;color:var(--gold)}
+.det-close{background:none;border:1px solid rgba(200,169,110,.25);color:var(--gold);width:30px;height:30px;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.det-close:hover{background:var(--gold);color:var(--black)}
+.det-body{padding:24px 28px}
+.det-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(200,169,110,.07)}
+.det-row:last-child{border-bottom:none}
+.det-lbl{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,240,232,.38)}
+.det-val{font-size:.76rem;color:var(--white);text-align:right;max-width:240px;word-break:break-word}
+.det-acts{padding:16px 28px 28px;display:flex;gap:8px;flex-wrap:wrap}
+.dbtn{padding:10px 18px;font-family:var(--fb);font-size:.58rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s}
+.dbtn-gold{background:var(--gold);color:var(--black)}
+.dbtn-gold:hover{background:var(--gl)}
+.dbtn-red{background:rgba(224,82,82,.15);color:var(--red);border:1px solid rgba(224,82,82,.25)}
+.dbtn-red:hover{background:rgba(224,82,82,.25)}
+
+/* AVAILABILITY SETTINGS */
+.setting-card{background:var(--bs);border:1px solid rgba(200,169,110,.13);padding:28px 26px;margin-bottom:16px;max-width:600px}
+.setting-card h3{font-family:var(--fd);font-size:1.3rem;font-weight:300;margin-bottom:6px}
+.setting-card h3 em{font-style:italic;color:var(--gold)}
+.setting-card p{font-size:.7rem;color:var(--wd);line-height:1.9;margin-bottom:20px}
+.num-input-row{display:flex;align-items:center;gap:14px}
+.num-btn{background:var(--bc);border:1px solid rgba(200,169,110,.25);color:var(--gold);width:36px;height:36px;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;font-family:var(--fb);font-weight:300}
+.num-btn:hover{background:var(--gold);color:var(--black)}
+.num-display{font-family:var(--fd);font-size:2.2rem;font-weight:300;color:var(--white);min-width:60px;text-align:center}
+.save-btn{background:var(--gold);color:var(--black);border:none;padding:10px 24px;font-family:var(--fb);font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:18px}
+.save-btn:hover{background:var(--gl)}
+
+/* CALENDAR */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:16px}
+.cal-header{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px}
+.cal-day-hd{text-align:center;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.3);padding:6px 0}
+.cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.68rem;color:var(--wd);border:1px solid rgba(200,169,110,.07);transition:all .3s;cursor:default;min-height:42px;padding:4px}
+.cal-day.other-month{opacity:.2}
+.cal-day.today{border-color:var(--gold);color:var(--gold)}
+.cal-day.booked{background:rgba(200,169,110,.08);border-color:rgba(200,169,110,.25);color:var(--white)}
+.cal-day.booked::after{content:'●';font-size:.45rem;color:var(--gold);display:block;margin-top:2px}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.cal-nav button{background:var(--bc);border:1px solid rgba(200,169,110,.2);color:var(--gold);padding:6px 14px;font-size:.7rem;cursor:pointer;transition:all .3s;font-family:var(--fb)}
+.cal-nav button:hover{background:var(--gold);color:var(--black)}
+.cal-title{font-family:var(--fd);font-size:1.2rem;font-weight:300;color:var(--white)}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:60px 20px;color:rgba(245,240,232,.28)}
+.empty span{font-size:2.5rem;display:block;margin-bottom:14px}
+.empty p{font-size:.72rem;letter-spacing:.12em}
+
+/* LOADING */
+.loading-row{text-align:center;padding:40px;color:rgba(245,240,232,.3);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;z-index:900;background:var(--bs);border-left:3px solid var(--gold);padding:12px 18px;font-size:.7rem;max-width:260px;line-height:1.7;transform:translateX(120%);transition:transform .4s}
+.toast.show{transform:translateX(0)}
+.toast.err{border-color:var(--red)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .app-body{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .sidebar.mobile-open{display:block;position:fixed;top:60px;left:0;bottom:0;z-index:150;width:220px}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .main{padding:20px 16px}
+  .topbar{padding:0 16px}
+  .login-box{padding:36px 24px;margin:16px}
+  .mobile-menu-btn{display:flex!important}
+}
+@media(max-width:480px){.stats-row{grid-template-columns:1fr}}
+.mobile-menu-btn{display:none;background:none;border:none;color:var(--gold);font-size:1.2rem;cursor:pointer;padding:8px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="l-logo">Secret<span>nights</span></div>
+    <span class="l-sub">Beheerderspaneel</span>
+    <label class="l-label">Wachtwoord</label>
+    <input class="l-input" type="password" id="pwInput" placeholder="••••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="l-btn" onclick="doLogin()">Inloggen</button>
+    <div class="l-err" id="loginErr"></div>
+    <p style="font-size:.58rem;color:rgba(245,240,232,.2);margin-top:24px;line-height:1.8">Wachtwoord vergeten?<br/>Neem contact op via info@secretnights.nl</p>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <!-- Topbar -->
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:8px">
+      <button class="mobile-menu-btn" onclick="toggleSidebar()" id="mMenuBtn">☰</button>
+      <span class="tb-logo">Secret<span>nights</span></span>
+      <span class="tb-badge">Beheer</span>
+    </div>
+    <div class="tb-right">
+      <span class="tb-user" id="tbUser"></span>
+      <button class="logout-btn" onclick="logout()">Uitloggen</button>
+    </div>
+  </div>
+
+  <div class="app-body">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="nav-item active" onclick="showPage('dashboard',this)" id="nav-dashboard">
+        <span class="nav-icon">📊</span> Dashboard
+      </div>
+      <div class="nav-item" onclick="showPage('reserveringen',this)" id="nav-reserveringen">
+        <span class="nav-icon">📋</span> Reserveringen
+      </div>
+      <div class="nav-item" onclick="showPage('kalender',this)" id="nav-kalender">
+        <span class="nav-icon">📅</span> Kalender
+      </div>
+      <div class="nav-section">Instellingen</div>
+      <div class="nav-item" onclick="showPage('beschikbaarheid',this)" id="nav-beschikbaarheid">
+        <span class="nav-icon">🔢</span> Beschikbaarheid
+      </div>
+      <div style="padding:32px 24px 0;border-top:1px solid rgba(200,169,110,.08);margin-top:16px">
+        <a href="index.html" target="_blank" style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(200,169,110,.4);text-decoration:none;transition:color .3s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(200,169,110,.4)'">↗ Naar website</a>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main">
+
+      <!-- DASHBOARD -->
+      <div class="page active" id="page-dashboard">
+        <div class="page-hd">
+          <h1>Goed <em>dag</em>, welkom terug 👋</h1>
+          <button class="filter-btn active" onclick="loadAll()" style="cursor:pointer">↻ Vernieuwen</button>
+        </div>
+        <div class="stats-row" id="statsRow">
+          <div class="stat-card gold"><span class="stat-label">Totaal Reserveringen</span><div class="stat-value" id="st-total">—</div><div class="stat-sub">Alle tijden</div></div>
+          <div class="stat-card green"><span class="stat-label">Bevestigd</span><div class="stat-value" id="st-bevestigd">—</div><div class="stat-sub">Actief</div></div>
+          <div class="stat-card blue"><span class="stat-label">Beschikbaar</span><div class="stat-value" id="st-beschikbaar">—</div><div class="stat-sub">Nachten dit seizoen</div></div>
+          <div class="stat-card orange"><span class="stat-label">Omzet</span><div class="stat-value" id="st-omzet">—</div><div class="stat-sub">Incl. alle boekingen</div></div>
+        </div>
+
+        <h2 style="font-family:var(--fd);font-size:1.3rem;font-weight:300;margin-bottom:16px;color:rgba(245,240,232,.6)">Recente boekingen</h2>
+        <div class="table-wrap" id="recentTable"><div class="loading-row">Laden...</div></div>
+      </div>
+
+      <!-- RESERVERINGEN -->
+      <div class="page" id="page-reserveringen">
+        <div class="page-hd">
+          <h1>Alle <em>Reserveringen</em></h1>
+        </div>
+        <div class="filters">
+          <button class="filter-btn active" onclick="filterRes('alle',this)">Alle</button>
+          <button class="filter-btn" onclick="filterRes('bevestigd',this)">Bevestigd</button>
+          <button class="filter-btn" onclick="filterRes('afgerond',this)">Afgerond</button>
+          <button class="filter-btn" onclick="filterRes('geannuleerd',this)">Geannuleerd</button>
+          <input class="search-box" type="text" placeholder="Zoek op naam, email..." id="searchBox" oninput="renderTable()"/>
+        </div>
+        <div class="table-wrap" id="resTable"><div class="loading-row">Laden...</div></div>
+      </div>
+
+      <!-- KALENDER -->
+      <div class="page" id="page-kalender">
+        <div class="page-hd"><h1><em>Kalender</em></h1></div>
+        <div style="background:var(--bs);border:1px solid rgba(200,169,110,.12);padding:28px;max-width:600px">
+          <div class="cal-nav">
+            <button onclick="calPrev()">← Vorige</button>
+            <span class="cal-title" id="calTitle">—</span>
+            <button onclick="calNext()">Volgende →</button>
+          </div>
+          <div class="cal-header">
+            <div class="cal-day-hd">Ma</div><div class="cal-day-hd">Di</div><div class="cal-day-hd">Wo</div>
+            <div class="cal-day-hd">Do</div><div class="cal-day-hd">Vr</div><div class="cal-day-hd">Za</div><div class="cal-day-hd">Zo</div>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(200,169,110,.1)">
+            <p style="font-size:.62rem;color:rgba(245,240,232,.35);line-height:2;letter-spacing:.06em">
+              <span style="color:var(--gold)">●</span> Geboekte datum &nbsp;&nbsp;
+              <span style="border:1px solid var(--gold);padding:1px 4px;color:var(--gold);font-size:.5rem">Vandaag</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BESCHIKBAARHEID -->
+      <div class="page" id="page-beschikbaarheid">
+        <div class="page-hd"><h1><em>Beschikbaarheid</em> beheren</h1></div>
+        <div class="setting-card">
+          <h3>Totaal beschikbare <em>nachten</em></h3>
+          <p>Dit aantal verschijnt op de website als het beschikbare aantal Secret Nights dit seizoen. Geboekte nachten worden hier automatisch van afgetrokken.</p>
+          <div class="num-input-row">
+            <button class="num-btn" onclick="adjTotal(-1)">−</button>
+            <div class="num-display" id="totalDisp">—</div>
+            <button class="num-btn" onclick="adjTotal(1)">+</button>
+          </div>
+          <button class="save-btn" onclick="saveTotal()">Opslaan →</button>
+        </div>
+        <div class="setting-card" style="margin-top:24px">
+          <h3>Geboekte <em>nachten</em> resetten</h3>
+          <p>Gebruik dit aan het begin van een nieuw seizoen om de teller terug te zetten naar 0. De reserveringen in de database blijven bewaard.</p>
+          <button class="save-btn" style="background:transparent;border:1px solid rgba(200,169,110,.3);color:var(--gold)" onclick="resetBooked()">Reset geboekte nachten</button>
+        </div>
+        <div style="background:rgba(200,169,110,.05);border:1px solid rgba(200,169,110,.12);padding:18px 20px;max-width:600px;margin-top:16px">
+          <p style="font-size:.7rem;color:var(--wd);line-height:2">
+            <strong style="color:var(--gold)">Live teller status:</strong><br/>
+            Totaal: <span id="s-totaal" style="color:var(--white)">—</span> nachten &nbsp;|&nbsp;
+            Geboekt: <span id="s-geboekt" style="color:var(--white)">—</span> &nbsp;|&nbsp;
+            Beschikbaar: <span id="s-rest" style="color:var(--gold)">—</span>
+          </p>
+        </div>
+      </div>
+
+    </div><!-- /main -->
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="det-ov" id="detOv">
+  <div class="det-modal">
+    <div class="det-hd">
+      <h2>Reservering <em>Details</em></h2>
+      <button class="det-close" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="det-body" id="detBody"></div>
+    <div class="det-acts" id="detActs"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SB_URL='https://fxaqsorekbsiqdnwhkwa.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ4YXFzb3Jla2JzaXFkbndoa3dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0NTgwNzYsImV4cCI6MjA4NzAzNDA3Nn0.1JyZcw0G3owob853H2MiYG1qw5v7W2sqUFzkjuxgtZo';
+const ADMIN_PW='Secretnights2026!';
+
+let allRes=[];let filterStatus='alle';let calYear=new Date().getFullYear();let calMonth=new Date().getMonth();let totalNachten=12;
+
+// AUTH
+function doLogin(){
+  const pw=document.getElementById('pwInput').value;
+  if(pw===ADMIN_PW){
+    localStorage.setItem('sn_admin','1');
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+    document.getElementById('tbUser').textContent='Beheerder • info@secretnights.nl';
+    loadAll();
+  } else {
+    document.getElementById('loginErr').textContent='Onjuist wachtwoord. Probeer opnieuw.';
+    document.getElementById('pwInput').value='';
+    setTimeout(()=>document.getElementById('loginErr').textContent='',3000);
+  }
+}
+function logout(){localStorage.removeItem('sn_admin');location.reload()}
+// Auto-login if remembered
+if(localStorage.getItem('sn_admin')){
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('app').classList.add('visible');
+  document.getElementById('tbUser').textContent='Beheerder • info@secretnights.nl';
+  setTimeout(loadAll,100);
+}
+
+// SIDEBAR
+function showPage(name,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  el.classList.add('active');
+  if(document.getElementById('sidebar').classList.contains('mobile-open'))toggleSidebar();
+}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('mobile-open')}
+
+// SUPABASE
+async function sb(path,opts={}){
+  return fetch(SB_URL+path,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json',...(opts.headers||{})},...opts});
+}
+
+// LOAD ALL
+async function loadAll(){
+  await Promise.all([loadReservations(),loadAvailability()]);
+  renderDashboard();
+  renderTable();
+  renderCalendar();
+}
+
+async function loadReservations(){
+  try{
+    const r=await sb('/rest/v1/reserveringen?select=*&order=created_at.desc');
+    allRes=await r.json();
+    if(!Array.isArray(allRes))allRes=[];
+  }catch{allRes=[]}
+}
+
+async function loadAvailability(){
+  try{
+    const r=await sb('/rest/v1/beschikbaarheid?select=*&limit=1');
+    const d=await r.json();
+    if(d&&d[0]){
+      totalNachten=d[0].totaal_nachten;
+      document.getElementById('totalDisp').textContent=totalNachten;
+      const rest=totalNachten-d[0].geboekte_nachten;
+      document.getElementById('s-totaal').textContent=totalNachten;
+      document.getElementById('s-geboekt').textContent=d[0].geboekte_nachten;
+      document.getElementById('s-rest').textContent=rest;
+      document.getElementById('st-beschikbaar').textContent=rest;
+    }
+  }catch{}
+}
+
+// DASHBOARD
+function renderDashboard(){
+  const total=allRes.length;
+  const bev=allRes.filter(r=>r.status==='bevestigd').length;
+  const omzet=allRes.reduce((s,r)=>s+(r.totaalbedrag||0),0);
+  document.getElementById('st-total').textContent=total;
+  document.getElementById('st-bevestigd').textContent=bev;
+  document.getElementById('st-omzet').textContent='€'+omzet.toLocaleString('nl-NL');
+  // Recent 5
+  const rec=allRes.slice(0,5);
+  document.getElementById('recentTable').innerHTML=buildTable(rec,true);
+}
+
+// TABLE
+function renderTable(){
+  const q=(document.getElementById('searchBox')?.value||'').toLowerCase();
+  let data=allRes;
+  if(filterStatus!=='alle')data=data.filter(r=>r.status===filterStatus);
+  if(q)data=data.filter(r=>(r.voornaam+' '+r.achternaam+' '+r.email).toLowerCase().includes(q));
+  document.getElementById('resTable').innerHTML=buildTable(data,false);
+}
+
+const bootNm={'nature-one':'Nature One','nature-two':'Nature Two'};
+const pkgNm={'wellness':'Wellness','dining':'Dining','sauna':'Sauna'};
+
+function buildTable(data,compact){
+  if(!data.length)return`<div class="empty"><span>📋</span><p>Geen reserveringen gevonden</p></div>`;
+  return`<table><thead><tr>
+    <th>Naam</th><th>Boot</th><th>Pakket</th><th>Datum</th>${compact?'':'<th>Personen</th>'}<th>Totaal</th><th>Status</th><th>Acties</th>
+  </tr></thead><tbody>${data.map(r=>`<tr>
+    <td>${r.voornaam} ${r.achternaam}<br/><span style="font-size:.6rem;color:rgba(245,240,232,.35)">${r.email}</span></td>
+    <td><span class="badge ${r.boot}">${bootNm[r.boot]||r.boot}</span></td>
+    <td>${pkgNm[r.pakket]||r.pakket}${r.massage?'<br/><span style="font-size:.58rem;color:var(--gold)">+massage</span>':''}</td>
+    <td>${fmtDatum(r.datum)}</td>
+    ${compact?'':'<td>'+r.personen+'</td>'}
+    <td style="color:var(--gold);font-family:var(--fd);font-size:.95rem">€${r.totaalbedrag},-</td>
+    <td><span class="badge ${r.status}">${r.status}</span></td>
+    <td><div class="action-btns">
+      <button class="act-btn" onclick='openDetail(${JSON.stringify(r).replace(/'/g,"\\'")}  )'>Details</button>
+      ${r.status==='bevestigd'?`<button class="act-btn success" onclick="changeStatus('${r.id}','afgerond')">✓ Afgerond</button>`:''} 
+      ${r.status!=='geannuleerd'?`<button class="act-btn danger" onclick="changeStatus('${r.id}','geannuleerd')">✕ Annuleer</button>`:''}
+    </div></td>
+  </tr>`).join('')}</tbody></table>`;
+}
+
+function fmtDatum(d){if(!d)return'—';const dt=new Date(d);return dt.toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'})}
+
+function filterRes(s,btn){
+  filterStatus=s;
+  document.querySelectorAll('.filters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTable();
+}
+
+// DETAIL MODAL
+function openDetail(r){
+  const bm={'nature-one':'Nature One (Biesbosch)','nature-two':'Nature Two (Bommelerwaard)'};
+  const pm={'wellness':'Natuurlijk Wellness','dining':'Dining Experience','sauna':'Sauna Boot'};
+  document.getElementById('detBody').innerHTML=`
+    <div class="det-row"><span class="det-lbl">Naam</span><span class="det-val">${r.voornaam} ${r.achternaam}</span></div>
+    <div class="det-row"><span class="det-lbl">E-mail</span><span class="det-val"><a href="mailto:${r.email}" style="color:var(--gold);text-decoration:none">${r.email}</a></span></div>
+    <div class="det-row"><span class="det-lbl">Telefoon</span><span class="det-val"><a href="tel:${r.telefoon}" style="color:var(--gold);text-decoration:none">${r.telefoon}</a></span></div>
+    <div class="det-row"><span class="det-lbl">Postcode</span><span class="det-val">${r.postcode||'—'}</span></div>
+    <div class="det-row"><span class="det-lbl">Boot</span><span class="det-val">${bm[r.boot]||r.boot}</span></div>
+    <div class="det-row"><span class="det-lbl">Arrangement</span><span class="det-val">${pm[r.pakket]||r.pakket}</span></div>
+    <div class="det-row"><span class="det-lbl">Massage</span><span class="det-val">${r.massage?'Ja (+€85)':'Nee'}</span></div>
+    <div class="det-row"><span class="det-lbl">Datum</span><span class="det-val">${fmtDatum(r.datum)}</span></div>
+    <div class="det-row"><span class="det-lbl">Personen</span><span class="det-val">${r.personen}</span></div>
+    <div class="det-row"><span class="det-lbl">Betaalmethode</span><span class="det-val">${r.betaalmethode||'—'}</span></div>
+    <div class="det-row"><span class="det-lbl">Wensen</span><span class="det-val">${r.wensen||'—'}</span></div>
+    <div class="det-row"><span class="det-lbl">Status</span><span class="det-val"><span class="badge ${r.status}">${r.status}</span></span></div>
+    <div class="det-row"><span class="det-lbl">Totaalbedrag</span><span class="det-val" style="font-family:var(--fd);font-size:1.3rem;color:var(--gold)">€${r.totaalbedrag},-</span></div>
+    <div class="det-row"><span class="det-lbl">Aanbetaling (30%)</span><span class="det-val">€${Math.round(r.totaalbedrag*.3)},-</span></div>
+    <div class="det-row"><span class="det-lbl">Geboekt op</span><span class="det-val">${r.created_at?new Date(r.created_at).toLocaleString('nl-NL'):'—'}</span></div>`;
+  document.getElementById('detActs').innerHTML=`
+    <a href="mailto:${r.email}?subject=Jouw Secret Night - ${fmtDatum(r.datum)}" class="dbtn dbtn-gold">✉ Mail gast</a>
+    <a href="tel:${r.telefoon}" class="dbtn" style="background:var(--bc);border:1px solid rgba(200,169,110,.2);color:var(--wd)">📞 Bel gast</a>
+    ${r.status!=='geannuleerd'?`<button class="dbtn dbtn-red" onclick="changeStatus('${r.id}','geannuleerd');closeDetail()">✕ Annuleer</button>`:''}`;
+  document.getElementById('detOv').classList.add('open');
+}
+function closeDetail(){document.getElementById('detOv').classList.remove('open')}
+document.getElementById('detOv').onclick=e=>{if(e.target===document.getElementById('detOv'))closeDetail()}
+
+// STATUS CHANGE
+async function changeStatus(id,status){
+  try{
+    const r=await sb(`/rest/v1/reserveringen?id=eq.${id}`,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({status})});
+    if(r.ok){toast(`Status gewijzigd naar: ${status}`);await loadReservations();renderDashboard();renderTable();renderCalendar();}
+    else toast('Fout bij opslaan','err');
+  }catch{toast('Fout bij opslaan','err')}
+}
+
+// CALENDAR
+function renderCalendar(){
+  const months=['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
+  document.getElementById('calTitle').textContent=months[calMonth]+' '+calYear;
+  const firstDay=new Date(calYear,calMonth,1);
+  let startDay=firstDay.getDay()-1; if(startDay<0)startDay=6;
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const bookedDates=new Set(allRes.filter(r=>r.status!=='geannuleerd'&&r.datum).map(r=>r.datum));
+  const today=new Date();
+  let html='';
+  for(let i=0;i<startDay;i++)html+=`<div class="cal-day other-month"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const dateStr=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isBooked=bookedDates.has(dateStr);
+    const isToday=d===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear();
+    html+=`<div class="cal-day ${isBooked?'booked':''} ${isToday?'today':''}" title="${isBooked?'Geboekt':'Beschikbaar'}">${d}</div>`;
+  }
+  document.getElementById('calGrid').innerHTML=html;
+}
+function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--}renderCalendar()}
+function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++}renderCalendar()}
+
+// AVAILABILITY
+function adjTotal(n){totalNachten=Math.max(1,Math.min(50,totalNachten+n));document.getElementById('totalDisp').textContent=totalNachten}
+async function saveTotal(){
+  try{
+    const r=await sb('/rest/v1/beschikbaarheid?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({totaal_nachten:totalNachten})});
+    if(r.ok){toast('Beschikbaarheid opgeslagen!');loadAvailability();}
+    else toast('Fout bij opslaan','err');
+  }catch{toast('Fout bij opslaan','err')}
+}
+async function resetBooked(){
+  if(!confirm('Weet je zeker dat je de geboekte nachten teller reset naar 0?'))return;
+  try{
+    const r=await sb('/rest/v1/beschikbaarheid?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({geboekte_nachten:0})});
+    if(r.ok){toast('Teller gereset ✓');loadAvailability();}
+    else toast('Fout','err');
+  }catch{toast('Fout','err')}
+}
+
+// TOAST
+function toast(msg,type='ok'){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type==='err'?'err':'');setTimeout(()=>t.classList.remove('show'),4000)}
+</script>
+</body>
+</html>

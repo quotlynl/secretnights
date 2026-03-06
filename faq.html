@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FAQ – Secretnights</title>
+<meta name="description" content="Veelgestelde vragen over Secretnights — houseboat overnachtingen op een geheime locatie in Nederland."/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--gold:#c8a96e;--gl:#e8d5a3;--black:#0a0a0a;--bs:#111111;--bc:#131313;--white:#f5f0e8;--wd:rgba(245,240,232,.65);--fd:'Cormorant Garamond',serif;--fb:'Montserrat',sans-serif}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:var(--fb);font-weight:300;overflow-x:hidden;cursor:none}
+a{cursor:none;color:inherit}
+@media(pointer:coarse){body{cursor:auto}a,button{cursor:pointer}}
+.cursor{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+.cursor-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(200,169,110,.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
+@media(pointer:coarse){.cursor,.cursor-ring{display:none}}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;background:rgba(10,10,10,.98);border-bottom:1px solid rgba(200,169,110,.12);transition:padding .3s}
+.nav-logo{font-family:var(--fd);font-size:1.5rem;font-weight:300;letter-spacing:.28em;color:var(--gold);text-decoration:none;text-transform:uppercase}
+.nav-logo span{font-style:italic;color:var(--white)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:var(--wd);text-decoration:none;font-size:.67rem;letter-spacing:.2em;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:var(--black);padding:10px 26px;font-family:var(--fb);font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;transition:all .3s;text-decoration:none}
+.nav-cta:hover{background:var(--gl)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:none}
+.hamburger span{width:24px;height:1px;background:var(--white);display:block}
+.mobile-nav{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,.98);z-index:190;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;transform:translateX(100%);transition:transform .4s ease}
+.mobile-nav.open{transform:translateX(0)}
+.mobile-nav a{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--white);text-decoration:none;transition:color .3s}
+.mobile-nav a:hover{color:var(--gold)}
+
+/* PAGE HERO */
+.page-hero{padding:140px 60px 80px;background:var(--bs);position:relative;overflow:hidden;text-align:center}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,.08),transparent 60%)}
+.page-hero-content{position:relative;z-index:1}
+.page-label{font-size:.6rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:block}
+.page-title{font-family:var(--fd);font-size:clamp(2.5rem,6vw,5rem);font-weight:300;line-height:1.05}
+.page-title em{font-style:italic;color:var(--gold)}
+.page-sub{font-size:.78rem;color:var(--wd);margin-top:20px;line-height:2;max-width:500px;margin-left:auto;margin-right:auto}
+
+/* FAQ */
+.faq-section{max-width:800px;margin:0 auto;padding:80px 60px}
+.faq-cat{margin-bottom:60px}
+.faq-cat-title{font-family:var(--fd);font-size:1.8rem;font-weight:300;color:var(--gold);margin-bottom:28px;padding-bottom:12px;border-bottom:1px solid rgba(200,169,110,.2)}
+.faq-item{border-bottom:1px solid rgba(200,169,110,.12)}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:20px 0;display:flex;justify-content:space-between;align-items:center;cursor:none;gap:20px}
+.faq-q-text{font-family:var(--fb);font-size:.8rem;font-weight:400;color:var(--white);line-height:1.5;letter-spacing:.02em}
+.faq-icon{font-size:1rem;color:var(--gold);transition:transform .3s;flex-shrink:0;font-family:var(--fb);font-weight:300;font-size:1.4rem;line-height:1}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:20px}
+.faq-a p{font-size:.76rem;color:var(--wd);line-height:2;margin-bottom:8px}
+.faq-a a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.3)}
+.faq-a strong{color:var(--white)}
+
+/* CTA STRIP */
+.cta-strip{background:var(--gold);padding:64px 60px;text-align:center}
+.cta-strip h2{font-family:var(--fd);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;font-style:italic;color:var(--black);margin-bottom:24px}
+.btn-dark{background:var(--black);color:var(--gold);padding:14px 38px;font-family:var(--fb);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;border:none;text-decoration:none;transition:all .3s;display:inline-block;cursor:none}
+.btn-dark:hover{background:#1a1a1a;transform:translateY(-2px)}
+
+/* FOOTER */
+footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:48px 60px 28px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px}
+.f-logo{font-family:var(--fd);font-size:1.7rem;font-weight:300;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.f-logo span{font-style:italic;color:rgba(245,240,232,.48)}
+.f-tag{font-size:.68rem;line-height:2;color:rgba(245,240,232,.32);max-width:230px}
+.f-col h5{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:13px;font-weight:600}
+.f-col ul{list-style:none}
+.f-col ul li{font-size:.7rem;color:rgba(245,240,232,.38);line-height:2.4;transition:color .3s}
+.f-col ul li:hover{color:var(--gold)}
+.f-col a{color:inherit;text-decoration:none}
+.footer-bottom{border-top:1px solid rgba(200,169,110,.1);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-bottom p{font-size:.58rem;color:rgba(245,240,232,.18)}
+.wa-btn{position:fixed;bottom:24px;right:24px;z-index:300;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.4);text-decoration:none;transition:transform .3s}
+.wa-btn:hover{transform:scale(1.1)}
+.wa-btn svg{width:26px;height:26px;fill:white}
+@media(max-width:768px){
+  nav{padding:18px 20px}.nav-links{display:none}.hamburger{display:flex}.nav-cta{display:none}
+  .page-hero{padding:110px 20px 60px}
+  .faq-section{padding:50px 20px}
+  .cta-strip{padding:50px 20px}
+  footer{padding:40px 20px 24px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
+}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<a href="https://wa.me/310630066444" target="_blank" class="wa-btn"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<nav>
+  <a href="index.html" class="nav-logo">Secret<span>nights</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#arrangementen">Arrangementen</a></li>
+    <li><a href="over-ons.html">Over ons</a></li>
+    <li><a href="faq.html" class="active">FAQ</a></li>
+  </ul>
+  <a href="index.html#reserveer" class="nav-cta">Reserveer Nu</a>
+  <button class="hamburger" id="hamburger" onclick="document.getElementById('mobileNav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="index.html#arrangementen">Arrangementen</a>
+  <a href="over-ons.html">Over ons</a>
+  <a href="faq.html">FAQ</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-content">
+    <span class="page-label">Veelgestelde Vragen</span>
+    <h1 class="page-title">Alles wat je wilt <em>weten</em></h1>
+    <p class="page-sub">Staat je vraag er niet tussen? Bel ons op 06 300 66 444 of stuur een WhatsApp.</p>
+  </div>
+</div>
+
+<div class="faq-section">
+
+  <div class="faq-cat">
+    <h2 class="faq-cat-title">🗺️ De Geheime Locatie</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Wanneer ontvang ik de exacte locatie?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Je ontvangt de exacte locatie uiterlijk <strong>48 uur voor je aankomst</strong> via e-mail. Zo blijft het mysterie zo lang mogelijk intact. De locatie bevat ook een routebeschrijving en praktische informatie.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoe ver is de locatie van mijn woonplaats?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Bij je reservering vragen we je postcode. Op basis daarvan selecteren we de boot die het dichtst bij jou in de buurt ligt. Beide boten vertrekken vanuit Noord-Brabant. <strong>Nature One</strong> vertrekt vanuit Veen, <strong>Nature Two</strong> vanuit Lith.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Zit de boot op één vaste plek, of ga ik echt varen?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>De boot ligt gereed op de geheime locatie. Je hoeft geen kilometers te varen — je stapt gewoon in op de plek en geniet direct van het uitzicht. Er is <strong>geen vaarbewijs nodig</strong>.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Is de locatie elke keer anders?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja! We selecteren elke boeking een unieke ligplek in de natuur. Geen enkel verblijf is hetzelfde. Zo kun je Secretnights meerdere keren beleven en toch steeds verrast worden.</p></div>
+    </div>
+  </div>
+
+  <div class="faq-cat">
+    <h2 class="faq-cat-title">🚤 De Boot</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Heb ik een vaarbewijs nodig?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p><strong>Nee!</strong> De boot ligt al op de locatie en hoeft niet gevaren te worden. Je hebt dus geen vaarbewijs of vaarervaring nodig. Perfect voor iedereen.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Wat is er aan boord aanwezig?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">
+        <p>De boot is volledig uitgerust met:</p>
+        <p>✓ Comfortabele tweepersoonsslaapkamer · ✓ Luxe badkamer met warme douche · ✓ Slaapbank voor extra personen · ✓ Nespresso-machine en melkopschuimer · ✓ BBQ en buitenterras · ✓ Verwarming · ✓ Draagbaar kooktoestel · ✓ Koelkast</p>
+        <p>Er is bewust <strong>geen wifi of televisie</strong> aan boord — voor echte ontspanning.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoeveel personen kunnen er mee?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p><strong>Nature One</strong>: 2 t/m 6 personen (Biesbosch, vertrek Veen).<br/><strong>Nature Two</strong>: 2 t/m 8 personen (Bommelerwaard, vertrek Lith).</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Is de boot geschikt voor kinderen?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja, de boot is geschikt voor kinderen. We vragen wel om voorzichtig te zijn aan het dek en verzoeken altijd een zwemvest voor jonge kinderen. Neem dit zelf mee of geef het door bij je wensen.</p></div>
+    </div>
+  </div>
+
+  <div class="faq-cat">
+    <h2 class="faq-cat-title">🍽️ Arrangementen & Services</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Wat houdt de Dining Experience precies in?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Een privé-kok bereidt een <strong>5-gangen diner</strong> aan boord, inclusief wijnpairing passend bij elk gerecht. De volgende ochtend is er een luxe ontbijt. Alles wordt aan boord bereid en geserveerd — jij hoeft niets te doen.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Kan ik een massage los bijboeken?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja, een massage is optioneel bij elk arrangement toe te voegen voor <strong>€ 85,-</strong>. De massage vindt plaats aan boord op het tijdstip dat jou het beste uitkomt. Voeg het eenvoudig toe tijdens het reserveren.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoe werkt het sauna arrangement?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Bij het Sauna Boot arrangement is er een <strong>privé-sauna</strong> aan boord aanwezig. Je kunt op elk gewenst moment de sauna in. Aan boord is ook een bubbelbad beschikbaar. Na de sauna kun je direct het koele, schone water in voor een verfrissende duik.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Moet ik zelf eten en drinken meenemen?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Bij <strong>Dining Experience</strong>: nee, alles is inbegrepen. Bij <strong>Wellness</strong> en <strong>Sauna Boot</strong> verzorg je zelf je maaltijden. Er is een koelkast, BBQ en kooktoestel aan boord. Je kunt ook een ontbijtpakket bijboeken — vermeld dit bij je wensen.</p></div>
+    </div>
+  </div>
+
+  <div class="faq-cat">
+    <h2 class="faq-cat-title">💳 Betalen & Annuleren</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoeveel moet ik direct betalen?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Bij reservering betaal je een <strong>aanbetaling van 30%</strong>. Het resterende bedrag (70%) betaal je uiterlijk 14 dagen voor aankomst.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Wat is het annuleringsbeleid?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">
+        <p><strong>Meer dan 30 dagen voor aankomst:</strong> volledige restitutie minus €25 administratiekosten.</p>
+        <p><strong>14–30 dagen voor aankomst:</strong> 50% restitutie van het totaalbedrag.</p>
+        <p><strong>Minder dan 14 dagen:</strong> geen restitutie mogelijk. We raden een annuleringsverzekering aan.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Kan ik mijn reservering wijzigen?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja, dit is mogelijk tot <strong>21 dagen voor aankomst</strong>, afhankelijk van beschikbaarheid. Neem hiervoor contact op via <a href="mailto:info@secretnights.nl">info@secretnights.nl</a> of <a href="tel:0630066444">06 300 66 444</a>.</p></div>
+    </div>
+  </div>
+
+  <div class="faq-cat">
+    <h2 class="faq-cat-title">🐶 Praktisch</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Zijn huisdieren toegestaan?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Kleine, goed opgevoede honden zijn welkom aan boord. Vermeld dit bij je wensen tijdens het reserveren. Er wordt een kleine schoonmaaktoeslag van €25 in rekening gebracht.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Wat als het slecht weer is?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>De houseboat is volledig voorzien van verwarming en is ook bij slecht weer heerlijk comfortabel. Het knusse interieur en de grote ramen zorgen voor een sfeervolle ervaring — ook als het regent. Bij extreme weersomstandigheden nemen wij contact met je op.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Is Secretnights geschikt als cadeau?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Absoluut! Wil je een Secretnights-ervaring weggeven als cadeau? Stuur ons een e-mail op <a href="mailto:info@secretnights.nl">info@secretnights.nl</a> en we regelen een mooi aanbod voor je op maat.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoe laat kan ik in- en uitchecken?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p><strong>Inchecken:</strong> vanaf 15:00 uur.<br/><strong>Uitchecken:</strong> voor 11:00 uur.<br/>Afwijkende tijden zijn in overleg mogelijk — vermeld dit bij je wensen.</p></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <h2>"Nog vragen? Wij helpen je graag."</h2>
+  <a href="index.html" class="btn-dark">Terug naar Home</a>
+  &nbsp;&nbsp;
+  <a href="tel:0630066444" class="btn-dark">06 300 66 444</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="f-logo">Secret<span>nights</span></div><p class="f-tag">Bijzondere overnachtingen op het water, volledig privé en mysterieus.</p></div>
+    <div class="f-col"><h5>Menu</h5><ul><li><a href="index.html">Home</a></li><li><a href="index.html#arrangementen">Arrangementen</a></li><li><a href="over-ons.html">Over ons</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div class="f-col"><h5>Info</h5><ul><li><a href="#">Privacybeleid</a></li><li><a href="#">Algemene Voorwaarden</a></li></ul></div>
+    <div class="f-col"><h5>Contact</h5><ul><li><a href="mailto:info@secretnights.nl">info@secretnights.nl</a></li><li><a href="tel:0630066444">06 300 66 444</a></li><li><a href="https://wa.me/310630066444">WhatsApp</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Secretnights</p><p style="color:rgba(200,169,110,.22);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem">12 Nights · Infinite Memories</p></div>
+</footer>
+
+<script>
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+if(cur){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});(function l(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(l)})()}
+function toggleFaq(btn){const item=btn.parentElement;const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open')}
+</script>
+</body>
+</html>
