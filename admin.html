@@ -381,7 +381,7 @@ tr:hover td{background:rgba(200,169,110,.025);color:var(--white)}
             <div class="sec-prev" onclick="kiesSec('contact')" id="prev-contact">
               <div class="edit-label">✏️ Bewerken</div>
               <div class="prev-contact">
-                <p>📞 <span id="prv-tel">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="prv-email">info@secretnights.nl</span> &nbsp;·&nbsp; 📍 <span id="prv-adres">Kazernestraat, Oss</span></p>
+                <p>📞 <span id="prv-tel">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="prv-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b7ded9d1d8f7c4d2d4c5d2c3d9ded0dfc3c499d9db">[email&#160;protected]</a></span> &nbsp;·&nbsp; 📍 <span id="prv-adres">Kazernestraat, Oss</span></p>
               </div>
             </div>
           </div>
@@ -471,9 +471,25 @@ tr:hover td{background:rgba(200,169,110,.025);color:var(--white)}
               <label class="toggle"><input type="checkbox" id="siteSchakelaar2" onchange="toggleSite(this.checked);document.getElementById('siteSchakelaar').checked=this.checked"/><div class="tgl-t"></div></label>
               <span style="font-size:.72rem;color:var(--wd)" id="site-status-lbl">Laden...</span>
             </div>
-            <div class="fg"><label>Offline bericht</label><textarea id="offline-msg" rows="3"></textarea></div>
+            <div class="fg"><label>Bericht op de offline pagina</label><textarea id="offline-msg" rows="3" placeholder="Bijv. We zijn er weer in april!"></textarea></div>
             <button class="btn-goud" onclick="slaaSiteOp()">Opslaan →</button>
           </div>
+
+          <!-- RESERVEREN AAN/UIT -->
+          <div style="background:var(--bs);border:2px solid rgba(200,169,110,.2);padding:24px;max-width:560px;margin-bottom:14px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+              <span style="font-size:1.4rem">🚫</span>
+              <div style="font-family:var(--fd);font-size:1.2rem;font-weight:300">Reserveren <em style="font-style:italic;color:var(--gold)">aan/uit</em></div>
+            </div>
+            <p style="font-size:.66rem;color:var(--wd);line-height:2;margin-bottom:18px">Schakel het reserveringsformulier uit zonder de website offline te zetten. Bezoekers zien de site maar kunnen niet reserveren. Handig als je nog niet klaar bent voor boekingen.</p>
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;padding:12px 16px;background:var(--bc);border:1px solid rgba(200,169,110,.12)">
+              <label class="toggle"><input type="checkbox" id="reserveerSchakelaar" onchange="toggleReserveren(this.checked)"/><div class="tgl-t"></div></label>
+              <span style="font-size:.74rem;font-weight:500" id="reserveer-status-lbl">Laden...</span>
+            </div>
+            <div class="fg"><label>Bericht voor bezoekers als reserveren uit staat</label><textarea id="reserveer-msg" rows="2" placeholder="Reserveren is tijdelijk niet mogelijk. Bel ons op 06 300 66 444."></textarea></div>
+            <button class="btn-goud" onclick="slaaReserveerOp()">Opslaan →</button>
+          </div>
+
           <div style="background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:24px;max-width:560px">
             <div style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:5px">Wachtwoord <em style="font-style:italic;color:var(--gold)">wijzigen</em></div>
             <p style="font-size:.66rem;color:var(--wd);line-height:2;margin-bottom:16px">Wijzig het wachtwoord voor dit beheerderspaneel.</p>
@@ -545,7 +561,7 @@ tr:hover td{background:rgba(200,169,110,.025);color:var(--white)}
 
 <div class="toast" id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ============================================================
 // CONFIGURATIE
 // ============================================================
@@ -666,7 +682,7 @@ async function laadBetaal() { try { var r = await api('/rest/v1/betaalmethodes?s
 
 async function laadInstellingen() {
   try {
-    var r = await api('/rest/v1/website_instellingen?id=eq.1&select=*');
+    var r = await api('/rest/v1/website_instellingen?id=eq.1&select=website_actief,offline_bericht,mollie_api_key,mollie_actief,reserveren_actief,reserveren_bericht');
     var d = await r.json();
     if (d && d[0]) {
       var aan = d[0].website_actief;
@@ -674,6 +690,10 @@ async function laadInstellingen() {
       document.getElementById('siteSchakelaar2').checked = aan;
       updateSiteLabel(aan);
       if (d[0].offline_bericht) document.getElementById('offline-msg').value = d[0].offline_bericht;
+      // Reserveren status
+      var resAan = d[0].reserveren_actief !== false;
+      updateReserveerLabel(resAan);
+      if (d[0].reserveren_bericht) document.getElementById('reserveer-msg').value = d[0].reserveren_bericht;
       if (d[0].mollie_api_key) document.getElementById('mollieKeyVeld').value = d[0].mollie_api_key;
       document.getElementById('mollieAan').checked = d[0].mollie_actief || false;
       document.getElementById('mollie-aan-lbl').textContent = d[0].mollie_actief ? 'Aan' : 'Uit';
@@ -994,6 +1014,29 @@ async function slaaSiteOp() {
   if (r.ok) toon('Opgeslagen ✓', 'ok'); else toon('Fout', 'err');
 }
 
+async function toggleReserveren(aan) {
+  var r = await api('/rest/v1/website_instellingen?id=eq.1', { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ reserveren_actief: aan, updated_at: new Date().toISOString() }) });
+  if (r.ok) {
+    updateReserveerLabel(aan);
+    toon(aan ? 'Reserveren is nu AAN ✓' : 'Reserveren is nu UIT — bezoekers kunnen niet reserveren', 'ok');
+  } else toon('Fout', 'err');
+}
+
+async function slaaReserveerOp() {
+  var msg = document.getElementById('reserveer-msg').value;
+  var r = await api('/rest/v1/website_instellingen?id=eq.1', { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ reserveren_bericht: msg, updated_at: new Date().toISOString() }) });
+  if (r.ok) toon('Opgeslagen ✓', 'ok'); else toon('Fout', 'err');
+}
+
+function updateReserveerLabel(aan) {
+  var lbl = document.getElementById('reserveer-status-lbl');
+  if (lbl) {
+    lbl.textContent = aan ? '✅ Reserveren is AAN — bezoekers kunnen boeken' : '🚫 Reserveren is UIT — bezoekers kunnen NIET boeken';
+    lbl.style.color = aan ? 'var(--green)' : 'var(--red)';
+  }
+  if (document.getElementById('reserveerSchakelaar')) document.getElementById('reserveerSchakelaar').checked = aan;
+}
+
 // ============================================================
 // BESCHIKBAARHEID
 // ============================================================
@@ -1018,12 +1061,4 @@ document.querySelectorAll('.modal-ov').forEach(function(o) { o.addEventListener(
 // ============================================================
 // TOAST
 // ============================================================
-function toon(bericht, type) {
-  var t = document.getElementById('toast');
-  t.textContent = bericht;
-  t.className = 'toast show' + (type ? ' ' + type : '');
-  setTimeout(function() { t.classList.remove('show'); }, 3800);
-}
-</script>
-</body>
-</html>
+function toon(berich

@@ -420,7 +420,7 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
     <div class="gold-line"></div>
     <p>Secretnights brengt je naar een geheime ligplek ergens in de Nederlandse natuur. Waar precies? Dat verklappen we pas nadat je hebt geboekt.</p>
     <p>Verwacht rust, ruimte en een uitzicht dat je adem beneemt. Een privé-boot, volledig uitgerust — alleen voor jou.</p>
-    <p style="font-size:.68rem;color:rgba(245,240,232,.34);font-style:italic;line-height:2;margin-top:4px">📞 06 300 66 444 · info@secretnights.nl · Ook via WhatsApp</p>
+    <p style="font-size:.68rem;color:rgba(245,240,232,.34);font-style:italic;line-height:2;margin-top:4px">📞 06 300 66 444 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="036a6d656c437066607166776d6a646b77702d6d6f">[email&#160;protected]</a> · Ook via WhatsApp</p>
     <a href="#" class="btn-p openB" style="margin-top:20px">Plan je Secret Night</a>
   </div>
   <div class="intro-frame reveal">
@@ -568,7 +568,7 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
     <div class="f-col">
       <h5>Contact</h5>
       <ul>
-        <li><a href="mailto:info@secretnights.nl">info@secretnights.nl</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#80e9eee6efc0f3e5e3f2e5f4eee9e7e8f4f3aeeeec"><span class="__cf_email__" data-cfemail="177e79717857647274657263797e707f636439797b">[email&#160;protected]</span></a></li>
         <li><a href="tel:0630066444">06 300 66 444</a></li>
         <li><a href="https://wa.me/310630066444">WhatsApp</a></li>
         <li>Kazernestraat, Oss</li>
@@ -730,9 +730,60 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const SB_URL='https://eugdqjclpptbneburqtn.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1Z2RxamNscHB0Ym5lYnVycXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTc2MDMsImV4cCI6MjA4OTU3MzYwM30.oXpk_sw_f3NGb6Q6Wx-TQfiYXFtnT_29iwkFKl5EqeA';
+
+// ===== WEBSITE & RESERVEREN STATUS CHECK =====
+async function checkSiteStatus(){
+  try{
+    const r=await sbFetch('/rest/v1/website_instellingen?id=eq.1&select=website_actief,offline_bericht,reserveren_actief,reserveren_bericht');
+    const d=await r.json();
+    if(d&&d[0]){
+      // WEBSITE OFFLINE
+      if(!d[0].website_actief){
+        document.body.innerHTML=`
+          <div style="min-height:100vh;background:#0a0a0a;display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;padding:24px">
+            <div style="text-align:center;max-width:560px">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:2.2rem;letter-spacing:.25em;color:#c8a96e;text-transform:uppercase;margin-bottom:8px">Secret<em style="font-style:italic;color:rgba(245,240,232,.6)">nights</em></div>
+              <div style="width:50px;height:1px;background:#c8a96e;margin:20px auto 28px"></div>
+              <div style="font-size:1.4rem;margin-bottom:8px">🌙</div>
+              <h1 style="font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:#f5f0e8;margin-bottom:18px;line-height:1.2">Wij zijn er zo <em style="font-style:italic;color:#c8a96e">weer</em></h1>
+              <p style="font-size:.78rem;color:rgba(245,240,232,.55);line-height:2.1;margin-bottom:32px">${d[0].offline_bericht||'We zijn momenteel offline voor onderhoud. Binnenkort zijn we terug!'}</p>
+              <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                <a href="tel:0630066444" style="background:#c8a96e;color:#0a0a0a;padding:13px 28px;font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none">📞 06 300 66 444</a>
+                <a href="https://wa.me/310630066444" style="background:transparent;color:#c8a96e;border:1px solid #c8a96e;padding:13px 28px;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none">💬 WhatsApp</a>
+              </div>
+              <p style="font-family:'Cormorant Garamond',serif;font-size:.85rem;font-style:italic;color:rgba(200,169,110,.35);margin-top:40px">— Secretnights, Kazernestraat Oss</p>
+            </div>
+          </div>`;
+        return;
+      }
+      // RESERVEREN UIT
+      if(!d[0].reserveren_actief){
+        const msg=d[0].reserveren_bericht||'Reserveren is tijdelijk niet mogelijk. Bel ons op 06 300 66 444.';
+        // Vervang alle reserveer-knoppen door melding
+        document.querySelectorAll('.openB').forEach(el=>{
+          el.removeAttribute('href');
+          el.style.background='transparent';
+          el.style.border='1px solid rgba(200,169,110,.3)';
+          el.style.color='rgba(200,169,110,.6)';
+          el.style.cursor='default';
+          el.style.pointerEvents='none';
+          el.textContent='Reserveren tijdelijk niet mogelijk';
+        });
+        // Toon banner bovenaan
+        const banner=document.createElement('div');
+        banner.style.cssText='position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,.96);border-bottom:1px solid rgba(200,169,110,.3);padding:12px 24px;text-align:center;font-family:Montserrat,sans-serif;font-size:.68rem;color:rgba(245,240,232,.7);line-height:1.9';
+        banner.innerHTML='⚠️ '+msg+' &nbsp;·&nbsp; <a href="tel:0630066444" style="color:#c8a96e;text-decoration:none">06 300 66 444</a> &nbsp;·&nbsp; <a href="https://wa.me/310630066444" style="color:#c8a96e;text-decoration:none">WhatsApp</a>';
+        document.body.prepend(banner);
+        // Verschuif nav naar beneden
+        const nav=document.getElementById('mainNav');
+        if(nav)nav.style.top='44px';
+      }
+    }
+  }catch(e){console.log('Status check failed',e)}
+}
 
 // COOKIE
 function setCookie(val){localStorage.setItem('sn_cookie',val);document.getElementById('cookieBanner').classList.remove('show')}
@@ -902,6 +953,7 @@ async function doPay(){
 }
 
 // INIT
+checkSiteStatus();
 loadAvail();
 const di=document.getElementById('f-date');if(di)di.min=new Date().toISOString().split('T')[0];
 </script>
