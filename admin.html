@@ -245,8 +245,8 @@ tr:hover td{background:rgba(200,169,110,.025);color:var(--white)}
     <div class="l-logo">Secret<em>nights</em></div>
     <span class="l-sub">Website Beheer</span>
     <label class="l-lbl">Wachtwoord</label>
-    <input class="l-inp" type="password" id="pwVeld" placeholder="Voer wachtwoord in"/>
-    <button class="l-btn" id="loginKnop">Inloggen →</button>
+    <input class="l-inp" type="password" id="pwVeld" placeholder="Voer wachtwoord in" onkeydown="if(event.key==='Enter')probeerLogin()"/>
+    <button class="l-btn" onclick="probeerLogin()">Inloggen →</button>
     <div class="l-err" id="loginFout"></div>
   </div>
 </div>
@@ -572,7 +572,7 @@ var WW = 'Secretnights2026!';
 // ============================================================
 // LOGIN - SIMPEL EN DIRECT
 // ============================================================
-document.getElementById('loginKnop').addEventListener('click', function() {
+function probeerLogin() {
   var ingevoerd = document.getElementById('pwVeld').value;
   var opgeslagen = localStorage.getItem('sn_ww');
   var geldigWw = opgeslagen || WW;
@@ -587,11 +587,7 @@ document.getElementById('loginKnop').addEventListener('click', function() {
     document.getElementById('pwVeld').value = '';
     document.getElementById('pwVeld').focus();
   }
-});
-
-document.getElementById('pwVeld').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') document.getElementById('loginKnop').click();
-});
+}
 
 function uitloggen() {
   localStorage.removeItem('sn_in');
