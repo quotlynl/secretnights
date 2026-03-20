@@ -9,41 +9,34 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--g:#c8a96e;--gl:#e8d5a3;--b:#0a0a0a;--bs:#111;--bc:#161616;--w:#f5f0e8;--wd:rgba(245,240,232,.65);--fd:'Cormorant Garamond',serif;--fb:'Montserrat',sans-serif;--grn:#4caf82;--red:#e05252;--org:#e08c52;--blu:#5294e2}
 body{background:var(--b);color:var(--w);font-family:var(--fb);font-weight:300;min-height:100vh}
-
-/* ---- LOGIN ---- */
 #L{position:fixed;inset:0;background:var(--b);display:flex;align-items:center;justify-content:center;z-index:9999}
-.lb{background:var(--bs);border:1px solid rgba(200,169,110,.22);padding:48px;width:380px;text-align:center}
+.lb{background:var(--bs);border:1px solid rgba(200,169,110,.22);padding:48px;width:360px;text-align:center}
 .lb-logo{font-family:var(--fd);font-size:1.7rem;letter-spacing:.25em;color:var(--g);text-transform:uppercase;margin-bottom:4px}
 .lb-logo em{font-style:italic;color:rgba(245,240,232,.5)}
 .lb-sub{font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,240,232,.25);margin-bottom:32px;display:block}
-.lb input{width:100%;background:var(--b);border:1px solid rgba(200,169,110,.3);color:var(--w);padding:13px 16px;font-size:1rem;font-family:var(--fb);outline:none;margin-bottom:12px;border-radius:0;-webkit-appearance:none;display:block}
+.lb input{width:100%;background:var(--b);border:1px solid rgba(200,169,110,.3);color:var(--w);padding:13px 16px;font-size:1rem;font-family:var(--fb);outline:none;margin-bottom:12px;border-radius:0;display:block}
 .lb input:focus{border-color:var(--g)}
-.lb button{width:100%;background:var(--g);color:var(--b);border:none;padding:14px;font-family:var(--fb);font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;margin-top:4px}
+.lb button{width:100%;background:var(--g);color:var(--b);border:none;padding:14px;font-family:var(--fb);font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;cursor:pointer}
 .lb button:hover{background:var(--gl)}
-#lfout{color:var(--red);font-size:.68rem;margin-top:10px;min-height:20px;font-weight:500}
-
-/* ---- APP ---- */
-#A{display:none}
-
-/* TOPBAR */
-.tb{background:var(--bs);border-bottom:1px solid rgba(200,169,110,.15);padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:55px;position:sticky;top:0;z-index:50}
+#lf{color:var(--red);font-size:.68rem;margin-top:10px;min-height:20px}
+#A{display:none;flex-direction:column;height:100vh}
+.tb{background:var(--bs);border-bottom:1px solid rgba(200,169,110,.15);padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:55px;flex-shrink:0;position:sticky;top:0;z-index:50}
 .tb-logo{font-family:var(--fd);font-size:1.1rem;letter-spacing:.2em;color:var(--g);text-transform:uppercase}
 .tb-logo em{font-style:italic;color:rgba(245,240,232,.5)}
 .tb-r{display:flex;align-items:center;gap:10px}
 .site-box{display:flex;align-items:center;gap:8px;background:var(--bc);border:1px solid rgba(200,169,110,.18);padding:5px 12px}
-.site-box span{font-size:.54rem;letter-spacing:.13em;text-transform:uppercase}
-.s-aan{color:var(--grn)}.s-uit{color:var(--red)}
-.sw{position:relative;width:42px;height:22px}
+.s-aan{color:var(--grn);font-size:.54rem;letter-spacing:.13em;text-transform:uppercase}
+.s-uit{color:var(--red);font-size:.54rem;letter-spacing:.13em;text-transform:uppercase}
+.sw{position:relative;width:42px;height:22px;flex-shrink:0}
 .sw input{opacity:0;position:absolute;width:0;height:0}
 .sw-t{position:absolute;inset:0;background:rgba(224,82,82,.2);border:1px solid rgba(224,82,82,.3);border-radius:11px;cursor:pointer;transition:all .3s}
 .sw input:checked+.sw-t{background:rgba(76,175,130,.2);border-color:var(--grn)}
 .sw-t::before{content:'';position:absolute;width:16px;height:16px;background:var(--red);border-radius:50%;left:2px;top:2px;transition:all .3s}
 .sw input:checked+.sw-t::before{transform:translateX(20px);background:var(--grn)}
+.tb-lnk{font-size:.56rem;color:rgba(200,169,110,.45);text-decoration:none;letter-spacing:.1em;text-transform:uppercase}
+.tb-lnk:hover{color:var(--g)}
 .tb-btn{background:transparent;border:1px solid rgba(200,169,110,.2);color:var(--g);padding:5px 12px;font-family:var(--fb);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
-.tb-btn:hover{background:rgba(200,169,110,.1)}
-
-/* LAYOUT */
-.layout{display:flex;height:calc(100vh - 55px)}
+.lay{display:flex;flex:1;overflow:hidden}
 .side{width:210px;background:var(--bs);border-right:1px solid rgba(200,169,110,.1);overflow-y:auto;flex-shrink:0}
 .ns{font-size:.44rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,240,232,.18);padding:16px 18px 5px}
 .ni{display:flex;align-items:center;gap:8px;padding:9px 18px;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.4);cursor:pointer;border-left:2px solid transparent;transition:all .2s}
@@ -53,23 +46,37 @@ body{background:var(--b);color:var(--w);font-family:var(--fb);font-weight:300;mi
 .main{flex:1;overflow-y:auto;background:var(--b)}
 .pg{display:none;flex-direction:column;min-height:100%}
 .pg.on{display:flex}
-
-/* PAGE HEAD */
 .ph{padding:18px 26px;border-bottom:1px solid rgba(200,169,110,.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;flex-shrink:0}
 .ph h1{font-family:var(--fd);font-size:1.6rem;font-weight:300}
 .ph h1 em{font-style:italic;color:var(--g)}
 .ph p{font-size:.6rem;color:var(--wd);margin-top:2px}
 .scroll{flex:1;overflow-y:auto;padding:22px 26px}
-
-/* STATS */
-.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:18px 26px;flex-shrink:0}
-.sc{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:18px;position:relative}
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:16px 26px;flex-shrink:0}
+.sc{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:18px;position:relative;overflow:hidden}
 .sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px}
-.sc.g::after{background:var(--g)}.sc.gr::after{background:var(--grn)}.sc.b::after{background:var(--blu)}.sc.o::after{background:var(--org)}
+.sc.g::after{background:var(--g)}.sc.gr::after{background:var(--grn)}.sc.b::after{background:var(--blu)}.sc.o::after{background:var(--org)}.sc.p::after{background:#a855f7}
 .sc-l{font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:7px;display:block}
 .sc-v{font-family:var(--fd);font-size:2.1rem;font-weight:300;line-height:1}
 .sc-s{font-size:.54rem;color:rgba(245,240,232,.2);margin-top:4px}
-
+/* CHART */
+.chart-wrap{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:20px;margin-bottom:14px}
+.chart-title{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:16px}
+.bar-chart{display:flex;align-items:flex-end;gap:4px;height:120px;padding-bottom:24px;position:relative}
+.bar-chart::after{content:'';position:absolute;bottom:24px;left:0;right:0;height:1px;background:rgba(200,169,110,.08)}
+.bar{flex:1;background:rgba(200,169,110,.15);border-top:2px solid rgba(200,169,110,.4);position:relative;transition:background .2s;min-width:0;cursor:default;border-radius:2px 2px 0 0}
+.bar:hover{background:rgba(200,169,110,.28)}
+.bar-lbl{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:.44rem;color:rgba(245,240,232,.28);white-space:nowrap}
+.bar-val{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:.5rem;color:var(--g);white-space:nowrap;opacity:0;transition:opacity .2s}
+.bar:hover .bar-val{opacity:1}
+.stat-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.stat-list{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:18px}
+.stat-list-title{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.32);margin-bottom:14px}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(200,169,110,.06)}
+.stat-row:last-child{border-bottom:none}
+.stat-row-lbl{font-size:.68rem;color:var(--wd)}
+.stat-row-val{font-family:var(--fd);font-size:1.1rem;color:var(--g);flex-shrink:0;margin-left:8px}
+.stat-row-bar{height:4px;background:rgba(200,169,110,.12);margin-top:4px;border-radius:2px;overflow:hidden}
+.stat-row-fill{height:100%;background:var(--g);border-radius:2px;transition:width .6s ease}
 /* BUTTONS */
 .bg{background:var(--g);color:var(--b);border:none;padding:9px 22px;font-family:var(--fb);font-size:.57rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .2s;display:inline-block;text-decoration:none}
 .bg:hover{background:var(--gl)}
@@ -78,8 +85,6 @@ body{background:var(--b);color:var(--w);font-family:var(--fb);font-weight:300;mi
 .bo:hover{border-color:var(--g);color:var(--g)}
 .br{background:transparent;border:1px solid rgba(224,82,82,.3);color:var(--red);padding:8px 16px;font-family:var(--fb);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
 .br:hover{background:rgba(224,82,82,.1)}
-
-/* FORM */
 .fg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
 .fg label{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g)}
 .fg input,.fg textarea,.fg select{background:var(--b);border:1px solid rgba(200,169,110,.2);color:var(--w);padding:10px 12px;font-family:var(--fb);font-size:.74rem;outline:none;border-radius:0;width:100%;transition:border-color .2s}
@@ -87,51 +92,65 @@ body{background:var(--b);color:var(--w);font-family:var(--fb);font-weight:300;mi
 .fg textarea{resize:vertical;min-height:75px;line-height:1.9}
 .fg select option{background:#1a1a1a}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
-
-/* EDITOR */
-.ed-layout{display:grid;grid-template-columns:1fr 370px;flex:1;overflow:hidden;min-height:0}
-.ed-prev{overflow-y:auto;background:#0c0c0c;border-right:1px solid rgba(200,169,110,.1)}
-.ed-pane{overflow-y:auto;background:var(--bs);padding:18px}
-.sp{position:relative;cursor:pointer;border:2px solid transparent;transition:border-color .2s;margin-bottom:2px}
-.sp:hover{border-color:rgba(200,169,110,.5)}
-.sp.on{border-color:var(--g)}
-.sp-lbl{position:absolute;top:7px;right:7px;background:var(--g);color:var(--b);font-size:.44rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;opacity:0;transition:opacity .2s;z-index:5;pointer-events:none}
-.sp:hover .sp-lbl,.sp.on .sp-lbl{opacity:1}
-/* preview */
-.pv-hero{background:#0a0a0a;min-height:240px;display:flex;flex-direction:column;justify-content:flex-end;padding:26px;position:relative;overflow:hidden}
-.pv-hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a1208,#050505)}
-.pv-hc{position:relative;z-index:2}
-.pv-lbl{font-size:.44rem;letter-spacing:.36em;text-transform:uppercase;color:var(--g);margin-bottom:8px;display:block}
-.pv-h1{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--w);line-height:1.05}
-.pv-h1 em{font-style:italic;color:var(--g)}
-.pv-sub{font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.5);margin-top:10px;line-height:2}
-.pv-intro{background:#111;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
-.pv-it h2{font-family:var(--fd);font-size:1.4rem;font-weight:300;color:var(--w);margin-bottom:10px;line-height:1.2}
-.pv-it h2 em{font-style:italic;color:var(--g)}
-.pv-it p{font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:6px}
-.pv-ii{background:linear-gradient(135deg,#1a1208,#0d0d0d);aspect-ratio:3/4;border:1px solid rgba(200,169,110,.12)}
-.pv-quote{background:var(--g);padding:24px 28px;text-align:center}
-.pv-quote blockquote{font-family:var(--fd);font-size:1.25rem;font-style:italic;font-weight:300;color:#0a0a0a;line-height:1.4}
-.pv-cta{background:#0a0a0a;padding:40px 28px;text-align:center}
-.pv-cta h2{font-family:var(--fd);font-size:1.6rem;font-weight:300;margin-bottom:8px}
-.pv-cta h2 em{font-style:italic;color:var(--g)}
-.pv-cta p{font-size:.65rem;color:var(--wd);line-height:2;max-width:340px;margin:0 auto 16px}
-.pv-btn{display:inline-block;background:var(--g);color:#0a0a0a;padding:9px 22px;font-family:var(--fb);font-size:.54rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
-.pv-cnt{background:#111;padding:18px 28px;border-top:1px solid rgba(200,169,110,.1)}
-.pv-cnt p{font-size:.62rem;color:rgba(245,240,232,.36);line-height:2.2}
-.pv-cnt span{color:var(--g)}
-.ed-leeg{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;color:rgba(245,240,232,.2);text-align:center;gap:10px}
-.ed-leeg span{font-size:1.8rem}
-.vb{background:var(--bc);padding:12px 14px;margin-bottom:7px;border:1px solid rgba(200,169,110,.07)}
+/* VISUELE EDITOR */
+.ed-lay{display:grid;grid-template-columns:1fr 360px;flex:1;overflow:hidden;min-height:0}
+.ed-site{overflow-y:auto;background:#000;position:relative}
+.ws-nav{background:rgba(10,10,10,.98);border-bottom:1px solid rgba(200,169,110,.12);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.ws-nav-logo{font-family:var(--fd);font-size:.9rem;letter-spacing:.25em;color:var(--g);text-transform:uppercase}
+.ws-nav-logo em{font-style:italic;color:var(--w)}
+.ws-nav-links{display:flex;gap:16px}
+.ws-nav-links span{font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,240,232,.4)}
+.ws-sec{position:relative;cursor:pointer;transition:outline .15s}
+.ws-sec:hover{outline:2px solid rgba(200,169,110,.5)}
+.ws-sec.gekozen{outline:3px solid var(--g)}
+.ws-edit-hint{position:absolute;top:8px;right:8px;background:var(--g);color:var(--b);font-size:.44rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;opacity:0;transition:opacity .2s;z-index:5;pointer-events:none;font-family:var(--fb)}
+.ws-sec:hover .ws-edit-hint,.ws-sec.gekozen .ws-edit-hint{opacity:1}
+.ws-hero{background:linear-gradient(180deg,rgba(10,10,10,.5) 0%,rgba(10,10,10,.05) 45%,rgba(10,10,10,.92) 100%),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-V8-34-1.jpg') center/cover;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:36px 28px}
+.ws-hero-tag{font-size:.44rem;letter-spacing:.38em;text-transform:uppercase;color:var(--g);margin-bottom:14px;display:block}
+.ws-hero-h1{font-family:var(--fd);font-size:clamp(1.6rem,4vw,3rem);font-weight:300;color:var(--w);line-height:1.05}
+.ws-hero-h1 em{font-style:italic;color:var(--g)}
+.ws-hero-sub{font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.5);margin-top:10px;line-height:2}
+.ws-hero-btns{display:flex;gap:8px;margin-top:20px;justify-content:center;flex-wrap:wrap}
+.ws-btn-p{background:var(--g);color:var(--b);padding:8px 20px;font-size:.5rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.ws-btn-g{border:1px solid rgba(245,240,232,.28);color:var(--w);padding:8px 20px;font-size:.5rem;letter-spacing:.16em;text-transform:uppercase}
+.ws-counter{background:var(--g);padding:12px 32px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.ws-counter span{font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--b);font-weight:600}
+.ws-counter .n{font-family:var(--fd);font-size:2.4rem;font-weight:300;color:var(--b);line-height:1}
+.ws-intro{background:#111;padding:44px 32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.ws-intro-txt h2{font-family:var(--fd);font-size:1.7rem;font-weight:300;color:var(--w);line-height:1.1;margin-bottom:14px}
+.ws-intro-txt h2 em{font-style:italic;color:var(--g)}
+.ws-intro-txt p{font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:10px}
+.ws-intro-img{background:linear-gradient(135deg,rgba(26,18,8,.9),rgba(13,13,13,.9)),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-slaapbank-sfeer-uitzicht-natuur.jpg') center/cover;aspect-ratio:3/4;border:1px solid rgba(200,169,110,.14)}
+.ws-quote{background:var(--g);padding:44px 32px;text-align:center}
+.ws-quote blockquote{font-family:var(--fd);font-size:clamp(1.2rem,2.5vw,1.9rem);font-style:italic;font-weight:300;color:var(--b);line-height:1.4;max-width:600px;margin:0 auto}
+.ws-quote cite{display:block;margin-top:14px;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,10,10,.45);font-style:normal}
+.ws-cta{background:var(--b);padding:60px 32px;text-align:center}
+.ws-cta h2{font-family:var(--fd);font-size:1.8rem;font-weight:300;margin-bottom:10px}
+.ws-cta h2 em{font-style:italic;color:var(--g)}
+.ws-cta p{font-size:.66rem;color:var(--wd);line-height:2;max-width:440px;margin:0 auto 24px}
+.ws-contact{background:#111;padding:16px 32px;border-top:1px solid rgba(200,169,110,.12)}
+.ws-contact p{font-size:.6rem;color:rgba(245,240,232,.36);line-height:2.2}
+.ws-contact span{color:var(--g)}
+/* EDIT PANEL */
+.ed-panel{overflow-y:auto;background:var(--bs);display:flex;flex-direction:column}
+.ed-panel-hd{padding:16px 18px;border-bottom:1px solid rgba(200,169,110,.1);flex-shrink:0}
+.ed-panel-hd h3{font-family:var(--fd);font-size:1.15rem;font-weight:300}
+.ed-panel-hd h3 em{font-style:italic;color:var(--g)}
+.ed-panel-hd p{font-size:.6rem;color:var(--wd);margin-top:3px}
+.ed-panel-body{flex:1;padding:16px 18px;overflow-y:auto}
+.ed-leeg{display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;color:rgba(245,240,232,.2);text-align:center;gap:12px}
+.ed-leeg span{font-size:2.5rem}
+.ed-leeg p{font-size:.64rem;letter-spacing:.08em;line-height:2}
+.vb{background:var(--bc);padding:12px 14px;margin-bottom:8px;border:1px solid rgba(200,169,110,.07)}
 .vb label{font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:5px}
 .vb input,.vb textarea{width:100%;background:var(--b);border:1px solid rgba(200,169,110,.18);color:var(--w);padding:8px 11px;font-family:var(--fb);font-size:.73rem;outline:none;border-radius:0;transition:border-color .2s}
 .vb input:focus,.vb textarea:focus{border-color:var(--g)}
 .vb textarea{resize:vertical;min-height:68px;line-height:1.9}
-.op-balk{padding:13px 18px;border-top:1px solid rgba(200,169,110,.1);background:var(--bs)}
-
+.ed-panel-ft{padding:14px 18px;border-top:1px solid rgba(200,169,110,.1);flex-shrink:0}
+.tip-box{background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.09);padding:9px 12px;font-size:.6rem;color:var(--wd);line-height:1.9;margin-top:10px}
 /* TABLE */
 .tw{background:var(--bs);border:1px solid rgba(200,169,110,.1);overflow:auto}
-table{width:100%;border-collapse:collapse;min-width:660px}
+table{width:100%;border-collapse:collapse;min-width:640px}
 thead{background:var(--bc)}
 th{padding:9px 12px;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g);font-weight:700;text-align:left;white-space:nowrap}
 td{padding:11px 12px;font-size:.67rem;color:var(--wd);border-top:1px solid rgba(200,169,110,.06);vertical-align:middle}
@@ -143,8 +162,6 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
 .ab{background:transparent;border:1px solid rgba(200,169,110,.15);color:var(--wd);padding:3px 7px;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s}
 .ab:hover{border-color:var(--g);color:var(--g)}
 .ab.d:hover{border-color:var(--red);color:var(--red)}
-
-/* MODAL */
 .mo{position:fixed;inset:0;z-index:600;background:rgba(10,10,10,.93);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
 .mo.on{display:flex}
 .mw{background:var(--bs);border:1px solid rgba(200,169,110,.22);width:100%;max-width:580px;max-height:90vh;overflow-y:auto;animation:mu .25s ease}
@@ -156,51 +173,28 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
 .mx:hover{background:var(--g);color:var(--b)}
 .mb{padding:20px 22px}
 .ma{padding:0 22px 20px;display:flex;gap:8px;flex-wrap:wrap}
-
-/* TOGGLE */
-.tg{position:relative;width:42px;height:22px}
+.tg{position:relative;width:42px;height:22px;flex-shrink:0}
 .tg input{opacity:0;position:absolute;width:0;height:0}
 .tg-t{position:absolute;inset:0;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.18);cursor:pointer;border-radius:11px;transition:all .3s}
 .tg input:checked+.tg-t{background:rgba(76,175,130,.2);border-color:var(--grn)}
 .tg-t::before{content:'';position:absolute;width:16px;height:16px;background:rgba(245,240,232,.4);border-radius:50%;left:2px;top:2px;transition:transform .3s}
 .tg input:checked+.tg-t::before{transform:translateX(20px);background:var(--grn)}
-
-/* CALENDAR */
 .cd{font-size:.47rem;letter-spacing:.14em;color:rgba(245,240,232,.24);padding:5px 0;text-align:center}
 .cdag{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.62rem;color:var(--wd);border:1px solid rgba(200,169,110,.05);min-height:36px}
-.cdag.vd{border-color:var(--g);color:var(--g)}
-.cdag.gb{background:rgba(200,169,110,.06);border-color:rgba(200,169,110,.18);color:var(--w)}
-.cdag.gb::after{content:'●';font-size:.36rem;color:var(--g);display:block}
-.cdag.an{opacity:.14}
-
-/* INFO */
+.cdag.vd{border-color:var(--g);color:var(--g)}.cdag.gb{background:rgba(200,169,110,.06);border-color:rgba(200,169,110,.18);color:var(--w)}.cdag.gb::after{content:'●';font-size:.36rem;color:var(--g);display:block}.cdag.an{opacity:.14}
 .ib{background:rgba(200,169,110,.05);border:1px solid rgba(200,169,110,.13);padding:12px 15px;font-size:.67rem;color:var(--wd);line-height:2;margin-bottom:14px}
 .ib a{color:var(--g);text-decoration:none}
-
-/* EMPTY/LOADING */
-.leeg{text-align:center;padding:40px 20px;color:rgba(245,240,232,.2)}
-.leeg span{font-size:1.9rem;display:block;margin-bottom:9px}
-.leeg p{font-size:.62rem;letter-spacing:.1em}
-.lad{text-align:center;padding:28px;color:rgba(245,240,232,.24);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase}
-
-/* BETAAL ROW */
-.pr{background:var(--bc);border:1px solid rgba(200,169,110,.1);padding:14px 18px;display:flex;align-items:center;gap:12px;margin-bottom:7px;flex-wrap:wrap}
+.icard{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:22px;max-width:540px;margin-bottom:12px}
+.icard h3{font-family:var(--fd);font-size:1.15rem;font-weight:300;margin-bottom:4px}
+.icard h3 em{font-style:italic;color:var(--g)}
+.icard p{font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:16px}
+.icard-sw{display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--bc);border:1px solid rgba(200,169,110,.1);margin-bottom:16px}
+.icard-sw span{font-size:.7rem;font-weight:500}
+.pr{background:var(--bc);border:1px solid rgba(200,169,110,.09);padding:14px 18px;display:flex;align-items:center;gap:12px;margin-bottom:7px}
 .pr-ico{font-size:1.25rem;width:32px;text-align:center}
 .pr-inf{flex:1}
 .pr-nm{font-size:.74rem;color:var(--w);font-weight:500}
 .pr-tp{font-size:.54rem;color:rgba(200,169,110,.48);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
-
-/* PAGINA CARD */
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:9px}
-.pcard{background:var(--bc);border:1px solid rgba(200,169,110,.1);padding:18px;transition:border-color .2s}
-.pcard:hover{border-color:rgba(200,169,110,.28)}
-.pcard h3{font-family:var(--fd);font-size:1.05rem;font-weight:300;margin-bottom:4px}
-.pcard p{font-size:.58rem;color:var(--wd);letter-spacing:.05em;margin-bottom:10px}
-.pub{font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;font-weight:700}
-.pub.live{background:rgba(76,175,130,.12);color:var(--grn);border:1px solid rgba(76,175,130,.18)}
-.pub.concept{background:rgba(200,169,110,.07);color:rgba(200,169,110,.5);border:1px solid rgba(200,169,110,.13)}
-
-/* MOLLIE */
 .mbox{background:var(--bc);border:1px solid rgba(200,169,110,.12);padding:20px;margin-bottom:12px}
 .mbox h3{font-family:var(--fd);font-size:1.15rem;font-weight:300;margin-bottom:4px}
 .mbox h3 em{font-style:italic;color:var(--g)}
@@ -212,56 +206,56 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
 .stap a{color:var(--g)}
 .sdot{width:8px;height:8px;border-radius:50%}
 .sdot.aan{background:var(--grn)}.sdot.uit{background:var(--red)}
-
-/* TOAST */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:9px}
+.pcard{background:var(--bc);border:1px solid rgba(200,169,110,.1);padding:18px;transition:border-color .2s}
+.pcard:hover{border-color:rgba(200,169,110,.28)}
+.pcard h3{font-family:var(--fd);font-size:1.05rem;font-weight:300;margin-bottom:4px}
+.pcard p{font-size:.58rem;color:var(--wd);letter-spacing:.05em;margin-bottom:10px}
+.pub{font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;font-weight:700}
+.pub.live{background:rgba(76,175,130,.12);color:var(--grn);border:1px solid rgba(76,175,130,.18)}
+.pub.concept{background:rgba(200,169,110,.07);color:rgba(200,169,110,.5);border:1px solid rgba(200,169,110,.13)}
+.foto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:9px}
+.leeg{text-align:center;padding:40px 20px;color:rgba(245,240,232,.2)}
+.leeg span{font-size:1.9rem;display:block;margin-bottom:9px}
+.leeg p{font-size:.62rem;letter-spacing:.1em}
+.lad{text-align:center;padding:28px;color:rgba(245,240,232,.24);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase}
 .toast{position:fixed;bottom:18px;right:18px;z-index:1000;background:var(--bs);border-left:3px solid var(--g);padding:11px 15px;font-size:.65rem;max-width:270px;line-height:1.8;transform:translateX(130%);transition:transform .35s;box-shadow:0 6px 28px rgba(0,0,0,.6)}
 .toast.on{transform:translateX(0)}
 .toast.err{border-color:var(--red);color:var(--red)}
 .toast.ok{border-color:var(--grn)}
-
-/* INSTELLING KAART */
-.icard{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:22px;max-width:540px;margin-bottom:12px}
-.icard h3{font-family:var(--fd);font-size:1.15rem;font-weight:300;margin-bottom:4px}
-.icard h3 em{font-style:italic;color:var(--g)}
-.icard p{font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:16px}
-.icard-schakelaar{display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--bc);border:1px solid rgba(200,169,110,.1);margin-bottom:16px}
-.icard-schakelaar span{font-size:.7rem;font-weight:500}
-
-@media(max-width:900px){.side{display:none}.sr{grid-template-columns:repeat(2,1fr)}.scroll{padding:16px 16px}.ed-layout{grid-template-columns:1fr}.ed-prev{display:none}}
+.xbtn{background:transparent;border:1px solid rgba(200,169,110,.22);color:var(--g);padding:7px 14px;font-family:var(--fb);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.xbtn:hover{background:rgba(200,169,110,.08)}
+@media(max-width:900px){.side{display:none}.sr{grid-template-columns:repeat(2,1fr)}.scroll{padding:16px}.ed-lay{grid-template-columns:1fr}.ed-site{display:none}}
 @media(max-width:480px){.sr{grid-template-columns:1fr}.f2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<!-- ===== LOGIN ===== -->
 <div id="L">
 <div class="lb">
   <div class="lb-logo">Secret<em>nights</em></div>
   <span class="lb-sub">Website Beheer</span>
   <input type="password" id="pw" placeholder="Wachtwoord" onkeydown="if(event.key==='Enter')login()"/>
   <button onclick="login()">Inloggen →</button>
-  <div id="lfout"></div>
+  <div id="lf"></div>
 </div>
 </div>
-
-<!-- ===== APP ===== -->
 <div id="A">
 <div class="tb">
   <div><span class="tb-logo">Secret<em>nights</em></span></div>
   <div class="tb-r">
-    <div class="site-box" id="site-box">
-      <span class="s-uit" id="site-lbl">Website</span>
+    <div class="site-box">
       <label class="sw"><input type="checkbox" id="site-sw" onchange="toggleSite(this.checked)"/><div class="sw-t"></div></label>
-      <span id="site-st">—</span>
+      <span id="site-st" class="s-uit">—</span>
     </div>
-    <a href="index.html" target="_blank" style="font-size:.56rem;color:rgba(200,169,110,.45);text-decoration:none;letter-spacing:.1em;text-transform:uppercase">↗ Site</a>
+    <a href="index.html" target="_blank" class="tb-lnk">↗ Site</a>
     <button class="tb-btn" onclick="uitloggen()">Uitloggen</button>
   </div>
 </div>
-<div class="layout">
+<div class="lay">
   <div class="side">
     <div class="ns">Overzicht</div>
     <div class="ni on" onclick="ga('dashboard',this)"><span class="ni-i">📊</span>Dashboard</div>
+    <div class="ni" onclick="ga('statistieken',this)"><span class="ni-i">📈</span>Statistieken</div>
     <div class="ni" onclick="ga('reserveringen',this)"><span class="ni-i">📋</span>Reserveringen</div>
     <div class="ni" onclick="ga('kalender',this)"><span class="ni-i">📅</span>Kalender</div>
     <div class="ns">Website</div>
@@ -274,24 +268,51 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
     <div class="ni" onclick="ga('inst',this)"><span class="ni-i">⚙️</span>Instellingen</div>
   </div>
   <div class="main">
-
     <!-- DASHBOARD -->
     <div class="pg on" id="pg-dashboard">
-      <div class="ph"><div><h1>Welkom <em>terug</em> 👋</h1><p>Live overzicht secretnights.nl</p></div><button class="bo" onclick="laadAlles()">↻ Vernieuwen</button></div>
+      <div class="ph"><div><h1>Welkom <em>terug</em> 👋</h1><p>Live overzicht van secretnights.nl</p></div><button class="bo" onclick="laadAlles()">↻ Vernieuwen</button></div>
       <div class="sr">
         <div class="sc g"><span class="sc-l">Reserveringen</span><div class="sc-v" id="s-res">—</div><div class="sc-s">Totaal</div></div>
         <div class="sc gr"><span class="sc-l">Bevestigd</span><div class="sc-v" id="s-bev">—</div><div class="sc-s">Actief</div></div>
-        <div class="sc b"><span class="sc-l">Beschikbaar</span><div class="sc-v" id="s-vrij">—</div><div class="sc-s">Nachten</div></div>
+        <div class="sc b"><span class="sc-l">Bezoekers</span><div class="sc-v" id="s-bez">—</div><div class="sc-s">Afgelopen 30 dagen</div></div>
         <div class="sc o"><span class="sc-l">Omzet</span><div class="sc-v" id="s-omz">—</div><div class="sc-s">Alle boekingen</div></div>
       </div>
-      <div class="scroll"><div id="d-banner"></div><div class="lad" id="d-tbl-lad">Laden...</div><div class="tw" id="d-tbl" style="display:none"></div></div>
+      <div class="scroll">
+        <div id="d-banner" style="margin-bottom:10px"></div>
+        <div class="lad" id="d-lad">Laden...</div>
+        <div class="tw" id="d-tbl" style="display:none"></div>
+      </div>
     </div>
-
+    <!-- STATISTIEKEN -->
+    <div class="pg" id="pg-statistieken">
+      <div class="ph"><div><h1>Website <em>Statistieken</em></h1><p>Bezoekersdata van secretnights.nl</p></div></div>
+      <div class="scroll">
+        <div class="sr" style="padding:0 0 16px 0;grid-template-columns:repeat(5,1fr)">
+          <div class="sc g"><span class="sc-l">Totaal</span><div class="sc-v" id="st-tot">—</div><div class="sc-s">Alle tijden</div></div>
+          <div class="sc gr"><span class="sc-l">Deze Maand</span><div class="sc-v" id="st-mnd">—</div><div class="sc-s">30 dagen</div></div>
+          <div class="sc b"><span class="sc-l">Deze Week</span><div class="sc-v" id="st-wk">—</div><div class="sc-s">7 dagen</div></div>
+          <div class="sc o"><span class="sc-l">Vandaag</span><div class="sc-v" id="st-vd">—</div><div class="sc-s">Vandaag</div></div>
+          <div class="sc p"><span class="sc-l">Mobiel</span><div class="sc-v" id="st-mob">—</div><div class="sc-s">% van totaal</div></div>
+        </div>
+        <div class="chart-wrap">
+          <div class="chart-title">Bezoekers per dag — afgelopen 14 dagen</div>
+          <div class="bar-chart" id="bar-chart"><div class="lad">Laden...</div></div>
+        </div>
+        <div class="stat-2">
+          <div class="stat-list"><div class="stat-list-title">Apparaat</div><div id="ap-st"><div class="lad">Laden...</div></div></div>
+          <div class="stat-list"><div class="stat-list-title">Per arrangement</div><div id="pk-st"><div class="lad">Laden...</div></div></div>
+        </div>
+        <div class="stat-2">
+          <div class="stat-list"><div class="stat-list-title">Recente boekingen</div><div id="re-st"><div class="lad">Laden...</div></div></div>
+          <div class="stat-list"><div class="stat-list-title">Per boot</div><div id="bo-st"><div class="lad">Laden...</div></div></div>
+        </div>
+      </div>
+    </div>
     <!-- RESERVERINGEN -->
     <div class="pg" id="pg-reserveringen">
-      <div class="ph"><h1>Alle <em>Reserveringen</em></h1></div>
+      <div class="ph"><h1>Alle <em>Reserveringen</em></h1><button class="xbtn" onclick="exportCSV()">⬇ Export CSV</button></div>
       <div style="padding:11px 26px;border-bottom:1px solid rgba(200,169,110,.08);display:flex;gap:7px;flex-wrap:wrap;align-items:center;flex-shrink:0">
-        <button class="ab on-f" id="rf-alle" onclick="setF('alle',this)" style="border-color:var(--g);color:var(--g)">Alle</button>
+        <button class="ab" id="rf-alle" onclick="setF('alle',this)" style="border-color:var(--g);color:var(--g)">Alle</button>
         <button class="ab" id="rf-bevestigd" onclick="setF('bevestigd',this)">Bevestigd</button>
         <button class="ab" id="rf-afgerond" onclick="setF('afgerond',this)">Afgerond</button>
         <button class="ab" id="rf-geannuleerd" onclick="setF('geannuleerd',this)">Geannuleerd</button>
@@ -299,90 +320,124 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
       </div>
       <div class="scroll"><div class="lad" id="r-lad">Laden...</div><div class="tw" id="r-tbl" style="display:none"></div></div>
     </div>
-
     <!-- KALENDER -->
     <div class="pg" id="pg-kalender">
       <div class="ph"><h1><em>Kalender</em></h1></div>
       <div class="scroll">
-        <div style="background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:22px;max-width:480px">
+        <div style="background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:22px;max-width:460px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
             <button class="bo" onclick="kPrev()" style="padding:5px 11px">←</button>
             <span style="font-family:var(--fd);font-size:1.05rem" id="k-tit">—</span>
             <button class="bo" onclick="kNext()" style="padding:5px 11px">→</button>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px">
-            <div class="cd">Ma</div><div class="cd">Di</div><div class="cd">Wo</div><div class="cd">Do</div><div class="cd">Vr</div><div class="cd">Za</div><div class="cd">Zo</div>
-          </div>
+          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px"><div class="cd">Ma</div><div class="cd">Di</div><div class="cd">Wo</div><div class="cd">Do</div><div class="cd">Vr</div><div class="cd">Za</div><div class="cd">Zo</div></div>
           <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px" id="k-grid"></div>
           <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(200,169,110,.07);font-size:.58rem;color:rgba(245,240,232,.26)"><span style="color:var(--g)">●</span> Geboekte datum</div>
         </div>
       </div>
     </div>
-
     <!-- VISUELE EDITOR -->
     <div class="pg" id="pg-editor" style="display:none;flex-direction:column">
-      <div class="ph" style="flex-shrink:0"><div><h1>Visuele <em>Editor</em></h1><p>Klik op een sectie om teksten te bewerken</p></div><button class="bg" id="op-btn" onclick="slaOp()" disabled>Opslaan →</button></div>
-      <div class="ed-layout">
-        <div class="ed-prev">
-          <div class="sp" onclick="kiesSec('hero')" id="sp-hero"><div class="sp-lbl">✏️ Bewerken</div>
-            <div class="pv-hero"><div class="pv-hero-bg"></div><div class="pv-hc">
-              <span class="pv-lbl">Bijzondere Overnachtingen op het Water</span>
-              <h1 class="pv-h1" id="pv-ht">Jouw <em>geheime</em> nacht begint hier</h1>
-              <p class="pv-sub" id="pv-hs">Een mysterieuze ligplek · Een privé-boot · Een beleving die je nooit vergeet</p>
-            </div></div>
+      <div class="ph" style="flex-shrink:0">
+        <div><h1>Visuele <em>Editor</em></h1><p>Klik op een sectie van de website om die aan te passen</p></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span id="ed-hint" style="font-size:.56rem;color:rgba(200,169,110,.4);letter-spacing:.07em">← Klik op een sectie</span>
+          <button class="bg" id="op-btn" onclick="slaOp()" disabled>Opslaan →</button>
+        </div>
+      </div>
+      <div class="ed-lay">
+        <div class="ed-site">
+          <div class="ws-nav">
+            <span class="ws-nav-logo">Secret<em>nights</em></span>
+            <div class="ws-nav-links"><span>Mysterie</span><span>Arrangementen</span><span>Galerij</span><span>FAQ</span></div>
+            <span style="border:1px solid var(--g);color:var(--g);padding:5px 14px;font-size:.48rem;letter-spacing:.16em;text-transform:uppercase">Reserveer</span>
           </div>
-          <div class="sp" onclick="kiesSec('intro')" id="sp-intro"><div class="sp-lbl">✏️ Bewerken</div>
-            <div class="pv-intro">
-              <div class="pv-it"><h2 id="pv-it2">Jij kiest de nacht. <em>Wij kiezen de plek.</em></h2><p id="pv-i1">Secretnights brengt je naar een geheime ligplek in de Nederlandse natuur.</p><p id="pv-i2">Verwacht rust, ruimte en een uitzicht dat je adem beneemt.</p></div>
-              <div class="pv-ii"></div>
+          <div class="ws-sec" id="sec-hero" onclick="kiesSec('hero')">
+            <div class="ws-edit-hint">✏️ Hero bewerken</div>
+            <div class="ws-hero">
+              <span class="ws-hero-tag">Bijzondere Overnachtingen op het Water</span>
+              <h1 class="ws-hero-h1" id="pv-ht">Jouw <em>geheime</em> nacht begint hier</h1>
+              <p class="ws-hero-sub" id="pv-hs">Een mysterieuze ligplek · Een privé-boot · Een beleving die je nooit vergeet</p>
+              <div class="ws-hero-btns"><div class="ws-btn-p">Reserveer je Night</div><div class="ws-btn-g">Ontdek het Mysterie</div></div>
             </div>
           </div>
-          <div class="sp" onclick="kiesSec('quote')" id="sp-quote"><div class="sp-lbl">✏️ Bewerken</div>
-            <div class="pv-quote"><blockquote id="pv-q">"Niet weten waar je naartoe gaat is deel van de magie."</blockquote></div>
+          <div class="ws-counter">
+            <span>Nog slechts</span>
+            <span class="n" id="pv-cnt">—</span>
+            <span style="font-family:var(--fd);font-size:.8rem;font-style:italic">Secret Nights</span>
           </div>
-          <div class="sp" onclick="kiesSec('cta')" id="sp-cta"><div class="sp-lbl">✏️ Bewerken</div>
-            <div class="pv-cta"><h2 id="pv-ct">Klaar voor jouw <em>geheime nacht?</em></h2><p id="pv-cp">Slechts 12 Secret Nights per seizoen beschikbaar.</p><div class="pv-btn">Reserveer Nu</div></div>
+          <div class="ws-sec" id="sec-intro" onclick="kiesSec('intro')">
+            <div class="ws-edit-hint">✏️ Mysterie sectie</div>
+            <div class="ws-intro">
+              <div class="ws-intro-txt">
+                <h2 id="pv-it">Jij kiest de nacht. <em>Wij kiezen de plek.</em></h2>
+                <p id="pv-i1">Secretnights brengt je naar een geheime ligplek in de Nederlandse natuur.</p>
+                <p id="pv-i2">Verwacht rust, ruimte en een uitzicht dat je adem beneemt.</p>
+              </div>
+              <div class="ws-intro-img"></div>
+            </div>
           </div>
-          <div class="sp" onclick="kiesSec('contact')" id="sp-contact"><div class="sp-lbl">✏️ Bewerken</div>
-            <div class="pv-cnt"><p>📞 <span id="pv-tel">06 300 66 444</span> · ✉️ <span id="pv-em">info@secretnights.nl</span> · 📍 <span id="pv-ad">Kazernestraat, Oss</span></p></div>
+          <div class="ws-sec" id="sec-quote" onclick="kiesSec('quote')">
+            <div class="ws-edit-hint">✏️ Quote bewerken</div>
+            <div class="ws-quote"><blockquote id="pv-q">"Niet weten waar je naartoe gaat is deel van de magie."</blockquote><cite>— Secretnights</cite></div>
+          </div>
+          <div class="ws-sec" id="sec-cta" onclick="kiesSec('cta')">
+            <div class="ws-edit-hint">✏️ Call-to-action</div>
+            <div class="ws-cta">
+              <h2 id="pv-ct">Klaar voor jouw <em>geheime nacht?</em></h2>
+              <p id="pv-cp">Slechts 12 Secret Nights per seizoen beschikbaar.</p>
+              <div class="ws-btn-p" style="display:inline-block">Reserveer Nu</div>
+            </div>
+          </div>
+          <div class="ws-sec" id="sec-contact" onclick="kiesSec('contact')">
+            <div class="ws-edit-hint">✏️ Contactgegevens</div>
+            <div class="ws-contact">
+              <p>📞 <span id="pv-tel">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="pv-em">info@secretnights.nl</span> &nbsp;·&nbsp; 📍 <span id="pv-ad">Kazernestraat, Oss</span></p>
+            </div>
           </div>
         </div>
-        <div class="ed-pane" id="ed-pane"><div class="ed-leeg"><span>👈</span><p>Klik op een sectie<br/>om teksten te bewerken</p></div></div>
+        <div class="ed-panel">
+          <div class="ed-panel-hd"><h3>Teksten <em>bewerken</em></h3><p>Selecteer een sectie links</p></div>
+          <div class="ed-panel-body" id="ed-body">
+            <div class="ed-leeg"><span>👈</span><p>Klik op een sectie<br/>van de website links<br/>om teksten te bewerken</p></div>
+          </div>
+          <div class="ed-panel-ft" id="ed-ft" style="display:none">
+            <button class="bg" style="width:100%" onclick="slaOp()">Opslaan op website →</button>
+            <div class="tip-box">💡 Gebruik <code style="background:var(--bc);padding:1px 4px;color:var(--g)">*woord*</code> voor <em style="font-style:italic;color:var(--g)">cursief goud</em>.</div>
+          </div>
+        </div>
       </div>
     </div>
-
     <!-- FOTOS -->
     <div class="pg" id="pg-fotos">
       <div class="ph"><div><h1>Foto's <em>beheren</em></h1></div><button class="bg" onclick="openM('m-foto')">+ Toevoegen</button></div>
       <div class="scroll">
-        <div class="ib">💡 Upload foto's gratis op <a href="https://imgur.com" target="_blank">imgur.com</a>, kopieer de directe URL en plak die hier.</div>
-        <div id="foto-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:9px"><div class="lad">Laden...</div></div>
+        <div class="ib">💡 Upload foto's gratis op <a href="https://imgur.com" target="_blank">imgur.com</a>, kopieer de URL en plak die hier.</div>
+        <div class="foto-grid" id="foto-grid"><div class="lad">Laden...</div></div>
       </div>
     </div>
-
     <!-- PAGINAS -->
     <div class="pg" id="pg-paginas">
       <div class="ph"><div><h1>Extra <em>Pagina's</em></h1></div><button class="bg" onclick="openM('m-np')">+ Nieuwe pagina</button></div>
       <div class="scroll">
-        <div class="ib">💡 Bereikbaar op <strong>secretnights.nl/pagina/[naam]</strong> — handig voor Privacybeleid, Algemene Voorwaarden etc.</div>
+        <div class="ib">💡 Bereikbaar op <strong>secretnights.nl/pagina/[naam]</strong></div>
         <div class="pgrid" id="p-grid"><div class="lad">Laden...</div></div>
       </div>
     </div>
-
     <!-- BETAALMETHODES -->
     <div class="pg" id="pg-betaal">
       <div class="ph"><div><h1><em>Betaalmethodes</em></h1></div><button class="bg" onclick="openM('m-betaal')">+ Toevoegen</button></div>
       <div class="scroll">
         <div class="mbox">
           <h3>iDEAL via <em>Mollie</em></h3>
-          <p>Ontvang echte iDEAL betalingen direct op je rekening. Gratis account nodig op mollie.com.</p>
+          <p>Ontvang echte iDEAL betalingen direct op je rekening.</p>
           <div style="display:flex;align-items:center;gap:9px;padding:10px 13px;background:var(--b);border:1px solid rgba(200,169,110,.1);margin-bottom:16px">
             <div class="sdot" id="m-dot"></div>
             <span style="font-size:.66rem;color:var(--wd)" id="m-txt">Laden...</span>
           </div>
           <div class="stap"><div class="snr">1</div><p>Maak een gratis account op <a href="https://mollie.com" target="_blank">mollie.com</a></p></div>
-          <div class="stap"><div class="snr">2</div><p>Ga naar <strong style="color:var(--w)">Dashboard → Developers → API keys</strong> en kopieer je Live key (begint met <code style="background:var(--bc);padding:1px 4px;color:var(--g)">live_</code>)</p></div>
-          <div class="stap"><div class="snr">3</div><p>Plak hieronder en klik opslaan → zet schakelaar aan</p></div>
+          <div class="stap"><div class="snr">2</div><p>Ga naar <strong style="color:var(--w)">Dashboard → Developers → API keys</strong> en kopieer je Live key</p></div>
+          <div class="stap"><div class="snr">3</div><p>Plak hieronder → opslaan → schakelaar aan</p></div>
           <div style="margin-top:14px">
             <div class="fg"><label>Mollie Live API Key</label><input type="password" id="mk" placeholder="live_xxxxxxxxxxxxxxxxxx" style="font-family:monospace"/></div>
             <div style="display:flex;gap:10px;align-items:center">
@@ -396,14 +451,13 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
         <div id="b-lijst"><div class="lad">Laden...</div></div>
       </div>
     </div>
-
     <!-- BESCHIKBAARHEID -->
     <div class="pg" id="pg-beschikbaar">
       <div class="ph"><h1><em>Beschikbaarheid</em></h1></div>
       <div class="scroll">
         <div class="icard">
           <h3>Beschikbare <em>nachten</em></h3>
-          <p>Dit getal staat live op de website. Geboekte nachten worden automatisch afgetrokken.</p>
+          <p>Dit getal staat live op de website.</p>
           <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
             <button onclick="aanpas(-1)" style="background:var(--bc);border:1px solid rgba(200,169,110,.2);color:var(--g);width:38px;height:38px;font-size:1.3rem;cursor:pointer" onmouseover="this.style.background='var(--g)';this.style.color='var(--b)'" onmouseout="this.style.background='var(--bc)';this.style.color='var(--g)'">−</button>
             <span id="tot-d" style="font-family:var(--fd);font-size:2.8rem;font-weight:300;min-width:52px;text-align:center">—</span>
@@ -411,52 +465,36 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
           </div>
           <button class="bg" onclick="slaaTot()">Opslaan →</button>
         </div>
-        <div class="icard">
-          <h3>Live <em>status</em></h3>
-          <p id="bes-st">Laden...</p>
-          <button class="br" style="margin-top:12px" onclick="resetBoek()">Reset geboekte teller naar 0</button>
-        </div>
+        <div class="icard"><h3>Live <em>status</em></h3><p id="bes-st">Laden...</p><button class="br" style="margin-top:12px" onclick="resetBoek()">Reset geboekte teller naar 0</button></div>
       </div>
     </div>
-
     <!-- INSTELLINGEN -->
     <div class="pg" id="pg-inst">
       <div class="ph"><h1>Website <em>Instellingen</em></h1></div>
       <div class="scroll">
-
         <div class="icard" style="border:1px solid rgba(200,169,110,.2)">
           <h3>Website <em>aan/uit</em></h3>
-          <p>Zet de website offline. Bezoekers zien dan een mooie onderhoudspagina met jouw bericht en contactgegevens.</p>
-          <div class="icard-schakelaar">
-            <label class="tg"><input type="checkbox" id="s-sw2" onchange="toggleSite(this.checked);document.getElementById('site-sw').checked=this.checked"/><div class="tg-t"></div></label>
-            <span id="s-st-lbl" style="color:var(--wd)">Laden...</span>
-          </div>
-          <div class="fg"><label>Bericht op de offline pagina</label><textarea id="s-msg" rows="3" placeholder="Bijv. We zijn tijdelijk gesloten. We zijn er weer in april!"></textarea></div>
+          <p>Zet de website offline. Bezoekers zien een mooie onderhoudspagina.</p>
+          <div class="icard-sw"><label class="tg"><input type="checkbox" id="s-sw2" onchange="toggleSite(this.checked);document.getElementById('site-sw').checked=this.checked"/><div class="tg-t"></div></label><span id="s-st-lbl" style="color:var(--wd)">Laden...</span></div>
+          <div class="fg"><label>Bericht op de offline pagina</label><textarea id="s-msg" rows="3" placeholder="We zijn tijdelijk offline..."></textarea></div>
           <button class="bg" onclick="slaaSite()">Opslaan →</button>
         </div>
-
         <div class="icard" style="border:2px solid rgba(200,169,110,.22)">
-          <h3><span style="font-size:1.2rem">🚫</span> Reserveren <em>aan/uit</em></h3>
-          <p>Schakel het reserveringsformulier uit zonder de website offline te zetten. Handig als je nog niet klaar bent voor boekingen maar de website al live wil hebben.</p>
-          <div class="icard-schakelaar">
-            <label class="tg"><input type="checkbox" id="r-sw" onchange="toggleRes(this.checked)"/><div class="tg-t"></div></label>
-            <span id="r-st-lbl" style="color:var(--wd)">Laden...</span>
-          </div>
-          <div class="fg"><label>Bericht voor bezoekers als reserveren uit staat</label><textarea id="r-msg" rows="2" placeholder="Reserveren is tijdelijk niet mogelijk. Bel ons op 06 300 66 444."></textarea></div>
+          <h3>🚫 Reserveren <em>aan/uit</em></h3>
+          <p>Schakel het boekingsformulier uit. De website blijft zichtbaar maar bezoekers kunnen niet reserveren. Handig als je nog niet klaar bent voor boekingen.</p>
+          <div class="icard-sw"><label class="tg"><input type="checkbox" id="r-sw" onchange="toggleRes(this.checked)"/><div class="tg-t"></div></label><span id="r-st-lbl" style="color:var(--wd)">Laden...</span></div>
+          <div class="fg"><label>Bericht voor bezoekers</label><textarea id="r-msg" rows="2" placeholder="Reserveren is tijdelijk niet mogelijk..."></textarea></div>
           <button class="bg" onclick="slaaRes()">Opslaan →</button>
         </div>
-
         <div class="icard">
           <h3>Wachtwoord <em>wijzigen</em></h3>
-          <p>Wijzig het inlogwachtwoord voor dit beheerderspaneel.</p>
+          <p>Wijzig het inlogwachtwoord.</p>
           <div class="fg"><label>Nieuw wachtwoord</label><input type="password" id="nw1" placeholder="Minimaal 8 tekens"/></div>
-          <div class="fg"><label>Herhaal wachtwoord</label><input type="password" id="nw2" placeholder="Herhaal wachtwoord"/></div>
+          <div class="fg"><label>Herhaal</label><input type="password" id="nw2" placeholder="Herhaal wachtwoord"/></div>
           <button class="bg" onclick="wijzigWw()">Wachtwoord wijzigen →</button>
         </div>
-
       </div>
     </div>
-
   </div>
 </div>
 </div>
@@ -474,18 +512,16 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
   </div>
   <div class="ma"><button class="bg" onclick="slaFoto()">Opslaan →</button><button class="bo" onclick="sluitM('m-foto')">Annuleren</button></div>
 </div></div>
-
 <div class="mo" id="m-np"><div class="mw"><div class="mh"><h2>Pagina <em>aanmaken</em></h2><button class="mx" onclick="sluitM('m-np')">✕</button></div>
   <div class="mb">
     <div class="ib" style="margin-bottom:12px">URL: <strong>secretnights.nl/pagina/[naam]</strong></div>
     <div class="fg"><label>URL naam *</label><input type="text" id="pm-sl" placeholder="algemene-voorwaarden" oninput="this.value=this.value.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')"/></div>
     <div class="fg"><label>Paginatitel *</label><input type="text" id="pm-ti" placeholder="Algemene Voorwaarden"/></div>
-    <div class="fg"><label>Inhoud</label><textarea id="pm-in" rows="8" placeholder="Schrijf hier de inhoud..."></textarea></div>
+    <div class="fg"><label>Inhoud</label><textarea id="pm-in" rows="8"></textarea></div>
     <div style="display:flex;align-items:center;gap:8px;margin-top:5px"><input type="checkbox" id="pm-pu" style="width:13px;height:13px;accent-color:var(--g)"/><label for="pm-pu" style="font-size:.64rem;color:var(--wd);cursor:pointer">Direct publiceren</label></div>
   </div>
   <div class="ma"><button class="bg" onclick="slaaPagina()">Aanmaken →</button><button class="bo" onclick="sluitM('m-np')">Annuleren</button></div>
 </div></div>
-
 <div class="mo" id="m-ep"><div class="mw" style="max-width:680px"><div class="mh"><h2>Pagina <em>bewerken</em></h2><button class="mx" onclick="sluitM('m-ep')">✕</button></div>
   <div class="mb">
     <div class="fg"><label>Titel</label><input type="text" id="ep-ti"/></div>
@@ -495,555 +531,117 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
   </div>
   <div class="ma"><button class="bg" onclick="bijwerkPagina()">Opslaan →</button><button class="br" onclick="verwijderPagina()">Verwijderen</button><button class="bo" onclick="sluitM('m-ep')">Annuleren</button></div>
 </div></div>
-
 <div class="mo" id="m-betaal"><div class="mw"><div class="mh"><h2>Betaalmethode <em>toevoegen</em></h2><button class="mx" onclick="sluitM('m-betaal')">✕</button></div>
   <div class="mb">
-    <div class="f2">
-      <div class="fg"><label>Naam *</label><input type="text" id="bm-n" placeholder="Bancontact"/></div>
-      <div class="fg"><label>Icoon</label><input type="text" id="bm-i" placeholder="💰" maxlength="4"/></div>
-    </div>
+    <div class="f2"><div class="fg"><label>Naam *</label><input type="text" id="bm-n" placeholder="Bancontact"/></div><div class="fg"><label>Icoon</label><input type="text" id="bm-i" placeholder="💰" maxlength="4"/></div></div>
     <div class="fg"><label>Type</label><select id="bm-t"><option value="ideal">iDEAL</option><option value="card">Creditcard</option><option value="paypal">PayPal</option><option value="bancontact">Bancontact</option><option value="klarna">Klarna</option></select></div>
     <div class="fg"><label>Mollie methode ID (optioneel)</label><input type="text" id="bm-m" placeholder="bancontact"/></div>
   </div>
   <div class="ma"><button class="bg" onclick="slaaBetaal()">Toevoegen →</button><button class="bo" onclick="sluitM('m-betaal')">Annuleren</button></div>
 </div></div>
-
 <div class="mo" id="m-res"><div class="mw"><div class="mh"><h2>Reservering <em>details</em></h2><button class="mx" onclick="sluitM('m-res')">✕</button></div><div class="mb" id="rm-b"></div><div class="ma" id="rm-a"></div></div></div>
-
 <div class="toast" id="toast"></div>
 
 <script>
 var SB='https://eugdqjclpptbneburqtn.supabase.co';
 var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1Z2RxamNscHB0Ym5lYnVycXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTc2MDMsImV4cCI6MjA4OTU3MzYwM30.oXpk_sw_f3NGb6Q6Wx-TQfiYXFtnT_29iwkFKl5EqeA';
-var STANDAARD_WW='Secretnights2026!';
+var WW='Secretnights2026!';
+var alleRes=[],alleFotos=[],allePaginas=[],alleBetaal=[],alleTeksten={};
+var resF='alle',kJ=new Date().getFullYear(),kM=new Date().getMonth(),totN=12;
+var gekozenSec=null,gw={};
 
-// =========================================
-// LOGIN
-// =========================================
-function login(){
-  var ingevoerd=document.getElementById('pw').value;
-  var opgeslagen=localStorage.getItem('sn_ww');
-  var juist=opgeslagen?opgeslagen:STANDAARD_WW;
-  if(ingevoerd===juist){
-    sessionStorage.setItem('sn_ok','1');
-    document.getElementById('L').style.display='none';
-    document.getElementById('A').style.display='block';
-    laadAlles();
-  } else {
-    document.getElementById('lfout').textContent='Onjuist wachtwoord. Probeer opnieuw.';
-    document.getElementById('pw').value='';
-    setTimeout(function(){document.getElementById('lfout').textContent='';},3000);
-  }
-}
+function login(){var i=document.getElementById('pw').value,j=localStorage.getItem('sn_ww')||WW;if(i===j){sessionStorage.setItem('sn_ok','1');document.getElementById('L').style.display='none';document.getElementById('A').style.display='flex';laadAlles();}else{document.getElementById('lf').textContent='Onjuist wachtwoord.';document.getElementById('pw').value='';setTimeout(function(){document.getElementById('lf').textContent='';},3000);}}
 document.getElementById('pw').addEventListener('keydown',function(e){if(e.key==='Enter')login();});
 function uitloggen(){sessionStorage.removeItem('sn_ok');location.reload();}
-// Auto login als al ingelogd in deze sessie
-if(sessionStorage.getItem('sn_ok')==='1'){
-  document.getElementById('L').style.display='none';
-  document.getElementById('A').style.display='block';
-  setTimeout(laadAlles,50);
-}
+if(sessionStorage.getItem('sn_ok')==='1'){document.getElementById('L').style.display='none';document.getElementById('A').style.display='flex';setTimeout(laadAlles,50);}
+function wijzigWw(){var p1=document.getElementById('nw1').value,p2=document.getElementById('nw2').value;if(p1.length<8){toon('Minimaal 8 tekens','err');return;}if(p1!==p2){toon('Wachtwoorden komen niet overeen','err');return;}localStorage.setItem('sn_ww',p1);WW=p1;document.getElementById('nw1').value='';document.getElementById('nw2').value='';toon('Wachtwoord gewijzigd ✓','ok');}
 
-// =========================================
-// API
-// =========================================
-function api(pad,opties){
-  opties=opties||{};
-  return fetch(SB+pad,{
-    method:opties.method||'GET',
-    headers:Object.assign({'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},opties.headers||{}),
-    body:opties.body||undefined
-  });
-}
+function api(pad,o){o=o||{};return fetch(SB+pad,{method:o.method||'GET',headers:Object.assign({'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},o.headers||{}),body:o.body||undefined});}
 
-// =========================================
-// DATA
-// =========================================
-var alleRes=[],alleFotos=[],allePaginas=[],alleBetaal=[],alleTeksten={};
-var resFilter='alle',kJaar=new Date().getFullYear(),kMaand=new Date().getMonth(),totN=12;
-var gekozenSec=null,gewijzigd={};
+function ga(naam,el){document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');p.style.display='none';});document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('on');});var pg=document.getElementById('pg-'+naam);if(pg){pg.classList.add('on');pg.style.display='flex';}if(el)el.classList.add('on');if(naam==='kalender')toonKal();if(naam==='editor')laadTeksten();if(naam==='statistieken')laadStats();}
 
-function laadAlles(){
-  laadRes();laadBeschikbaar();laadFotos();laadPaginas();laadBetaal();laadInst();
-}
-
-function laadRes(){
-  api('/rest/v1/reserveringen?select=*&order=created_at.desc').then(function(r){return r.json();}).then(function(d){
-    alleRes=Array.isArray(d)?d:[];
-    toonDash();toonRes();toonKal();
-  }).catch(function(){alleRes=[];});
-}
-
-function laadBeschikbaar(){
-  api('/rest/v1/beschikbaarheid?select=*&limit=1').then(function(r){return r.json();}).then(function(d){
-    if(d&&d[0]){
-      totN=d[0].totaal_nachten;
-      document.getElementById('tot-d').textContent=totN;
-      var rest=totN-d[0].geboekte_nachten;
-      document.getElementById('s-vrij').textContent=rest;
-      document.getElementById('bes-st').innerHTML='Totaal: <strong style="color:var(--w)">'+totN+'</strong> &nbsp;|&nbsp; Geboekt: <strong style="color:var(--w)">'+d[0].geboekte_nachten+'</strong> &nbsp;|&nbsp; Beschikbaar: <strong style="color:var(--g)">'+rest+'</strong>';
-    }
-  }).catch(function(){});
-}
-
-function laadFotos(){
-  api('/rest/v1/media?select=*&order=created_at.desc').then(function(r){return r.json();}).then(function(d){
-    alleFotos=Array.isArray(d)?d:[];toonFotos();
-  }).catch(function(){alleFotos=[];});
-}
-
-function laadPaginas(){
-  api('/rest/v1/extra_paginas?select=*&order=created_at.desc').then(function(r){return r.json();}).then(function(d){
-    allePaginas=Array.isArray(d)?d:[];toonPaginas();
-  }).catch(function(){allePaginas=[];});
-}
-
-function laadBetaal(){
-  api('/rest/v1/betaalmethodes?select=*&order=volgorde').then(function(r){return r.json();}).then(function(d){
-    alleBetaal=Array.isArray(d)?d:[];toonBetaal();
-  }).catch(function(){alleBetaal=[];});
-}
-
-function laadInst(){
-  api('/rest/v1/website_instellingen?id=eq.1&select=*').then(function(r){return r.json();}).then(function(d){
-    if(!d||!d[0])return;
-    var inst=d[0];
-    // Site schakelaar
-    var aan=inst.website_actief!==false;
-    document.getElementById('site-sw').checked=aan;
-    document.getElementById('s-sw2').checked=aan;
-    updateSiteLbl(aan);
-    if(inst.offline_bericht)document.getElementById('s-msg').value=inst.offline_bericht;
-    // Reserveren schakelaar
-    var rAan=inst.reserveren_actief!==false;
-    document.getElementById('r-sw').checked=rAan;
-    updateResLbl(rAan);
-    if(inst.reserveren_bericht)document.getElementById('r-msg').value=inst.reserveren_bericht;
-    // Mollie
-    if(inst.mollie_api_key)document.getElementById('mk').value=inst.mollie_api_key;
-    document.getElementById('m-sw').checked=inst.mollie_actief||false;
-    document.getElementById('m-lbl').textContent=inst.mollie_actief?'Aan':'Uit';
-    var dot=document.getElementById('m-dot');
-    dot.className='sdot '+(inst.mollie_actief&&inst.mollie_api_key?'aan':'uit');
-    document.getElementById('m-txt').textContent=inst.mollie_actief&&inst.mollie_api_key?'Mollie is actief — echte betalingen ingeschakeld':'Mollie is niet actief';
-    // Dashboard banner
-    if(!aan){
-      document.getElementById('d-banner').innerHTML='<div style="background:rgba(224,82,82,.1);border:1px solid rgba(224,82,82,.25);padding:11px 15px;margin-bottom:14px;font-size:.68rem;color:var(--red)">⚠️ <strong>Website is OFFLINE.</strong> Zet hem aan via de schakelaar bovenin of via Instellingen.</div>';
-    } else {
-      document.getElementById('d-banner').innerHTML='';
-    }
-    if(!rAan){
-      document.getElementById('d-banner').innerHTML+='<div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);padding:11px 15px;margin-bottom:14px;font-size:.68rem;color:var(--g)">🚫 <strong>Reserveren is UIT.</strong> Bezoekers kunnen niet boeken. Zet het aan via Instellingen.</div>';
-    }
-    // Laad teksten
-    laadTeksten();
-  }).catch(function(){});
-}
-
-function laadTeksten(){
-  api('/rest/v1/pagina_inhoud?select=*').then(function(r){return r.json();}).then(function(d){
-    if(!Array.isArray(d))return;
-    alleTeksten={};
-    d.forEach(function(item){
-      if(!alleTeksten[item.pagina])alleTeksten[item.pagina]={};
-      if(!alleTeksten[item.pagina][item.sectie])alleTeksten[item.pagina][item.sectie]={};
-      alleTeksten[item.pagina][item.sectie][item.veld]=item.waarde;
-    });
-    updatePrev();
-  }).catch(function(){});
-}
-
+function laadAlles(){laadRes();laadBeschikbaar();laadFotos();laadPaginas();laadBetaal();laadInst();laadTeksten();}
+function laadRes(){api('/rest/v1/reserveringen?select=*&order=created_at.desc').then(function(r){return r.json();}).then(function(d){alleRes=Array.isArray(d)?d:[];toonDash();toonRes();toonKal();}).catch(function(){alleRes=[];});}
+function laadBeschikbaar(){api('/rest/v1/beschikbaarheid?select=*&limit=1').then(function(r){return r.json();}).then(function(d){if(d&&d[0]){totN=d[0].totaal_nachten;document.getElementById('tot-d').textContent=totN;var r=totN-d[0].geboekte_nachten;document.getElementById('bes-st').innerHTML='Totaal: <strong style="color:var(--w)">'+totN+'</strong> | Geboekt: <strong style="color:var(--w)">'+d[0].geboekte_nachten+'</strong> | Beschikbaar: <strong style="color:var(--g)">'+r+'</strong>';}}).catch(function(){});}
+function laadFotos(){api('/rest/v1/media?select=*&order=created_at.desc').then(function(r){return r.json();}).then(function(d){alleFotos=Array.isArray(d)?d:[];toonFotos();}).catch(function(){alleFotos=[];});}
+function laadPaginas(){api('/rest/v1/extra_paginas?select=*&order=created_at.desc').then(function(r){return r.json();}).then(function(d){allePaginas=Array.isArray(d)?d:[];toonPaginas();}).catch(function(){allePaginas=[];});}
+function laadBetaal(){api('/rest/v1/betaalmethodes?select=*&order=volgorde').then(function(r){return r.json();}).then(function(d){alleBetaal=Array.isArray(d)?d:[];toonBetaal();}).catch(function(){alleBetaal=[];});}
+function laadInst(){api('/rest/v1/website_instellingen?id=eq.1&select=*').then(function(r){return r.json();}).then(function(d){if(!d||!d[0])return;var i=d[0];var aan=i.website_actief!==false;document.getElementById('site-sw').checked=aan;document.getElementById('s-sw2').checked=aan;updateSiteLbl(aan);if(i.offline_bericht)document.getElementById('s-msg').value=i.offline_bericht;var rA=i.reserveren_actief!==false;document.getElementById('r-sw').checked=rA;updateResLbl(rA);if(i.reserveren_bericht)document.getElementById('r-msg').value=i.reserveren_bericht;if(i.mollie_api_key)document.getElementById('mk').value=i.mollie_api_key;document.getElementById('m-sw').checked=i.mollie_actief||false;document.getElementById('m-lbl').textContent=i.mollie_actief?'Aan':'Uit';document.getElementById('m-dot').className='sdot '+(i.mollie_actief&&i.mollie_api_key?'aan':'uit');document.getElementById('m-txt').textContent=i.mollie_actief&&i.mollie_api_key?'Mollie actief':'Mollie niet actief';var b='';if(!aan)b+='<div style="background:rgba(224,82,82,.1);border:1px solid rgba(224,82,82,.25);padding:11px 15px;margin-bottom:8px;font-size:.68rem;color:var(--red)">⚠️ <strong>Website is OFFLINE.</strong></div>';if(!rA)b+='<div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);padding:11px 15px;margin-bottom:8px;font-size:.68rem;color:var(--g)">🚫 <strong>Reserveren is UIT.</strong></div>';document.getElementById('d-banner').innerHTML=b;}).catch(function(){});}
+function laadTeksten(){api('/rest/v1/pagina_inhoud?select=*').then(function(r){return r.json();}).then(function(d){if(!Array.isArray(d))return;alleTeksten={};d.forEach(function(item){if(!alleTeksten[item.pagina])alleTeksten[item.pagina]={};if(!alleTeksten[item.pagina][item.sectie])alleTeksten[item.pagina][item.sectie]={};alleTeksten[item.pagina][item.sectie][item.veld]=item.waarde;});updatePrev();}).catch(function(){});}
 function getT(p,s,v){return(alleTeksten[p]&&alleTeksten[p][s]&&alleTeksten[p][s][v])||'';}
 
-// =========================================
-// NAVIGATIE
-// =========================================
-function ga(naam,el){
-  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');p.style.display='none';});
-  document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('on');});
-  var pg=document.getElementById('pg-'+naam);
-  if(pg){pg.classList.add('on');pg.style.display='flex';}
-  if(el)el.classList.add('on');
-  if(naam==='kalender')toonKal();
-  if(naam==='editor')laadTeksten();
+function laadStats(){
+  var nu=new Date();
+  var vdStr=nu.toISOString().split('T')[0];
+  var wkStr=new Date(nu-7*86400000).toISOString();
+  var mndStr=new Date(nu-30*86400000).toISOString();
+  api('/rest/v1/bezoeken?select=id').then(function(r){return r.json();}).then(function(d){document.getElementById('st-tot').textContent=(Array.isArray(d)?d.length:0).toLocaleString('nl');});
+  api('/rest/v1/bezoeken?select=id&created_at=gte.'+mndStr).then(function(r){return r.json();}).then(function(d){var n=Array.isArray(d)?d.length:0;document.getElementById('st-mnd').textContent=n.toLocaleString('nl');document.getElementById('s-bez').textContent=n.toLocaleString('nl');});
+  api('/rest/v1/bezoeken?select=id&created_at=gte.'+wkStr).then(function(r){return r.json();}).then(function(d){document.getElementById('st-wk').textContent=(Array.isArray(d)?d.length:0).toLocaleString('nl');});
+  api('/rest/v1/bezoeken?select=id&created_at=gte.'+vdStr+'T00:00:00').then(function(r){return r.json();}).then(function(d){document.getElementById('st-vd').textContent=(Array.isArray(d)?d.length:0).toLocaleString('nl');});
+  api('/rest/v1/bezoeken?select=apparaat').then(function(r){return r.json();}).then(function(d){if(!Array.isArray(d)||!d.length){document.getElementById('ap-st').innerHTML='<div class="leeg"><span>📱</span><p>Nog geen data</p></div>';document.getElementById('st-mob').textContent='0%';return;}var mob=d.filter(function(b){return b.apparaat==='mobiel';}).length;var pct=Math.round(mob/d.length*100);document.getElementById('st-mob').textContent=pct+'%';document.getElementById('ap-st').innerHTML='<div class="stat-row"><div><div class="stat-row-lbl">📱 Mobiel</div><div class="stat-row-bar"><div class="stat-row-fill" style="width:'+pct+'%"></div></div></div><div class="stat-row-val">'+mob+'</div></div><div class="stat-row"><div><div class="stat-row-lbl">💻 Desktop</div><div class="stat-row-bar"><div class="stat-row-fill" style="width:'+(100-pct)+'%"></div></div></div><div class="stat-row-val">'+(d.length-mob)+'</div></div>';});
+  var pc={wellness:0,dining:0,sauna:0};alleRes.forEach(function(r){if(pc[r.pakket]!==undefined)pc[r.pakket]++;});var pm=Math.max(1,pc.wellness,pc.dining,pc.sauna);document.getElementById('pk-st').innerHTML=['wellness','dining','sauna'].map(function(k){var l={wellness:'🌿 Wellness',dining:'🍽️ Dining',sauna:'🧖 Sauna'}[k];return'<div class="stat-row"><div><div class="stat-row-lbl">'+l+'</div><div class="stat-row-bar"><div class="stat-row-fill" style="width:'+(pc[k]/pm*100)+'%"></div></div></div><div class="stat-row-val">'+pc[k]+'</div></div>';}).join('');
+  var b1=alleRes.filter(function(r){return r.boot==='nature-one';}).length,b2=alleRes.filter(function(r){return r.boot==='nature-two';}).length,bm=Math.max(1,b1,b2);document.getElementById('bo-st').innerHTML='<div class="stat-row"><div><div class="stat-row-lbl">🚤 Nature One</div><div class="stat-row-bar"><div class="stat-row-fill" style="width:'+(b1/bm*100)+'%"></div></div></div><div class="stat-row-val">'+b1+'</div></div><div class="stat-row"><div><div class="stat-row-lbl">🚤 Nature Two</div><div class="stat-row-bar"><div class="stat-row-fill" style="width:'+(b2/bm*100)+'%"></div></div></div><div class="stat-row-val">'+b2+'</div></div>';
+  var rec=alleRes.slice(0,5);document.getElementById('re-st').innerHTML=rec.length?rec.map(function(r){return'<div class="stat-row"><span class="stat-row-lbl">'+r.voornaam+' '+r.achternaam+'<br/><span style="font-size:.52rem;opacity:.6">'+fmtD(r.datum)+'</span></span><span class="sb '+r.status+'">'+r.status+'</span></div>';}).join(''):'<div class="leeg"><span>📋</span><p>Nog geen reserveringen</p></div>';
+  var van=new Date(nu-14*86400000).toISOString();
+  api('/rest/v1/bezoeken?select=created_at&created_at=gte.'+van).then(function(r){return r.json();}).then(function(d){if(!Array.isArray(d)){document.getElementById('bar-chart').innerHTML='<div class="lad">Geen data</div>';return;}var dm={};for(var i=13;i>=0;i--){var dt=new Date(nu-i*86400000);dm[dt.toISOString().split('T')[0]]=0;}d.forEach(function(b){var k=(b.created_at||'').split('T')[0];if(dm[k]!==undefined)dm[k]++;});var keys=Object.keys(dm);var mx=Math.max(1,Math.max.apply(null,keys.map(function(k){return dm[k];})));document.getElementById('bar-chart').innerHTML=keys.map(function(k){var p=dm[k]/mx*100;var dg=k.split('-')[2]+'/'+k.split('-')[1];return'<div class="bar" style="height:'+Math.max(4,p)+'%" title="'+k+': '+dm[k]+'"><div class="bar-val">'+dm[k]+'</div><div class="bar-lbl">'+dg+'</div></div>';}).join('');});
 }
 
-// =========================================
-// DASHBOARD
-// =========================================
 var BN={'nature-one':'Nature One','nature-two':'Nature Two'};
 var PN={'wellness':'Wellness','dining':'Dining','sauna':'Sauna'};
 function fmtD(d){if(!d)return'—';return new Date(d).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'});}
+function toonDash(){document.getElementById('s-res').textContent=alleRes.length;document.getElementById('s-bev').textContent=alleRes.filter(function(r){return r.status==='bevestigd';}).length;document.getElementById('s-omz').textContent='€'+alleRes.reduce(function(s,r){return s+(r.totaalbedrag||0);},0).toLocaleString('nl');var t=bouwTbl(alleRes.slice(0,6));document.getElementById('d-lad').style.display=t?'none':'block';document.getElementById('d-tbl').style.display=t?'block':'none';if(t)document.getElementById('d-tbl').innerHTML=t;}
+function bouwTbl(data){if(!data.length)return null;return'<table><thead><tr><th>Naam</th><th>Boot</th><th>Pakket</th><th>Datum</th><th>Totaal</th><th>Status</th><th>Acties</th></tr></thead><tbody>'+data.map(function(r){return'<tr><td>'+r.voornaam+' '+r.achternaam+'<br/><span style="font-size:.54rem;color:rgba(245,240,232,.26)">'+r.email+'</span></td><td>'+(BN[r.boot]||r.boot)+'</td><td>'+(PN[r.pakket]||r.pakket)+(r.massage?' 💆':'')+'</td><td>'+fmtD(r.datum)+'</td><td style="color:var(--g);font-family:var(--fd)">€'+r.totaalbedrag+',-</td><td><span class="sb '+r.status+'">'+r.status+'</span></td><td style="display:flex;gap:3px"><button class="ab" onclick="openRD(\''+r.id+'\')">Details</button>'+(r.status==='bevestigd'?'<button class="ab" style="border-color:var(--grn);color:var(--grn)" onclick="chgSt(\''+r.id+'\',\'afgerond\')">✓</button>':'')+(r.status!=='geannuleerd'?'<button class="ab d" onclick="chgSt(\''+r.id+'\',\'geannuleerd\')">✕</button>':'')+'</td></tr>';}).join('')+'</tbody></table>';}
+function setF(f,btn){resF=f;document.querySelectorAll('[id^="rf-"]').forEach(function(b){b.style.borderColor='';b.style.color='';});btn.style.borderColor='var(--g)';btn.style.color='var(--g)';toonRes();}
+function toonRes(){var q=(document.getElementById('zoek')?document.getElementById('zoek').value:'').toLowerCase();var d=alleRes;if(resF!=='alle')d=d.filter(function(r){return r.status===resF;});if(q)d=d.filter(function(r){return(r.voornaam+r.achternaam+r.email).toLowerCase().indexOf(q)!==-1;});var t=bouwTbl(d);document.getElementById('r-lad').style.display=t?'none':'block';document.getElementById('r-tbl').style.display=t?'block':'none';if(t)document.getElementById('r-tbl').innerHTML=t;}
+function chgSt(id,s){api('/rest/v1/reserveringen?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({status:s})}).then(function(r){if(r.ok){toon('Gewijzigd ✓','ok');laadRes();}else toon('Fout','err');});}
+function openRD(id){var r=null;for(var i=0;i<alleRes.length;i++){if(alleRes[i].id===id){r=alleRes[i];break;}}if(!r)return;var bm={'nature-one':'Nature One (Biesbosch)','nature-two':'Nature Two (Bommelerwaard)'};var pm={'wellness':'Natuurlijk Wellness','dining':'Dining Experience','sauna':'Sauna Boot'};var rijen=[['Naam',r.voornaam+' '+r.achternaam],['E-mail','<a href="mailto:'+r.email+'" style="color:var(--g)">'+r.email+'</a>'],['Telefoon','<a href="tel:'+r.telefoon+'" style="color:var(--g)">'+r.telefoon+'</a>'],['Boot',(bm[r.boot]||r.boot)],['Arrangement',(pm[r.pakket]||r.pakket)],['Massage',r.massage?'Ja (+€85)':'Nee'],['Datum',fmtD(r.datum)],['Personen',r.personen],['Wensen',r.wensen||'—'],['Status','<span class="sb '+r.status+'">'+r.status+'</span>'],['Totaal','<span style="font-family:var(--fd);font-size:1.25rem;color:var(--g)">€'+r.totaalbedrag+',-</span>'],['Aanbetaling','€'+Math.round(r.totaalbedrag*.3)+',-']];document.getElementById('rm-b').innerHTML=rijen.map(function(row){return'<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(200,169,110,.06)"><span style="font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.3)">'+row[0]+'</span><span style="font-size:.68rem;color:var(--w);text-align:right;max-width:220px">'+row[1]+'</span></div>';}).join('');document.getElementById('rm-a').innerHTML='<a href="mailto:'+r.email+'" class="bg" style="text-decoration:none">✉ Mail gast</a>'+(r.status!=='geannuleerd'?'<button class="br" onclick="chgSt(\''+r.id+'\',\'geannuleerd\');sluitM(\'m-res\')">✕ Annuleer</button>':'')+'<button class="bo" onclick="sluitM(\'m-res\')">Sluiten</button>';openM('m-res');}
+function exportCSV(){var h=['Voornaam','Achternaam','Email','Telefoon','Boot','Pakket','Massage','Datum','Personen','Totaal','Status','Geboekt'].join(';');var rows=alleRes.map(function(r){return[r.voornaam,r.achternaam,r.email,r.telefoon,r.boot,r.pakket,r.massage?'Ja':'Nee',r.datum,r.personen,r.totaalbedrag,r.status,(r.created_at||'').split('T')[0]].join(';');});var blob=new Blob([h+'\n'+rows.join('\n')],{type:'text/csv;charset=utf-8;'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='secretnights-reserveringen.csv';a.click();toon('CSV gedownload ✓','ok');}
 
-function toonDash(){
-  document.getElementById('s-res').textContent=alleRes.length;
-  document.getElementById('s-bev').textContent=alleRes.filter(function(r){return r.status==='bevestigd';}).length;
-  document.getElementById('s-omz').textContent='€'+alleRes.reduce(function(s,r){return s+(r.totaalbedrag||0);},0).toLocaleString('nl');
-  var tbl=bouwTbl(alleRes.slice(0,6));
-  if(tbl){
-    document.getElementById('d-tbl-lad').style.display='none';
-    document.getElementById('d-tbl').style.display='block';
-    document.getElementById('d-tbl').innerHTML=tbl;
-  }
-}
-
-function bouwTbl(data){
-  if(!data.length)return null;
-  var rijen=data.map(function(r){
-    var sid=JSON.stringify(r).replace(/\\/g,'\\\\').replace(/"/g,'&quot;');
-    return '<tr>'+
-      '<td>'+r.voornaam+' '+r.achternaam+'<br/><span style="font-size:.54rem;color:rgba(245,240,232,.26)">'+r.email+'</span></td>'+
-      '<td>'+(BN[r.boot]||r.boot)+'</td>'+
-      '<td>'+(PN[r.pakket]||r.pakket)+(r.massage?' 💆':'')+'</td>'+
-      '<td>'+fmtD(r.datum)+'</td>'+
-      '<td style="color:var(--g);font-family:var(--fd)">€'+r.totaalbedrag+',-</td>'+
-      '<td><span class="sb '+r.status+'">'+r.status+'</span></td>'+
-      '<td style="display:flex;gap:3px;flex-wrap:wrap">'+
-        '<button class="ab" onclick="openResDetail(\''+r.id+'\')">Details</button>'+
-        (r.status==='bevestigd'?'<button class="ab" style="border-color:var(--grn);color:var(--grn)" onclick="chgSt(\''+r.id+'\',\'afgerond\')">✓</button>':'')+
-        (r.status!=='geannuleerd'?'<button class="ab d" onclick="chgSt(\''+r.id+'\',\'geannuleerd\')">✕</button>':'')+
-      '</td></tr>';
-  }).join('');
-  return '<table><thead><tr><th>Naam</th><th>Boot</th><th>Pakket</th><th>Datum</th><th>Totaal</th><th>Status</th><th>Acties</th></tr></thead><tbody>'+rijen+'</tbody></table>';
-}
-
-function setF(f,btn){
-  resFilter=f;
-  document.querySelectorAll('[id^="rf-"]').forEach(function(b){b.style.borderColor='';b.style.color='';});
-  btn.style.borderColor='var(--g)';btn.style.color='var(--g)';
-  toonRes();
-}
-
-function toonRes(){
-  var q=(document.getElementById('zoek')?document.getElementById('zoek').value:'').toLowerCase();
-  var d=alleRes;
-  if(resFilter!=='alle')d=d.filter(function(r){return r.status===resFilter;});
-  if(q)d=d.filter(function(r){return(r.voornaam+r.achternaam+r.email).toLowerCase().indexOf(q)!==-1;});
-  var tbl=bouwTbl(d);
-  document.getElementById('r-lad').style.display=tbl?'none':'block';
-  document.getElementById('r-tbl').style.display=tbl?'block':'none';
-  if(tbl)document.getElementById('r-tbl').innerHTML=tbl;
-}
-
-// Bewaar reserveringen in map voor snel opzoeken
-var resMap={};
-function slaResOp(){resMap={};alleRes.forEach(function(r){resMap[r.id]=r;});}
-
-function openResDetail(id){
-  // Zoek opnieuw op in huidige data
-  var r=null;
-  for(var i=0;i<alleRes.length;i++){if(alleRes[i].id===id){r=alleRes[i];break;}}
-  if(!r)return;
-  var bm={'nature-one':'Nature One (Biesbosch)','nature-two':'Nature Two (Bommelerwaard)'};
-  var pm={'wellness':'Natuurlijk Wellness','dining':'Dining Experience','sauna':'Sauna Boot'};
-  var rijen=[['Naam',r.voornaam+' '+r.achternaam],['E-mail','<a href="mailto:'+r.email+'" style="color:var(--g)">'+r.email+'</a>'],['Telefoon','<a href="tel:'+r.telefoon+'" style="color:var(--g)">'+r.telefoon+'</a>'],['Boot',(bm[r.boot]||r.boot)],['Arrangement',(pm[r.pakket]||r.pakket)],['Massage',r.massage?'Ja (+€85)':'Nee'],['Datum',fmtD(r.datum)],['Personen',r.personen],['Wensen',r.wensen||'—'],['Status','<span class="sb '+r.status+'">'+r.status+'</span>'],['Totaal','<span style="font-family:var(--fd);font-size:1.25rem;color:var(--g)">€'+r.totaalbedrag+',-</span>'],['Aanbetaling','€'+Math.round(r.totaalbedrag*.3)+',-']];
-  document.getElementById('rm-b').innerHTML=rijen.map(function(row){
-    return'<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(200,169,110,.06)"><span style="font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.3)">'+row[0]+'</span><span style="font-size:.68rem;color:var(--w);text-align:right;max-width:220px">'+row[1]+'</span></div>';
-  }).join('');
-  document.getElementById('rm-a').innerHTML='<a href="mailto:'+r.email+'" class="bg" style="text-decoration:none">✉ Mail gast</a>'+(r.status!=='geannuleerd'?'<button class="br" onclick="chgSt(\''+r.id+'\',\'geannuleerd\');sluitM(\'m-res\')">✕ Annuleer</button>':'')+'<button class="bo" onclick="sluitM(\'m-res\')">Sluiten</button>';
-  openM('m-res');
-}
-
-function chgSt(id,status){
-  api('/rest/v1/reserveringen?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({status:status})}).then(function(r){
-    if(r.ok){toon('Gewijzigd ✓','ok');laadRes();}else toon('Fout','err');
-  });
-}
-
-// =========================================
-// KALENDER
-// =========================================
 var MAANDEN=['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
-function toonKal(){
-  document.getElementById('k-tit').textContent=MAANDEN[kMaand]+' '+kJaar;
-  var s=new Date(kJaar,kMaand,1).getDay()-1;if(s<0)s=6;
-  var dagen=new Date(kJaar,kMaand+1,0).getDate();
-  var geboekt={};
-  alleRes.filter(function(r){return r.status!=='geannuleerd'&&r.datum;}).forEach(function(r){geboekt[r.datum]=true;});
-  var vandaag=new Date();
-  var html='';
-  for(var i=0;i<s;i++)html+='<div class="cdag an"></div>';
-  for(var d=1;d<=dagen;d++){
-    var ds=kJaar+'-'+String(kMaand+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
-    var isV=d===vandaag.getDate()&&kMaand===vandaag.getMonth()&&kJaar===vandaag.getFullYear();
-    html+='<div class="cdag '+(geboekt[ds]?'gb':'')+' '+(isV?'vd':'')+'" title="'+(geboekt[ds]?'Geboekt':'Vrij')+'">'+d+'</div>';
-  }
-  document.getElementById('k-grid').innerHTML=html;
-}
-function kPrev(){kMaand--;if(kMaand<0){kMaand=11;kJaar--;}toonKal();}
-function kNext(){kMaand++;if(kMaand>11){kMaand=0;kJaar++;}toonKal();}
+function toonKal(){document.getElementById('k-tit').textContent=MAANDEN[kM]+' '+kJ;var s=new Date(kJ,kM,1).getDay()-1;if(s<0)s=6;var d=new Date(kJ,kM+1,0).getDate();var gb={};alleRes.filter(function(r){return r.status!=='geannuleerd'&&r.datum;}).forEach(function(r){gb[r.datum]=true;});var vd=new Date();var h='';for(var i=0;i<s;i++)h+='<div class="cdag an"></div>';for(var x=1;x<=d;x++){var ds=kJ+'-'+String(kM+1).padStart(2,'0')+'-'+String(x).padStart(2,'0');var isV=x===vd.getDate()&&kM===vd.getMonth()&&kJ===vd.getFullYear();h+='<div class="cdag '+(gb[ds]?'gb':'')+' '+(isV?'vd':'')+'" title="'+(gb[ds]?'Geboekt':'Vrij')+'">'+x+'</div>';}document.getElementById('k-grid').innerHTML=h;}
+function kPrev(){kM--;if(kM<0){kM=11;kJ--;}toonKal();}
+function kNext(){kM++;if(kM>11){kM=0;kJ++;}toonKal();}
 
-// =========================================
-// VISUELE EDITOR
-// =========================================
-var SECS={
-  hero:{lbl:'Hero — Bovenste sectie',p:'index',s:'hero',velden:[['titel','Hoofdtitel',false,'Gebruik *woord* voor cursief goud'],['subtitel','Subtitel / tagline',true]]},
-  intro:{lbl:'Mysterie sectie',p:'index',s:'intro',velden:[['titel','Titel',false,'Gebruik *woord* voor cursief goud'],['tekst1','Alinea 1',true],['tekst2','Alinea 2',true]]},
-  quote:{lbl:'Quote balk (goud)',p:'index',s:'quote',velden:[['tekst','Quote tekst',true]]},
-  cta:{lbl:'Call-to-action onderaan',p:'index',s:'cta',velden:[['titel','Titel',false,'Gebruik *woord* voor cursief goud'],['tekst','Tekst',true]]},
-  contact:{lbl:'Contactgegevens',p:'algemeen',s:'contact',velden:[['telefoon','Telefoonnummer',false],['email','E-mailadres',false],['adres','Adres',false],['whatsapp','WhatsApp nummer',false]]}
-};
+var SECS={hero:{lbl:'Hero',p:'index',s:'hero',velden:[['titel','Hoofdtitel',false,'Gebruik *woord* voor cursief goud'],['subtitel','Subtitel',true]]},intro:{lbl:'Mysterie sectie',p:'index',s:'intro',velden:[['titel','Titel',false,'Gebruik *woord* voor cursief goud'],['tekst1','Alinea 1',true],['tekst2','Alinea 2',true]]},quote:{lbl:'Quote balk',p:'index',s:'quote',velden:[['tekst','Quote tekst',true]]},cta:{lbl:'Call-to-action',p:'index',s:'cta',velden:[['titel','Titel',false,'Gebruik *woord* voor cursief goud'],['tekst','Tekst',true]]},contact:{lbl:'Contactgegevens',p:'algemeen',s:'contact',velden:[['telefoon','Telefoonnummer',false],['email','E-mailadres',false],['adres','Adres',false],['whatsapp','WhatsApp nummer',false]]}};
+function updatePrev(){var ht=getT('index','hero','titel');if(ht)document.getElementById('pv-ht').innerHTML=ht.replace(/\*([^*]+)\*/g,'<em>$1</em>');var hs=getT('index','hero','subtitel');if(hs)document.getElementById('pv-hs').textContent=hs;var it=getT('index','intro','titel');if(it)document.getElementById('pv-it').innerHTML=it.replace(/\*([^*]+)\*/g,'<em>$1</em>');var i1=getT('index','intro','tekst1');if(i1)document.getElementById('pv-i1').textContent=i1;var i2=getT('index','intro','tekst2');if(i2)document.getElementById('pv-i2').textContent=i2;var q=getT('index','quote','tekst');if(q)document.getElementById('pv-q').textContent='"'+q+'"';var ct=getT('index','cta','titel');if(ct)document.getElementById('pv-ct').innerHTML=ct.replace(/\*([^*]+)\*/g,'<em>$1</em>');var cp=getT('index','cta','tekst');if(cp)document.getElementById('pv-cp').textContent=cp;var tel=getT('algemeen','contact','telefoon');if(tel)document.getElementById('pv-tel').textContent=tel;var em=getT('algemeen','contact','email');if(em)document.getElementById('pv-em').textContent=em;var ad=getT('algemeen','contact','adres');if(ad)document.getElementById('pv-ad').textContent=ad;api('/rest/v1/beschikbaarheid?select=totaal_nachten,geboekte_nachten&limit=1').then(function(r){return r.json();}).then(function(d){if(d&&d[0])document.getElementById('pv-cnt').textContent=d[0].totaal_nachten-d[0].geboekte_nachten;}).catch(function(){});}
+function kiesSec(key){gekozenSec=key;document.querySelectorAll('.ws-sec').forEach(function(el){el.classList.remove('gekozen');});document.getElementById('sec-'+key).classList.add('gekozen');var def=SECS[key];var html='';def.velden.forEach(function(v){var w=getT(def.p,def.s,v[0]);html+='<div class="vb"><label>'+v[1]+(v[3]?' <span style="color:rgba(200,169,110,.38);font-size:.42rem;text-transform:none;letter-spacing:.07em">'+v[3]+'</span>':'')+'</label>';if(v[2]){html+='<textarea oninput="veldGew(\''+def.p+'\',\''+def.s+'\',\''+v[0]+'\',this.value)" rows="3">'+w+'</textarea>';}else{html+='<input type="text" oninput="veldGew(\''+def.p+'\',\''+def.s+'\',\''+v[0]+'\',this.value)" value="'+w.replace(/"/g,'&quot;')+'"/>';}html+='</div>';});document.getElementById('ed-body').innerHTML=html;document.getElementById('ed-ft').style.display='block';document.getElementById('op-btn').disabled=false;document.getElementById('ed-hint').textContent='✓ '+def.lbl+' geselecteerd';document.getElementById('sec-'+key).scrollIntoView({behavior:'smooth',block:'center'});}
+function veldGew(p,s,v,val){if(!gw[p])gw[p]={};if(!gw[p][s])gw[p][s]={};gw[p][s][v]=val;if(!alleTeksten[p])alleTeksten[p]={};if(!alleTeksten[p][s])alleTeksten[p][s]={};alleTeksten[p][s][v]=val;updatePrev();}
+function slaOp(){var btn=document.getElementById('op-btn');btn.textContent='Opslaan...';btn.disabled=true;var prs=[];Object.keys(gw).forEach(function(p){Object.keys(gw[p]).forEach(function(s){Object.keys(gw[p][s]).forEach(function(v){prs.push(api('/rest/v1/pagina_inhoud',{method:'POST',headers:{'Prefer':'resolution=merge-duplicates'},body:JSON.stringify({pagina:p,sectie:s,veld:v,waarde:gw[p][s][v],updated_at:new Date().toISOString()})}));});});});Promise.all(prs).then(function(){gw={};toon('Opgeslagen op de website ✓','ok');btn.textContent='Opslaan →';btn.disabled=false;});}
 
-function updatePrev(){
-  var ht=getT('index','hero','titel');if(ht)document.getElementById('pv-ht').innerHTML=ht.replace(/\*([^*]+)\*/g,'<em>$1</em>');
-  var hs=getT('index','hero','subtitel');if(hs)document.getElementById('pv-hs').textContent=hs;
-  var it=getT('index','intro','titel');if(it)document.getElementById('pv-it2').innerHTML=it.replace(/\*([^*]+)\*/g,'<em>$1</em>');
-  var i1=getT('index','intro','tekst1');if(i1)document.getElementById('pv-i1').textContent=i1;
-  var i2=getT('index','intro','tekst2');if(i2)document.getElementById('pv-i2').textContent=i2;
-  var q=getT('index','quote','tekst');if(q)document.getElementById('pv-q').textContent='"'+q+'"';
-  var ct=getT('index','cta','titel');if(ct)document.getElementById('pv-ct').innerHTML=ct.replace(/\*([^*]+)\*/g,'<em>$1</em>');
-  var cp=getT('index','cta','tekst');if(cp)document.getElementById('pv-cp').textContent=cp;
-  var tel=getT('algemeen','contact','telefoon');if(tel)document.getElementById('pv-tel').textContent=tel;
-  var em=getT('algemeen','contact','email');if(em)document.getElementById('pv-em').textContent=em;
-  var ad=getT('algemeen','contact','adres');if(ad)document.getElementById('pv-ad').textContent=ad;
-}
-
-function kiesSec(key){
-  gekozenSec=key;gewijzigd={};
-  document.querySelectorAll('.sp').forEach(function(el){el.classList.remove('on');});
-  document.getElementById('sp-'+key).classList.add('on');
-  var def=SECS[key];
-  var html='<div style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid rgba(200,169,110,.1)">'+def.lbl+'</div>';
-  def.velden.forEach(function(v){
-    var waarde=getT(def.p,def.s,v[0]);
-    html+='<div class="vb"><label>'+v[1]+(v[3]?' <span style="color:rgba(200,169,110,.38);font-size:.42rem;text-transform:none;letter-spacing:.07em">'+v[3]+'</span>':'')+'</label>';
-    if(v[2]){
-      html+='<textarea oninput="veldGew(\''+def.p+'\',\''+def.s+'\',\''+v[0]+'\',this.value)" rows="3">'+waarde+'</textarea>';
-    } else {
-      html+='<input type="text" oninput="veldGew(\''+def.p+'\',\''+def.s+'\',\''+v[0]+'\',this.value)" value="'+waarde.replace(/"/g,'&quot;')+'"/>';
-    }
-    html+='</div>';
-  });
-  html+='<div style="margin-top:12px;padding:9px 12px;background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.09);font-size:.6rem;color:var(--wd);line-height:1.9">💡 Gebruik <code style="background:var(--bc);padding:1px 4px;color:var(--g)">*woord*</code> voor cursief goud in titels.</div>';
-  document.getElementById('ed-pane').innerHTML=html;
-  document.getElementById('op-btn').disabled=false;
-}
-
-function veldGew(p,s,v,val){
-  if(!gewijzigd[p])gewijzigd[p]={};
-  if(!gewijzigd[p][s])gewijzigd[p][s]={};
-  gewijzigd[p][s][v]=val;
-  if(!alleTeksten[p])alleTeksten[p]={};
-  if(!alleTeksten[p][s])alleTeksten[p][s]={};
-  alleTeksten[p][s][v]=val;
-  updatePrev();
-}
-
-function slaOp(){
-  var btn=document.getElementById('op-btn');btn.textContent='Opslaan...';btn.disabled=true;
-  var prs=[];
-  Object.keys(gewijzigd).forEach(function(p){
-    Object.keys(gewijzigd[p]).forEach(function(s){
-      Object.keys(gewijzigd[p][s]).forEach(function(v){
-        prs.push(api('/rest/v1/pagina_inhoud',{method:'POST',headers:{'Prefer':'resolution=merge-duplicates'},body:JSON.stringify({pagina:p,sectie:s,veld:v,waarde:gewijzigd[p][s][v],updated_at:new Date().toISOString()})}));
-      });
-    });
-  });
-  Promise.all(prs).then(function(){
-    gewijzigd={};toon('Opgeslagen op de website ✓','ok');btn.textContent='Opslaan →';btn.disabled=false;
-  });
-}
-
-// =========================================
-// FOTOS
-// =========================================
-function toonFotos(){
-  var g=document.getElementById('foto-grid');
-  if(!alleFotos.length){g.innerHTML='<div class="leeg"><span>🖼️</span><p>Nog geen foto\'s</p></div>';return;}
-  g.innerHTML=alleFotos.map(function(f){
-    return'<div style="background:var(--bc);border:1px solid rgba(200,169,110,.09);overflow:hidden">'+
-      '<img src="'+f.url+'" style="width:100%;aspect-ratio:4/3;object-fit:cover;filter:brightness(.75);display:block" onerror="this.style.background=\'#1a1a1a\';this.style.minHeight=\'90px\'"/>'+
-      '<div style="padding:9px 11px">'+
-        '<div style="font-size:.6rem;color:var(--w);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(f.naam||'Naamloos')+'</div>'+
-        '<div style="font-size:.5rem;color:rgba(200,169,110,.43);margin-bottom:7px">'+(f.pagina||'Algemeen')+(f.sectie?' · '+f.sectie:'')+'</div>'+
-        '<div style="display:flex;gap:5px">'+
-          '<button style="flex:1;background:transparent;border:1px solid rgba(200,169,110,.15);color:var(--wd);padding:4px;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer" onclick="navigator.clipboard.writeText(\''+f.url+'\').then(function(){toon(\'URL gekopieerd!\',\'ok\')})">📋 URL</button>'+
-          '<button style="background:transparent;border:1px solid rgba(224,82,82,.2);color:var(--red);padding:4px 7px;font-size:.48rem;cursor:pointer" onclick="delFoto(\''+f.id+'\')">🗑</button>'+
-        '</div>'+
-      '</div></div>';
-  }).join('');
-}
+function toonFotos(){var g=document.getElementById('foto-grid');if(!alleFotos.length){g.innerHTML='<div class="leeg"><span>🖼️</span><p>Nog geen foto\'s</p></div>';return;}g.innerHTML=alleFotos.map(function(f){return'<div style="background:var(--bc);border:1px solid rgba(200,169,110,.09);overflow:hidden"><img src="'+f.url+'" style="width:100%;aspect-ratio:4/3;object-fit:cover;filter:brightness(.75);display:block" onerror="this.style.background=\'#1a1a1a\';this.style.minHeight=\'90px\'"/><div style="padding:9px 11px"><div style="font-size:.6rem;color:var(--w);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(f.naam||'Naamloos')+'</div><div style="font-size:.5rem;color:rgba(200,169,110,.43);margin-bottom:7px">'+(f.pagina||'Algemeen')+(f.sectie?' · '+f.sectie:'')+'</div><div style="display:flex;gap:5px"><button style="flex:1;background:transparent;border:1px solid rgba(200,169,110,.15);color:var(--wd);padding:4px;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer" onclick="navigator.clipboard.writeText(\''+f.url+'\').then(function(){toon(\'URL gekopieerd!\',\'ok\')})">📋 URL</button><button style="background:transparent;border:1px solid rgba(224,82,82,.2);color:var(--red);padding:4px 7px;font-size:.48rem;cursor:pointer" onclick="delFoto(\''+f.id+'\')">🗑</button></div></div></div>';}).join('');}
 function prvFoto(){var u=document.getElementById('fm-u').value;if(u.indexOf('http')===0){document.getElementById('fp').style.display='block';document.getElementById('fp-i').src=u;}else document.getElementById('fp').style.display='none';}
-function slaFoto(){
-  var url=document.getElementById('fm-u').value.trim();
-  if(!url){toon('Voer een URL in','err');return;}
-  api('/rest/v1/media',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({naam:document.getElementById('fm-n').value||'Foto',url:url,pagina:document.getElementById('fm-p').value||null,sectie:document.getElementById('fm-s').value||null})}).then(function(r){
-    if(r.ok){toon('Foto opgeslagen ✓','ok');sluitM('m-foto');['fm-n','fm-u','fm-s'].forEach(function(i){document.getElementById(i).value='';});document.getElementById('fp').style.display='none';laadFotos();}else toon('Fout','err');
-  });
-}
+function slaFoto(){var url=document.getElementById('fm-u').value.trim();if(!url){toon('Voer een URL in','err');return;}api('/rest/v1/media',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({naam:document.getElementById('fm-n').value||'Foto',url:url,pagina:document.getElementById('fm-p').value||null,sectie:document.getElementById('fm-s').value||null})}).then(function(r){if(r.ok){toon('Foto opgeslagen ✓','ok');sluitM('m-foto');['fm-n','fm-u','fm-s'].forEach(function(i){document.getElementById(i).value='';});document.getElementById('fp').style.display='none';laadFotos();}else toon('Fout','err');});}
 function delFoto(id){if(!confirm('Foto verwijderen?'))return;api('/rest/v1/media?id=eq.'+id,{method:'DELETE'}).then(function(){toon('Verwijderd','ok');laadFotos();});}
 
-// =========================================
-// PAGINAS
-// =========================================
-function toonPaginas(){
-  var g=document.getElementById('p-grid');
-  if(!allePaginas.length){g.innerHTML='<div class="leeg"><span>📄</span><p>Nog geen pagina\'s</p></div>';return;}
-  g.innerHTML=allePaginas.map(function(p){
-    return'<div class="pcard">'+
-      '<h3>'+p.titel+'</h3>'+
-      '<p>secretnights.nl/pagina/'+p.slug+'<br/>'+fmtD(p.created_at)+'</p>'+
-      '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">'+
-        '<span class="pub '+(p.gepubliceerd?'live':'concept')+'">'+(p.gepubliceerd?'Live':'Concept')+'</span>'+
-        '<button class="bo" style="padding:5px 11px;font-size:.5rem" onclick="openBewerkPagina(\''+p.id+'\')">✏️ Bewerken</button>'+
-      '</div></div>';
-  }).join('');
-}
-function slaaPagina(){
-  var slug=document.getElementById('pm-sl').value.trim();
-  var titel=document.getElementById('pm-ti').value.trim();
-  if(!slug||!titel){toon('Vul naam en titel in','err');return;}
-  api('/rest/v1/extra_paginas',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({slug:slug,titel:titel,inhoud:document.getElementById('pm-in').value,gepubliceerd:document.getElementById('pm-pu').checked})}).then(function(r){
-    if(r.ok){toon('Pagina aangemaakt ✓','ok');sluitM('m-np');laadPaginas();}else toon('Naam al in gebruik?','err');
-  });
-}
-function openBewerkPagina(id){
-  var p=null;for(var i=0;i<allePaginas.length;i++){if(allePaginas[i].id===id){p=allePaginas[i];break;}}
-  if(!p)return;
-  document.getElementById('ep-id').value=p.id;
-  document.getElementById('ep-ti').value=p.titel;
-  document.getElementById('ep-in').value=p.inhoud||'';
-  document.getElementById('ep-pu').checked=p.gepubliceerd;
-  openM('m-ep');
-}
-function bijwerkPagina(){
-  var id=document.getElementById('ep-id').value;
-  api('/rest/v1/extra_paginas?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({titel:document.getElementById('ep-ti').value,inhoud:document.getElementById('ep-in').value,gepubliceerd:document.getElementById('ep-pu').checked,updated_at:new Date().toISOString()})}).then(function(r){
-    if(r.ok){toon('Opgeslagen ✓','ok');sluitM('m-ep');laadPaginas();}else toon('Fout','err');
-  });
-}
-function verwijderPagina(){
-  if(!confirm('Pagina permanent verwijderen?'))return;
-  var id=document.getElementById('ep-id').value;
-  api('/rest/v1/extra_paginas?id=eq.'+id,{method:'DELETE'}).then(function(){toon('Verwijderd','ok');sluitM('m-ep');laadPaginas();});
-}
+function toonPaginas(){var g=document.getElementById('p-grid');if(!allePaginas.length){g.innerHTML='<div class="leeg"><span>📄</span><p>Nog geen pagina\'s</p></div>';return;}g.innerHTML=allePaginas.map(function(p){return'<div class="pcard"><h3>'+p.titel+'</h3><p>secretnights.nl/pagina/'+p.slug+'<br/>'+fmtD(p.created_at)+'</p><div style="display:flex;gap:6px;align-items:center"><span class="pub '+(p.gepubliceerd?'live':'concept')+'">'+(p.gepubliceerd?'Live':'Concept')+'</span><button class="bo" style="padding:5px 11px;font-size:.5rem" onclick="openBP(\''+p.id+'\')">✏️</button></div></div>';}).join('');}
+function slaaPagina(){var sl=document.getElementById('pm-sl').value.trim(),ti=document.getElementById('pm-ti').value.trim();if(!sl||!ti){toon('Vul naam en titel in','err');return;}api('/rest/v1/extra_paginas',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({slug:sl,titel:ti,inhoud:document.getElementById('pm-in').value,gepubliceerd:document.getElementById('pm-pu').checked})}).then(function(r){if(r.ok){toon('Aangemaakt ✓','ok');sluitM('m-np');laadPaginas();}else toon('Naam al in gebruik?','err');});}
+function openBP(id){var p=null;for(var i=0;i<allePaginas.length;i++){if(allePaginas[i].id===id){p=allePaginas[i];break;}}if(!p)return;document.getElementById('ep-id').value=p.id;document.getElementById('ep-ti').value=p.titel;document.getElementById('ep-in').value=p.inhoud||'';document.getElementById('ep-pu').checked=p.gepubliceerd;openM('m-ep');}
+function bijwerkPagina(){var id=document.getElementById('ep-id').value;api('/rest/v1/extra_paginas?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({titel:document.getElementById('ep-ti').value,inhoud:document.getElementById('ep-in').value,gepubliceerd:document.getElementById('ep-pu').checked,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok){toon('Opgeslagen ✓','ok');sluitM('m-ep');laadPaginas();}else toon('Fout','err');});}
+function verwijderPagina(){if(!confirm('Permanent verwijderen?'))return;api('/rest/v1/extra_paginas?id=eq.'+document.getElementById('ep-id').value,{method:'DELETE'}).then(function(){toon('Verwijderd','ok');sluitM('m-ep');laadPaginas();});}
 
-// =========================================
-// BETAALMETHODES
-// =========================================
-function toonBetaal(){
-  var l=document.getElementById('b-lijst');
-  if(!alleBetaal.length){l.innerHTML='<div class="leeg"><span>💳</span><p>Geen methodes</p></div>';return;}
-  l.innerHTML=alleBetaal.map(function(b){
-    return'<div class="pr">'+
-      '<div class="pr-ico">'+(b.icon||'💰')+'</div>'+
-      '<div class="pr-inf"><div class="pr-nm">'+b.naam+'</div><div class="pr-tp">'+b.type+(b.mollie_id?' · Mollie: '+b.mollie_id:'')+'</div></div>'+
-      '<label class="tg"><input type="checkbox" '+(b.actief?'checked':'')+' onchange="toggleBetaal(\''+b.id+'\',this.checked)"/><div class="tg-t"></div></label>'+
-      '<button class="ab d" onclick="delBetaal(\''+b.id+'\')">🗑</button>'+
-    '</div>';
-  }).join('');
-}
-function slaaBetaal(){
-  var naam=document.getElementById('bm-n').value.trim();
-  if(!naam){toon('Naam vereist','err');return;}
-  api('/rest/v1/betaalmethodes',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({naam:naam,type:document.getElementById('bm-t').value,icon:document.getElementById('bm-i').value||'💰',mollie_id:document.getElementById('bm-m').value||null,actief:true,volgorde:alleBetaal.length+1})}).then(function(r){
-    if(r.ok){toon('Toegevoegd ✓','ok');sluitM('m-betaal');laadBetaal();}else toon('Fout','err');
-  });
-}
-function toggleBetaal(id,aan){
-  api('/rest/v1/betaalmethodes?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({actief:aan})}).then(function(){toon(aan?'Aan ✓':'Uit','ok');});
-}
-function delBetaal(id){
-  if(!confirm('Verwijderen?'))return;
-  api('/rest/v1/betaalmethodes?id=eq.'+id,{method:'DELETE'}).then(function(){toon('Verwijderd','ok');laadBetaal();});
-}
-function slaaMollie(){
-  var key=document.getElementById('mk').value.trim();
-  if(key.indexOf('live_')!==0&&key.indexOf('test_')!==0){toon('Voer een geldige Mollie key in (begint met live_ of test_)','err');return;}
-  api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({mollie_api_key:key,updated_at:new Date().toISOString()})}).then(function(r){
-    if(r.ok){toon('Mollie key opgeslagen ✓','ok');laadInst();}else toon('Fout','err');
-  });
-}
-function toggleMollie(aan){
-  api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({mollie_actief:aan,updated_at:new Date().toISOString()})}).then(function(r){
-    if(r.ok){document.getElementById('m-lbl').textContent=aan?'Aan':'Uit';toon(aan?'Mollie ACTIEF ✓':'Mollie uitgeschakeld','ok');laadInst();}else toon('Fout','err');
-  });
-}
+function toonBetaal(){var l=document.getElementById('b-lijst');if(!alleBetaal.length){l.innerHTML='<div class="leeg"><span>💳</span><p>Geen methodes</p></div>';return;}l.innerHTML=alleBetaal.map(function(b){return'<div class="pr"><div class="pr-ico">'+(b.icon||'💰')+'</div><div class="pr-inf"><div class="pr-nm">'+b.naam+'</div><div class="pr-tp">'+b.type+(b.mollie_id?' · '+b.mollie_id:'')+'</div></div><label class="tg"><input type="checkbox" '+(b.actief?'checked':'')+' onchange="toggleBetaal(\''+b.id+'\',this.checked)"/><div class="tg-t"></div></label><button class="ab d" onclick="delBetaal(\''+b.id+'\')">🗑</button></div>';}).join('');}
+function slaaBetaal(){var n=document.getElementById('bm-n').value.trim();if(!n){toon('Naam vereist','err');return;}api('/rest/v1/betaalmethodes',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({naam:n,type:document.getElementById('bm-t').value,icon:document.getElementById('bm-i').value||'💰',mollie_id:document.getElementById('bm-m').value||null,actief:true,volgorde:alleBetaal.length+1})}).then(function(r){if(r.ok){toon('Toegevoegd ✓','ok');sluitM('m-betaal');laadBetaal();}else toon('Fout','err');});}
+function toggleBetaal(id,aan){api('/rest/v1/betaalmethodes?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({actief:aan})}).then(function(){toon(aan?'Aan ✓':'Uit','ok');});}
+function delBetaal(id){if(!confirm('Verwijderen?'))return;api('/rest/v1/betaalmethodes?id=eq.'+id,{method:'DELETE'}).then(function(){toon('Verwijderd','ok');laadBetaal();});}
+function slaaMollie(){var k=document.getElementById('mk').value.trim();if(k.indexOf('live_')!==0&&k.indexOf('test_')!==0){toon('Ongeldige key (begint met live_ of test_)','err');return;}api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({mollie_api_key:k,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok){toon('Mollie key opgeslagen ✓','ok');laadInst();}else toon('Fout','err');});}
+function toggleMollie(aan){api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({mollie_actief:aan,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok){document.getElementById('m-lbl').textContent=aan?'Aan':'Uit';toon(aan?'Mollie ACTIEF ✓':'Uitgeschakeld','ok');laadInst();}else toon('Fout','err');});}
 
-// =========================================
-// WEBSITE / RESERVEREN AAN-UIT
-// =========================================
-function updateSiteLbl(aan){
-  var st=document.getElementById('site-st');
-  var l=document.getElementById('s-st-lbl');
-  if(st){st.textContent=aan?'Online':'Offline';st.className=aan?'s-aan':'s-uit';}
-  if(l){l.textContent=aan?'✅ Website is ONLINE — bezoekers kunnen de site bezoeken':'🔴 Website is OFFLINE — bezoekers zien de onderhoudspagina';l.style.color=aan?'var(--grn)':'var(--red)';}
-  document.getElementById('site-sw').checked=aan;
-  document.getElementById('s-sw2').checked=aan;
-}
-function updateResLbl(aan){
-  var l=document.getElementById('r-st-lbl');
-  if(l){l.textContent=aan?'✅ Reserveren is AAN — bezoekers kunnen boeken':'🚫 Reserveren is UIT — bezoekers kunnen NIET boeken';l.style.color=aan?'var(--grn)':'var(--red)';}
-  document.getElementById('r-sw').checked=aan;
-}
-function toggleSite(aan){
-  api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({website_actief:aan,updated_at:new Date().toISOString()})}).then(function(r){
-    if(r.ok){updateSiteLbl(aan);toon(aan?'Website is nu ONLINE ✓':'Website is nu OFFLINE','ok');laadInst();}else toon('Fout bij opslaan','err');
-  });
-}
-function slaaSite(){
-  var msg=document.getElementById('s-msg').value;
-  api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({offline_bericht:msg,updated_at:new Date().toISOString()})}).then(function(r){
-    if(r.ok)toon('Opgeslagen ✓','ok');else toon('Fout','err');
-  });
-}
-function toggleRes(aan){
-  api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({reserveren_actief:aan,updated_at:new Date().toISOString()})}).then(function(r){
-    if(r.ok){updateResLbl(aan);toon(aan?'Reserveren is nu AAN ✓':'Reserveren is nu UIT — bezoekers kunnen niet boeken','ok');}else toon('Fout','err');
-  });
-}
-function slaaRes(){
-  var msg=document.getElementById('r-msg').value;
-  api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({reserveren_bericht:msg,updated_at:new Date().toISOString()})}).then(function(r){
-    if(r.ok)toon('Opgeslagen ✓','ok');else toon('Fout','err');
-  });
-}
+function updateSiteLbl(aan){var s=document.getElementById('site-st');if(s){s.textContent=aan?'Online':'Offline';s.className=aan?'s-aan':'s-uit';}var l=document.getElementById('s-st-lbl');if(l){l.textContent=aan?'✅ Website is ONLINE':'🔴 Website is OFFLINE';l.style.color=aan?'var(--grn)':'var(--red)';}document.getElementById('site-sw').checked=aan;document.getElementById('s-sw2').checked=aan;}
+function updateResLbl(aan){var l=document.getElementById('r-st-lbl');if(l){l.textContent=aan?'✅ Reserveren is AAN':'🚫 Reserveren is UIT';l.style.color=aan?'var(--grn)':'var(--red)';}document.getElementById('r-sw').checked=aan;}
+function toggleSite(aan){api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({website_actief:aan,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok){updateSiteLbl(aan);toon(aan?'Website ONLINE ✓':'Website OFFLINE','ok');laadInst();}else toon('Fout bij opslaan','err');});}
+function slaaSite(){api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({offline_bericht:document.getElementById('s-msg').value,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok)toon('Opgeslagen ✓','ok');else toon('Fout','err');});}
+function toggleRes(aan){api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({reserveren_actief:aan,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok){updateResLbl(aan);toon(aan?'Reserveren AAN ✓':'Reserveren UIT','ok');}else toon('Fout','err');});}
+function slaaRes(){api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({reserveren_bericht:document.getElementById('r-msg').value,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok)toon('Opgeslagen ✓','ok');else toon('Fout','err');});}
 
-// =========================================
-// BESCHIKBAARHEID
-// =========================================
 function aanpas(n){totN=Math.max(1,Math.min(99,totN+n));document.getElementById('tot-d').textContent=totN;}
-function slaaTot(){
-  api('/rest/v1/beschikbaarheid?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({totaal_nachten:totN})}).then(function(r){
-    if(r.ok){toon('Opgeslagen ✓','ok');laadBeschikbaar();}else toon('Fout','err');
-  });
-}
-function resetBoek(){
-  if(!confirm('Teller resetten naar 0?'))return;
-  api('/rest/v1/beschikbaarheid?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({geboekte_nachten:0})}).then(function(){toon('Gereset ✓','ok');laadBeschikbaar();});
-}
+function slaaTot(){api('/rest/v1/beschikbaarheid?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({totaal_nachten:totN})}).then(function(r){if(r.ok){toon('Opgeslagen ✓','ok');laadBeschikbaar();}else toon('Fout','err');});}
+function resetBoek(){if(!confirm('Teller resetten naar 0?'))return;api('/rest/v1/beschikbaarheid?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({geboekte_nachten:0})}).then(function(){toon('Gereset ✓','ok');laadBeschikbaar();});}
 
-// =========================================
-// WACHTWOORD
-// =========================================
-function wijzigWw(){
-  var p1=document.getElementById('nw1').value;
-  var p2=document.getElementById('nw2').value;
-  if(p1.length<8){toon('Minimaal 8 tekens','err');return;}
-  if(p1!==p2){toon('Wachtwoorden komen niet overeen','err');return;}
-  localStorage.setItem('sn_ww',p1);
-  STANDAARD_WW=p1;
-  document.getElementById('nw1').value='';
-  document.getElementById('nw2').value='';
-  toon('Wachtwoord gewijzigd ✓','ok');
-}
-
-// =========================================
-// MODALS
-// =========================================
 function openM(id){document.getElementById(id).classList.add('on');}
 function sluitM(id){document.getElementById(id).classList.remove('on');}
 document.querySelectorAll('.mo').forEach(function(o){o.addEventListener('click',function(e){if(e.target===o)o.classList.remove('on');});});
-
-// =========================================
-// TOAST
-// =========================================
-function toon(bericht,type){
-  var t=document.getElementById('toast');
-  t.textContent=bericht;
-  t.className='toast on'+(type?' '+type:'');
-  setTimeout(function(){t.classList.remove('on');},3800);
-}
+function toon(b,t){var el=document.getElementById('toast');el.textContent=b;el.className='toast on'+(t?' '+t:'');setTimeout(function(){el.classList.remove('on');},3800);}
 </script>
 </body>
 </html>
