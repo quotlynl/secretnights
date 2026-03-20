@@ -19,7 +19,7 @@ body{background:var(--b);color:var(--w);font-family:var(--fb);font-weight:300;mi
 .lb button{width:100%;background:var(--g);color:var(--b);border:none;padding:14px;font-family:var(--fb);font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;cursor:pointer}
 .lb button:hover{background:var(--gl)}
 #lf{color:var(--red);font-size:.68rem;margin-top:10px;min-height:20px}
-#A{display:none;flex-direction:column;height:100vh}
+#A{display:none;flex-direction:column;height:100vh}#A.zichtbaar{display:flex!important}
 .tb{background:var(--bs);border-bottom:1px solid rgba(200,169,110,.15);padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:55px;flex-shrink:0;position:sticky;top:0;z-index:50}
 .tb-logo{font-family:var(--fd);font-size:1.1rem;letter-spacing:.2em;color:var(--g);text-transform:uppercase}
 .tb-logo em{font-style:italic;color:rgba(245,240,232,.5)}
@@ -237,6 +237,12 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
 </style>
 </head>
 <body>
+<script>
+// Vroege check - voorkomt flikkering en werkt altijd
+if(sessionStorage.getItem('sn_ok')==='1'){
+  document.write('<style>#L{display:none!important}#A{display:flex!important}</style>');
+}
+</script>
 <div id="L">
 <div class="lb">
   <div class="lb-logo">Secret<em>nights</em></div>
@@ -674,33 +680,35 @@ var resF='alle',kJ=new Date().getFullYear(),kM=new Date().getMonth(),totN=12;
 var gekozenSec=null,gw={};
 
 function login(){
-  var ingevoerd=document.getElementById('pw').value;
-  var opgeslagen=localStorage.getItem('sn_ww');
-  var juist=opgeslagen?opgeslagen:WW;
-  if(ingevoerd===juist){
-    sessionStorage.setItem('sn_ok','1');
-    document.getElementById('L').style.display='none';
-    document.getElementById('A').style.display='flex';
-    laadAlles();
-  } else {
-    document.getElementById('lf').textContent='Onjuist wachtwoord. Probeer opnieuw.';
-    document.getElementById('pw').value='';
-    document.getElementById('pw').focus();
-    setTimeout(function(){document.getElementById('lf').textContent='';},3000);
+  try {
+    var ingevoerd=document.getElementById('pw').value;
+    var opgeslagen=localStorage.getItem('sn_ww');
+    var juist=opgeslagen&&opgeslagen.length>0?opgeslagen:WW;
+    if(ingevoerd===juist){
+      sessionStorage.setItem('sn_ok','1');
+      // Verberg login
+      var loginEl=document.getElementById('L');
+      if(loginEl){loginEl.style.cssText='display:none!important';}
+      // Toon app
+      var appEl=document.getElementById('A');
+      if(appEl){
+        appEl.style.cssText='display:flex!important;flex-direction:column;height:100vh;';
+      }
+      setTimeout(function(){laadAlles();},50);
+    } else {
+      var fout=document.getElementById('lf');
+      if(fout){fout.textContent='Onjuist wachtwoord. Probeer opnieuw.';}
+      var pwEl=document.getElementById('pw');
+      if(pwEl){pwEl.value='';pwEl.focus();}
+      setTimeout(function(){var f=document.getElementById('lf');if(f)f.textContent='';},3000);
+    }
+  } catch(err){
+    alert('Fout: '+err.message);
   }
 }
 function uitloggen(){sessionStorage.removeItem('sn_ok');location.reload();}
 
-// Auto-login check - wacht tot DOM volledig geladen is
-window.addEventListener('DOMContentLoaded',function(){
-  if(sessionStorage.getItem('sn_ok')==='1'){
-    document.getElementById('L').style.display='none';
-    document.getElementById('A').style.display='flex';
-    setTimeout(laadAlles,100);
-  } else {
-    document.getElementById('pw').focus();
-  }
-});
+// Auto-login wordt afgehandeld door vroege script bovenaan body
 function wijzigWw(){var p1=document.getElementById('nw1').value,p2=document.getElementById('nw2').value;if(p1.length<8){toon('Minimaal 8 tekens','err');return;}if(p1!==p2){toon('Wachtwoorden komen niet overeen','err');return;}localStorage.setItem('sn_ww',p1);WW=p1;document.getElementById('nw1').value='';document.getElementById('nw2').value='';toon('Wachtwoord gewijzigd ✓','ok');}
 
 function api(pad,o){o=o||{};return fetch(SB+pad,{method:o.method||'GET',headers:Object.assign({'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},o.headers||{}),body:o.body||undefined});}
