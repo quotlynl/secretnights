@@ -360,7 +360,10 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
           </div>
                     <!-- EDIT PANEEL -->
           <div class="edit-paneel">
-            <div class="edit-kop"><h3>Teksten <em>bewerken</em></h3><p id="edit-kop-sub">Klik op ✏️ om een sectie te bewerken</p></div>
+            <div class="edit-kop" style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+              <div><h3>Teksten <em>bewerken</em></h3><p id="edit-kop-sub">Klik op ✏️ om een sectie te bewerken</p></div>
+              <button id="sluit-editor" onclick="sluitEditor()" style="background:transparent;border:1px solid rgba(200,169,110,.2);color:var(--g);width:26px;height:26px;cursor:pointer;font-size:.78rem;display:none;align-items:center;justify-content:center;flex-shrink:0" title="Sluiten">✕</button>
+            </div>
             <div class="edit-body" id="edit-body">
               <div class="edit-leeg"><span>✏️</span><p>Klik op een ✏️ potlood<br/>naast een sectie om<br/>teksten te bewerken</p></div>
             </div>
@@ -912,6 +915,17 @@ function updatePreview() {
   api('/rest/v1/beschikbaarheid?select=totaal_nachten,geboekte_nachten&limit=1').then(function(r) { return r.json(); }).then(function(d) { if (d && d[0]) document.getElementById('pv-teller').textContent = d[0].totaal_nachten - d[0].geboekte_nachten; }).catch(function() {});
 }
 
+function sluitEditor() {
+  gekozenSectie = null;
+  document.querySelectorAll('.overlay-potlood').forEach(function(el) { el.classList.remove('actief'); });
+  document.getElementById('edit-body').innerHTML = '<div class="edit-leeg"><span>✏️</span><p>Klik op een ✏️ potlood<br/>naast een sectie om<br/>teksten te bewerken</p></div>';
+  document.getElementById('edit-voet').style.display = 'none';
+  document.getElementById('opslaan-knop').disabled = true;
+  document.getElementById('edit-kop-sub').textContent = 'Klik op ✏️ om een sectie te bewerken';
+  document.getElementById('sluit-editor').style.display = 'none';
+  document.getElementById('ed-hint').textContent = '← Klik op ✏️';
+}
+
 function kiesSectie(key) {
   gekozenSectie = key;
   // Markeer het actieve potlood knopje
@@ -921,6 +935,7 @@ function kiesSectie(key) {
   if (!def) return;
   document.getElementById('edit-kop-sub').textContent = def.label;
   document.getElementById('ed-hint').textContent = '✓ ' + def.label;
+  document.getElementById('sluit-editor').style.display = 'flex';
   var html = '';
   def.velden.forEach(function(veld) {
     var w = haalTekst(veld.p, veld.s, veld.v) || '';
