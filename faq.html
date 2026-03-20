@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Over Ons – Secretnights</title>
-<meta name="description" content="Leer Secretnights kennen — het verhaal achter de meest bijzondere overnachtingen op het water in Nederland."/>
+<title>FAQ – Secretnights</title>
+<meta name="description" content="Veelgestelde vragen over Secretnights — houseboat overnachtingen op een geheime locatie in Nederland."/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
@@ -13,12 +13,11 @@
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--white);font-family:var(--fb);font-weight:300;overflow-x:hidden;cursor:none}
 a{cursor:none;color:inherit}
-@media(pointer:coarse){body{cursor:auto}a,button{cursor:pointer}.cursor,.cursor-ring{display:none!important}}
+@media(pointer:coarse){body{cursor:auto}a,button{cursor:pointer}}
 .cursor{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
 .cursor-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(200,169,110,.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;background:rgba(10,10,10,.98);border-bottom:1px solid rgba(200,169,110,.12)}
+@media(pointer:coarse){.cursor,.cursor-ring{display:none}}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;background:rgba(10,10,10,.98);border-bottom:1px solid rgba(200,169,110,.12);transition:padding .3s}
 .nav-logo{font-family:var(--fd);font-size:1.5rem;font-weight:300;letter-spacing:.28em;color:var(--gold);text-decoration:none;text-transform:uppercase}
 .nav-logo span{font-style:italic;color:var(--white)}
 .nav-links{display:flex;gap:36px;list-style:none}
@@ -27,149 +26,67 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-cta{background:var(--gold);color:var(--black);padding:10px 26px;font-family:var(--fb);font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;transition:all .3s;text-decoration:none}
 .nav-cta:hover{background:var(--gl)}
 .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:none}
-.hamburger span{width:24px;height:1px;background:var(--white);display:block;transition:all .3s}
-.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
-.hamburger.active span:nth-child(2){opacity:0}
-.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+.hamburger span{width:24px;height:1px;background:var(--white);display:block}
 .mobile-nav{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,.98);z-index:190;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;transform:translateX(100%);transition:transform .4s ease}
 .mobile-nav.open{transform:translateX(0)}
 .mobile-nav a{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--white);text-decoration:none;transition:color .3s}
 .mobile-nav a:hover{color:var(--gold)}
 
-/* HERO */
-.page-hero{position:relative;height:70vh;min-height:460px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 60px 72px;overflow:hidden}
-.ph-img{position:absolute;inset:0}
-.ph-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.22) contrast(1.4) saturate(.42);transform:scale(1.04)}
-.ph-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.3) 0%,rgba(10,10,10,.88) 100%)}
-.ph-content{position:relative;z-index:2;max-width:700px}
-.ph-label{font-size:.58rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block}
-.ph-title{font-family:var(--fd);font-size:clamp(2.5rem,6vw,5.5rem);font-weight:300;line-height:1.05}
-.ph-title em{font-style:italic;color:var(--gold)}
+/* PAGE HERO */
+.page-hero{padding:140px 60px 80px;background:var(--bs);position:relative;overflow:hidden;text-align:center}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,.08),transparent 60%)}
+.page-hero-content{position:relative;z-index:1}
+.page-label{font-size:.6rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:block}
+.page-title{font-family:var(--fd);font-size:clamp(2.5rem,6vw,5rem);font-weight:300;line-height:1.05}
+.page-title em{font-style:italic;color:var(--gold)}
+.page-sub{font-size:.78rem;color:var(--wd);margin-top:20px;line-height:2;max-width:500px;margin-left:auto;margin-right:auto}
 
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .85s,transform .85s}
-.reveal.visible{opacity:1;transform:none}
+/* FAQ */
+.faq-section{max-width:800px;margin:0 auto;padding:80px 60px}
+.faq-cat{margin-bottom:60px}
+.faq-cat-title{font-family:var(--fd);font-size:1.8rem;font-weight:300;color:var(--gold);margin-bottom:28px;padding-bottom:12px;border-bottom:1px solid rgba(200,169,110,.2)}
+.faq-item{border-bottom:1px solid rgba(200,169,110,.12)}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:20px 0;display:flex;justify-content:space-between;align-items:center;cursor:none;gap:20px}
+.faq-q-text{font-family:var(--fb);font-size:.8rem;font-weight:400;color:var(--white);line-height:1.5;letter-spacing:.02em}
+.faq-icon{font-size:1rem;color:var(--gold);transition:transform .3s;flex-shrink:0;font-family:var(--fb);font-weight:300;font-size:1.4rem;line-height:1}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:20px}
+.faq-a p{font-size:.76rem;color:var(--wd);line-height:2;margin-bottom:8px}
+.faq-a a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.3)}
+.faq-a strong{color:var(--white)}
 
-/* SECTIONS */
-.section-label{font-size:.58rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block}
-.gold-line{width:50px;height:1px;background:var(--gold);margin:24px 0}
-
-/* STORY */
-.story{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding:100px 60px;background:var(--bs)}
-.story-text h2{font-family:var(--fd);font-size:clamp(2rem,4vw,3.8rem);font-weight:300;line-height:1.1;margin-bottom:24px}
-.story-text h2 em{font-style:italic;color:var(--gold)}
-.story-text p{font-size:.8rem;line-height:2.2;color:var(--wd);margin-bottom:16px}
-.story-img{position:relative}
-.story-img .frame{aspect-ratio:4/5;overflow:hidden;border:1px solid rgba(200,169,110,.15)}
-.story-img .frame img{width:100%;height:100%;object-fit:cover;filter:brightness(.32) contrast(1.3) saturate(.5);transition:filter .6s}
-.story-img:hover .frame img{filter:brightness(.52) contrast(1.2) saturate(.65)}
-.pull-quote{position:absolute;bottom:-28px;left:-28px;right:28px;background:var(--gold);padding:24px 28px}
-.pull-quote p{font-family:var(--fd);font-size:1.15rem;font-style:italic;font-weight:300;color:var(--black);line-height:1.5}
-
-/* VALUES */
-.values-section{padding:100px 60px;background:var(--black)}
-.values-header{text-align:center;max-width:600px;margin:0 auto 64px}
-.values-header h2{font-family:var(--fd);font-size:clamp(2rem,4vw,3.5rem);font-weight:300;line-height:1.1}
-.values-header h2 em{font-style:italic;color:var(--gold)}
-.values-header p{font-size:.78rem;line-height:2.1;color:var(--wd);margin-top:16px}
-.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,.1)}
-.vc{background:var(--black);padding:48px 36px;position:relative;overflow:hidden;transition:background .4s}
-.vc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transition:transform .5s}
-.vc:hover{background:#0a0802}
-.vc:hover::after{transform:scaleX(1)}
-.vc-icon{font-size:2.2rem;margin-bottom:20px;display:block}
-.vc h3{font-family:var(--fd);font-size:1.5rem;font-weight:300;margin-bottom:12px}
-.vc p{font-size:.74rem;line-height:2;color:var(--wd)}
-
-/* NUMBERS */
-.numbers{background:var(--gold);padding:64px 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
-.nb{text-align:center;padding:8px}
-.nb-n{font-family:var(--fd);font-size:3.5rem;font-weight:300;color:var(--black);line-height:1}
-.nb-l{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,10,10,.5);margin-top:8px;font-weight:500}
-
-/* TEAM / ABOUT PERSON */
-.about-person{padding:100px 60px;background:var(--bs)}
-.ap-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:72px;align-items:center;max-width:1100px;margin:0 auto}
-.ap-img{aspect-ratio:3/4;overflow:hidden;border:1px solid rgba(200,169,110,.15);position:relative}
-.ap-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.35) contrast(1.3) saturate(.45)}
-.ap-text h2{font-family:var(--fd);font-size:clamp(2rem,4vw,3.5rem);font-weight:300;line-height:1.1;margin-bottom:6px}
-.ap-text h2 em{font-style:italic;color:var(--gold)}
-.ap-name{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:block}
-.ap-text p{font-size:.8rem;line-height:2.2;color:var(--wd);margin-bottom:14px}
-.ap-contact{margin-top:28px;display:flex;flex-direction:column;gap:8px}
-.ap-contact a{font-size:.7rem;color:var(--gold);text-decoration:none;letter-spacing:.08em;border-bottom:1px solid rgba(200,169,110,.25);padding-bottom:2px;display:inline-block;transition:border-color .3s}
-.ap-contact a:hover{border-color:var(--gold)}
-
-/* BOATS */
-.boats-section{padding:100px 60px;background:var(--black)}
-.boats-header{text-align:center;margin-bottom:60px}
-.boats-header h2{font-family:var(--fd);font-size:clamp(2rem,4vw,3.5rem);font-weight:300;line-height:1.1}
-.boats-header h2 em{font-style:italic;color:var(--gold)}
-.boats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(200,169,110,.1)}
-.bc-card{background:var(--bc);overflow:hidden;position:relative;transition:background .4s}
-.bc-card:hover{background:#0d0b08}
-.bc-img{height:280px;overflow:hidden}
-.bc-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.3) contrast(1.32) saturate(.48);transition:filter .6s,transform .7s}
-.bc-card:hover .bc-img img{filter:brightness(.5) contrast(1.2) saturate(.65);transform:scale(1.04)}
-.bc-body{padding:36px 36px 40px}
-.bc-body h3{font-family:var(--fd);font-size:2rem;font-weight:300;margin-bottom:12px}
-.bc-body h3 em{font-style:italic;color:var(--gold)}
-.bc-body p{font-size:.76rem;line-height:2.1;color:var(--wd);margin-bottom:18px}
-.bc-specs{display:flex;gap:18px;flex-wrap:wrap}
-.spec{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,169,110,.25);padding:5px 12px}
-
-/* CTA */
-.cta-strip{background:var(--gold);padding:72px 60px;text-align:center;position:relative;overflow:hidden}
-.cta-strip::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.06),transparent)}
-.cta-strip h2{font-family:var(--fd);font-size:clamp(1.8rem,4vw,3.2rem);font-weight:300;font-style:italic;color:var(--black);margin-bottom:28px}
-.cta-strip .acts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+/* CTA STRIP */
+.cta-strip{background:var(--gold);padding:64px 60px;text-align:center}
+.cta-strip h2{font-family:var(--fd);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;font-style:italic;color:var(--black);margin-bottom:24px}
 .btn-dark{background:var(--black);color:var(--gold);padding:14px 38px;font-family:var(--fb);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;border:none;text-decoration:none;transition:all .3s;display:inline-block;cursor:none}
 .btn-dark:hover{background:#1a1a1a;transform:translateY(-2px)}
-.btn-out{background:transparent;color:var(--black);padding:14px 38px;font-family:var(--fb);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;border:2px solid rgba(10,10,10,.3);text-decoration:none;transition:all .3s;display:inline-block;cursor:none}
-.btn-out:hover{border-color:var(--black);transform:translateY(-2px)}
 
 /* FOOTER */
-footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:54px 60px 32px}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:48px}
-.f-logo{font-family:var(--fd);font-size:1.8rem;font-weight:300;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:48px 60px 28px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px}
+.f-logo{font-family:var(--fd);font-size:1.7rem;font-weight:300;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
 .f-logo span{font-style:italic;color:rgba(245,240,232,.48)}
-.f-tag{font-size:.68rem;line-height:2;color:rgba(245,240,232,.32);max-width:240px}
-.f-col h5{font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:600}
+.f-tag{font-size:.68rem;line-height:2;color:rgba(245,240,232,.32);max-width:230px}
+.f-col h5{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:13px;font-weight:600}
 .f-col ul{list-style:none}
 .f-col ul li{font-size:.7rem;color:rgba(245,240,232,.38);line-height:2.4;transition:color .3s}
 .f-col ul li:hover{color:var(--gold)}
 .f-col a{color:inherit;text-decoration:none}
-.footer-bottom{border-top:1px solid rgba(200,169,110,.1);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-bottom{border-top:1px solid rgba(200,169,110,.1);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .footer-bottom p{font-size:.58rem;color:rgba(245,240,232,.18)}
 .wa-btn{position:fixed;bottom:24px;right:24px;z-index:300;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.4);text-decoration:none;transition:transform .3s}
 .wa-btn:hover{transform:scale(1.1)}
 .wa-btn svg{width:26px;height:26px;fill:white}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  nav{padding:18px 24px}
-  .nav-links,.nav-cta{display:none}
-  .hamburger{display:flex}
-  .page-hero{padding:0 24px 56px;height:60vh}
-  .story,.about-person,.values-section,.boats-section{padding:64px 24px}
-  .numbers{padding:48px 24px}
-  .cta-strip{padding:56px 24px}
-  footer{padding:44px 24px 28px}
-  .story{grid-template-columns:1fr;gap:48px}
-  .story-img{margin-top:28px}
-  .pull-quote{position:static;margin-top:16px;left:0;right:0;bottom:0}
-  .ap-grid{grid-template-columns:1fr;gap:36px}
-  .ap-img{aspect-ratio:16/9}
-  .values-grid{grid-template-columns:1fr}
-  .numbers{grid-template-columns:repeat(2,1fr);gap:1px}
-  .boats-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
-  .cta-strip .acts{flex-direction:column;align-items:center}
+@media(max-width:768px){
+  nav{padding:18px 20px}.nav-links{display:none}.hamburger{display:flex}.nav-cta{display:none}
+  .page-hero{padding:110px 20px 60px}
+  .faq-section{padding:50px 20px}
+  .cta-strip{padding:50px 20px}
+  footer{padding:40px 20px 24px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
 }
-@media(max-width:480px){
-  .footer-grid{grid-template-columns:1fr}
-  .numbers{grid-template-columns:1fr 1fr}
-}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -183,13 +100,12 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="index.html#arrangementen">Arrangementen</a></li>
-    <li><a href="over-ons.html" class="active">Over ons</a></li>
-    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="over-ons.html">Over ons</a></li>
+    <li><a href="faq.html" class="active">FAQ</a></li>
   </ul>
-  <a href="index.html" class="nav-cta">Reserveer Nu</a>
+  <a href="index.html#reserveer" class="nav-cta">Reserveer Nu</a>
   <button class="hamburger" id="hamburger" onclick="document.getElementById('mobileNav').classList.toggle('open');this.classList.toggle('active')"><span></span><span></span><span></span></button>
 </nav>
-
 <div class="mobile-nav" id="mobileNav">
   <a href="index.html">Home</a>
   <a href="index.html#arrangementen">Arrangementen</a>
@@ -197,128 +113,128 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
   <a href="faq.html">FAQ</a>
 </div>
 
-<!-- HERO -->
 <div class="page-hero">
-  <div class="ph-img"><img src="https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-V8-17.jpg" alt="Secretnights"/></div>
-  <div class="ph-grad"></div>
-  <div class="ph-content">
-    <span class="ph-label">Over Secretnights</span>
-    <h1 class="ph-title">Het <em>verhaal</em> achter<br/>de geheime nacht</h1>
+  <div class="page-hero-content">
+    <span class="page-label">Veelgestelde Vragen</span>
+    <h1 class="page-title">Alles wat je wilt <em>weten</em></h1>
+    <p class="page-sub">Staat je vraag er niet tussen? Bel ons op 06 300 66 444 of stuur een WhatsApp.</p>
   </div>
 </div>
 
-<!-- STORY -->
-<section class="story">
-  <div class="story-text reveal">
-    <span class="section-label">Hoe het begon</span>
-    <h2>Een idee geboren<br/>op het <em>water</em></h2>
-    <div class="gold-line"></div>
-    <p>Secretnights is geboren uit een eenvoudige gedachte: wat als een overnachting niet alleen luxe biedt, maar ook mysterie? Niet weten waar je naartoe gaat, maar wél weten dat het bijzonder zal zijn.</p>
-    <p>Vanuit Noord-Brabant brengen we gasten naar de meest adembenemende plekken in de Nederlandse natuur — op het water, volledig privé, ver weg van de drukte van alledag.</p>
-    <p>Elk verblijf is met zorg samengesteld. Van de geheime ligplek tot het arrangement aan boord — geen detail is te klein.</p>
-  </div>
-  <div class="story-img reveal">
-    <div class="frame"><img src="https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-slaapbank-sfeer-uitzicht-natuur.jpg" alt="Interieur boot"/></div>
-    <div class="pull-quote"><p>"Niet weten waar je naartoe gaat is deel van de magie — aankomen is de rest."</p></div>
-  </div>
-</section>
+<div class="faq-section">
 
-<!-- VALUES -->
-<section class="values-section">
-  <div class="values-header reveal">
-    <span class="section-label">Waar wij voor staan</span>
-    <h2>Onze <em>waarden</em></h2>
-    <p>Drie principes liggen ten grondslag aan alles wat we doen bij Secretnights.</p>
-  </div>
-  <div class="values-grid">
-    <div class="vc reveal">
-      <span class="vc-icon">🔒</span>
-      <h3>Exclusiviteit</h3>
-      <p>Slechts 12 Secret Nights per seizoen. We kiezen voor kwaliteit boven kwantiteit. Elk verblijf krijgt de volle aandacht — geen compromissen.</p>
+  <div class="faq-cat">
+    <h2 class="faq-cat-title">🗺️ De Geheime Locatie</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Wanneer ontvang ik de exacte locatie?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Je ontvangt de exacte locatie uiterlijk <strong>48 uur voor je aankomst</strong> via e-mail. Zo blijft het mysterie zo lang mogelijk intact. De locatie bevat ook een routebeschrijving en praktische informatie.</p></div>
     </div>
-    <div class="vc reveal" style="transition-delay:.15s">
-      <span class="vc-icon">🌿</span>
-      <h3>Verbondenheid met natuur</h3>
-      <p>We zoeken de mooiste, meest afgelegen plekken in de Nederlandse natuur op. Geen wifi, geen televisie — alleen water, lucht en stilte.</p>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoe ver is de locatie van mijn woonplaats?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Bij je reservering vragen we je postcode. Op basis daarvan selecteren we de boot die het dichtst bij jou in de buurt ligt. Beide boten vertrekken vanuit Noord-Brabant. <strong>Nature One</strong> vertrekt vanuit Veen, <strong>Nature Two</strong> vanuit Lith.</p></div>
     </div>
-    <div class="vc reveal" style="transition-delay:.3s">
-      <span class="vc-icon">✨</span>
-      <h3>Onvergetelijke momenten</h3>
-      <p>Een Secretnights-ervaring is niet zomaar een overnachting. Het is een verhaal dat je vertelt. Een herinnering die je bijblijft. Een moment dat telt.</p>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Zit de boot op één vaste plek, of ga ik echt varen?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>De boot ligt gereed op de geheime locatie. Je hoeft geen kilometers te varen — je stapt gewoon in op de plek en geniet direct van het uitzicht. Er is <strong>geen vaarbewijs nodig</strong>.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Is de locatie elke keer anders?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja! We selecteren elke boeking een unieke ligplek in de natuur. Geen enkel verblijf is hetzelfde. Zo kun je Secretnights meerdere keren beleven en toch steeds verrast worden.</p></div>
     </div>
   </div>
-</section>
 
-<!-- NUMBERS -->
-<div class="numbers reveal">
-  <div class="nb"><div class="nb-n">12</div><div class="nb-l">Nachten per seizoen</div></div>
-  <div class="nb"><div class="nb-n">2</div><div class="nb-l">Privé-boten</div></div>
-  <div class="nb"><div class="nb-n">100%</div><div class="nb-l">Privé-ervaring</div></div>
-  <div class="nb"><div class="nb-n">48u</div><div class="nb-l">Voor aankomst locatie</div></div>
+  <div class="faq-cat">
+    <h2 class="faq-cat-title">🚤 De Boot</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Heb ik een vaarbewijs nodig?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p><strong>Nee!</strong> De boot ligt al op de locatie en hoeft niet gevaren te worden. Je hebt dus geen vaarbewijs of vaarervaring nodig. Perfect voor iedereen.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Wat is er aan boord aanwezig?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">
+        <p>De boot is volledig uitgerust met:</p>
+        <p>✓ Comfortabele tweepersoonsslaapkamer · ✓ Luxe badkamer met warme douche · ✓ Slaapbank voor extra personen · ✓ Nespresso-machine en melkopschuimer · ✓ BBQ en buitenterras · ✓ Verwarming · ✓ Draagbaar kooktoestel · ✓ Koelkast</p>
+        <p>Er is bewust <strong>geen wifi of televisie</strong> aan boord — voor echte ontspanning.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoeveel personen kunnen er mee?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p><strong>Nature One</strong>: 2 t/m 6 personen (Biesbosch, vertrek Veen).<br/><strong>Nature Two</strong>: 2 t/m 8 personen (Bommelerwaard, vertrek Lith).</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Is de boot geschikt voor kinderen?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja, de boot is geschikt voor kinderen. We vragen wel om voorzichtig te zijn aan het dek en verzoeken altijd een zwemvest voor jonge kinderen. Neem dit zelf mee of geef het door bij je wensen.</p></div>
+    </div>
+  </div>
+
+  <div class="faq-cat">
+    <h2 class="faq-cat-title">🍽️ Arrangementen & Services</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Wat houdt de Dining Experience precies in?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Een privé-kok bereidt een <strong>5-gangen diner</strong> aan boord, inclusief wijnpairing passend bij elk gerecht. De volgende ochtend is er een luxe ontbijt. Alles wordt aan boord bereid en geserveerd — jij hoeft niets te doen.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Kan ik een massage los bijboeken?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja, een massage is optioneel bij elk arrangement toe te voegen voor <strong>€ 85,-</strong>. De massage vindt plaats aan boord op het tijdstip dat jou het beste uitkomt. Voeg het eenvoudig toe tijdens het reserveren.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoe werkt het sauna arrangement?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Bij het Sauna Boot arrangement is er een <strong>privé-sauna</strong> aan boord aanwezig. Je kunt op elk gewenst moment de sauna in. Aan boord is ook een bubbelbad beschikbaar. Na de sauna kun je direct het koele, schone water in voor een verfrissende duik.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Moet ik zelf eten en drinken meenemen?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Bij <strong>Dining Experience</strong>: nee, alles is inbegrepen. Bij <strong>Wellness</strong> en <strong>Sauna Boot</strong> verzorg je zelf je maaltijden. Er is een koelkast, BBQ en kooktoestel aan boord. Je kunt ook een ontbijtpakket bijboeken — vermeld dit bij je wensen.</p></div>
+    </div>
+  </div>
+
+  <div class="faq-cat">
+    <h2 class="faq-cat-title">💳 Betalen & Annuleren</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoeveel moet ik direct betalen?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Bij reservering betaal je een <strong>aanbetaling van 30%</strong>. Het resterende bedrag (70%) betaal je uiterlijk 14 dagen voor aankomst.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Wat is het annuleringsbeleid?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a">
+        <p><strong>Meer dan 30 dagen voor aankomst:</strong> volledige restitutie minus €25 administratiekosten.</p>
+        <p><strong>14–30 dagen voor aankomst:</strong> 50% restitutie van het totaalbedrag.</p>
+        <p><strong>Minder dan 14 dagen:</strong> geen restitutie mogelijk. We raden een annuleringsverzekering aan.</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Kan ik mijn reservering wijzigen?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Ja, dit is mogelijk tot <strong>21 dagen voor aankomst</strong>, afhankelijk van beschikbaarheid. Neem hiervoor contact op via <a href="mailto:info@secretnights.nl">info@secretnights.nl</a> of <a href="tel:0630066444">06 300 66 444</a>.</p></div>
+    </div>
+  </div>
+
+  <div class="faq-cat">
+    <h2 class="faq-cat-title">🐶 Praktisch</h2>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Zijn huisdieren toegestaan?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Kleine, goed opgevoede honden zijn welkom aan boord. Vermeld dit bij je wensen tijdens het reserveren. Er wordt een kleine schoonmaaktoeslag van €25 in rekening gebracht.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Wat als het slecht weer is?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>De houseboat is volledig voorzien van verwarming en is ook bij slecht weer heerlijk comfortabel. Het knusse interieur en de grote ramen zorgen voor een sfeervolle ervaring — ook als het regent. Bij extreme weersomstandigheden nemen wij contact met je op.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Is Secretnights geschikt als cadeau?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Absoluut! Wil je een Secretnights-ervaring weggeven als cadeau? Stuur ons een e-mail op <a href="mailto:info@secretnights.nl">info@secretnights.nl</a> en we regelen een mooi aanbod voor je op maat.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoe laat kan ik in- en uitchecken?</span><span class="faq-icon">+</span></button>
+      <div class="faq-a"><p><strong>Inchecken:</strong> vanaf 15:00 uur.<br/><strong>Uitchecken:</strong> voor 11:00 uur.<br/>Afwijkende tijden zijn in overleg mogelijk — vermeld dit bij je wensen.</p></div>
+    </div>
+  </div>
+
 </div>
-
-<!-- ABOUT PERSON -->
-<section class="about-person">
-  <div class="ap-grid">
-    <div class="ap-img reveal"><img src="https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-V8-24.jpg" alt="Holiday Houseboats"/></div>
-    <div class="reveal">
-      <span class="section-label">De mensen achter Secretnights</span>
-      <h2>Holiday <em>Houseboats</em></h2>
-      <span class="ap-name">Oss, Noord-Brabant</span>
-      <p>Secretnights is een concept van <strong style="color:var(--white)">Holiday Houseboats</strong>, gevestigd in Oss. Met jaren aan ervaring op het water weten we als geen ander hoe we gasten een onvergetelijke beleving kunnen bieden.</p>
-      <p>Onze passie voor de Nederlandse natuur, water en luxe belevenissen heeft geleid tot het meest exclusieve overnachtingsconcept van Nederland: een geheime ligplek, volledig privé, op een boot die klaarstaat voor jou.</p>
-      <p>Van de selectie van de locaties tot de persoonlijke service — alles wordt met zorg en liefde voor het vak gedaan.</p>
-      <div class="ap-contact">
-        <a href="tel:0630066444">📞 06 300 66 444</a>
-        <a href="mailto:info@secretnights.nl">✉️ info@secretnights.nl</a>
-        <a href="https://wa.me/310630066444">💬 WhatsApp beschikbaar</a>
-        <span style="font-size:.7rem;color:var(--wd);letter-spacing:.06em">📍 Kazernestraat, Oss</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BOATS -->
-<section class="boats-section">
-  <div class="boats-header reveal">
-    <span class="section-label">Onze vloot</span>
-    <h2>Twee <em>bijzondere</em> boten</h2>
-  </div>
-  <div class="boats-grid">
-    <div class="bc-card reveal">
-      <div class="bc-img"><img src="https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-V8-34-1.jpg" alt="Nature One"/></div>
-      <div class="bc-body">
-        <h3>Nature <em>One</em></h3>
-        <p>Onze eerste boot vaart door de Biesbosch — één van de grootste zoetwatergetijdengebieden van Europa. Kronkelende kreken, riet en een rijke biodiversiteit vormen het decor voor jouw geheime nacht.</p>
-        <div class="bc-specs">
-          <span class="spec">2–6 personen</span>
-          <span class="spec">Biesbosch</span>
-          <span class="spec">Vertrek Veen</span>
-        </div>
-      </div>
-    </div>
-    <div class="bc-card reveal" style="transition-delay:.2s">
-      <div class="bc-img"><img src="https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-zelf-varen-geen-vaarbewijs.jpg" alt="Nature Two"/></div>
-      <div class="bc-body">
-        <h3>Nature <em>Two</em></h3>
-        <p>De tweede boot verkent de Bommelerwaard — een gebied van dijken, uiterwaarden en rust. Wakker worden met uitzicht op de rivier terwijl de wereld nog slaapt: dat is Nature Two.</p>
-        <div class="bc-specs">
-          <span class="spec">2–8 personen</span>
-          <span class="spec">Bommelerwaard</span>
-          <span class="spec">Vertrek Lith</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- CTA -->
 <div class="cta-strip">
-  <h2>"Klaar voor jouw geheime nacht?"</h2>
-  <div class="acts">
-    <a href="index.html" class="btn-dark">Reserveer Nu</a>
-    <a href="faq.html" class="btn-out">Lees de FAQ</a>
-  </div>
+  <h2>"Nog vragen? Wij helpen je graag."</h2>
+  <a href="index.html" class="btn-dark">Terug naar Home</a>
+  &nbsp;&nbsp;
+  <a href="tel:0630066444" class="btn-dark">06 300 66 444</a>
 </div>
 
 <footer>
@@ -326,15 +242,15 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
     <div><div class="f-logo">Secret<span>nights</span></div><p class="f-tag">Bijzondere overnachtingen op het water, volledig privé en mysterieus.</p></div>
     <div class="f-col"><h5>Menu</h5><ul><li><a href="index.html">Home</a></li><li><a href="index.html#arrangementen">Arrangementen</a></li><li><a href="over-ons.html">Over ons</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
     <div class="f-col"><h5>Info</h5><ul><li><a href="#">Privacybeleid</a></li><li><a href="#">Algemene Voorwaarden</a></li></ul></div>
-    <div class="f-col"><h5>Contact</h5><ul><li><a href="mailto:info@secretnights.nl">info@secretnights.nl</a></li><li><a href="tel:0630066444">06 300 66 444</a></li><li><a href="https://wa.me/310630066444">WhatsApp</a></li><li>Kazernestraat, Oss</li></ul></div>
+    <div class="f-col"><h5>Contact</h5><ul><li><a href="mailto:info@secretnights.nl">info@secretnights.nl</a></li><li><a href="tel:0630066444">06 300 66 444</a></li><li><a href="https://wa.me/310630066444">WhatsApp</a></li></ul></div>
   </div>
   <div class="footer-bottom"><p>© 2026 Secretnights</p><p style="color:rgba(200,169,110,.22);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.85rem">12 Nights · Infinite Memories</p></div>
 </footer>
 
 <script>
 const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-if(cur&&window.matchMedia('(pointer:fine)').matches){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});(function l(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(l)})()}
-document.querySelectorAll('.reveal').forEach(el=>new IntersectionObserver(e=>{if(e[0].isIntersecting)el.classList.add('visible')},{threshold:.1}).observe(el));
+if(cur){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});(function l(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(l)})()}
+function toggleFaq(btn){const item=btn.parentElement;const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open')}
 </script>
 </body>
 </html>
