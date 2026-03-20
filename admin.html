@@ -9,82 +9,77 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--g:#c8a96e;--gl:#e8d5a3;--b:#0a0a0a;--bs:#111;--bc:#161616;--w:#f5f0e8;--wd:rgba(245,240,232,.65);--fd:'Cormorant Garamond',serif;--fb:'Montserrat',sans-serif;--grn:#4caf82;--red:#e05252;--org:#e08c52;--blu:#5294e2}
 body{background:var(--b);color:var(--w);font-family:var(--fb);font-weight:300;min-height:100vh}
-#L{position:fixed;inset:0;background:var(--b);display:flex;align-items:center;justify-content:center;z-index:9999}
-.lb{background:var(--bs);border:1px solid rgba(200,169,110,.22);padding:48px;width:360px;text-align:center}
-.lb-logo{font-family:var(--fd);font-size:1.7rem;letter-spacing:.25em;color:var(--g);text-transform:uppercase;margin-bottom:4px}
-.lb-logo em{font-style:italic;color:rgba(245,240,232,.5)}
-.lb-sub{font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,240,232,.25);margin-bottom:32px;display:block}
-.lb input{width:100%;background:var(--b);border:1px solid rgba(200,169,110,.3);color:var(--w);padding:13px 16px;font-size:1rem;font-family:var(--fb);outline:none;margin-bottom:12px;border-radius:0;display:block}
-.lb input:focus{border-color:var(--g)}
-.lb button{width:100%;background:var(--g);color:var(--b);border:none;padding:14px;font-family:var(--fb);font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;cursor:pointer}
-.lb button:hover{background:var(--gl)}
-#lf{color:var(--red);font-size:.68rem;margin-top:10px;min-height:20px}
-#A{display:none;flex-direction:column;height:100vh}#A.zichtbaar{display:flex!important}
-.tb{background:var(--bs);border-bottom:1px solid rgba(200,169,110,.15);padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:55px;flex-shrink:0;position:sticky;top:0;z-index:50}
+
+/* ====== LOGIN ====== */
+#login-scherm{position:fixed;inset:0;background:var(--b);display:flex;align-items:center;justify-content:center;z-index:9999}
+.login-doos{background:var(--bs);border:1px solid rgba(200,169,110,.22);padding:52px 44px;width:360px;text-align:center}
+.login-logo{font-family:var(--fd);font-size:1.8rem;letter-spacing:.25em;color:var(--g);text-transform:uppercase;margin-bottom:4px}
+.login-logo em{font-style:italic;color:rgba(245,240,232,.55)}
+.login-subtitel{font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,240,232,.25);margin-bottom:36px;display:block}
+#login-ww{width:100%;background:var(--b);border:1px solid rgba(200,169,110,.3);color:var(--w);padding:14px 16px;font-size:1rem;font-family:var(--fb);border-radius:0;outline:none;display:block;margin-bottom:12px}
+#login-knop{width:100%;background:var(--g);color:var(--b);border:none;padding:14px;font-family:var(--fb);font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;margin-top:4px;display:block}
+#login-knop:hover{background:var(--gl)}
+#login-fout{color:var(--red);font-size:.7rem;margin-top:12px;min-height:20px}
+
+/* ====== APP ====== */
+#app{display:none;flex-direction:column;height:100vh}
+
+/* TOPBAR */
+.topbar{background:var(--bs);border-bottom:1px solid rgba(200,169,110,.15);padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:55px;flex-shrink:0}
 .tb-logo{font-family:var(--fd);font-size:1.1rem;letter-spacing:.2em;color:var(--g);text-transform:uppercase}
 .tb-logo em{font-style:italic;color:rgba(245,240,232,.5)}
-.tb-r{display:flex;align-items:center;gap:10px}
-.site-box{display:flex;align-items:center;gap:8px;background:var(--bc);border:1px solid rgba(200,169,110,.18);padding:5px 12px}
-.s-aan{color:var(--grn);font-size:.54rem;letter-spacing:.13em;text-transform:uppercase}
-.s-uit{color:var(--red);font-size:.54rem;letter-spacing:.13em;text-transform:uppercase}
-.sw{position:relative;width:42px;height:22px;flex-shrink:0}
-.sw input{opacity:0;position:absolute;width:0;height:0}
-.sw-t{position:absolute;inset:0;background:rgba(224,82,82,.2);border:1px solid rgba(224,82,82,.3);border-radius:11px;cursor:pointer;transition:all .3s}
-.sw input:checked+.sw-t{background:rgba(76,175,130,.2);border-color:var(--grn)}
-.sw-t::before{content:'';position:absolute;width:16px;height:16px;background:var(--red);border-radius:50%;left:2px;top:2px;transition:all .3s}
-.sw input:checked+.sw-t::before{transform:translateX(20px);background:var(--grn)}
-.tb-lnk{font-size:.56rem;color:rgba(200,169,110,.45);text-decoration:none;letter-spacing:.1em;text-transform:uppercase}
-.tb-lnk:hover{color:var(--g)}
-.tb-btn{background:transparent;border:1px solid rgba(200,169,110,.2);color:var(--g);padding:5px 12px;font-family:var(--fb);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.tb-rechts{display:flex;align-items:center;gap:12px}
+.site-schakelaar{display:flex;align-items:center;gap:8px;background:var(--bc);border:1px solid rgba(200,169,110,.18);padding:6px 14px}
+.schakelaar{position:relative;width:42px;height:22px;flex-shrink:0}
+.schakelaar input{opacity:0;position:absolute;width:0;height:0}
+.sch-baan{position:absolute;inset:0;background:rgba(224,82,82,.2);border:1px solid rgba(224,82,82,.3);border-radius:11px;cursor:pointer;transition:all .3s}
+.schakelaar input:checked+.sch-baan{background:rgba(76,175,130,.2);border-color:var(--grn)}
+.sch-baan::before{content:'';position:absolute;width:16px;height:16px;background:var(--red);border-radius:50%;left:2px;top:2px;transition:all .3s}
+.schakelaar input:checked+.sch-baan::before{transform:translateX(20px);background:var(--grn)}
+.tb-link{font-size:.56rem;color:rgba(200,169,110,.45);text-decoration:none;letter-spacing:.1em;text-transform:uppercase}
+.tb-link:hover{color:var(--g)}
+.uit-knop{background:transparent;border:1px solid rgba(200,169,110,.2);color:var(--g);padding:6px 12px;font-family:var(--fb);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+
+/* LAYOUT */
 .lay{display:flex;flex:1;overflow:hidden}
-.side{width:210px;background:var(--bs);border-right:1px solid rgba(200,169,110,.1);overflow-y:auto;flex-shrink:0}
-.ns{font-size:.44rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,240,232,.18);padding:16px 18px 5px}
-.ni{display:flex;align-items:center;gap:8px;padding:9px 18px;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.4);cursor:pointer;border-left:2px solid transparent;transition:all .2s}
-.ni:hover{color:var(--w);background:rgba(200,169,110,.04)}
-.ni.on{color:var(--g);border-left-color:var(--g);background:rgba(200,169,110,.06)}
-.ni-i{width:16px;text-align:center;font-size:.85rem}
-.main{flex:1;overflow-y:auto;background:var(--b)}
-.pg{display:none;flex-direction:column;min-height:100%}
-.pg.on{display:flex}
-.ph{padding:18px 26px;border-bottom:1px solid rgba(200,169,110,.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;flex-shrink:0}
-.ph h1{font-family:var(--fd);font-size:1.6rem;font-weight:300}
-.ph h1 em{font-style:italic;color:var(--g)}
-.ph p{font-size:.6rem;color:var(--wd);margin-top:2px}
+.zijbalk{width:210px;background:var(--bs);border-right:1px solid rgba(200,169,110,.1);overflow-y:auto;flex-shrink:0}
+.nav-kop{font-size:.44rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,240,232,.18);padding:16px 18px 5px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:10px 18px;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.4);cursor:pointer;border-left:2px solid transparent;transition:all .2s}
+.nav-item:hover{color:var(--w);background:rgba(200,169,110,.04)}
+.nav-item.actief{color:var(--g);border-left-color:var(--g);background:rgba(200,169,110,.06)}
+.nav-icoon{width:16px;text-align:center;font-size:.85rem}
+
+/* HOOFD GEBIED */
+.hoofd{flex:1;overflow-y:auto;background:var(--b)}
+.pagina{display:none;flex-direction:column;min-height:100%}
+.pagina.actief{display:flex}
+
+/* PAGINA HEADER */
+.pg-kop{padding:18px 26px;border-bottom:1px solid rgba(200,169,110,.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;flex-shrink:0}
+.pg-kop h1{font-family:var(--fd);font-size:1.6rem;font-weight:300}
+.pg-kop h1 em{font-style:italic;color:var(--g)}
+.pg-kop p{font-size:.6rem;color:var(--wd);margin-top:2px}
 .scroll{flex:1;overflow-y:auto;padding:22px 26px}
-.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:16px 26px;flex-shrink:0}
-.sc{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:18px;position:relative;overflow:hidden}
-.sc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px}
-.sc.g::after{background:var(--g)}.sc.gr::after{background:var(--grn)}.sc.b::after{background:var(--blu)}.sc.o::after{background:var(--org)}.sc.p::after{background:#a855f7}
-.sc-l{font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:7px;display:block}
-.sc-v{font-family:var(--fd);font-size:2.1rem;font-weight:300;line-height:1}
-.sc-s{font-size:.54rem;color:rgba(245,240,232,.2);margin-top:4px}
-/* CHART */
-.chart-wrap{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:20px;margin-bottom:14px}
-.chart-title{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:16px}
-.bar-chart{display:flex;align-items:flex-end;gap:4px;height:120px;padding-bottom:24px;position:relative}
-.bar-chart::after{content:'';position:absolute;bottom:24px;left:0;right:0;height:1px;background:rgba(200,169,110,.08)}
-.bar{flex:1;background:rgba(200,169,110,.15);border-top:2px solid rgba(200,169,110,.4);position:relative;transition:background .2s;min-width:0;cursor:default;border-radius:2px 2px 0 0}
-.bar:hover{background:rgba(200,169,110,.28)}
-.bar-lbl{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:.44rem;color:rgba(245,240,232,.28);white-space:nowrap}
-.bar-val{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:.5rem;color:var(--g);white-space:nowrap;opacity:0;transition:opacity .2s}
-.bar:hover .bar-val{opacity:1}
-.stat-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.stat-list{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:18px}
-.stat-list-title{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.32);margin-bottom:14px}
-.stat-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(200,169,110,.06)}
-.stat-row:last-child{border-bottom:none}
-.stat-row-lbl{font-size:.68rem;color:var(--wd)}
-.stat-row-val{font-family:var(--fd);font-size:1.1rem;color:var(--g);flex-shrink:0;margin-left:8px}
-.stat-row-bar{height:4px;background:rgba(200,169,110,.12);margin-top:4px;border-radius:2px;overflow:hidden}
-.stat-row-fill{height:100%;background:var(--g);border-radius:2px;transition:width .6s ease}
-/* BUTTONS */
-.bg{background:var(--g);color:var(--b);border:none;padding:9px 22px;font-family:var(--fb);font-size:.57rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .2s;display:inline-block;text-decoration:none}
-.bg:hover{background:var(--gl)}
-.bg:disabled{opacity:.35;cursor:not-allowed}
-.bo{background:transparent;border:1px solid rgba(200,169,110,.22);color:var(--wd);padding:8px 16px;font-family:var(--fb);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s}
-.bo:hover{border-color:var(--g);color:var(--g)}
-.br{background:transparent;border:1px solid rgba(224,82,82,.3);color:var(--red);padding:8px 16px;font-family:var(--fb);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
-.br:hover{background:rgba(224,82,82,.1)}
+
+/* STATISTIEKEN KAARTEN */
+.stat-rij{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:16px 26px;flex-shrink:0}
+.stat-kaart{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:18px;position:relative;overflow:hidden}
+.stat-kaart::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px}
+.stat-kaart.goud::after{background:var(--g)}.stat-kaart.groen::after{background:var(--grn)}.stat-kaart.blauw::after{background:var(--blu)}.stat-kaart.oranje::after{background:var(--org)}.stat-kaart.paars::after{background:#a855f7}
+.stat-label{font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:7px;display:block}
+.stat-waarde{font-family:var(--fd);font-size:2.1rem;font-weight:300;line-height:1}
+.stat-sub{font-size:.54rem;color:rgba(245,240,232,.2);margin-top:4px}
+
+/* KNOPPEN */
+.btn-goud{background:var(--g);color:var(--b);border:none;padding:9px 22px;font-family:var(--fb);font-size:.57rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;display:inline-block;text-decoration:none}
+.btn-goud:hover{background:var(--gl)}
+.btn-goud:disabled{opacity:.35;cursor:not-allowed}
+.btn-uit{background:transparent;border:1px solid rgba(200,169,110,.22);color:var(--wd);padding:8px 16px;font-family:var(--fb);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.btn-uit:hover{border-color:var(--g);color:var(--g)}
+.btn-rood{background:transparent;border:1px solid rgba(224,82,82,.3);color:var(--red);padding:8px 16px;font-family:var(--fb);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.btn-rood:hover{background:rgba(224,82,82,.1)}
+
+/* FORMULIER */
 .fg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
 .fg label{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g)}
 .fg input,.fg textarea,.fg select{background:var(--b);border:1px solid rgba(200,169,110,.2);color:var(--w);padding:10px 12px;font-family:var(--fb);font-size:.74rem;outline:none;border-radius:0;width:100%;transition:border-color .2s}
@@ -92,804 +87,1112 @@ body{background:var(--b);color:var(--w);font-family:var(--fb);font-weight:300;mi
 .fg textarea{resize:vertical;min-height:75px;line-height:1.9}
 .fg select option{background:#1a1a1a}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+
 /* VISUELE EDITOR */
-.ed-lay{display:grid;grid-template-columns:1fr 360px;flex:1;overflow:hidden;min-height:0}
-.ed-site{overflow-y:auto;background:#000;position:relative}
-.ws-nav{background:rgba(10,10,10,.98);border-bottom:1px solid rgba(200,169,110,.12);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
-.ws-nav-logo{font-family:var(--fd);font-size:.9rem;letter-spacing:.25em;color:var(--g);text-transform:uppercase}
-.ws-nav-logo em{font-style:italic;color:var(--w)}
-.ws-nav-links{display:flex;gap:16px}
-.ws-nav-links span{font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,240,232,.4)}
-.ws-sec{position:relative;cursor:pointer;transition:outline .15s}
-.ws-sec:hover{outline:2px solid rgba(200,169,110,.5)}
-.ws-sec.gekozen{outline:3px solid var(--g)}
-.ws-edit-hint{position:absolute;top:8px;right:8px;background:var(--g);color:var(--b);font-size:.44rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;opacity:0;transition:opacity .2s;z-index:5;pointer-events:none;font-family:var(--fb)}
-.ws-sec:hover .ws-edit-hint,.ws-sec.gekozen .ws-edit-hint{opacity:1}
-.ws-hero{background:linear-gradient(180deg,rgba(10,10,10,.5) 0%,rgba(10,10,10,.05) 45%,rgba(10,10,10,.92) 100%),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-V8-34-1.jpg') center/cover;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:36px 28px}
-.ws-hero-tag{font-size:.44rem;letter-spacing:.38em;text-transform:uppercase;color:var(--g);margin-bottom:14px;display:block}
-.ws-hero-h1{font-family:var(--fd);font-size:clamp(1.6rem,4vw,3rem);font-weight:300;color:var(--w);line-height:1.05}
-.ws-hero-h1 em{font-style:italic;color:var(--g)}
-.ws-hero-sub{font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.5);margin-top:10px;line-height:2}
-.ws-hero-btns{display:flex;gap:8px;margin-top:20px;justify-content:center;flex-wrap:wrap}
-.ws-btn-p{background:var(--g);color:var(--b);padding:8px 20px;font-size:.5rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
-.ws-btn-g{border:1px solid rgba(245,240,232,.28);color:var(--w);padding:8px 20px;font-size:.5rem;letter-spacing:.16em;text-transform:uppercase}
-.ws-counter{background:var(--g);padding:12px 32px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
-.ws-counter span{font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--b);font-weight:600}
-.ws-counter .n{font-family:var(--fd);font-size:2.4rem;font-weight:300;color:var(--b);line-height:1}
-.ws-intro{background:#111;padding:44px 32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
-.ws-intro-txt h2{font-family:var(--fd);font-size:1.7rem;font-weight:300;color:var(--w);line-height:1.1;margin-bottom:14px}
-.ws-intro-txt h2 em{font-style:italic;color:var(--g)}
-.ws-intro-txt p{font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:10px}
-.ws-intro-img{background:linear-gradient(135deg,rgba(26,18,8,.9),rgba(13,13,13,.9)),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-slaapbank-sfeer-uitzicht-natuur.jpg') center/cover;aspect-ratio:3/4;border:1px solid rgba(200,169,110,.14)}
-.ws-quote{background:var(--g);padding:44px 32px;text-align:center}
-.ws-quote blockquote{font-family:var(--fd);font-size:clamp(1.2rem,2.5vw,1.9rem);font-style:italic;font-weight:300;color:var(--b);line-height:1.4;max-width:600px;margin:0 auto}
-.ws-quote cite{display:block;margin-top:14px;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,10,10,.45);font-style:normal}
-.ws-cta{background:var(--b);padding:60px 32px;text-align:center}
-.ws-cta h2{font-family:var(--fd);font-size:1.8rem;font-weight:300;margin-bottom:10px}
-.ws-cta h2 em{font-style:italic;color:var(--g)}
-.ws-cta p{font-size:.66rem;color:var(--wd);line-height:2;max-width:440px;margin:0 auto 24px}
-.ws-contact{background:#111;padding:16px 32px;border-top:1px solid rgba(200,169,110,.12)}
-.ws-contact p{font-size:.6rem;color:rgba(245,240,232,.36);line-height:2.2}
-.ws-contact span{color:var(--g)}
-/* EDIT PANEL */
-.ed-panel{overflow-y:auto;background:var(--bs);display:flex;flex-direction:column}
-.ed-panel-hd{padding:16px 18px;border-bottom:1px solid rgba(200,169,110,.1);flex-shrink:0}
-.ed-panel-hd h3{font-family:var(--fd);font-size:1.15rem;font-weight:300}
-.ed-panel-hd h3 em{font-style:italic;color:var(--g)}
-.ed-panel-hd p{font-size:.6rem;color:var(--wd);margin-top:3px}
-.ed-panel-body{flex:1;padding:16px 18px;overflow-y:auto}
-.ed-leeg{display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;color:rgba(245,240,232,.2);text-align:center;gap:12px}
-.ed-leeg span{font-size:2.5rem}
-.ed-leeg p{font-size:.64rem;letter-spacing:.08em;line-height:2}
-.vb{background:var(--bc);padding:12px 14px;margin-bottom:8px;border:1px solid rgba(200,169,110,.07)}
-.vb label{font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:5px}
-.vb input,.vb textarea{width:100%;background:var(--b);border:1px solid rgba(200,169,110,.18);color:var(--w);padding:8px 11px;font-family:var(--fb);font-size:.73rem;outline:none;border-radius:0;transition:border-color .2s}
-.vb input:focus,.vb textarea:focus{border-color:var(--g)}
-.vb textarea{resize:vertical;min-height:68px;line-height:1.9}
-.ed-panel-ft{padding:14px 18px;border-top:1px solid rgba(200,169,110,.1);flex-shrink:0}
-.tip-box{background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.09);padding:9px 12px;font-size:.6rem;color:var(--wd);line-height:1.9;margin-top:10px}
-/* TABLE */
-.tw{background:var(--bs);border:1px solid rgba(200,169,110,.1);overflow:auto}
+.editor-lay{display:grid;grid-template-columns:1fr 360px;flex:1;overflow:hidden;min-height:0}
+.site-preview{overflow-y:auto;background:#000}
+/* Website secties in preview */
+.ws-nav-prev{background:rgba(10,10,10,.98);border-bottom:1px solid rgba(200,169,110,.12);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.ws-sectie{position:relative;cursor:pointer;transition:outline .15s}
+.ws-sectie:hover{outline:2px solid rgba(200,169,110,.5)}
+.ws-sectie.gekozen{outline:3px solid var(--g)}
+.potlood-knop{position:absolute;top:10px;right:10px;z-index:10;background:var(--g);color:var(--b);border:none;width:36px;height:36px;border-radius:50%;font-size:.9rem;cursor:pointer;opacity:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.ws-sectie:hover .potlood-knop,.ws-sectie.gekozen .potlood-knop{opacity:1}
+/* Editor paneel rechts */
+.edit-paneel{overflow-y:auto;background:var(--bs);display:flex;flex-direction:column;border-left:1px solid rgba(200,169,110,.1)}
+.edit-kop{padding:16px 18px;border-bottom:1px solid rgba(200,169,110,.1);flex-shrink:0;background:var(--bc)}
+.edit-kop h3{font-family:var(--fd);font-size:1.1rem;font-weight:300}
+.edit-kop h3 em{font-style:italic;color:var(--g)}
+.edit-kop p{font-size:.58rem;color:var(--wd);margin-top:3px}
+.edit-body{flex:1;padding:16px 18px;overflow-y:auto}
+.edit-leeg{display:flex;flex-direction:column;align-items:center;justify-content:center;height:280px;color:rgba(245,240,232,.18);text-align:center;gap:12px}
+.edit-leeg span{font-size:2.5rem}
+.edit-leeg p{font-size:.64rem;letter-spacing:.08em;line-height:2}
+.veld-blok{background:var(--bc);padding:12px 14px;margin-bottom:8px;border:1px solid rgba(200,169,110,.07)}
+.veld-blok label{font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:5px}
+.veld-blok input,.veld-blok textarea{width:100%;background:var(--b);border:1px solid rgba(200,169,110,.18);color:var(--w);padding:8px 11px;font-family:var(--fb);font-size:.73rem;outline:none;border-radius:0;transition:border-color .2s}
+.veld-blok input:focus,.veld-blok textarea:focus{border-color:var(--g)}
+.veld-blok textarea{resize:vertical;min-height:68px;line-height:1.9}
+.edit-voet{padding:14px 18px;border-top:1px solid rgba(200,169,110,.1);flex-shrink:0}
+.tip{background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.09);padding:9px 12px;font-size:.6rem;color:var(--wd);line-height:1.9;margin-top:10px}
+
+/* TABEL */
+.tbl{background:var(--bs);border:1px solid rgba(200,169,110,.1);overflow:auto}
 table{width:100%;border-collapse:collapse;min-width:640px}
 thead{background:var(--bc)}
 th{padding:9px 12px;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g);font-weight:700;text-align:left;white-space:nowrap}
 td{padding:11px 12px;font-size:.67rem;color:var(--wd);border-top:1px solid rgba(200,169,110,.06);vertical-align:middle}
 tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
-.sb{display:inline-block;padding:2px 8px;font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
-.sb.bevestigd{background:rgba(76,175,130,.12);color:var(--grn);border:1px solid rgba(76,175,130,.18)}
-.sb.geannuleerd{background:rgba(224,82,82,.1);color:var(--red);border:1px solid rgba(224,82,82,.14)}
-.sb.afgerond{background:rgba(200,169,110,.1);color:var(--g);border:1px solid rgba(200,169,110,.18)}
-.ab{background:transparent;border:1px solid rgba(200,169,110,.15);color:var(--wd);padding:3px 7px;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s}
-.ab:hover{border-color:var(--g);color:var(--g)}
-.ab.d:hover{border-color:var(--red);color:var(--red)}
-.mo{position:fixed;inset:0;z-index:600;background:rgba(10,10,10,.93);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
-.mo.on{display:flex}
-.mw{background:var(--bs);border:1px solid rgba(200,169,110,.22);width:100%;max-width:580px;max-height:90vh;overflow-y:auto;animation:mu .25s ease}
-@keyframes mu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.mh{padding:18px 22px;border-bottom:1px solid rgba(200,169,110,.1);display:flex;justify-content:space-between;align-items:center}
-.mh h2{font-family:var(--fd);font-size:1.3rem;font-weight:300}
-.mh h2 em{font-style:italic;color:var(--g)}
-.mx{background:none;border:1px solid rgba(200,169,110,.2);color:var(--g);width:26px;height:26px;cursor:pointer;font-size:.78rem;display:flex;align-items:center;justify-content:center}
-.mx:hover{background:var(--g);color:var(--b)}
-.mb{padding:20px 22px}
-.ma{padding:0 22px 20px;display:flex;gap:8px;flex-wrap:wrap}
+.badge{display:inline-block;padding:2px 8px;font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.badge.bevestigd{background:rgba(76,175,130,.12);color:var(--grn);border:1px solid rgba(76,175,130,.18)}
+.badge.geannuleerd{background:rgba(224,82,82,.1);color:var(--red);border:1px solid rgba(224,82,82,.14)}
+.badge.afgerond{background:rgba(200,169,110,.1);color:var(--g);border:1px solid rgba(200,169,110,.18)}
+.tbl-btn{background:transparent;border:1px solid rgba(200,169,110,.15);color:var(--wd);padding:3px 7px;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.tbl-btn:hover{border-color:var(--g);color:var(--g)}
+.tbl-btn.gevaar:hover{border-color:var(--red);color:var(--red)}
+
+/* MODAL */
+.modal-achtergrond{position:fixed;inset:0;z-index:600;background:rgba(10,10,10,.93);display:none;align-items:center;justify-content:center;padding:20px}
+.modal-achtergrond.open{display:flex}
+.modal-venster{background:var(--bs);border:1px solid rgba(200,169,110,.22);width:100%;max-width:580px;max-height:90vh;overflow-y:auto;animation:inschuiven .25s ease}
+@keyframes inschuiven{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.modal-kop{padding:18px 22px;border-bottom:1px solid rgba(200,169,110,.1);display:flex;justify-content:space-between;align-items:center}
+.modal-kop h2{font-family:var(--fd);font-size:1.3rem;font-weight:300}
+.modal-kop h2 em{font-style:italic;color:var(--g)}
+.modal-sluit{background:none;border:1px solid rgba(200,169,110,.2);color:var(--g);width:26px;height:26px;cursor:pointer;font-size:.78rem;display:flex;align-items:center;justify-content:center}
+.modal-sluit:hover{background:var(--g);color:var(--b)}
+.modal-inhoud{padding:20px 22px}
+.modal-knoppen{padding:0 22px 20px;display:flex;gap:8px;flex-wrap:wrap}
+
+/* KAART */
+.kaart{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:22px;max-width:540px;margin-bottom:12px}
+.kaart h3{font-family:var(--fd);font-size:1.15rem;font-weight:300;margin-bottom:4px}
+.kaart h3 em{font-style:italic;color:var(--g)}
+.kaart p{font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:16px}
+.kaart-schakelaar{display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--bc);border:1px solid rgba(200,169,110,.1);margin-bottom:16px}
+.kaart-schakelaar span{font-size:.7rem;font-weight:500}
 .tg{position:relative;width:42px;height:22px;flex-shrink:0}
 .tg input{opacity:0;position:absolute;width:0;height:0}
-.tg-t{position:absolute;inset:0;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.18);cursor:pointer;border-radius:11px;transition:all .3s}
-.tg input:checked+.tg-t{background:rgba(76,175,130,.2);border-color:var(--grn)}
-.tg-t::before{content:'';position:absolute;width:16px;height:16px;background:rgba(245,240,232,.4);border-radius:50%;left:2px;top:2px;transition:transform .3s}
-.tg input:checked+.tg-t::before{transform:translateX(20px);background:var(--grn)}
-.cd{font-size:.47rem;letter-spacing:.14em;color:rgba(245,240,232,.24);padding:5px 0;text-align:center}
-.cdag{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.62rem;color:var(--wd);border:1px solid rgba(200,169,110,.05);min-height:36px}
-.cdag.vd{border-color:var(--g);color:var(--g)}.cdag.gb{background:rgba(200,169,110,.06);border-color:rgba(200,169,110,.18);color:var(--w)}.cdag.gb::after{content:'●';font-size:.36rem;color:var(--g);display:block}.cdag.an{opacity:.14}
-.ib{background:rgba(200,169,110,.05);border:1px solid rgba(200,169,110,.13);padding:12px 15px;font-size:.67rem;color:var(--wd);line-height:2;margin-bottom:14px}
-.ib a{color:var(--g);text-decoration:none}
-.icard{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:22px;max-width:540px;margin-bottom:12px}
-.icard h3{font-family:var(--fd);font-size:1.15rem;font-weight:300;margin-bottom:4px}
-.icard h3 em{font-style:italic;color:var(--g)}
-.icard p{font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:16px}
-.icard-sw{display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--bc);border:1px solid rgba(200,169,110,.1);margin-bottom:16px}
-.icard-sw span{font-size:.7rem;font-weight:500}
-.pr{background:var(--bc);border:1px solid rgba(200,169,110,.09);padding:14px 18px;display:flex;align-items:center;gap:12px;margin-bottom:7px}
-.pr-ico{font-size:1.25rem;width:32px;text-align:center}
-.pr-inf{flex:1}
-.pr-nm{font-size:.74rem;color:var(--w);font-weight:500}
-.pr-tp{font-size:.54rem;color:rgba(200,169,110,.48);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
-.mbox{background:var(--bc);border:1px solid rgba(200,169,110,.12);padding:20px;margin-bottom:12px}
-.mbox h3{font-family:var(--fd);font-size:1.15rem;font-weight:300;margin-bottom:4px}
-.mbox h3 em{font-style:italic;color:var(--g)}
-.mbox p{font-size:.66rem;color:var(--wd);line-height:2;margin-bottom:12px}
-.stap{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(200,169,110,.06)}
-.stap:last-child{border-bottom:none}
-.snr{width:22px;height:22px;border-radius:50%;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.28);display:flex;align-items:center;justify-content:center;font-size:.52rem;color:var(--g);font-weight:700;flex-shrink:0;margin-top:2px}
-.stap p{font-size:.66rem;color:var(--wd);line-height:1.9}
-.stap a{color:var(--g)}
-.sdot{width:8px;height:8px;border-radius:50%}
-.sdot.aan{background:var(--grn)}.sdot.uit{background:var(--red)}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:9px}
-.pcard{background:var(--bc);border:1px solid rgba(200,169,110,.1);padding:18px;transition:border-color .2s}
-.pcard:hover{border-color:rgba(200,169,110,.28)}
-.pcard h3{font-family:var(--fd);font-size:1.05rem;font-weight:300;margin-bottom:4px}
-.pcard p{font-size:.58rem;color:var(--wd);letter-spacing:.05em;margin-bottom:10px}
-.pub{font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;font-weight:700}
-.pub.live{background:rgba(76,175,130,.12);color:var(--grn);border:1px solid rgba(76,175,130,.18)}
-.pub.concept{background:rgba(200,169,110,.07);color:rgba(200,169,110,.5);border:1px solid rgba(200,169,110,.13)}
+.tg-baan{position:absolute;inset:0;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.18);cursor:pointer;border-radius:11px;transition:all .3s}
+.tg input:checked+.tg-baan{background:rgba(76,175,130,.2);border-color:var(--grn)}
+.tg-baan::before{content:'';position:absolute;width:16px;height:16px;background:rgba(245,240,232,.4);border-radius:50%;left:2px;top:2px;transition:transform .3s}
+.tg input:checked+.tg-baan::before{transform:translateX(20px);background:var(--grn)}
+
+/* BETALINGEN */
+.betaal-rij{background:var(--bc);border:1px solid rgba(200,169,110,.09);padding:14px 18px;display:flex;align-items:center;gap:12px;margin-bottom:7px}
+.betaal-icoon{font-size:1.25rem;width:32px;text-align:center}
+.betaal-info{flex:1}
+.betaal-naam{font-size:.74rem;color:var(--w);font-weight:500}
+.betaal-type{font-size:.54rem;color:rgba(200,169,110,.48);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+
+/* KALENDER */
+.kal-dag-kop{text-align:center;font-size:.47rem;letter-spacing:.14em;color:rgba(245,240,232,.24);padding:5px 0}
+.kal-dag{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.62rem;color:var(--wd);border:1px solid rgba(200,169,110,.05);min-height:36px}
+.kal-dag.vandaag{border-color:var(--g);color:var(--g)}.kal-dag.geboekt{background:rgba(200,169,110,.06);border-color:rgba(200,169,110,.18);color:var(--w)}.kal-dag.geboekt::after{content:'●';font-size:.36rem;color:var(--g);display:block}.kal-dag.ander{opacity:.14}
+
+/* STAAFGRAFIEK */
+.staaf-wrap{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:20px;margin-bottom:14px}
+.staaf-titel{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:16px}
+.staaf-grafiek{display:flex;align-items:flex-end;gap:4px;height:120px;padding-bottom:24px;position:relative}
+.staaf-grafiek::after{content:'';position:absolute;bottom:24px;left:0;right:0;height:1px;background:rgba(200,169,110,.08)}
+.staaf{flex:1;background:rgba(200,169,110,.15);border-top:2px solid rgba(200,169,110,.4);position:relative;min-width:0;border-radius:2px 2px 0 0;transition:background .2s;cursor:default}
+.staaf:hover{background:rgba(200,169,110,.28)}
+.staaf-lbl{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:.44rem;color:rgba(245,240,232,.28);white-space:nowrap}
+.staaf-val{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:.5rem;color:var(--g);white-space:nowrap;opacity:0;transition:opacity .2s}
+.staaf:hover .staaf-val{opacity:1}
+.stat-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.stat-lijstje{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:18px}
+.stat-lijstje-titel{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.32);margin-bottom:14px}
+.stat-rij2{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(200,169,110,.06)}
+.stat-rij2:last-child{border-bottom:none}
+.stat-rij2-lbl{font-size:.68rem;color:var(--wd)}
+.stat-rij2-val{font-family:var(--fd);font-size:1.1rem;color:var(--g);flex-shrink:0;margin-left:8px}
+.prog-balk{height:4px;background:rgba(200,169,110,.12);margin-top:4px;border-radius:2px;overflow:hidden}
+.prog-vulling{height:100%;background:var(--g);border-radius:2px;transition:width .6s ease}
+
+/* PAGINA KAARTEN */
+.pagina-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:9px}
+.pagina-kaart{background:var(--bc);border:1px solid rgba(200,169,110,.1);padding:18px;transition:border-color .2s}
+.pagina-kaart:hover{border-color:rgba(200,169,110,.28)}
+.pagina-kaart h3{font-family:var(--fd);font-size:1.05rem;font-weight:300;margin-bottom:4px}
+.pagina-kaart p{font-size:.58rem;color:var(--wd);letter-spacing:.05em;margin-bottom:10px}
+.pub-badge{font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;font-weight:700}
+.pub-badge.live{background:rgba(76,175,130,.12);color:var(--grn);border:1px solid rgba(76,175,130,.18)}
+.pub-badge.concept{background:rgba(200,169,110,.07);color:rgba(200,169,110,.5);border:1px solid rgba(200,169,110,.13)}
+
+/* FOTO GRID */
 .foto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:9px}
+
+/* HULP */
+.info-box{background:rgba(200,169,110,.05);border:1px solid rgba(200,169,110,.13);padding:12px 15px;font-size:.67rem;color:var(--wd);line-height:2;margin-bottom:14px}
+.info-box a{color:var(--g);text-decoration:none}
 .leeg{text-align:center;padding:40px 20px;color:rgba(245,240,232,.2)}
 .leeg span{font-size:1.9rem;display:block;margin-bottom:9px}
 .leeg p{font-size:.62rem;letter-spacing:.1em}
-.lad{text-align:center;padding:28px;color:rgba(245,240,232,.24);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase}
+.laden{text-align:center;padding:28px;color:rgba(245,240,232,.24);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase}
 .toast{position:fixed;bottom:18px;right:18px;z-index:1000;background:var(--bs);border-left:3px solid var(--g);padding:11px 15px;font-size:.65rem;max-width:270px;line-height:1.8;transform:translateX(130%);transition:transform .35s;box-shadow:0 6px 28px rgba(0,0,0,.6)}
-.toast.on{transform:translateX(0)}
-.toast.err{border-color:var(--red);color:var(--red)}
+.toast.toon{transform:translateX(0)}
+.toast.fout{border-color:var(--red);color:var(--red)}
 .toast.ok{border-color:var(--grn)}
-.xbtn{background:transparent;border:1px solid rgba(200,169,110,.22);color:var(--g);padding:7px 14px;font-family:var(--fb);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
-/* PENCIL EDITOR STYLES */
-.ws-blok{position:relative;cursor:pointer;transition:outline .15s}
-.ws-blok:hover{outline:2px solid rgba(200,169,110,.5)}
-.ws-blok.actief{outline:3px solid var(--g)}
-.pencil-btn{position:absolute;top:10px;right:10px;z-index:15;background:var(--g);color:var(--b);border:none;width:34px;height:34px;border-radius:50%;font-size:.85rem;cursor:pointer;opacity:0;transition:opacity .2s,transform .2s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4)}
-.ws-blok:hover .pencil-btn,.ws-blok.actief .pencil-btn{opacity:1}
-.pencil-btn:hover{transform:scale(1.1)}
-.xbtn:hover{background:rgba(200,169,110,.08)}
-@media(max-width:900px){.side{display:none}.sr{grid-template-columns:repeat(2,1fr)}.scroll{padding:16px}.ed-lay{grid-template-columns:1fr}.ed-site{display:none}}
-@media(max-width:480px){.sr{grid-template-columns:1fr}.f2{grid-template-columns:1fr}}
+.export-knop{background:transparent;border:1px solid rgba(200,169,110,.22);color:var(--g);padding:7px 14px;font-family:var(--fb);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.export-knop:hover{background:rgba(200,169,110,.08)}
+@media(max-width:900px){.zijbalk{display:none}.stat-rij{grid-template-columns:repeat(2,1fr)}.scroll{padding:16px}.editor-lay{grid-template-columns:1fr}.site-preview{display:none}}
+@media(max-width:480px){.stat-rij{grid-template-columns:1fr}.f2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<script>
-// Vroege check - voorkomt flikkering en werkt altijd
-if(sessionStorage.getItem('sn_ok')==='1'){
-  document.write('<style>#L{display:none!important}#A{display:flex!important}</style>');
-}
-</script>
-<div id="L">
-<div class="lb">
-  <div class="lb-logo">Secret<em>nights</em></div>
-  <span class="lb-sub">Website Beheer</span>
-  <input type="password" id="pw" placeholder="Wachtwoord" onkeydown="if(event.key==='Enter')login()"/>
-  <button onclick="login()">Inloggen →</button>
-  <div id="lf"></div>
-</div>
-</div>
-<div id="A">
-<div class="tb">
-  <div><span class="tb-logo">Secret<em>nights</em></span></div>
-  <div class="tb-r">
-    <div class="site-box">
-      <label class="sw"><input type="checkbox" id="site-sw" onchange="toggleSite(this.checked)"/><div class="sw-t"></div></label>
-      <span id="site-st" class="s-uit">—</span>
-    </div>
-    <a href="index.html" target="_blank" class="tb-lnk">↗ Site</a>
-    <button class="tb-btn" onclick="uitloggen()">Uitloggen</button>
+
+<!-- ===== LOGIN ===== -->
+<div id="login-scherm">
+  <div class="login-doos">
+    <div class="login-logo">Secret<em>nights</em></div>
+    <span class="login-subtitel">Website Beheer</span>
+    <input type="password" id="login-ww" placeholder="Voer wachtwoord in" onkeydown="if(event.key==='Enter')inloggen()"/>
+    <button id="login-knop" class="btn-goud" style="width:100%;padding:14px;font-size:.62rem" onclick="inloggen()">Inloggen →</button>
+    <div id="login-fout"></div>
   </div>
 </div>
-<div class="lay">
-  <div class="side">
-    <div class="ns">Overzicht</div>
-    <div class="ni on" onclick="ga('dashboard',this)"><span class="ni-i">📊</span>Dashboard</div>
-    <div class="ni" onclick="ga('statistieken',this)"><span class="ni-i">📈</span>Statistieken</div>
-    <div class="ni" onclick="ga('reserveringen',this)"><span class="ni-i">📋</span>Reserveringen</div>
-    <div class="ni" onclick="ga('kalender',this)"><span class="ni-i">📅</span>Kalender</div>
-    <div class="ns">Website</div>
-    <div class="ni" onclick="ga('editor',this)"><span class="ni-i">🖥️</span>Visuele Editor</div>
-    <div class="ni" onclick="ga('fotos',this)"><span class="ni-i">🖼️</span>Foto's</div>
-    <div class="ni" onclick="ga('paginas',this)"><span class="ni-i">📄</span>Pagina's</div>
-    <div class="ns">Instellingen</div>
-    <div class="ni" onclick="ga('betaal',this)"><span class="ni-i">💳</span>Betaalmethodes</div>
-    <div class="ni" onclick="ga('beschikbaar',this)"><span class="ni-i">🔢</span>Beschikbaarheid</div>
-    <div class="ni" onclick="ga('inst',this)"><span class="ni-i">⚙️</span>Instellingen</div>
+
+<!-- ===== APP ===== -->
+<div id="app">
+  <div class="topbar">
+    <span class="tb-logo">Secret<em>nights</em></span>
+    <div class="tb-rechts">
+      <div class="site-schakelaar">
+        <label class="schakelaar"><input type="checkbox" id="site-schakelaar" onchange="wisselSite(this.checked)"/><div class="sch-baan"></div></label>
+        <span id="site-status" style="font-size:.54rem;letter-spacing:.13em;text-transform:uppercase">—</span>
+      </div>
+      <a href="index.html" target="_blank" class="tb-link">↗ Bekijk site</a>
+      <button class="uit-knop" onclick="uitloggen()">Uitloggen</button>
+    </div>
   </div>
-  <div class="main">
-    <!-- DASHBOARD -->
-    <div class="pg on" id="pg-dashboard">
-      <div class="ph"><div><h1>Welkom <em>terug</em> 👋</h1><p>Live overzicht van secretnights.nl</p></div><button class="bo" onclick="laadAlles()">↻ Vernieuwen</button></div>
-      <div class="sr">
-        <div class="sc g"><span class="sc-l">Reserveringen</span><div class="sc-v" id="s-res">—</div><div class="sc-s">Totaal</div></div>
-        <div class="sc gr"><span class="sc-l">Bevestigd</span><div class="sc-v" id="s-bev">—</div><div class="sc-s">Actief</div></div>
-        <div class="sc b"><span class="sc-l">Bezoekers</span><div class="sc-v" id="s-bez">—</div><div class="sc-s">Afgelopen 30 dagen</div></div>
-        <div class="sc o"><span class="sc-l">Omzet</span><div class="sc-v" id="s-omz">—</div><div class="sc-s">Alle boekingen</div></div>
-      </div>
-      <div class="scroll">
-        <div id="d-banner" style="margin-bottom:10px"></div>
-        <div class="lad" id="d-lad">Laden...</div>
-        <div class="tw" id="d-tbl" style="display:none"></div>
-      </div>
+  <div class="lay">
+    <div class="zijbalk">
+      <div class="nav-kop">Overzicht</div>
+      <div class="nav-item actief" onclick="toonPagina('dashboard',this)"><span class="nav-icoon">📊</span>Dashboard</div>
+      <div class="nav-item" onclick="toonPagina('statistieken',this)"><span class="nav-icoon">📈</span>Statistieken</div>
+      <div class="nav-item" onclick="toonPagina('reserveringen',this)"><span class="nav-icoon">📋</span>Reserveringen</div>
+      <div class="nav-item" onclick="toonPagina('kalender',this)"><span class="nav-icoon">📅</span>Kalender</div>
+      <div class="nav-kop">Website</div>
+      <div class="nav-item" onclick="toonPagina('editor',this)"><span class="nav-icoon">🖥️</span>Visuele Editor</div>
+      <div class="nav-item" onclick="toonPagina('fotos',this)"><span class="nav-icoon">🖼️</span>Foto's</div>
+      <div class="nav-item" onclick="toonPagina('paginas',this)"><span class="nav-icoon">📄</span>Pagina's</div>
+      <div class="nav-kop">Instellingen</div>
+      <div class="nav-item" onclick="toonPagina('betaal',this)"><span class="nav-icoon">💳</span>Betaalmethodes</div>
+      <div class="nav-item" onclick="toonPagina('beschikbaar',this)"><span class="nav-icoon">🔢</span>Beschikbaarheid</div>
+      <div class="nav-item" onclick="toonPagina('instellingen',this)"><span class="nav-icoon">⚙️</span>Instellingen</div>
     </div>
-    <!-- STATISTIEKEN -->
-    <div class="pg" id="pg-statistieken">
-      <div class="ph"><div><h1>Website <em>Statistieken</em></h1><p>Bezoekersdata van secretnights.nl</p></div></div>
-      <div class="scroll">
-        <div class="sr" style="padding:0 0 16px 0;grid-template-columns:repeat(5,1fr)">
-          <div class="sc g"><span class="sc-l">Totaal</span><div class="sc-v" id="st-tot">—</div><div class="sc-s">Alle tijden</div></div>
-          <div class="sc gr"><span class="sc-l">Deze Maand</span><div class="sc-v" id="st-mnd">—</div><div class="sc-s">30 dagen</div></div>
-          <div class="sc b"><span class="sc-l">Deze Week</span><div class="sc-v" id="st-wk">—</div><div class="sc-s">7 dagen</div></div>
-          <div class="sc o"><span class="sc-l">Vandaag</span><div class="sc-v" id="st-vd">—</div><div class="sc-s">Vandaag</div></div>
-          <div class="sc p"><span class="sc-l">Mobiel</span><div class="sc-v" id="st-mob">—</div><div class="sc-s">% van totaal</div></div>
+    <div class="hoofd">
+
+      <!-- DASHBOARD -->
+      <div class="pagina actief" id="pg-dashboard">
+        <div class="pg-kop"><div><h1>Welkom <em>terug</em> 👋</h1><p>Live overzicht van secretnights.nl</p></div><button class="btn-uit" onclick="laadAlles()">↻ Vernieuwen</button></div>
+        <div class="stat-rij">
+          <div class="stat-kaart goud"><span class="stat-label">Reserveringen</span><div class="stat-waarde" id="s-res">—</div><div class="stat-sub">Totaal ooit</div></div>
+          <div class="stat-kaart groen"><span class="stat-label">Bevestigd</span><div class="stat-waarde" id="s-bev">—</div><div class="stat-sub">Actief</div></div>
+          <div class="stat-kaart blauw"><span class="stat-label">Bezoekers</span><div class="stat-waarde" id="s-bez">—</div><div class="stat-sub">Afgelopen 30 dagen</div></div>
+          <div class="stat-kaart oranje"><span class="stat-label">Omzet</span><div class="stat-waarde" id="s-omz">—</div><div class="stat-sub">Alle boekingen</div></div>
         </div>
-        <div class="chart-wrap">
-          <div class="chart-title">Bezoekers per dag — afgelopen 14 dagen</div>
-          <div class="bar-chart" id="bar-chart"><div class="lad">Laden...</div></div>
-        </div>
-        <div class="stat-2">
-          <div class="stat-list"><div class="stat-list-title">Apparaat</div><div id="ap-st"><div class="lad">Laden...</div></div></div>
-          <div class="stat-list"><div class="stat-list-title">Per arrangement</div><div id="pk-st"><div class="lad">Laden...</div></div></div>
-        </div>
-        <div class="stat-2">
-          <div class="stat-list"><div class="stat-list-title">Recente boekingen</div><div id="re-st"><div class="lad">Laden...</div></div></div>
-          <div class="stat-list"><div class="stat-list-title">Per boot</div><div id="bo-st"><div class="lad">Laden...</div></div></div>
-        </div>
+        <div class="scroll"><div id="d-banner" style="margin-bottom:10px"></div><div class="tbl" id="d-tbl"><div class="laden">Laden...</div></div></div>
       </div>
-    </div>
-    <!-- RESERVERINGEN -->
-    <div class="pg" id="pg-reserveringen">
-      <div class="ph"><h1>Alle <em>Reserveringen</em></h1><button class="xbtn" onclick="exportCSV()">⬇ Export CSV</button></div>
-      <div style="padding:11px 26px;border-bottom:1px solid rgba(200,169,110,.08);display:flex;gap:7px;flex-wrap:wrap;align-items:center;flex-shrink:0">
-        <button class="ab" id="rf-alle" onclick="setF('alle',this)" style="border-color:var(--g);color:var(--g)">Alle</button>
-        <button class="ab" id="rf-bevestigd" onclick="setF('bevestigd',this)">Bevestigd</button>
-        <button class="ab" id="rf-afgerond" onclick="setF('afgerond',this)">Afgerond</button>
-        <button class="ab" id="rf-geannuleerd" onclick="setF('geannuleerd',this)">Geannuleerd</button>
-        <input id="zoek" type="text" placeholder="Zoek naam of email..." oninput="toonRes()" style="margin-left:auto;background:var(--bc);border:1px solid rgba(200,169,110,.15);color:var(--w);padding:6px 10px;font-family:var(--fb);font-size:.67rem;outline:none;width:180px"/>
-      </div>
-      <div class="scroll"><div class="lad" id="r-lad">Laden...</div><div class="tw" id="r-tbl" style="display:none"></div></div>
-    </div>
-    <!-- KALENDER -->
-    <div class="pg" id="pg-kalender">
-      <div class="ph"><h1><em>Kalender</em></h1></div>
-      <div class="scroll">
-        <div style="background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:22px;max-width:460px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
-            <button class="bo" onclick="kPrev()" style="padding:5px 11px">←</button>
-            <span style="font-family:var(--fd);font-size:1.05rem" id="k-tit">—</span>
-            <button class="bo" onclick="kNext()" style="padding:5px 11px">→</button>
+
+      <!-- STATISTIEKEN -->
+      <div class="pagina" id="pg-statistieken">
+        <div class="pg-kop"><div><h1>Website <em>Statistieken</em></h1><p>Bezoekersdata van secretnights.nl</p></div></div>
+        <div class="scroll">
+          <div class="stat-rij" style="padding:0 0 16px 0;grid-template-columns:repeat(5,1fr)">
+            <div class="stat-kaart goud"><span class="stat-label">Totaal</span><div class="stat-waarde" id="st-tot">—</div><div class="stat-sub">Alle tijden</div></div>
+            <div class="stat-kaart groen"><span class="stat-label">Maand</span><div class="stat-waarde" id="st-mnd">—</div><div class="stat-sub">30 dagen</div></div>
+            <div class="stat-kaart blauw"><span class="stat-label">Week</span><div class="stat-waarde" id="st-wk">—</div><div class="stat-sub">7 dagen</div></div>
+            <div class="stat-kaart oranje"><span class="stat-label">Vandaag</span><div class="stat-waarde" id="st-vd">—</div><div class="stat-sub">Vandaag</div></div>
+            <div class="stat-kaart paars"><span class="stat-label">Mobiel</span><div class="stat-waarde" id="st-mob">—</div><div class="stat-sub">% van totaal</div></div>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px"><div class="cd">Ma</div><div class="cd">Di</div><div class="cd">Wo</div><div class="cd">Do</div><div class="cd">Vr</div><div class="cd">Za</div><div class="cd">Zo</div></div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px" id="k-grid"></div>
-          <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(200,169,110,.07);font-size:.58rem;color:rgba(245,240,232,.26)"><span style="color:var(--g)">●</span> Geboekte datum</div>
-        </div>
-      </div>
-    </div>
-    <!-- VISUELE EDITOR -->
-    <div class="pg" id="pg-editor" style="display:none;flex-direction:column">
-      <div class="ph" style="flex-shrink:0">
-        <div><h1>Visuele <em>Editor</em></h1><p>Klik op een ✏️ potlood om een sectie te bewerken</p></div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <span id="op-saved" style="font-size:.58rem;color:var(--grn);display:none">✓ Opgeslagen!</span>
-          <button class="bg" id="op-btn" onclick="slaOp()" disabled>Opslaan op website →</button>
-        </div>
-      </div>
-      <!-- EDITOR LAYOUT: website preview links, edit panel rechts -->
-      <div style="display:grid;grid-template-columns:1fr 380px;flex:1;overflow:hidden;min-height:0">
-      <!-- WEBSITE PREVIEW MET POTLOOD KNOPPEN -->
-      <div style="overflow-y:auto;background:#000;position:relative" id="ed-preview">
-        <!-- NAV preview -->
-        <div style="background:rgba(10,10,10,.98);border-bottom:1px solid rgba(200,169,110,.12);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20">
-          <span style="font-family:var(--fd);font-size:.9rem;letter-spacing:.25em;color:var(--g);text-transform:uppercase">Secret<em style="font-style:italic;color:rgba(245,240,232,.5)">nights</em></span>
-          <div style="display:flex;gap:16px"><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">Mysterie</span><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">Arrangementen</span><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">FAQ</span></div>
-        </div>
-        <!-- Elke sectie is klikbaar met potlood -->
-        <div id="ws-hero" class="ws-blok" onclick="openSec('hero')" title="Hero sectie bewerken">
-          <button class="pencil-btn">✏️</button>
-          <div style="background:linear-gradient(180deg,rgba(10,10,10,.5) 0%,rgba(10,10,10,.05) 45%,rgba(10,10,10,.92) 100%),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-V8-34-1.jpg') center/cover;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:36px 28px">
-            <span style="font-size:.44rem;letter-spacing:.38em;text-transform:uppercase;color:var(--g);margin-bottom:14px;display:block">Bijzondere Overnachtingen op het Water</span>
-            <h1 id="p-hero-titel" style="font-family:var(--fd);font-size:clamp(1.6rem,4vw,3rem);font-weight:300;color:var(--w);line-height:1.05">Jouw <em style="font-style:italic;color:var(--g)">geheime</em> nacht begint hier</h1>
-            <p id="p-hero-sub" style="font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.5);margin-top:10px;line-height:2">Een mysterieuze ligplek · Een privé-boot · Een beleving die je nooit vergeet</p>
-            <div style="display:flex;gap:8px;margin-top:18px;justify-content:center"><div style="background:var(--g);color:var(--b);padding:8px 20px;font-size:.5rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase" id="p-hero-k1">Reserveer je Night</div><div style="border:1px solid rgba(245,240,232,.28);color:var(--w);padding:8px 20px;font-size:.5rem;letter-spacing:.16em;text-transform:uppercase" id="p-hero-k2">Ontdek het Mysterie</div></div>
+          <div class="staaf-wrap"><div class="staaf-titel">Bezoekers per dag — afgelopen 14 dagen</div><div class="staaf-grafiek" id="staaf-grafiek"><div class="laden">Laden...</div></div></div>
+          <div class="stat-2">
+            <div class="stat-lijstje"><div class="stat-lijstje-titel">Apparaat</div><div id="ap-stats"><div class="laden">Laden...</div></div></div>
+            <div class="stat-lijstje"><div class="stat-lijstje-titel">Per arrangement</div><div id="pk-stats"><div class="laden">Laden...</div></div></div>
+          </div>
+          <div class="stat-2">
+            <div class="stat-lijstje"><div class="stat-lijstje-titel">Recente boekingen</div><div id="re-stats"><div class="laden">Laden...</div></div></div>
+            <div class="stat-lijstje"><div class="stat-lijstje-titel">Per boot</div><div id="bo-stats"><div class="laden">Laden...</div></div></div>
           </div>
         </div>
-        <!-- COUNTER -->
-        <div style="background:var(--g);padding:12px 32px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap">
-          <span style="font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--b);font-weight:600">Nog slechts</span>
-          <span style="font-family:var(--fd);font-size:2.4rem;font-weight:300;color:var(--b);line-height:1" id="p-cnt">—</span>
-          <span style="font-family:var(--fd);font-size:.8rem;font-style:italic;color:var(--b)">Secret Nights</span>
+      </div>
+
+      <!-- RESERVERINGEN -->
+      <div class="pagina" id="pg-reserveringen">
+        <div class="pg-kop"><h1>Alle <em>Reserveringen</em></h1><button class="export-knop" onclick="exportCSV()">⬇ Export CSV</button></div>
+        <div style="padding:11px 26px;border-bottom:1px solid rgba(200,169,110,.08);display:flex;gap:7px;flex-wrap:wrap;align-items:center;flex-shrink:0">
+          <button class="tbl-btn" id="rf-alle" onclick="setFilter('alle',this)" style="border-color:var(--g);color:var(--g)">Alle</button>
+          <button class="tbl-btn" id="rf-bev" onclick="setFilter('bevestigd',this)">Bevestigd</button>
+          <button class="tbl-btn" id="rf-afg" onclick="setFilter('afgerond',this)">Afgerond</button>
+          <button class="tbl-btn" id="rf-ann" onclick="setFilter('geannuleerd',this)">Geannuleerd</button>
+          <input id="zoek" type="text" placeholder="Zoek naam of email..." oninput="toonRes()" style="margin-left:auto;background:var(--bc);border:1px solid rgba(200,169,110,.15);color:var(--w);padding:6px 10px;font-family:var(--fb);font-size:.67rem;outline:none;width:180px"/>
         </div>
-        <!-- INTRO -->
-        <div id="ws-intro" class="ws-blok" onclick="openSec('intro')" title="Mysterie sectie bewerken">
-          <button class="pencil-btn">✏️</button>
-          <div style="background:#111;padding:44px 32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center">
-            <div>
-              <h2 id="p-intro-titel" style="font-family:var(--fd);font-size:1.7rem;font-weight:300;color:var(--w);line-height:1.1;margin-bottom:14px">Jij kiest de nacht. <em style="font-style:italic;color:var(--g)">Wij kiezen de plek.</em></h2>
-              <p id="p-intro-t1" style="font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:10px">Secretnights brengt je naar een geheime ligplek ergens in de Nederlandse natuur.</p>
-              <p id="p-intro-t2" style="font-size:.64rem;color:var(--wd);line-height:2">Verwacht rust, ruimte en een uitzicht dat je adem beneemt.</p>
+        <div class="scroll"><div class="tbl" id="res-tbl"><div class="laden">Laden...</div></div></div>
+      </div>
+
+      <!-- KALENDER -->
+      <div class="pagina" id="pg-kalender">
+        <div class="pg-kop"><h1><em>Kalender</em></h1></div>
+        <div class="scroll">
+          <div style="background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:22px;max-width:460px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+              <button class="btn-uit" onclick="kalVorige()" style="padding:5px 11px">←</button>
+              <span style="font-family:var(--fd);font-size:1.05rem" id="kal-titel">—</span>
+              <button class="btn-uit" onclick="kalVolgende()" style="padding:5px 11px">→</button>
             </div>
-            <div style="background:linear-gradient(135deg,rgba(26,18,8,.9),rgba(13,13,13,.9)),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-slaapbank-sfeer-uitzicht-natuur.jpg') center/cover;aspect-ratio:3/4;border:1px solid rgba(200,169,110,.14)"></div>
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px">
+              <div class="kal-dag-kop">Ma</div><div class="kal-dag-kop">Di</div><div class="kal-dag-kop">Wo</div><div class="kal-dag-kop">Do</div><div class="kal-dag-kop">Vr</div><div class="kal-dag-kop">Za</div><div class="kal-dag-kop">Zo</div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px" id="kal-grid"></div>
+            <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(200,169,110,.07);font-size:.58rem;color:rgba(245,240,232,.26)"><span style="color:var(--g)">●</span> Geboekte datum</div>
           </div>
         </div>
-        <!-- FEATURES -->
-        <div id="ws-features" class="ws-blok" onclick="openSec('features')" title="Features bewerken">
-          <button class="pencil-btn">✏️</button>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,.12)">
-            <div style="background:#131313;padding:36px 28px;text-align:center"><div style="font-size:1.4rem;margin-bottom:14px">🌿</div><h3 id="p-f1-titel" style="font-family:var(--fd);font-size:1.25rem;font-weight:300;margin-bottom:9px">Natuur &amp; Rust</h3><p id="p-f1-tekst" style="font-size:.64rem;line-height:1.9;color:var(--wd)">Wakker worden op het water, omringd door ongerepte natuur.</p></div>
-            <div style="background:#131313;padding:36px 28px;text-align:center"><div style="font-size:1.4rem;margin-bottom:14px">🛁</div><h3 id="p-f2-titel" style="font-family:var(--fd);font-size:1.25rem;font-weight:300;margin-bottom:9px">Wellness op het Water</h3><p id="p-f2-tekst" style="font-size:.64rem;line-height:1.9;color:var(--wd)">Privé-sauna, massage in de open lucht of gewoon genieten.</p></div>
-            <div style="background:#131313;padding:36px 28px;text-align:center"><div style="font-size:1.4rem;margin-bottom:14px">🍽️</div><h3 id="p-f3-titel" style="font-family:var(--fd);font-size:1.25rem;font-weight:300;margin-bottom:9px">Culinaire Ervaring</h3><p id="p-f3-tekst" style="font-size:.64rem;line-height:1.9;color:var(--wd)">Een privé-kok bereidt een exclusief menu aan boord.</p></div>
+      </div>
+
+      <!-- VISUELE EDITOR -->
+      <div class="pagina" id="pg-editor" style="display:none;flex-direction:column">
+        <div class="pg-kop" style="flex-shrink:0">
+          <div><h1>Visuele <em>Editor</em></h1><p>Klik op ✏️ naast een sectie om teksten aan te passen</p></div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span id="ed-hint" style="font-size:.56rem;color:rgba(200,169,110,.4)">← Klik op ✏️</span>
+            <button class="btn-goud" id="opslaan-knop" onclick="slaOp()" disabled>Opslaan op website →</button>
           </div>
         </div>
-        <!-- ARRANGEMENTEN -->
-        <div id="ws-arrangementen" class="ws-blok" onclick="openSec('arrangementen')" title="Arrangementen bewerken">
-          <button class="pencil-btn">✏️</button>
-          <div style="background:#111;padding:44px 32px">
-            <div style="margin-bottom:32px"><span style="font-size:.52rem;letter-spacing:.4em;text-transform:uppercase;color:var(--g)">Selecteer jouw beleving</span><h2 style="font-family:var(--fd);font-size:2rem;font-weight:300;margin-top:8px">Kies je <em style="font-style:italic;color:var(--g)">arrangement</em></h2></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(200,169,110,.1)">
-              <div style="background:#131313;padding:36px 32px;grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center">
-                <div><div style="font-family:var(--fd);font-size:3rem;font-weight:300;color:rgba(200,169,110,.1)">01</div><h3 id="p-dining-titel" style="font-family:var(--fd);font-size:1.5rem;font-weight:300;margin-bottom:10px"><em style="font-style:italic;color:var(--g)">Dining</em> Experience</h3><p id="p-dining-tekst" style="font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:14px">Een privé-kok neemt de volledige culinaire beleving voor zijn rekening.</p><span id="p-dining-prijs" style="font-family:var(--fd);font-size:.88rem;color:var(--gl)">Vanaf € 695 per nacht</span></div>
-                <div style="background:linear-gradient(135deg,rgba(26,18,8,.8),rgba(13,13,13,.8)),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-terras-strand-ontbijt.jpg') center/cover;aspect-ratio:1;border:1px solid rgba(200,169,110,.1)"></div>
+        <div class="editor-lay">
+          <!-- WEBSITE PREVIEW -->
+          <div class="site-preview">
+            <!-- Nav -->
+            <div class="ws-nav-prev">
+              <span style="font-family:var(--fd);font-size:.9rem;letter-spacing:.25em;color:var(--g);text-transform:uppercase">Secret<em style="font-style:italic;color:rgba(245,240,232,.5)">nights</em></span>
+              <div style="display:flex;gap:16px"><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">Mysterie</span><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">Arrangementen</span><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">FAQ</span></div>
+              <span style="border:1px solid var(--g);color:var(--g);padding:4px 12px;font-size:.46rem;letter-spacing:.14em;text-transform:uppercase">Reserveer</span>
+            </div>
+            <!-- Hero -->
+            <div class="ws-sectie" id="ws-hero" onclick="kiesSectie('hero')">
+              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('hero')">✏️</button>
+              <div style="background:linear-gradient(180deg,rgba(10,10,10,.5) 0%,rgba(10,10,10,.05) 45%,rgba(10,10,10,.92) 100%),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-V8-34-1.jpg') center/cover;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:36px 28px">
+                <span style="font-size:.44rem;letter-spacing:.38em;text-transform:uppercase;color:var(--g);margin-bottom:14px;display:block">Bijzondere Overnachtingen op het Water</span>
+                <h1 id="pv-hero-titel" style="font-family:var(--fd);font-size:clamp(1.6rem,4vw,3rem);font-weight:300;color:var(--w);line-height:1.05">Jouw <em style="font-style:italic;color:var(--g)">geheime</em> nacht begint hier</h1>
+                <p id="pv-hero-sub" style="font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.5);margin-top:10px;line-height:2">Een mysterieuze ligplek · Een privé-boot · Een beleving die je nooit vergeet</p>
+                <div style="display:flex;gap:8px;margin-top:18px;justify-content:center"><span style="background:var(--g);color:var(--b);padding:8px 20px;font-size:.5rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase" id="pv-hero-k1">Reserveer je Night</span><span style="border:1px solid rgba(245,240,232,.28);color:var(--w);padding:8px 20px;font-size:.5rem;letter-spacing:.16em;text-transform:uppercase" id="pv-hero-k2">Ontdek het Mysterie</span></div>
               </div>
-              <div style="background:#131313;padding:32px"><div style="font-family:var(--fd);font-size:3rem;font-weight:300;color:rgba(200,169,110,.1)">02</div><h3 id="p-wellness-titel" style="font-family:var(--fd);font-size:1.5rem;font-weight:300;margin-bottom:10px">Natuurlijk <em style="font-style:italic;color:var(--g)">Wellness</em></h3><p id="p-wellness-tekst" style="font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:14px">Totale ontspanning op het water.</p><span id="p-wellness-prijs" style="font-family:var(--fd);font-size:.88rem;color:var(--gl)">Vanaf € 450 per nacht</span></div>
-              <div style="background:#131313;padding:32px"><div style="font-family:var(--fd);font-size:3rem;font-weight:300;color:rgba(200,169,110,.1)">03</div><h3 id="p-sauna-titel" style="font-family:var(--fd);font-size:1.5rem;font-weight:300;margin-bottom:10px">Sauna <em style="font-style:italic;color:var(--g)">Boot</em></h3><p id="p-sauna-tekst" style="font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:14px">Een exclusieve privé-sauna midden in de natuur.</p><span id="p-sauna-prijs" style="font-family:var(--fd);font-size:.88rem;color:var(--gl)">Vanaf € 550 per nacht</span></div>
             </div>
-          </div>
-        </div>
-        <!-- REVIEWS -->
-        <div id="ws-reviews" class="ws-blok" onclick="openSec('reviews')" title="Reviews bewerken">
-          <button class="pencil-btn">✏️</button>
-          <div style="background:#111;padding:44px 32px">
-            <h2 style="font-family:var(--fd);font-size:2rem;font-weight:300;margin-bottom:32px">Wat gasten <em style="font-style:italic;color:var(--g)">zeggen</em></h2>
-            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,.08)">
-              <div style="background:#131313;padding:36px 30px"><div style="color:var(--g);font-size:.62rem;margin-bottom:14px">★ ★ ★ ★ ★</div><p id="p-r1-tekst" style="font-family:var(--fd);font-size:1rem;font-style:italic;line-height:1.75;margin-bottom:16px">"De locatie nam onze adem weg."</p><span id="p-r1-naam" style="font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Sarah &amp; Tom</span></div>
-              <div style="background:#131313;padding:36px 30px"><div style="color:var(--g);font-size:.62rem;margin-bottom:14px">★ ★ ★ ★ ★</div><p id="p-r2-tekst" style="font-family:var(--fd);font-size:1rem;font-style:italic;line-height:1.75;margin-bottom:16px">"De privé-kok was een openbaring."</p><span id="p-r2-naam" style="font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Familie De Groot</span></div>
-              <div style="background:#131313;padding:36px 30px"><div style="color:var(--g);font-size:.62rem;margin-bottom:14px">★ ★ ★ ★ ★</div><p id="p-r3-tekst" style="font-family:var(--fd);font-size:1rem;font-style:italic;line-height:1.75;margin-bottom:16px">"Sauna bij zonsondergang, water in."</p><span id="p-r3-naam" style="font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Charlotte V.</span></div>
+            <!-- Counter -->
+            <div style="background:var(--g);padding:12px 28px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap">
+              <span style="font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--b);font-weight:600">Nog slechts</span>
+              <span id="pv-teller" style="font-family:var(--fd);font-size:2.4rem;font-weight:300;color:var(--b);line-height:1">—</span>
+              <span style="font-family:var(--fd);font-size:.8rem;font-style:italic;color:var(--b)">Secret Nights</span>
             </div>
-          </div>
-        </div>
-        <!-- QUOTE -->
-        <div id="ws-quote" class="ws-blok" onclick="openSec('quote')" title="Quote bewerken">
-          <button class="pencil-btn">✏️</button>
-          <div style="background:var(--g);padding:44px 32px;text-align:center">
-            <blockquote id="p-quote-tekst" style="font-family:var(--fd);font-size:clamp(1.2rem,2.5vw,1.9rem);font-style:italic;font-weight:300;color:var(--b);line-height:1.4;max-width:600px;margin:0 auto">"Niet weten waar je naartoe gaat is deel van de magie."</blockquote>
-            <cite style="display:block;margin-top:14px;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,10,10,.45);font-style:normal">— Secretnights</cite>
-          </div>
-        </div>
-        <!-- CTA -->
-        <div id="ws-cta" class="ws-blok" onclick="openSec('cta')" title="Call-to-action bewerken">
-          <button class="pencil-btn">✏️</button>
-          <div style="background:var(--b);padding:60px 32px;text-align:center">
-            <h2 id="p-cta-titel" style="font-family:var(--fd);font-size:1.8rem;font-weight:300;margin-bottom:10px">Klaar voor jouw <em style="font-style:italic;color:var(--g)">geheime nacht?</em></h2>
-            <p id="p-cta-tekst" style="font-size:.66rem;color:var(--wd);line-height:2;max-width:440px;margin:0 auto 24px">Slechts 12 Secret Nights per seizoen beschikbaar.</p>
-            <div style="display:inline-block;background:var(--g);color:var(--b);padding:10px 26px;font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Reserveer Nu</div>
-          </div>
-        </div>
-        <!-- CONTACT / FOOTER -->
-        <div id="ws-contact" class="ws-blok" onclick="openSec('contact')" title="Contactgegevens bewerken">
-          <button class="pencil-btn">✏️</button>
-          <div style="background:#111;padding:16px 32px;border-top:1px solid rgba(200,169,110,.12)">
-            <p style="font-size:.6rem;color:rgba(245,240,232,.36);line-height:2.2">📞 <span id="p-tel" style="color:var(--g)">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="p-em" style="color:var(--g)">info@secretnights.nl</span> &nbsp;·&nbsp; 📍 <span id="p-ad" style="color:var(--g)">Kazernestraat, Oss</span></p>
-          </div>
-        </div>
-      </div>
-      <!-- EDIT PANEL RECHTS -->
-      <div style="overflow-y:auto;background:var(--bs);display:flex;flex-direction:column;border-left:1px solid rgba(200,169,110,.1)" id="ed-panel-wrap">
-        <div style="padding:16px 18px;border-bottom:1px solid rgba(200,169,110,.1);flex-shrink:0;background:var(--bc)">
-          <div style="font-family:var(--fd);font-size:1.1rem;font-weight:300" id="ed-panel-title">Selecteer een sectie</div>
-          <div style="font-size:.58rem;color:var(--wd);margin-top:3px" id="ed-panel-sub">Klik op een ✏️ potlood om te bewerken</div>
-        </div>
-        <div style="flex:1;padding:16px 18px;overflow-y:auto" id="ed-body">
-          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:280px;color:rgba(245,240,232,.18);text-align:center;gap:12px">
-            <span style="font-size:2.5rem">✏️</span>
-            <p style="font-size:.64rem;letter-spacing:.08em;line-height:2">Klik op een ✏️ potlood<br/>naast een sectie van<br/>de website om te bewerken</p>
-          </div>
-        </div>
-        <div style="padding:14px 18px;border-top:1px solid rgba(200,169,110,.1);flex-shrink:0;display:none" id="ed-ft">
-          <button class="bg" style="width:100%" onclick="slaOp()">💾 Opslaan op website →</button>
-          <div style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.09);padding:9px 12px;font-size:.6rem;color:var(--wd);line-height:1.9;margin-top:10px">💡 Gebruik <code style="background:var(--bc);padding:1px 4px;color:var(--g)">*woord*</code> voor <em style="font-style:italic;color:var(--g)">cursief goud</em>. Wijzigingen zijn live na opslaan.</div>
-        </div>
-      </div>
-      </div>
-    </div>
-        <div class="ed-site">
-          <div class="ws-nav">
-            <span class="ws-nav-logo">Secret<em>nights</em></span>
-            <div class="ws-nav-links"><span>Mysterie</span><span>Arrangementen</span><span>Galerij</span><span>FAQ</span></div>
-            <span style="border:1px solid var(--g);color:var(--g);padding:5px 14px;font-size:.48rem;letter-spacing:.16em;text-transform:uppercase">Reserveer</span>
-          </div>
-          <div class="ws-sec" id="sec-hero" onclick="kiesSec('hero')">
-            <div class="ws-edit-hint">✏️ Hero bewerken</div>
-            <div class="ws-hero">
-              <span class="ws-hero-tag">Bijzondere Overnachtingen op het Water</span>
-              <h1 class="ws-hero-h1" id="pv-ht">Jouw <em>geheime</em> nacht begint hier</h1>
-              <p class="ws-hero-sub" id="pv-hs">Een mysterieuze ligplek · Een privé-boot · Een beleving die je nooit vergeet</p>
-              <div class="ws-hero-btns"><div class="ws-btn-p">Reserveer je Night</div><div class="ws-btn-g">Ontdek het Mysterie</div></div>
-            </div>
-          </div>
-          <div class="ws-counter">
-            <span>Nog slechts</span>
-            <span class="n" id="pv-cnt">—</span>
-            <span style="font-family:var(--fd);font-size:.8rem;font-style:italic">Secret Nights</span>
-          </div>
-          <div class="ws-sec" id="sec-intro" onclick="kiesSec('intro')">
-            <div class="ws-edit-hint">✏️ Mysterie sectie</div>
-            <div class="ws-intro">
-              <div class="ws-intro-txt">
-                <h2 id="pv-it">Jij kiest de nacht. <em>Wij kiezen de plek.</em></h2>
-                <p id="pv-i1">Secretnights brengt je naar een geheime ligplek in de Nederlandse natuur.</p>
-                <p id="pv-i2">Verwacht rust, ruimte en een uitzicht dat je adem beneemt.</p>
+            <!-- Intro -->
+            <div class="ws-sectie" id="ws-intro" onclick="kiesSectie('intro')">
+              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('intro')">✏️</button>
+              <div style="background:#111;padding:44px 28px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center">
+                <div>
+                  <h2 id="pv-intro-titel" style="font-family:var(--fd);font-size:1.7rem;font-weight:300;color:var(--w);line-height:1.1;margin-bottom:14px">Jij kiest de nacht. <em style="font-style:italic;color:var(--g)">Wij kiezen de plek.</em></h2>
+                  <p id="pv-intro-t1" style="font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:10px">Secretnights brengt je naar een geheime ligplek in de Nederlandse natuur.</p>
+                  <p id="pv-intro-t2" style="font-size:.64rem;color:var(--wd);line-height:2">Verwacht rust, ruimte en een uitzicht dat je adem beneemt.</p>
+                </div>
+                <div style="background:linear-gradient(135deg,rgba(26,18,8,.85),rgba(13,13,13,.85)),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-slaapbank-sfeer-uitzicht-natuur.jpg') center/cover;aspect-ratio:3/4;border:1px solid rgba(200,169,110,.14)"></div>
               </div>
-              <div class="ws-intro-img"></div>
+            </div>
+            <!-- Features -->
+            <div class="ws-sectie" id="ws-features" onclick="kiesSectie('features')">
+              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('features')">✏️</button>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,.12)">
+                <div style="background:#131313;padding:32px 24px;text-align:center"><div style="font-size:1.4rem;margin-bottom:12px">🌿</div><h3 id="pv-f1-titel" style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:8px">Natuur &amp; Rust</h3><p id="pv-f1-tekst" style="font-size:.62rem;line-height:1.9;color:var(--wd)">Wakker worden op het water, omringd door ongerepte natuur.</p></div>
+                <div style="background:#131313;padding:32px 24px;text-align:center"><div style="font-size:1.4rem;margin-bottom:12px">🛁</div><h3 id="pv-f2-titel" style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:8px">Wellness op het Water</h3><p id="pv-f2-tekst" style="font-size:.62rem;line-height:1.9;color:var(--wd)">Privé-sauna, massage of gewoon genieten.</p></div>
+                <div style="background:#131313;padding:32px 24px;text-align:center"><div style="font-size:1.4rem;margin-bottom:12px">🍽️</div><h3 id="pv-f3-titel" style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:8px">Culinaire Ervaring</h3><p id="pv-f3-tekst" style="font-size:.62rem;line-height:1.9;color:var(--wd)">Een privé-kok bereidt een exclusief menu aan boord.</p></div>
+              </div>
+            </div>
+            <!-- Arrangementen -->
+            <div class="ws-sectie" id="ws-arrangementen" onclick="kiesSectie('arrangementen')">
+              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('arrangementen')">✏️</button>
+              <div style="background:#111;padding:40px 28px">
+                <div style="margin-bottom:28px"><span style="font-size:.5rem;letter-spacing:.38em;text-transform:uppercase;color:var(--g)">Selecteer jouw beleving</span><h2 style="font-family:var(--fd);font-size:1.9rem;font-weight:300;margin-top:6px">Kies je <em style="font-style:italic;color:var(--g)">arrangement</em></h2></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(200,169,110,.1)">
+                  <div style="background:#131313;padding:32px;grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center">
+                    <div><div style="font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(200,169,110,.1)">01</div><h3 id="pv-dining-titel" style="font-family:var(--fd);font-size:1.4rem;font-weight:300;margin-bottom:8px"><em style="font-style:italic;color:var(--g)">Dining</em> Experience</h3><p id="pv-dining-tekst" style="font-size:.62rem;color:var(--wd);line-height:2;margin-bottom:12px">Een privé-kok neemt de culinaire beleving voor zijn rekening.</p><span id="pv-dining-prijs" style="font-family:var(--fd);font-size:.85rem;color:var(--gl)">Vanaf € 695 per nacht</span></div>
+                    <div style="background:linear-gradient(135deg,rgba(26,18,8,.8),rgba(13,13,13,.8)),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-terras-strand-ontbijt.jpg') center/cover;aspect-ratio:1;border:1px solid rgba(200,169,110,.1)"></div>
+                  </div>
+                  <div style="background:#131313;padding:28px"><div style="font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(200,169,110,.1)">02</div><h3 id="pv-wellness-titel" style="font-family:var(--fd);font-size:1.4rem;font-weight:300;margin-bottom:8px">Natuurlijk <em style="font-style:italic;color:var(--g)">Wellness</em></h3><p id="pv-wellness-tekst" style="font-size:.62rem;color:var(--wd);line-height:2;margin-bottom:12px">Totale ontspanning op het water.</p><span id="pv-wellness-prijs" style="font-family:var(--fd);font-size:.85rem;color:var(--gl)">Vanaf € 450 per nacht</span></div>
+                  <div style="background:#131313;padding:28px"><div style="font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(200,169,110,.1)">03</div><h3 id="pv-sauna-titel" style="font-family:var(--fd);font-size:1.4rem;font-weight:300;margin-bottom:8px">Sauna <em style="font-style:italic;color:var(--g)">Boot</em></h3><p id="pv-sauna-tekst" style="font-size:.62rem;color:var(--wd);line-height:2;margin-bottom:12px">Privé-sauna midden in de natuur.</p><span id="pv-sauna-prijs" style="font-family:var(--fd);font-size:.85rem;color:var(--gl)">Vanaf € 550 per nacht</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- Reviews -->
+            <div class="ws-sectie" id="ws-reviews" onclick="kiesSectie('reviews')">
+              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('reviews')">✏️</button>
+              <div style="background:#111;padding:40px 28px">
+                <h2 style="font-family:var(--fd);font-size:1.9rem;font-weight:300;margin-bottom:28px">Wat gasten <em style="font-style:italic;color:var(--g)">zeggen</em></h2>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,.08)">
+                  <div style="background:#131313;padding:32px 26px"><div style="color:var(--g);font-size:.6rem;margin-bottom:12px">★ ★ ★ ★ ★</div><p id="pv-r1" style="font-family:var(--fd);font-size:.95rem;font-style:italic;line-height:1.75;margin-bottom:14px">"De locatie nam onze adem weg."</p><span id="pv-r1n" style="font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Sarah &amp; Tom</span></div>
+                  <div style="background:#131313;padding:32px 26px"><div style="color:var(--g);font-size:.6rem;margin-bottom:12px">★ ★ ★ ★ ★</div><p id="pv-r2" style="font-family:var(--fd);font-size:.95rem;font-style:italic;line-height:1.75;margin-bottom:14px">"De privé-kok was een openbaring."</p><span id="pv-r2n" style="font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Familie De Groot</span></div>
+                  <div style="background:#131313;padding:32px 26px"><div style="color:var(--g);font-size:.6rem;margin-bottom:12px">★ ★ ★ ★ ★</div><p id="pv-r3" style="font-family:var(--fd);font-size:.95rem;font-style:italic;line-height:1.75;margin-bottom:14px">"Sauna bij zonsondergang, water in."</p><span id="pv-r3n" style="font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Charlotte V.</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- Quote -->
+            <div class="ws-sectie" id="ws-quote" onclick="kiesSectie('quote')">
+              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('quote')">✏️</button>
+              <div style="background:var(--g);padding:44px 28px;text-align:center"><blockquote id="pv-quote" style="font-family:var(--fd);font-size:clamp(1.2rem,2.5vw,1.9rem);font-style:italic;font-weight:300;color:var(--b);line-height:1.4;max-width:600px;margin:0 auto">"Niet weten waar je naartoe gaat is deel van de magie."</blockquote><cite style="display:block;margin-top:14px;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,10,10,.45);font-style:normal">— Secretnights</cite></div>
+            </div>
+            <!-- CTA -->
+            <div class="ws-sectie" id="ws-cta" onclick="kiesSectie('cta')">
+              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('cta')">✏️</button>
+              <div style="background:var(--b);padding:56px 28px;text-align:center">
+                <h2 id="pv-cta-titel" style="font-family:var(--fd);font-size:1.8rem;font-weight:300;margin-bottom:10px">Klaar voor jouw <em style="font-style:italic;color:var(--g)">geheime nacht?</em></h2>
+                <p id="pv-cta-tekst" style="font-size:.66rem;color:var(--wd);line-height:2;max-width:440px;margin:0 auto 24px">Slechts 12 Secret Nights per seizoen beschikbaar.</p>
+                <span style="background:var(--g);color:var(--b);padding:10px 26px;font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Reserveer Nu</span>
+              </div>
+            </div>
+            <!-- Contact -->
+            <div class="ws-sectie" id="ws-contact" onclick="kiesSectie('contact')">
+              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('contact')">✏️</button>
+              <div style="background:#111;padding:16px 28px;border-top:1px solid rgba(200,169,110,.12)">
+                <p style="font-size:.6rem;color:rgba(245,240,232,.36);line-height:2.2">📞 <span id="pv-tel" style="color:var(--g)">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="pv-email" style="color:var(--g)">info[at]secretnights.nl</span> &nbsp;·&nbsp; 📍 <span id="pv-adres" style="color:var(--g)">Kazernestraat, Oss</span></p>
+              </div>
             </div>
           </div>
-          <div class="ws-sec" id="sec-quote" onclick="kiesSec('quote')">
-            <div class="ws-edit-hint">✏️ Quote bewerken</div>
-            <div class="ws-quote"><blockquote id="pv-q">"Niet weten waar je naartoe gaat is deel van de magie."</blockquote><cite>— Secretnights</cite></div>
-          </div>
-          <div class="ws-sec" id="sec-cta" onclick="kiesSec('cta')">
-            <div class="ws-edit-hint">✏️ Call-to-action</div>
-            <div class="ws-cta">
-              <h2 id="pv-ct">Klaar voor jouw <em>geheime nacht?</em></h2>
-              <p id="pv-cp">Slechts 12 Secret Nights per seizoen beschikbaar.</p>
-              <div class="ws-btn-p" style="display:inline-block">Reserveer Nu</div>
+          <!-- EDIT PANEEL -->
+          <div class="edit-paneel">
+            <div class="edit-kop"><h3>Teksten <em>bewerken</em></h3><p id="edit-kop-sub">Klik op ✏️ om een sectie te bewerken</p></div>
+            <div class="edit-body" id="edit-body">
+              <div class="edit-leeg"><span>✏️</span><p>Klik op een ✏️ potlood<br/>naast een sectie om<br/>teksten te bewerken</p></div>
             </div>
-          </div>
-          <div class="ws-sec" id="sec-contact" onclick="kiesSec('contact')">
-            <div class="ws-edit-hint">✏️ Contactgegevens</div>
-            <div class="ws-contact">
-              <p>📞 <span id="pv-tel">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="pv-em"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bdd4d3dbd2fdced8decfd8c9d3d4dad5c9ce93d3d1">[email&#160;protected]</a></span> &nbsp;·&nbsp; 📍 <span id="pv-ad">Kazernestraat, Oss</span></p>
+            <div class="edit-voet" id="edit-voet" style="display:none">
+              <button class="btn-goud" style="width:100%" onclick="slaOp()">💾 Opslaan op website →</button>
+              <div class="tip">💡 Gebruik <code style="background:var(--bc);padding:1px 4px;color:var(--g)">*woord*</code> voor <em style="font-style:italic;color:var(--g)">cursief goud</em> in titels. Na opslaan zijn wijzigingen direct live.</div>
             </div>
           </div>
         </div>
-        <div class="ed-panel">
-          <div class="ed-panel-hd"><h3>Teksten <em>bewerken</em></h3><p>Selecteer een sectie links</p></div>
-          <div class="ed-panel-body" id="ed-body">
-            <div class="ed-leeg"><span>👈</span><p>Klik op een sectie<br/>van de website links<br/>om teksten te bewerken</p></div>
-          </div>
-          <div class="ed-panel-ft" id="ed-ft" style="display:none">
-            <button class="bg" style="width:100%" onclick="slaOp()">Opslaan op website →</button>
-            <div class="tip-box">💡 Gebruik <code style="background:var(--bc);padding:1px 4px;color:var(--g)">*woord*</code> voor <em style="font-style:italic;color:var(--g)">cursief goud</em>.</div>
-          </div>
+      </div>
+
+      <!-- FOTOS -->
+      <div class="pagina" id="pg-fotos">
+        <div class="pg-kop"><div><h1>Foto's <em>beheren</em></h1></div><button class="btn-goud" onclick="openModal('m-foto')">+ Foto toevoegen</button></div>
+        <div class="scroll">
+          <div class="info-box">💡 Upload foto's gratis op <a href="https://imgur.com" target="_blank">imgur.com</a>, kopieer de URL en plak die hier.</div>
+          <div class="foto-grid" id="foto-grid"><div class="laden">Laden...</div></div>
         </div>
       </div>
-    </div>
-    <!-- FOTOS -->
-    <div class="pg" id="pg-fotos">
-      <div class="ph"><div><h1>Foto's <em>beheren</em></h1></div><button class="bg" onclick="openM('m-foto')">+ Toevoegen</button></div>
-      <div class="scroll">
-        <div class="ib">💡 Upload foto's gratis op <a href="https://imgur.com" target="_blank">imgur.com</a>, kopieer de URL en plak die hier.</div>
-        <div class="foto-grid" id="foto-grid"><div class="lad">Laden...</div></div>
+
+      <!-- PAGINAS -->
+      <div class="pagina" id="pg-paginas">
+        <div class="pg-kop"><div><h1>Extra <em>Pagina's</em></h1></div><button class="btn-goud" onclick="openModal('m-pagina')">+ Nieuwe pagina</button></div>
+        <div class="scroll">
+          <div class="info-box">💡 Bereikbaar op <strong>secretnights.nl/pagina/[naam]</strong> — voor Privacybeleid, Voorwaarden etc.</div>
+          <div class="pagina-grid" id="pagina-grid"><div class="laden">Laden...</div></div>
+        </div>
       </div>
-    </div>
-    <!-- PAGINAS -->
-    <div class="pg" id="pg-paginas">
-      <div class="ph"><div><h1>Extra <em>Pagina's</em></h1></div><button class="bg" onclick="openM('m-np')">+ Nieuwe pagina</button></div>
-      <div class="scroll">
-        <div class="ib">💡 Bereikbaar op <strong>secretnights.nl/pagina/[naam]</strong></div>
-        <div class="pgrid" id="p-grid"><div class="lad">Laden...</div></div>
-      </div>
-    </div>
-    <!-- BETAALMETHODES -->
-    <div class="pg" id="pg-betaal">
-      <div class="ph"><div><h1><em>Betaalmethodes</em></h1></div><button class="bg" onclick="openM('m-betaal')">+ Toevoegen</button></div>
-      <div class="scroll">
-        <div class="mbox">
-          <h3>iDEAL via <em>Mollie</em></h3>
-          <p>Ontvang echte iDEAL betalingen direct op je rekening.</p>
-          <div style="display:flex;align-items:center;gap:9px;padding:10px 13px;background:var(--b);border:1px solid rgba(200,169,110,.1);margin-bottom:16px">
-            <div class="sdot" id="m-dot"></div>
-            <span style="font-size:.66rem;color:var(--wd)" id="m-txt">Laden...</span>
-          </div>
-          <div class="stap"><div class="snr">1</div><p>Maak een gratis account op <a href="https://mollie.com" target="_blank">mollie.com</a></p></div>
-          <div class="stap"><div class="snr">2</div><p>Ga naar <strong style="color:var(--w)">Dashboard → Developers → API keys</strong> en kopieer je Live key</p></div>
-          <div class="stap"><div class="snr">3</div><p>Plak hieronder → opslaan → schakelaar aan</p></div>
-          <div style="margin-top:14px">
-            <div class="fg"><label>Mollie Live API Key</label><input type="password" id="mk" placeholder="live_xxxxxxxxxxxxxxxxxx" style="font-family:monospace"/></div>
+
+      <!-- BETAALMETHODES -->
+      <div class="pagina" id="pg-betaal">
+        <div class="pg-kop"><div><h1><em>Betaalmethodes</em></h1></div><button class="btn-goud" onclick="openModal('m-betaal')">+ Toevoegen</button></div>
+        <div class="scroll">
+          <div class="kaart">
+            <h3>iDEAL via <em>Mollie</em></h3>
+            <p>Ontvang echte iDEAL betalingen direct op je rekening. Maak eerst een gratis account aan op mollie.com.</p>
+            <div style="display:flex;align-items:center;gap:9px;padding:10px 13px;background:var(--b);border:1px solid rgba(200,169,110,.1);margin-bottom:16px">
+              <div style="width:8px;height:8px;border-radius:50%" id="mollie-dot"></div>
+              <span style="font-size:.66rem;color:var(--wd)" id="mollie-txt">Laden...</span>
+            </div>
+            <div class="fg"><label>Mollie Live API Key</label><input type="password" id="mollie-key" placeholder="live_xxxxxxxxxxxxxxxxxx" style="font-family:monospace"/></div>
             <div style="display:flex;gap:10px;align-items:center">
-              <button class="bg" onclick="slaaMollie()">Opslaan →</button>
-              <label class="tg"><input type="checkbox" id="m-sw" onchange="toggleMollie(this.checked)"/><div class="tg-t"></div></label>
-              <span style="font-size:.6rem;color:var(--wd)" id="m-lbl">Uit</span>
+              <button class="btn-goud" onclick="slaaMollie()">Opslaan →</button>
+              <label class="tg"><input type="checkbox" id="mollie-sw" onchange="wisselMollie(this.checked)"/><div class="tg-baan"></div></label>
+              <span style="font-size:.6rem;color:var(--wd)" id="mollie-lbl">Uit</span>
             </div>
           </div>
+          <div style="font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.26);margin:18px 0 10px">Actieve methodes</div>
+          <div id="betaal-lijst"><div class="laden">Laden...</div></div>
         </div>
-        <div style="font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.26);margin:18px 0 10px">Actieve methodes</div>
-        <div id="b-lijst"><div class="lad">Laden...</div></div>
       </div>
-    </div>
-    <!-- BESCHIKBAARHEID -->
-    <div class="pg" id="pg-beschikbaar">
-      <div class="ph"><h1><em>Beschikbaarheid</em></h1></div>
-      <div class="scroll">
-        <div class="icard">
-          <h3>Beschikbare <em>nachten</em></h3>
-          <p>Dit getal staat live op de website.</p>
-          <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
-            <button onclick="aanpas(-1)" style="background:var(--bc);border:1px solid rgba(200,169,110,.2);color:var(--g);width:38px;height:38px;font-size:1.3rem;cursor:pointer" onmouseover="this.style.background='var(--g)';this.style.color='var(--b)'" onmouseout="this.style.background='var(--bc)';this.style.color='var(--g)'">−</button>
-            <span id="tot-d" style="font-family:var(--fd);font-size:2.8rem;font-weight:300;min-width:52px;text-align:center">—</span>
-            <button onclick="aanpas(1)" style="background:var(--bc);border:1px solid rgba(200,169,110,.2);color:var(--g);width:38px;height:38px;font-size:1.3rem;cursor:pointer" onmouseover="this.style.background='var(--g)';this.style.color='var(--b)'" onmouseout="this.style.background='var(--bc)';this.style.color='var(--g)'">+</button>
+
+      <!-- BESCHIKBAARHEID -->
+      <div class="pagina" id="pg-beschikbaar">
+        <div class="pg-kop"><h1><em>Beschikbaarheid</em></h1></div>
+        <div class="scroll">
+          <div class="kaart">
+            <h3>Beschikbare <em>nachten</em></h3>
+            <p>Dit getal staat live op de website. Geboekte nachten worden automatisch afgetrokken.</p>
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+              <button onclick="aanpasNachten(-1)" style="background:var(--bc);border:1px solid rgba(200,169,110,.2);color:var(--g);width:40px;height:40px;font-size:1.3rem;cursor:pointer" onmouseover="this.style.background='var(--g)';this.style.color='var(--b)'" onmouseout="this.style.background='var(--bc)';this.style.color='var(--g)'">−</button>
+              <span id="nachten-display" style="font-family:var(--fd);font-size:2.8rem;font-weight:300;min-width:52px;text-align:center">—</span>
+              <button onclick="aanpasNachten(1)" style="background:var(--bc);border:1px solid rgba(200,169,110,.2);color:var(--g);width:40px;height:40px;font-size:1.3rem;cursor:pointer" onmouseover="this.style.background='var(--g)';this.style.color='var(--b)'" onmouseout="this.style.background='var(--bc)';this.style.color='var(--g)'">+</button>
+            </div>
+            <button class="btn-goud" onclick="slaaNachten()">Opslaan →</button>
           </div>
-          <button class="bg" onclick="slaaTot()">Opslaan →</button>
-        </div>
-        <div class="icard"><h3>Live <em>status</em></h3><p id="bes-st">Laden...</p><button class="br" style="margin-top:12px" onclick="resetBoek()">Reset geboekte teller naar 0</button></div>
-      </div>
-    </div>
-    <!-- INSTELLINGEN -->
-    <div class="pg" id="pg-inst">
-      <div class="ph"><h1>Website <em>Instellingen</em></h1></div>
-      <div class="scroll">
-        <div class="icard" style="border:1px solid rgba(200,169,110,.2)">
-          <h3>Website <em>aan/uit</em></h3>
-          <p>Zet de website offline. Bezoekers zien een mooie onderhoudspagina.</p>
-          <div class="icard-sw"><label class="tg"><input type="checkbox" id="s-sw2" onchange="toggleSite(this.checked);document.getElementById('site-sw').checked=this.checked"/><div class="tg-t"></div></label><span id="s-st-lbl" style="color:var(--wd)">Laden...</span></div>
-          <div class="fg"><label>Bericht op de offline pagina</label><textarea id="s-msg" rows="3" placeholder="We zijn tijdelijk offline..."></textarea></div>
-          <button class="bg" onclick="slaaSite()">Opslaan →</button>
-        </div>
-        <div class="icard" style="border:2px solid rgba(200,169,110,.22)">
-          <h3>🚫 Reserveren <em>aan/uit</em></h3>
-          <p>Schakel het boekingsformulier uit. De website blijft zichtbaar maar bezoekers kunnen niet reserveren. Handig als je nog niet klaar bent voor boekingen.</p>
-          <div class="icard-sw"><label class="tg"><input type="checkbox" id="r-sw" onchange="toggleRes(this.checked)"/><div class="tg-t"></div></label><span id="r-st-lbl" style="color:var(--wd)">Laden...</span></div>
-          <div class="fg"><label>Bericht voor bezoekers</label><textarea id="r-msg" rows="2" placeholder="Reserveren is tijdelijk niet mogelijk..."></textarea></div>
-          <button class="bg" onclick="slaaRes()">Opslaan →</button>
-        </div>
-        <div class="icard">
-          <h3>Wachtwoord <em>wijzigen</em></h3>
-          <p>Wijzig het inlogwachtwoord.</p>
-          <div class="fg"><label>Nieuw wachtwoord</label><input type="password" id="nw1" placeholder="Minimaal 8 tekens"/></div>
-          <div class="fg"><label>Herhaal</label><input type="password" id="nw2" placeholder="Herhaal wachtwoord"/></div>
-          <button class="bg" onclick="wijzigWw()">Wachtwoord wijzigen →</button>
+          <div class="kaart"><h3>Live <em>status</em></h3><p id="beschikbaar-status" style="font-size:.7rem;color:var(--wd);line-height:2.4;margin-bottom:0">Laden...</p><button class="btn-rood" style="margin-top:14px" onclick="resetGeboekt()">Reset geboekte teller naar 0</button></div>
         </div>
       </div>
+
+      <!-- INSTELLINGEN -->
+      <div class="pagina" id="pg-instellingen">
+        <div class="pg-kop"><h1>Website <em>Instellingen</em></h1></div>
+        <div class="scroll">
+          <div class="kaart" style="border:1px solid rgba(200,169,110,.2)">
+            <h3>Website <em>aan/uit</em></h3>
+            <p>Zet de website offline. Bezoekers zien een onderhoudspagina.</p>
+            <div class="kaart-schakelaar"><label class="tg"><input type="checkbox" id="site-sw2" onchange="wisselSite(this.checked);document.getElementById('site-schakelaar').checked=this.checked"/><div class="tg-baan"></div></label><span id="site-sw-lbl" style="color:var(--wd)">Laden...</span></div>
+            <div class="fg"><label>Bericht op de offline pagina</label><textarea id="offline-bericht" rows="3" placeholder="We zijn tijdelijk offline..."></textarea></div>
+            <button class="btn-goud" onclick="slaaSite()">Opslaan →</button>
+          </div>
+          <div class="kaart" style="border:2px solid rgba(200,169,110,.22)">
+            <h3>🚫 Reserveren <em>aan/uit</em></h3>
+            <p>Schakel het boekingsformulier uit zonder de website offline te zetten. Handig als je nog niet klaar bent voor boekingen.</p>
+            <div class="kaart-schakelaar"><label class="tg"><input type="checkbox" id="reserveer-sw" onchange="wisselReserveren(this.checked)"/><div class="tg-baan"></div></label><span id="reserveer-sw-lbl" style="color:var(--wd)">Laden...</span></div>
+            <div class="fg"><label>Bericht voor bezoekers</label><textarea id="reserveer-bericht" rows="2" placeholder="Reserveren is tijdelijk niet mogelijk..."></textarea></div>
+            <button class="btn-goud" onclick="slaaReserveren()">Opslaan →</button>
+          </div>
+          <div class="kaart">
+            <h3>Wachtwoord <em>wijzigen</em></h3>
+            <p>Wijzig het inlogwachtwoord voor dit beheerderspaneel.</p>
+            <div class="fg"><label>Nieuw wachtwoord</label><input type="password" id="nw1" placeholder="Minimaal 8 tekens"/></div>
+            <div class="fg"><label>Herhaal wachtwoord</label><input type="password" id="nw2" placeholder="Herhaal"/></div>
+            <button class="btn-goud" onclick="wijzigWachtwoord()">Wachtwoord wijzigen →</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-</div>
 </div>
 
 <!-- MODALS -->
-<div class="mo" id="m-foto"><div class="mw"><div class="mh"><h2>Foto <em>toevoegen</em></h2><button class="mx" onclick="sluitM('m-foto')">✕</button></div>
-  <div class="mb">
-    <div class="fg"><label>Naam</label><input type="text" id="fm-n" placeholder="Hero achtergrond"/></div>
-    <div class="fg"><label>Foto URL *</label><input type="text" id="fm-u" placeholder="https://..." oninput="prvFoto()"/></div>
-    <div id="fp" style="display:none;margin:7px 0"><img id="fp-i" style="width:100%;max-height:140px;object-fit:cover;filter:brightness(.75)" src="" alt=""/></div>
+<div class="modal-achtergrond" id="m-foto"><div class="modal-venster"><div class="modal-kop"><h2>Foto <em>toevoegen</em></h2><button class="modal-sluit" onclick="sluitModal('m-foto')">✕</button></div>
+  <div class="modal-inhoud">
+    <div class="fg"><label>Naam</label><input type="text" id="foto-naam" placeholder="Hero achtergrond"/></div>
+    <div class="fg"><label>Foto URL *</label><input type="text" id="foto-url" placeholder="https://..." oninput="voorbeeldFoto()"/></div>
+    <div id="foto-voorbeeld" style="display:none;margin:7px 0"><img id="foto-voorbeeld-img" style="width:100%;max-height:140px;object-fit:cover;filter:brightness(.75)" src="" alt=""/></div>
     <div class="f2">
-      <div class="fg"><label>Pagina</label><select id="fm-p"><option value="">Algemeen</option><option value="index">Hoofdpagina</option><option value="over-ons">Over ons</option></select></div>
-      <div class="fg"><label>Sectie</label><input type="text" id="fm-s" placeholder="hero, galerij..."/></div>
+      <div class="fg"><label>Pagina</label><select id="foto-pagina"><option value="">Algemeen</option><option value="index">Hoofdpagina</option><option value="over-ons">Over ons</option></select></div>
+      <div class="fg"><label>Sectie</label><input type="text" id="foto-sectie" placeholder="hero, galerij..."/></div>
     </div>
   </div>
-  <div class="ma"><button class="bg" onclick="slaFoto()">Opslaan →</button><button class="bo" onclick="sluitM('m-foto')">Annuleren</button></div>
+  <div class="modal-knoppen"><button class="btn-goud" onclick="slaFoto()">Opslaan →</button><button class="btn-uit" onclick="sluitModal('m-foto')">Annuleren</button></div>
 </div></div>
-<div class="mo" id="m-np"><div class="mw"><div class="mh"><h2>Pagina <em>aanmaken</em></h2><button class="mx" onclick="sluitM('m-np')">✕</button></div>
-  <div class="mb">
-    <div class="ib" style="margin-bottom:12px">URL: <strong>secretnights.nl/pagina/[naam]</strong></div>
-    <div class="fg"><label>URL naam *</label><input type="text" id="pm-sl" placeholder="algemene-voorwaarden" oninput="this.value=this.value.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')"/></div>
-    <div class="fg"><label>Paginatitel *</label><input type="text" id="pm-ti" placeholder="Algemene Voorwaarden"/></div>
-    <div class="fg"><label>Inhoud</label><textarea id="pm-in" rows="8"></textarea></div>
-    <div style="display:flex;align-items:center;gap:8px;margin-top:5px"><input type="checkbox" id="pm-pu" style="width:13px;height:13px;accent-color:var(--g)"/><label for="pm-pu" style="font-size:.64rem;color:var(--wd);cursor:pointer">Direct publiceren</label></div>
-  </div>
-  <div class="ma"><button class="bg" onclick="slaaPagina()">Aanmaken →</button><button class="bo" onclick="sluitM('m-np')">Annuleren</button></div>
-</div></div>
-<div class="mo" id="m-ep"><div class="mw" style="max-width:680px"><div class="mh"><h2>Pagina <em>bewerken</em></h2><button class="mx" onclick="sluitM('m-ep')">✕</button></div>
-  <div class="mb">
-    <div class="fg"><label>Titel</label><input type="text" id="ep-ti"/></div>
-    <div class="fg"><label>Inhoud</label><textarea id="ep-in" rows="12"></textarea></div>
-    <input type="hidden" id="ep-id"/>
-    <div style="display:flex;align-items:center;gap:8px;margin-top:7px"><input type="checkbox" id="ep-pu" style="width:13px;height:13px;accent-color:var(--g)"/><label for="ep-pu" style="font-size:.64rem;color:var(--wd);cursor:pointer">Gepubliceerd</label></div>
-  </div>
-  <div class="ma"><button class="bg" onclick="bijwerkPagina()">Opslaan →</button><button class="br" onclick="verwijderPagina()">Verwijderen</button><button class="bo" onclick="sluitM('m-ep')">Annuleren</button></div>
-</div></div>
-<div class="mo" id="m-betaal"><div class="mw"><div class="mh"><h2>Betaalmethode <em>toevoegen</em></h2><button class="mx" onclick="sluitM('m-betaal')">✕</button></div>
-  <div class="mb">
-    <div class="f2"><div class="fg"><label>Naam *</label><input type="text" id="bm-n" placeholder="Bancontact"/></div><div class="fg"><label>Icoon</label><input type="text" id="bm-i" placeholder="💰" maxlength="4"/></div></div>
-    <div class="fg"><label>Type</label><select id="bm-t"><option value="ideal">iDEAL</option><option value="card">Creditcard</option><option value="paypal">PayPal</option><option value="bancontact">Bancontact</option><option value="klarna">Klarna</option></select></div>
-    <div class="fg"><label>Mollie methode ID (optioneel)</label><input type="text" id="bm-m" placeholder="bancontact"/></div>
-  </div>
-  <div class="ma"><button class="bg" onclick="slaaBetaal()">Toevoegen →</button><button class="bo" onclick="sluitM('m-betaal')">Annuleren</button></div>
-</div></div>
-<div class="mo" id="m-res"><div class="mw"><div class="mh"><h2>Reservering <em>details</em></h2><button class="mx" onclick="sluitM('m-res')">✕</button></div><div class="mb" id="rm-b"></div><div class="ma" id="rm-a"></div></div></div>
-<div class="toast" id="toast"></div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-var SB='https://eugdqjclpptbneburqtn.supabase.co';
-var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1Z2RxamNscHB0Ym5lYnVycXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTc2MDMsImV4cCI6MjA4OTU3MzYwM30.oXpk_sw_f3NGb6Q6Wx-TQfiYXFtnT_29iwkFKl5EqeA';
-var WW='Secretnights2026!';
-var alleRes=[],alleFotos=[],allePaginas=[],alleBetaal=[],alleTeksten={};
-var resF='alle',kJ=new Date().getFullYear(),kM=new Date().getMonth(),totN=12;
-var gekozenSec=null,gw={};
+<div class="modal-achtergrond" id="m-pagina"><div class="modal-venster"><div class="modal-kop"><h2>Pagina <em>aanmaken</em></h2><button class="modal-sluit" onclick="sluitModal('m-pagina')">✕</button></div>
+  <div class="modal-inhoud">
+    <div class="info-box" style="margin-bottom:12px">URL wordt: <strong>secretnights.nl/pagina/[naam]</strong></div>
+    <div class="fg"><label>URL naam *</label><input type="text" id="pagina-slug" placeholder="algemene-voorwaarden" oninput="this.value=this.value.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')"/></div>
+    <div class="fg"><label>Paginatitel *</label><input type="text" id="pagina-titel" placeholder="Algemene Voorwaarden"/></div>
+    <div class="fg"><label>Inhoud</label><textarea id="pagina-inhoud" rows="8"></textarea></div>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:5px"><input type="checkbox" id="pagina-pub" style="width:13px;height:13px;accent-color:var(--g)"/><label for="pagina-pub" style="font-size:.64rem;color:var(--wd);cursor:pointer">Direct publiceren</label></div>
+  </div>
+  <div class="modal-knoppen"><button class="btn-goud" onclick="slaaPagina()">Aanmaken →</button><button class="btn-uit" onclick="sluitModal('m-pagina')">Annuleren</button></div>
+</div></div>
 
-function login(){
-  try {
-    var ingevoerd=document.getElementById('pw').value;
-    var opgeslagen=localStorage.getItem('sn_ww');
-    var juist=opgeslagen&&opgeslagen.length>0?opgeslagen:WW;
-    if(ingevoerd===juist){
-      sessionStorage.setItem('sn_ok','1');
-      // Verberg login
-      var loginEl=document.getElementById('L');
-      if(loginEl){loginEl.style.cssText='display:none!important';}
-      // Toon app
-      var appEl=document.getElementById('A');
-      if(appEl){
-        appEl.style.cssText='display:flex!important;flex-direction:column;height:100vh;';
-      }
-      setTimeout(function(){laadAlles();},50);
-    } else {
-      var fout=document.getElementById('lf');
-      if(fout){fout.textContent='Onjuist wachtwoord. Probeer opnieuw.';}
-      var pwEl=document.getElementById('pw');
-      if(pwEl){pwEl.value='';pwEl.focus();}
-      setTimeout(function(){var f=document.getElementById('lf');if(f)f.textContent='';},3000);
-    }
-  } catch(err){
-    alert('Fout: '+err.message);
+<div class="modal-achtergrond" id="m-bewerk-pagina"><div class="modal-venster" style="max-width:680px"><div class="modal-kop"><h2>Pagina <em>bewerken</em></h2><button class="modal-sluit" onclick="sluitModal('m-bewerk-pagina')">✕</button></div>
+  <div class="modal-inhoud">
+    <div class="fg"><label>Titel</label><input type="text" id="bp-titel"/></div>
+    <div class="fg"><label>Inhoud</label><textarea id="bp-inhoud" rows="12"></textarea></div>
+    <input type="hidden" id="bp-id"/>
+    <div style="display:flex;align-items:center;gap:8px;margin-top:7px"><input type="checkbox" id="bp-pub" style="width:13px;height:13px;accent-color:var(--g)"/><label for="bp-pub" style="font-size:.64rem;color:var(--wd);cursor:pointer">Gepubliceerd</label></div>
+  </div>
+  <div class="modal-knoppen"><button class="btn-goud" onclick="bijwerkPagina()">Opslaan →</button><button class="btn-rood" onclick="verwijderPagina()">Verwijderen</button><button class="btn-uit" onclick="sluitModal('m-bewerk-pagina')">Annuleren</button></div>
+</div></div>
+
+<div class="modal-achtergrond" id="m-betaal"><div class="modal-venster"><div class="modal-kop"><h2>Betaalmethode <em>toevoegen</em></h2><button class="modal-sluit" onclick="sluitModal('m-betaal')">✕</button></div>
+  <div class="modal-inhoud">
+    <div class="f2"><div class="fg"><label>Naam *</label><input type="text" id="bm-naam" placeholder="Bancontact"/></div><div class="fg"><label>Icoon</label><input type="text" id="bm-icoon" placeholder="💰" maxlength="4"/></div></div>
+    <div class="fg"><label>Type</label><select id="bm-type"><option value="ideal">iDEAL</option><option value="card">Creditcard</option><option value="paypal">PayPal</option><option value="bancontact">Bancontact</option><option value="klarna">Klarna</option></select></div>
+    <div class="fg"><label>Mollie methode ID (optioneel)</label><input type="text" id="bm-mollie" placeholder="bancontact"/></div>
+  </div>
+  <div class="modal-knoppen"><button class="btn-goud" onclick="slaaBetaal()">Toevoegen →</button><button class="btn-uit" onclick="sluitModal('m-betaal')">Annuleren</button></div>
+</div></div>
+
+<div class="modal-achtergrond" id="m-reservering"><div class="modal-venster"><div class="modal-kop"><h2>Reservering <em>details</em></h2><button class="modal-sluit" onclick="sluitModal('m-reservering')">✕</button></div><div class="modal-inhoud" id="res-modal-inhoud"></div><div class="modal-knoppen" id="res-modal-knoppen"></div></div></div>
+
+<div class="toast" id="toast-melding"></div>
+
+<script data-cfasync="false">
+// ================================================================
+// CONFIGURATIE
+// ================================================================
+var SB = 'https://eugdqjclpptbneburqtn.supabase.co';
+var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1Z2RxamNscHB0Ym5lYnVycXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTc2MDMsImV4cCI6MjA4OTU3MzYwM30.oXpk_sw_f3NGb6Q6Wx-TQfiYXFtnT_29iwkFKl5EqeA';
+
+// ================================================================
+// LOGIN — simpel en direct, geen addEventListener
+// ================================================================
+var juistWachtwoord = localStorage.getItem('sn_ww') || 'Secretnights2026!';
+
+function inloggen() {
+  var invoer = document.getElementById('login-ww').value;
+  if (invoer === juistWachtwoord) {
+    sessionStorage.setItem('sn_in', '1');
+    document.getElementById('login-scherm').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    laadAlles();
+  } else {
+    document.getElementById('login-fout').textContent = 'Onjuist wachtwoord. Probeer opnieuw.';
+    document.getElementById('login-ww').value = '';
+    setTimeout(function() { document.getElementById('login-fout').textContent = ''; }, 3000);
   }
 }
-function uitloggen(){sessionStorage.removeItem('sn_ok');location.reload();}
 
-// Auto-login wordt afgehandeld door vroege script bovenaan body
-function wijzigWw(){var p1=document.getElementById('nw1').value,p2=document.getElementById('nw2').value;if(p1.length<8){toon('Minimaal 8 tekens','err');return;}if(p1!==p2){toon('Wachtwoorden komen niet overeen','err');return;}localStorage.setItem('sn_ww',p1);WW=p1;document.getElementById('nw1').value='';document.getElementById('nw2').value='';toon('Wachtwoord gewijzigd ✓','ok');}
+// Handlers staan inline in de HTML
 
-function api(pad,o){o=o||{};return fetch(SB+pad,{method:o.method||'GET',headers:Object.assign({'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},o.headers||{}),body:o.body||undefined});}
-
-function ga(naam,el){document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');p.style.display='none';});document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('on');});var pg=document.getElementById('pg-'+naam);if(pg){pg.classList.add('on');pg.style.display='flex';}if(el)el.classList.add('on');if(naam==='kalender')toonKal();if(naam==='editor')laadTeksten();if(naam==='statistieken')laadStats();}
-
-function laadAlles(){laadRes();laadBeschikbaar();laadFotos();laadPaginas();laadBetaal();laadInst();laadTeksten();}
-function laadRes(){api('/rest/v1/reserveringen?select=*&order=created_at.desc').then(function(r){return r.json();}).then(function(d){alleRes=Array.isArray(d)?d:[];toonDash();toonRes();toonKal();}).catch(function(){alleRes=[];});}
-function laadBeschikbaar(){api('/rest/v1/beschikbaarheid?select=*&limit=1').then(function(r){return r.json();}).then(function(d){if(d&&d[0]){totN=d[0].totaal_nachten;document.getElementById('tot-d').textContent=totN;var r=totN-d[0].geboekte_nachten;document.getElementById('bes-st').innerHTML='Totaal: <strong style="color:var(--w)">'+totN+'</strong> | Geboekt: <strong style="color:var(--w)">'+d[0].geboekte_nachten+'</strong> | Beschikbaar: <strong style="color:var(--g)">'+r+'</strong>';}}).catch(function(){});}
-function laadFotos(){api('/rest/v1/media?select=*&order=created_at.desc').then(function(r){return r.json();}).then(function(d){alleFotos=Array.isArray(d)?d:[];toonFotos();}).catch(function(){alleFotos=[];});}
-function laadPaginas(){api('/rest/v1/extra_paginas?select=*&order=created_at.desc').then(function(r){return r.json();}).then(function(d){allePaginas=Array.isArray(d)?d:[];toonPaginas();}).catch(function(){allePaginas=[];});}
-function laadBetaal(){api('/rest/v1/betaalmethodes?select=*&order=volgorde').then(function(r){return r.json();}).then(function(d){alleBetaal=Array.isArray(d)?d:[];toonBetaal();}).catch(function(){alleBetaal=[];});}
-function laadInst(){api('/rest/v1/website_instellingen?id=eq.1&select=*').then(function(r){return r.json();}).then(function(d){if(!d||!d[0])return;var i=d[0];var aan=i.website_actief!==false;document.getElementById('site-sw').checked=aan;document.getElementById('s-sw2').checked=aan;updateSiteLbl(aan);if(i.offline_bericht)document.getElementById('s-msg').value=i.offline_bericht;var rA=i.reserveren_actief!==false;document.getElementById('r-sw').checked=rA;updateResLbl(rA);if(i.reserveren_bericht)document.getElementById('r-msg').value=i.reserveren_bericht;if(i.mollie_api_key)document.getElementById('mk').value=i.mollie_api_key;document.getElementById('m-sw').checked=i.mollie_actief||false;document.getElementById('m-lbl').textContent=i.mollie_actief?'Aan':'Uit';document.getElementById('m-dot').className='sdot '+(i.mollie_actief&&i.mollie_api_key?'aan':'uit');document.getElementById('m-txt').textContent=i.mollie_actief&&i.mollie_api_key?'Mollie actief':'Mollie niet actief';var b='';if(!aan)b+='<div style="background:rgba(224,82,82,.1);border:1px solid rgba(224,82,82,.25);padding:11px 15px;margin-bottom:8px;font-size:.68rem;color:var(--red)">⚠️ <strong>Website is OFFLINE.</strong></div>';if(!rA)b+='<div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);padding:11px 15px;margin-bottom:8px;font-size:.68rem;color:var(--g)">🚫 <strong>Reserveren is UIT.</strong></div>';document.getElementById('d-banner').innerHTML=b;}).catch(function(){});}
-function laadTeksten(){api('/rest/v1/pagina_inhoud?select=*').then(function(r){return r.json();}).then(function(d){if(!Array.isArray(d))return;alleTeksten={};d.forEach(function(item){if(!alleTeksten[item.pagina])alleTeksten[item.pagina]={};if(!alleTeksten[item.pagina][item.sectie])alleTeksten[item.pagina][item.sectie]={};alleTeksten[item.pagina][item.sectie][item.veld]=item.waarde;});updatePrev();}).catch(function(){});}
-function getT(p,s,v){return(alleTeksten[p]&&alleTeksten[p][s]&&alleTeksten[p][s][v])||'';}
-
-function laadStats(){
-  var nu=new Date();
-  var vdStr=nu.toISOString().split('T')[0];
-  var wkStr=new Date(nu-7*86400000).toISOString();
-  var mndStr=new Date(nu-30*86400000).toISOString();
-  api('/rest/v1/bezoeken?select=id').then(function(r){return r.json();}).then(function(d){document.getElementById('st-tot').textContent=(Array.isArray(d)?d.length:0).toLocaleString('nl');});
-  api('/rest/v1/bezoeken?select=id&created_at=gte.'+mndStr).then(function(r){return r.json();}).then(function(d){var n=Array.isArray(d)?d.length:0;document.getElementById('st-mnd').textContent=n.toLocaleString('nl');document.getElementById('s-bez').textContent=n.toLocaleString('nl');});
-  api('/rest/v1/bezoeken?select=id&created_at=gte.'+wkStr).then(function(r){return r.json();}).then(function(d){document.getElementById('st-wk').textContent=(Array.isArray(d)?d.length:0).toLocaleString('nl');});
-  api('/rest/v1/bezoeken?select=id&created_at=gte.'+vdStr+'T00:00:00').then(function(r){return r.json();}).then(function(d){document.getElementById('st-vd').textContent=(Array.isArray(d)?d.length:0).toLocaleString('nl');});
-  api('/rest/v1/bezoeken?select=apparaat').then(function(r){return r.json();}).then(function(d){if(!Array.isArray(d)||!d.length){document.getElementById('ap-st').innerHTML='<div class="leeg"><span>📱</span><p>Nog geen data</p></div>';document.getElementById('st-mob').textContent='0%';return;}var mob=d.filter(function(b){return b.apparaat==='mobiel';}).length;var pct=Math.round(mob/d.length*100);document.getElementById('st-mob').textContent=pct+'%';document.getElementById('ap-st').innerHTML='<div class="stat-row"><div><div class="stat-row-lbl">📱 Mobiel</div><div class="stat-row-bar"><div class="stat-row-fill" style="width:'+pct+'%"></div></div></div><div class="stat-row-val">'+mob+'</div></div><div class="stat-row"><div><div class="stat-row-lbl">💻 Desktop</div><div class="stat-row-bar"><div class="stat-row-fill" style="width:'+(100-pct)+'%"></div></div></div><div class="stat-row-val">'+(d.length-mob)+'</div></div>';});
-  var pc={wellness:0,dining:0,sauna:0};alleRes.forEach(function(r){if(pc[r.pakket]!==undefined)pc[r.pakket]++;});var pm=Math.max(1,pc.wellness,pc.dining,pc.sauna);document.getElementById('pk-st').innerHTML=['wellness','dining','sauna'].map(function(k){var l={wellness:'🌿 Wellness',dining:'🍽️ Dining',sauna:'🧖 Sauna'}[k];return'<div class="stat-row"><div><div class="stat-row-lbl">'+l+'</div><div class="stat-row-bar"><div class="stat-row-fill" style="width:'+(pc[k]/pm*100)+'%"></div></div></div><div class="stat-row-val">'+pc[k]+'</div></div>';}).join('');
-  var b1=alleRes.filter(function(r){return r.boot==='nature-one';}).length,b2=alleRes.filter(function(r){return r.boot==='nature-two';}).length,bm=Math.max(1,b1,b2);document.getElementById('bo-st').innerHTML='<div class="stat-row"><div><div class="stat-row-lbl">🚤 Nature One</div><div class="stat-row-bar"><div class="stat-row-fill" style="width:'+(b1/bm*100)+'%"></div></div></div><div class="stat-row-val">'+b1+'</div></div><div class="stat-row"><div><div class="stat-row-lbl">🚤 Nature Two</div><div class="stat-row-bar"><div class="stat-row-fill" style="width:'+(b2/bm*100)+'%"></div></div></div><div class="stat-row-val">'+b2+'</div></div>';
-  var rec=alleRes.slice(0,5);document.getElementById('re-st').innerHTML=rec.length?rec.map(function(r){return'<div class="stat-row"><span class="stat-row-lbl">'+r.voornaam+' '+r.achternaam+'<br/><span style="font-size:.52rem;opacity:.6">'+fmtD(r.datum)+'</span></span><span class="sb '+r.status+'">'+r.status+'</span></div>';}).join(''):'<div class="leeg"><span>📋</span><p>Nog geen reserveringen</p></div>';
-  var van=new Date(nu-14*86400000).toISOString();
-  api('/rest/v1/bezoeken?select=created_at&created_at=gte.'+van).then(function(r){return r.json();}).then(function(d){if(!Array.isArray(d)){document.getElementById('bar-chart').innerHTML='<div class="lad">Geen data</div>';return;}var dm={};for(var i=13;i>=0;i--){var dt=new Date(nu-i*86400000);dm[dt.toISOString().split('T')[0]]=0;}d.forEach(function(b){var k=(b.created_at||'').split('T')[0];if(dm[k]!==undefined)dm[k]++;});var keys=Object.keys(dm);var mx=Math.max(1,Math.max.apply(null,keys.map(function(k){return dm[k];})));document.getElementById('bar-chart').innerHTML=keys.map(function(k){var p=dm[k]/mx*100;var dg=k.split('-')[2]+'/'+k.split('-')[1];return'<div class="bar" style="height:'+Math.max(4,p)+'%" title="'+k+': '+dm[k]+'"><div class="bar-val">'+dm[k]+'</div><div class="bar-lbl">'+dg+'</div></div>';}).join('');});
+// Controleer of al ingelogd
+if (sessionStorage.getItem('sn_in') === '1') {
+  document.getElementById('login-scherm').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  laadAlles();
 }
 
-var BN={'nature-one':'Nature One','nature-two':'Nature Two'};
-var PN={'wellness':'Wellness','dining':'Dining','sauna':'Sauna'};
-function fmtD(d){if(!d)return'—';return new Date(d).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'});}
-function toonDash(){document.getElementById('s-res').textContent=alleRes.length;document.getElementById('s-bev').textContent=alleRes.filter(function(r){return r.status==='bevestigd';}).length;document.getElementById('s-omz').textContent='€'+alleRes.reduce(function(s,r){return s+(r.totaalbedrag||0);},0).toLocaleString('nl');var t=bouwTbl(alleRes.slice(0,6));document.getElementById('d-lad').style.display=t?'none':'block';document.getElementById('d-tbl').style.display=t?'block':'none';if(t)document.getElementById('d-tbl').innerHTML=t;}
-function bouwTbl(data){if(!data.length)return null;return'<table><thead><tr><th>Naam</th><th>Boot</th><th>Pakket</th><th>Datum</th><th>Totaal</th><th>Status</th><th>Acties</th></tr></thead><tbody>'+data.map(function(r){return'<tr><td>'+r.voornaam+' '+r.achternaam+'<br/><span style="font-size:.54rem;color:rgba(245,240,232,.26)">'+r.email+'</span></td><td>'+(BN[r.boot]||r.boot)+'</td><td>'+(PN[r.pakket]||r.pakket)+(r.massage?' 💆':'')+'</td><td>'+fmtD(r.datum)+'</td><td style="color:var(--g);font-family:var(--fd)">€'+r.totaalbedrag+',-</td><td><span class="sb '+r.status+'">'+r.status+'</span></td><td style="display:flex;gap:3px"><button class="ab" onclick="openRD(\''+r.id+'\')">Details</button>'+(r.status==='bevestigd'?'<button class="ab" style="border-color:var(--grn);color:var(--grn)" onclick="chgSt(\''+r.id+'\',\'afgerond\')">✓</button>':'')+(r.status!=='geannuleerd'?'<button class="ab d" onclick="chgSt(\''+r.id+'\',\'geannuleerd\')">✕</button>':'')+'</td></tr>';}).join('')+'</tbody></table>';}
-function setF(f,btn){resF=f;document.querySelectorAll('[id^="rf-"]').forEach(function(b){b.style.borderColor='';b.style.color='';});btn.style.borderColor='var(--g)';btn.style.color='var(--g)';toonRes();}
-function toonRes(){var q=(document.getElementById('zoek')?document.getElementById('zoek').value:'').toLowerCase();var d=alleRes;if(resF!=='alle')d=d.filter(function(r){return r.status===resF;});if(q)d=d.filter(function(r){return(r.voornaam+r.achternaam+r.email).toLowerCase().indexOf(q)!==-1;});var t=bouwTbl(d);document.getElementById('r-lad').style.display=t?'none':'block';document.getElementById('r-tbl').style.display=t?'block':'none';if(t)document.getElementById('r-tbl').innerHTML=t;}
-function chgSt(id,s){api('/rest/v1/reserveringen?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({status:s})}).then(function(r){if(r.ok){toon('Gewijzigd ✓','ok');laadRes();}else toon('Fout','err');});}
-function openRD(id){var r=null;for(var i=0;i<alleRes.length;i++){if(alleRes[i].id===id){r=alleRes[i];break;}}if(!r)return;var bm={'nature-one':'Nature One (Biesbosch)','nature-two':'Nature Two (Bommelerwaard)'};var pm={'wellness':'Natuurlijk Wellness','dining':'Dining Experience','sauna':'Sauna Boot'};var rijen=[['Naam',r.voornaam+' '+r.achternaam],['E-mail','<a href="mailto:'+r.email+'" style="color:var(--g)">'+r.email+'</a>'],['Telefoon','<a href="tel:'+r.telefoon+'" style="color:var(--g)">'+r.telefoon+'</a>'],['Boot',(bm[r.boot]||r.boot)],['Arrangement',(pm[r.pakket]||r.pakket)],['Massage',r.massage?'Ja (+€85)':'Nee'],['Datum',fmtD(r.datum)],['Personen',r.personen],['Wensen',r.wensen||'—'],['Status','<span class="sb '+r.status+'">'+r.status+'</span>'],['Totaal','<span style="font-family:var(--fd);font-size:1.25rem;color:var(--g)">€'+r.totaalbedrag+',-</span>'],['Aanbetaling','€'+Math.round(r.totaalbedrag*.3)+',-']];document.getElementById('rm-b').innerHTML=rijen.map(function(row){return'<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(200,169,110,.06)"><span style="font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.3)">'+row[0]+'</span><span style="font-size:.68rem;color:var(--w);text-align:right;max-width:220px">'+row[1]+'</span></div>';}).join('');document.getElementById('rm-a').innerHTML='<a href="mailto:'+r.email+'" class="bg" style="text-decoration:none">✉ Mail gast</a>'+(r.status!=='geannuleerd'?'<button class="br" onclick="chgSt(\''+r.id+'\',\'geannuleerd\');sluitM(\'m-res\')">✕ Annuleer</button>':'')+'<button class="bo" onclick="sluitM(\'m-res\')">Sluiten</button>';openM('m-res');}
-function exportCSV(){var h=['Voornaam','Achternaam','Email','Telefoon','Boot','Pakket','Massage','Datum','Personen','Totaal','Status','Geboekt'].join(';');var rows=alleRes.map(function(r){return[r.voornaam,r.achternaam,r.email,r.telefoon,r.boot,r.pakket,r.massage?'Ja':'Nee',r.datum,r.personen,r.totaalbedrag,r.status,(r.created_at||'').split('T')[0]].join(';');});var blob=new Blob([h+'\n'+rows.join('\n')],{type:'text/csv;charset=utf-8;'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='secretnights-reserveringen.csv';a.click();toon('CSV gedownload ✓','ok');}
+function uitloggen() { sessionStorage.removeItem('sn_in'); location.reload(); }
 
-var MAANDEN=['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'];
-function toonKal(){document.getElementById('k-tit').textContent=MAANDEN[kM]+' '+kJ;var s=new Date(kJ,kM,1).getDay()-1;if(s<0)s=6;var d=new Date(kJ,kM+1,0).getDate();var gb={};alleRes.filter(function(r){return r.status!=='geannuleerd'&&r.datum;}).forEach(function(r){gb[r.datum]=true;});var vd=new Date();var h='';for(var i=0;i<s;i++)h+='<div class="cdag an"></div>';for(var x=1;x<=d;x++){var ds=kJ+'-'+String(kM+1).padStart(2,'0')+'-'+String(x).padStart(2,'0');var isV=x===vd.getDate()&&kM===vd.getMonth()&&kJ===vd.getFullYear();h+='<div class="cdag '+(gb[ds]?'gb':'')+' '+(isV?'vd':'')+'" title="'+(gb[ds]?'Geboekt':'Vrij')+'">'+x+'</div>';}document.getElementById('k-grid').innerHTML=h;}
-function kPrev(){kM--;if(kM<0){kM=11;kJ--;}toonKal();}
-function kNext(){kM++;if(kM>11){kM=0;kJ++;}toonKal();}
-
-var SECS={hero:{lbl:'Hero',p:'index',s:'hero',velden:[['titel','Hoofdtitel',false,'Gebruik *woord* voor cursief goud'],['subtitel','Subtitel',true]]},intro:{lbl:'Mysterie sectie',p:'index',s:'intro',velden:[['titel','Titel',false,'Gebruik *woord* voor cursief goud'],['tekst1','Alinea 1',true],['tekst2','Alinea 2',true]]},quote:{lbl:'Quote balk',p:'index',s:'quote',velden:[['tekst','Quote tekst',true]]},cta:{lbl:'Call-to-action',p:'index',s:'cta',velden:[['titel','Titel',false,'Gebruik *woord* voor cursief goud'],['tekst','Tekst',true]]},contact:{lbl:'Contactgegevens',p:'algemeen',s:'contact',velden:[['telefoon','Telefoonnummer',false],['email','E-mailadres',false],['adres','Adres',false],['whatsapp','WhatsApp nummer',false]]}};
-function upd(id,val,isHtml){var el=document.getElementById(id);if(!el||!val)return;var r=val.replace(/\*([^*]+)\*/g,'<em style="font-style:italic;color:var(--g)">$1</em>');if(isHtml)el.innerHTML=r;else el.textContent=val;}
-function updatePrev(){
-  upd('p-hero-titel',getT('index','hero','titel'),true);
-  upd('p-hero-sub',getT('index','hero','subtitel'),false);
-  upd('p-hero-k1',getT('index','hero','knop1'),false);
-  upd('p-hero-k2',getT('index','hero','knop2'),false);
-  upd('p-intro-titel',getT('index','intro','titel'),true);
-  upd('p-intro-t1',getT('index','intro','tekst1'),false);
-  upd('p-intro-t2',getT('index','intro','tekst2'),false);
-  upd('p-f1-titel',getT('index','feature1','titel'),false);
-  upd('p-f1-tekst',getT('index','feature1','tekst'),false);
-  upd('p-f2-titel',getT('index','feature2','titel'),false);
-  upd('p-f2-tekst',getT('index','feature2','tekst'),false);
-  upd('p-f3-titel',getT('index','feature3','titel'),false);
-  upd('p-f3-tekst',getT('index','feature3','tekst'),false);
-  upd('p-dining-titel',getT('index','dining','titel'),true);
-  upd('p-dining-tekst',getT('index','dining','tekst'),false);
-  upd('p-dining-prijs',getT('index','dining','prijs'),false);
-  upd('p-wellness-titel',getT('index','wellness','titel'),true);
-  upd('p-wellness-tekst',getT('index','wellness','tekst'),false);
-  upd('p-wellness-prijs',getT('index','wellness','prijs'),false);
-  upd('p-sauna-titel',getT('index','sauna','titel'),true);
-  upd('p-sauna-tekst',getT('index','sauna','tekst'),false);
-  upd('p-sauna-prijs',getT('index','sauna','prijs'),false);
-  upd('p-r1-tekst',getT('index','review1','tekst'),false);
-  upd('p-r1-naam',getT('index','review1','naam'),false);
-  upd('p-r2-tekst',getT('index','review2','tekst'),false);
-  upd('p-r2-naam',getT('index','review2','naam'),false);
-  upd('p-r3-tekst',getT('index','review3','tekst'),false);
-  upd('p-r3-naam',getT('index','review3','naam'),false);
-  upd('p-quote-tekst',getT('index','quote','tekst'),false);
-  upd('p-cta-titel',getT('index','cta','titel'),true);
-  upd('p-cta-tekst',getT('index','cta','tekst'),false);
-  upd('p-tel',getT('algemeen','contact','telefoon'),false);
-  upd('p-em',getT('algemeen','contact','email'),false);
-  upd('p-ad',getT('algemeen','contact','adres'),false);
-  // Oude preview elementen (backward compat)
-  upd('pv-ht',getT('index','hero','titel'),true);
-  upd('pv-hs',getT('index','hero','subtitel'),false);
-  upd('pv-it',getT('index','intro','titel'),true);
-  upd('pv-i1',getT('index','intro','tekst1'),false);
-  upd('pv-i2',getT('index','intro','tekst2'),false);
-  upd('pv-ct',getT('index','cta','titel'),true);
-  upd('pv-cp',getT('index','cta','tekst'),false);
-  var qel=document.getElementById('p-quote-tekst');if(qel){var q=getT('index','quote','tekst');if(q)qel.textContent='"'+q+'"';}
-  api('/rest/v1/beschikbaarheid?select=totaal_nachten,geboekte_nachten&limit=1').then(function(r){return r.json();}).then(function(d){if(d&&d[0]){var r=d[0].totaal_nachten-d[0].geboekte_nachten;var e1=document.getElementById('p-cnt');var e2=document.getElementById('pv-cnt');if(e1)e1.textContent=r;if(e2)e2.textContent=r;}}).catch(function(){});
+function wijzigWachtwoord() {
+  var p1 = document.getElementById('nw1').value;
+  var p2 = document.getElementById('nw2').value;
+  if (p1.length < 8) { toon('Minimaal 8 tekens', 'fout'); return; }
+  if (p1 !== p2) { toon('Wachtwoorden komen niet overeen', 'fout'); return; }
+  localStorage.setItem('sn_ww', p1);
+  juistWachtwoord = p1;
+  document.getElementById('nw1').value = '';
+  document.getElementById('nw2').value = '';
+  toon('Wachtwoord gewijzigd ✓', 'ok');
 }
-// SECTIE DEFINITIES - alles aanpasbaar
-var SECS_DEF={
-  hero:{label:'🦸 Hero',velden:[{p:'index',s:'hero',v:'titel',lbl:'Hoofdtitel',ta:false,hint:'Gebruik *woord* voor cursief goud',pid:'p-hero-titel'},{p:'index',s:'hero',v:'subtitel',lbl:'Subtitel',ta:true,pid:'p-hero-sub'},{p:'index',s:'hero',v:'knop1',lbl:'Knop 1',ta:false,pid:'p-hero-k1'},{p:'index',s:'hero',v:'knop2',lbl:'Knop 2',ta:false,pid:'p-hero-k2'}]},
-  intro:{label:'🌊 Mysterie sectie',velden:[{p:'index',s:'intro',v:'titel',lbl:'Titel',ta:false,hint:'Gebruik *woord* voor cursief goud',pid:'p-intro-titel'},{p:'index',s:'intro',v:'tekst1',lbl:'Alinea 1',ta:true,pid:'p-intro-t1'},{p:'index',s:'intro',v:'tekst2',lbl:'Alinea 2',ta:true,pid:'p-intro-t2'}]},
-  features:{label:'✨ Features',velden:[{p:'index',s:'feature1',v:'titel',lbl:'Blok 1 titel',ta:false,pid:'p-f1-titel'},{p:'index',s:'feature1',v:'tekst',lbl:'Blok 1 tekst',ta:true,pid:'p-f1-tekst'},{p:'index',s:'feature2',v:'titel',lbl:'Blok 2 titel',ta:false,pid:'p-f2-titel'},{p:'index',s:'feature2',v:'tekst',lbl:'Blok 2 tekst',ta:true,pid:'p-f2-tekst'},{p:'index',s:'feature3',v:'titel',lbl:'Blok 3 titel',ta:false,pid:'p-f3-titel'},{p:'index',s:'feature3',v:'tekst',lbl:'Blok 3 tekst',ta:true,pid:'p-f3-tekst'}]},
-  arrangementen:{label:'🛥️ Arrangementen & Prijzen',velden:[{p:'index',s:'dining',v:'titel',lbl:'Dining titel',ta:false,pid:'p-dining-titel'},{p:'index',s:'dining',v:'tekst',lbl:'Dining tekst',ta:true,pid:'p-dining-tekst'},{p:'index',s:'dining',v:'prijs',lbl:'Dining prijs',ta:false,pid:'p-dining-prijs'},{p:'index',s:'wellness',v:'titel',lbl:'Wellness titel',ta:false,pid:'p-wellness-titel'},{p:'index',s:'wellness',v:'tekst',lbl:'Wellness tekst',ta:true,pid:'p-wellness-tekst'},{p:'index',s:'wellness',v:'prijs',lbl:'Wellness prijs',ta:false,pid:'p-wellness-prijs'},{p:'index',s:'sauna',v:'titel',lbl:'Sauna titel',ta:false,pid:'p-sauna-titel'},{p:'index',s:'sauna',v:'tekst',lbl:'Sauna tekst',ta:true,pid:'p-sauna-tekst'},{p:'index',s:'sauna',v:'prijs',lbl:'Sauna prijs',ta:false,pid:'p-sauna-prijs'},{p:'index',s:'massage',v:'prijs',lbl:'Massage bijprijs',ta:false}]},
-  reviews:{label:'⭐ Reviews',velden:[{p:'index',s:'review1',v:'tekst',lbl:'Review 1 tekst',ta:true,pid:'p-r1-tekst'},{p:'index',s:'review1',v:'naam',lbl:'Review 1 naam',ta:false,pid:'p-r1-naam'},{p:'index',s:'review2',v:'tekst',lbl:'Review 2 tekst',ta:true,pid:'p-r2-tekst'},{p:'index',s:'review2',v:'naam',lbl:'Review 2 naam',ta:false,pid:'p-r2-naam'},{p:'index',s:'review3',v:'tekst',lbl:'Review 3 tekst',ta:true,pid:'p-r3-tekst'},{p:'index',s:'review3',v:'naam',lbl:'Review 3 naam',ta:false,pid:'p-r3-naam'}]},
-  quote:{label:'💬 Quote balk',velden:[{p:'index',s:'quote',v:'tekst',lbl:'Quote tekst',ta:true,pid:'p-quote-tekst'}]},
-  cta:{label:'🎯 Call-to-action',velden:[{p:'index',s:'cta',v:'titel',lbl:'Titel',ta:false,hint:'Gebruik *woord* voor cursief goud',pid:'p-cta-titel'},{p:'index',s:'cta',v:'tekst',lbl:'Tekst',ta:true,pid:'p-cta-tekst'}]},
-  contact:{label:'📞 Contactgegevens',velden:[{p:'algemeen',s:'contact',v:'telefoon',lbl:'Telefoonnummer',ta:false,pid:'p-tel'},{p:'algemeen',s:'contact',v:'email',lbl:'E-mail',ta:false,pid:'p-em'},{p:'algemeen',s:'contact',v:'adres',lbl:'Adres',ta:false,pid:'p-ad'},{p:'algemeen',s:'contact',v:'whatsapp',lbl:'WhatsApp nummer',ta:false}]}
+
+// ================================================================
+// API
+// ================================================================
+function api(pad, opties) {
+  opties = opties || {};
+  return fetch(SB + pad, {
+    method: opties.method || 'GET',
+    headers: Object.assign({ 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Content-Type': 'application/json' }, opties.headers || {}),
+    body: opties.body || undefined
+  });
+}
+
+// ================================================================
+// NAVIGATIE
+// ================================================================
+function toonPagina(naam, el) {
+  document.querySelectorAll('.pagina').forEach(function(p) { p.classList.remove('actief'); p.style.display = 'none'; });
+  document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('actief'); });
+  var pg = document.getElementById('pg-' + naam);
+  if (pg) { pg.classList.add('actief'); pg.style.display = 'flex'; }
+  if (el) el.classList.add('actief');
+  if (naam === 'kalender') toonKalender();
+  if (naam === 'editor') laadTeksten();
+  if (naam === 'statistieken') laadStatistieken();
+}
+
+// ================================================================
+// DATA
+// ================================================================
+var alleRes = [], alleFotos = [], allePaginas = [], alleBetaal = [], alleTeksten = {};
+var resFilter = 'alle', kalJaar = new Date().getFullYear(), kalMaand = new Date().getMonth(), totNachten = 12;
+var gekozenSectie = null, gewijzigdeVelden = {};
+
+function laadAlles() {
+  laadReserveringen();
+  laadBeschikbaar();
+  laadFotos();
+  laadPaginas();
+  laadBetaal();
+  laadInstellingen();
+}
+
+function laadReserveringen() {
+  api('/rest/v1/reserveringen?select=*&order=created_at.desc')
+    .then(function(r) { return r.json(); })
+    .then(function(d) { alleRes = Array.isArray(d) ? d : []; toonDashboard(); toonRes(); toonKalender(); })
+    .catch(function() { alleRes = []; });
+}
+
+function laadBeschikbaar() {
+  api('/rest/v1/beschikbaarheid?select=*&limit=1')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d && d[0]) {
+        totNachten = d[0].totaal_nachten;
+        document.getElementById('nachten-display').textContent = totNachten;
+        var rest = totNachten - d[0].geboekte_nachten;
+        document.getElementById('beschikbaar-status').innerHTML = 'Totaal: <strong style="color:var(--w)">' + totNachten + '</strong> &nbsp;|&nbsp; Geboekt: <strong style="color:var(--w)">' + d[0].geboekte_nachten + '</strong> &nbsp;|&nbsp; Beschikbaar: <strong style="color:var(--g)">' + rest + '</strong>';
+      }
+    }).catch(function() {});
+}
+
+function laadFotos() {
+  api('/rest/v1/media?select=*&order=created_at.desc')
+    .then(function(r) { return r.json(); })
+    .then(function(d) { alleFotos = Array.isArray(d) ? d : []; toonFotos(); })
+    .catch(function() { alleFotos = []; });
+}
+
+function laadPaginas() {
+  api('/rest/v1/extra_paginas?select=*&order=created_at.desc')
+    .then(function(r) { return r.json(); })
+    .then(function(d) { allePaginas = Array.isArray(d) ? d : []; toonPaginas(); })
+    .catch(function() { allePaginas = []; });
+}
+
+function laadBetaal() {
+  api('/rest/v1/betaalmethodes?select=*&order=volgorde')
+    .then(function(r) { return r.json(); })
+    .then(function(d) { alleBetaal = Array.isArray(d) ? d : []; toonBetaal(); })
+    .catch(function() { alleBetaal = []; });
+}
+
+function laadInstellingen() {
+  api('/rest/v1/website_instellingen?id=eq.1&select=*')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!d || !d[0]) return;
+      var inst = d[0];
+      var aan = inst.website_actief !== false;
+      document.getElementById('site-schakelaar').checked = aan;
+      document.getElementById('site-sw2').checked = aan;
+      updateSiteLbl(aan);
+      if (inst.offline_bericht) document.getElementById('offline-bericht').value = inst.offline_bericht;
+      var rAan = inst.reserveren_actief !== false;
+      document.getElementById('reserveer-sw').checked = rAan;
+      updateResLbl(rAan);
+      if (inst.reserveren_bericht) document.getElementById('reserveer-bericht').value = inst.reserveren_bericht;
+      if (inst.mollie_api_key) document.getElementById('mollie-key').value = inst.mollie_api_key;
+      document.getElementById('mollie-sw').checked = inst.mollie_actief || false;
+      document.getElementById('mollie-lbl').textContent = inst.mollie_actief ? 'Aan' : 'Uit';
+      document.getElementById('mollie-dot').style.background = (inst.mollie_actief && inst.mollie_api_key) ? 'var(--grn)' : 'var(--red)';
+      document.getElementById('mollie-txt').textContent = (inst.mollie_actief && inst.mollie_api_key) ? 'Mollie actief — echte betalingen ingeschakeld' : 'Mollie niet actief';
+      var banner = '';
+      if (!aan) banner += '<div style="background:rgba(224,82,82,.1);border:1px solid rgba(224,82,82,.25);padding:11px 15px;margin-bottom:8px;font-size:.68rem;color:var(--red)">⚠️ <strong>Website is OFFLINE.</strong> Zet hem aan via de schakelaar bovenin.</div>';
+      if (!rAan) banner += '<div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);padding:11px 15px;margin-bottom:8px;font-size:.68rem;color:var(--g)">🚫 <strong>Reserveren is UIT.</strong> Zet het aan via Instellingen.</div>';
+      document.getElementById('d-banner').innerHTML = banner;
+    }).catch(function() {});
+}
+
+function laadTeksten() {
+  api('/rest/v1/pagina_inhoud?select=*')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (!Array.isArray(d)) return;
+      alleTeksten = {};
+      d.forEach(function(item) {
+        if (!alleTeksten[item.pagina]) alleTeksten[item.pagina] = {};
+        if (!alleTeksten[item.pagina][item.sectie]) alleTeksten[item.pagina][item.sectie] = {};
+        alleTeksten[item.pagina][item.sectie][item.veld] = item.waarde;
+      });
+      updatePreview();
+    }).catch(function() {});
+}
+
+function haalTekst(p, s, v) { return (alleTeksten[p] && alleTeksten[p][s] && alleTeksten[p][s][v]) || ''; }
+
+// ================================================================
+// STATISTIEKEN
+// ================================================================
+function laadStatistieken() {
+  var nu = new Date();
+  var vdStr = nu.toISOString().split('T')[0];
+  var wkStr = new Date(nu - 7 * 86400000).toISOString();
+  var mndStr = new Date(nu - 30 * 86400000).toISOString();
+  api('/rest/v1/bezoeken?select=id').then(function(r) { return r.json(); }).then(function(d) { document.getElementById('st-tot').textContent = (Array.isArray(d) ? d.length : 0).toLocaleString('nl'); });
+  api('/rest/v1/bezoeken?select=id&created_at=gte.' + mndStr).then(function(r) { return r.json(); }).then(function(d) { var n = Array.isArray(d) ? d.length : 0; document.getElementById('st-mnd').textContent = n.toLocaleString('nl'); document.getElementById('s-bez').textContent = n.toLocaleString('nl'); });
+  api('/rest/v1/bezoeken?select=id&created_at=gte.' + wkStr).then(function(r) { return r.json(); }).then(function(d) { document.getElementById('st-wk').textContent = (Array.isArray(d) ? d.length : 0).toLocaleString('nl'); });
+  api('/rest/v1/bezoeken?select=id&created_at=gte.' + vdStr + 'T00:00:00').then(function(r) { return r.json(); }).then(function(d) { document.getElementById('st-vd').textContent = (Array.isArray(d) ? d.length : 0).toLocaleString('nl'); });
+  api('/rest/v1/bezoeken?select=apparaat').then(function(r) { return r.json(); }).then(function(d) {
+    if (!Array.isArray(d) || !d.length) { document.getElementById('ap-stats').innerHTML = '<div class="leeg"><span>📱</span><p>Nog geen data</p></div>'; document.getElementById('st-mob').textContent = '0%'; return; }
+    var mob = d.filter(function(b) { return b.apparaat === 'mobiel'; }).length;
+    var pct = Math.round(mob / d.length * 100);
+    document.getElementById('st-mob').textContent = pct + '%';
+    document.getElementById('ap-stats').innerHTML = '<div class="stat-rij2"><div><div class="stat-rij2-lbl">📱 Mobiel</div><div class="prog-balk"><div class="prog-vulling" style="width:' + pct + '%"></div></div></div><div class="stat-rij2-val">' + mob + '</div></div><div class="stat-rij2"><div><div class="stat-rij2-lbl">💻 Desktop</div><div class="prog-balk"><div class="prog-vulling" style="width:' + (100 - pct) + '%"></div></div></div><div class="stat-rij2-val">' + (d.length - mob) + '</div></div>';
+  });
+  var pc = { wellness: 0, dining: 0, sauna: 0 };
+  alleRes.forEach(function(r) { if (pc[r.pakket] !== undefined) pc[r.pakket]++; });
+  var pm = Math.max(1, pc.wellness, pc.dining, pc.sauna);
+  document.getElementById('pk-stats').innerHTML = ['wellness', 'dining', 'sauna'].map(function(k) { var l = { wellness: '🌿 Wellness', dining: '🍽️ Dining', sauna: '🧖 Sauna' }[k]; return '<div class="stat-rij2"><div><div class="stat-rij2-lbl">' + l + '</div><div class="prog-balk"><div class="prog-vulling" style="width:' + (pc[k] / pm * 100) + '%"></div></div></div><div class="stat-rij2-val">' + pc[k] + '</div></div>'; }).join('');
+  var b1 = alleRes.filter(function(r) { return r.boot === 'nature-one'; }).length, b2 = alleRes.filter(function(r) { return r.boot === 'nature-two'; }).length, bm = Math.max(1, b1, b2);
+  document.getElementById('bo-stats').innerHTML = '<div class="stat-rij2"><div><div class="stat-rij2-lbl">🚤 Nature One</div><div class="prog-balk"><div class="prog-vulling" style="width:' + (b1 / bm * 100) + '%"></div></div></div><div class="stat-rij2-val">' + b1 + '</div></div><div class="stat-rij2"><div><div class="stat-rij2-lbl">🚤 Nature Two</div><div class="prog-balk"><div class="prog-vulling" style="width:' + (b2 / bm * 100) + '%"></div></div></div><div class="stat-rij2-val">' + b2 + '</div></div>';
+  var rec = alleRes.slice(0, 5);
+  document.getElementById('re-stats').innerHTML = rec.length ? rec.map(function(r) { return '<div class="stat-rij2"><span class="stat-rij2-lbl">' + r.voornaam + ' ' + r.achternaam + '<br/><span style="font-size:.52rem;opacity:.6">' + fmtDatum(r.datum) + '</span></span><span class="badge ' + r.status + '">' + r.status + '</span></div>'; }).join('') : '<div class="leeg"><span>📋</span><p>Nog geen reserveringen</p></div>';
+  var van14 = new Date(nu - 14 * 86400000).toISOString();
+  api('/rest/v1/bezoeken?select=created_at&created_at=gte.' + van14).then(function(r) { return r.json(); }).then(function(d) {
+    if (!Array.isArray(d)) { document.getElementById('staaf-grafiek').innerHTML = '<div class="laden">Geen data</div>'; return; }
+    var dm = {};
+    for (var i = 13; i >= 0; i--) { var dt = new Date(nu - i * 86400000); dm[dt.toISOString().split('T')[0]] = 0; }
+    d.forEach(function(b) { var k = (b.created_at || '').split('T')[0]; if (dm[k] !== undefined) dm[k]++; });
+    var keys = Object.keys(dm);
+    var mx = Math.max(1, Math.max.apply(null, keys.map(function(k) { return dm[k]; })));
+    document.getElementById('staaf-grafiek').innerHTML = keys.map(function(k) { var p = dm[k] / mx * 100; var dg = k.split('-')[2] + '/' + k.split('-')[1]; return '<div class="staaf" style="height:' + Math.max(4, p) + '%" title="' + k + ': ' + dm[k] + ' bezoekers"><div class="staaf-val">' + dm[k] + '</div><div class="staaf-lbl">' + dg + '</div></div>'; }).join('');
+  });
+}
+
+// ================================================================
+// DASHBOARD
+// ================================================================
+var BOOT_NAMEN = { 'nature-one': 'Nature One', 'nature-two': 'Nature Two' };
+var PAKKET_NAMEN = { 'wellness': 'Wellness', 'dining': 'Dining', 'sauna': 'Sauna' };
+function fmtDatum(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' }); }
+
+function toonDashboard() {
+  document.getElementById('s-res').textContent = alleRes.length;
+  document.getElementById('s-bev').textContent = alleRes.filter(function(r) { return r.status === 'bevestigd'; }).length;
+  document.getElementById('s-omz').textContent = '€' + alleRes.reduce(function(s, r) { return s + (r.totaalbedrag || 0); }, 0).toLocaleString('nl');
+  var tbl = bouwTabel(alleRes.slice(0, 6));
+  document.getElementById('d-tbl').innerHTML = tbl || '<div class="leeg"><span>📋</span><p>Geen reserveringen</p></div>';
+}
+
+function bouwTabel(data) {
+  if (!data.length) return null;
+  return '<table><thead><tr><th>Naam</th><th>Boot</th><th>Pakket</th><th>Datum</th><th>Totaal</th><th>Status</th><th>Acties</th></tr></thead><tbody>' + data.map(function(r) {
+    return '<tr><td>' + r.voornaam + ' ' + r.achternaam + '<br/><span style="font-size:.54rem;color:rgba(245,240,232,.26)">' + r.email + '</span></td><td>' + (BOOT_NAMEN[r.boot] || r.boot) + '</td><td>' + (PAKKET_NAMEN[r.pakket] || r.pakket) + (r.massage ? ' 💆' : '') + '</td><td>' + fmtDatum(r.datum) + '</td><td style="color:var(--g);font-family:var(--fd)">€' + r.totaalbedrag + ',-</td><td><span class="badge ' + r.status + '">' + r.status + '</span></td><td style="display:flex;gap:3px"><button class="tbl-btn" onclick="openReservering(\'' + r.id + '\')">Details</button>' + (r.status === 'bevestigd' ? '<button class="tbl-btn" style="border-color:var(--grn);color:var(--grn)" onclick="wijzigStatus(\'' + r.id + '\',\'afgerond\')">✓</button>' : '') + (r.status !== 'geannuleerd' ? '<button class="tbl-btn gevaar" onclick="wijzigStatus(\'' + r.id + '\',\'geannuleerd\')">✕</button>' : '') + '</td></tr>';
+  }).join('') + '</tbody></table>';
+}
+
+function setFilter(f, btn) {
+  resFilter = f;
+  document.querySelectorAll('[id^="rf-"]').forEach(function(b) { b.style.borderColor = ''; b.style.color = ''; });
+  btn.style.borderColor = 'var(--g)'; btn.style.color = 'var(--g)';
+  toonRes();
+}
+
+function toonRes() {
+  var q = (document.getElementById('zoek') ? document.getElementById('zoek').value : '').toLowerCase();
+  var d = alleRes;
+  if (resFilter !== 'alle') d = d.filter(function(r) { return r.status === resFilter; });
+  if (q) d = d.filter(function(r) { return (r.voornaam + r.achternaam + r.email).toLowerCase().indexOf(q) !== -1; });
+  var tbl = bouwTabel(d);
+  document.getElementById('res-tbl').innerHTML = tbl || '<div class="leeg"><span>📋</span><p>Geen reserveringen gevonden</p></div>';
+}
+
+function wijzigStatus(id, status) {
+  api('/rest/v1/reserveringen?id=eq.' + id, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ status: status }) })
+    .then(function(r) { if (r.ok) { toon('Gewijzigd ✓', 'ok'); laadReserveringen(); } else toon('Fout', 'fout'); });
+}
+
+function openReservering(id) {
+  var r = null;
+  for (var i = 0; i < alleRes.length; i++) { if (alleRes[i].id === id) { r = alleRes[i]; break; } }
+  if (!r) return;
+  var bm = { 'nature-one': 'Nature One (Biesbosch)', 'nature-two': 'Nature Two (Bommelerwaard)' };
+  var pm = { 'wellness': 'Natuurlijk Wellness', 'dining': 'Dining Experience', 'sauna': 'Sauna Boot' };
+  var rijen = [['Naam', r.voornaam + ' ' + r.achternaam], ['E-mail', '<a href="mailto:' + r.email + '" style="color:var(--g)">' + r.email + '</a>'], ['Telefoon', '<a href="tel:' + r.telefoon + '" style="color:var(--g)">' + r.telefoon + '</a>'], ['Boot', bm[r.boot] || r.boot], ['Arrangement', pm[r.pakket] || r.pakket], ['Massage', r.massage ? 'Ja (+€85)' : 'Nee'], ['Datum', fmtDatum(r.datum)], ['Personen', r.personen], ['Wensen', r.wensen || '—'], ['Status', '<span class="badge ' + r.status + '">' + r.status + '</span>'], ['Totaal', '<span style="font-family:var(--fd);font-size:1.25rem;color:var(--g)">€' + r.totaalbedrag + ',-</span>'], ['Aanbetaling', '€' + Math.round(r.totaalbedrag * .3) + ',-']];
+  document.getElementById('res-modal-inhoud').innerHTML = rijen.map(function(rij) { return '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(200,169,110,.06)"><span style="font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.3)">' + rij[0] + '</span><span style="font-size:.68rem;color:var(--w);text-align:right;max-width:220px">' + rij[1] + '</span></div>'; }).join('');
+  document.getElementById('res-modal-knoppen').innerHTML = '<a href="mailto:' + r.email + '" class="btn-goud" style="text-decoration:none">✉ Mail gast</a>' + (r.status !== 'geannuleerd' ? '<button class="btn-rood" onclick="wijzigStatus(\'' + r.id + '\',\'geannuleerd\');sluitModal(\'m-reservering\')">✕ Annuleer</button>' : '') + '<button class="btn-uit" onclick="sluitModal(\'m-reservering\')">Sluiten</button>';
+  openModal('m-reservering');
+}
+
+function exportCSV() {
+  var h = ['Voornaam', 'Achternaam', 'Email', 'Telefoon', 'Boot', 'Pakket', 'Massage', 'Datum', 'Personen', 'Totaal', 'Status', 'Geboekt'].join(';');
+  var rows = alleRes.map(function(r) { return [r.voornaam, r.achternaam, r.email, r.telefoon, r.boot, r.pakket, r.massage ? 'Ja' : 'Nee', r.datum, r.personen, r.totaalbedrag, r.status, (r.created_at || '').split('T')[0]].join(';'); });
+  var blob = new Blob([h + '\n' + rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'secretnights-reserveringen.csv'; a.click();
+  toon('CSV gedownload ✓', 'ok');
+}
+
+// ================================================================
+// KALENDER
+// ================================================================
+var MAANDEN = ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December'];
+function toonKalender() {
+  document.getElementById('kal-titel').textContent = MAANDEN[kalMaand] + ' ' + kalJaar;
+  var s = new Date(kalJaar, kalMaand, 1).getDay() - 1; if (s < 0) s = 6;
+  var d = new Date(kalJaar, kalMaand + 1, 0).getDate();
+  var geboekt = {};
+  alleRes.filter(function(r) { return r.status !== 'geannuleerd' && r.datum; }).forEach(function(r) { geboekt[r.datum] = true; });
+  var vd = new Date();
+  var html = '';
+  for (var i = 0; i < s; i++) html += '<div class="kal-dag ander"></div>';
+  for (var x = 1; x <= d; x++) {
+    var ds = kalJaar + '-' + String(kalMaand + 1).padStart(2, '0') + '-' + String(x).padStart(2, '0');
+    var isV = x === vd.getDate() && kalMaand === vd.getMonth() && kalJaar === vd.getFullYear();
+    html += '<div class="kal-dag ' + (geboekt[ds] ? 'geboekt' : '') + ' ' + (isV ? 'vandaag' : '') + '" title="' + (geboekt[ds] ? 'Geboekt' : 'Vrij') + '">' + x + '</div>';
+  }
+  document.getElementById('kal-grid').innerHTML = html;
+}
+function kalVorige() { kalMaand--; if (kalMaand < 0) { kalMaand = 11; kalJaar--; } toonKalender(); }
+function kalVolgende() { kalMaand++; if (kalMaand > 11) { kalMaand = 0; kalJaar++; } toonKalender(); }
+
+// ================================================================
+// VISUELE EDITOR
+// ================================================================
+var SECTIE_DEFINITIES = {
+  hero: { label: '🦸 Hero — Bovenste sectie', velden: [
+    { p: 'index', s: 'hero', v: 'titel', lbl: 'Hoofdtitel', ta: false, hint: 'Gebruik *woord* voor cursief goud', pid: 'pv-hero-titel' },
+    { p: 'index', s: 'hero', v: 'subtitel', lbl: 'Subtitel', ta: true, pid: 'pv-hero-sub' },
+    { p: 'index', s: 'hero', v: 'knop1', lbl: 'Knop 1 tekst', ta: false, pid: 'pv-hero-k1' },
+    { p: 'index', s: 'hero', v: 'knop2', lbl: 'Knop 2 tekst', ta: false, pid: 'pv-hero-k2' }
+  ]},
+  intro: { label: '🌊 Mysterie sectie', velden: [
+    { p: 'index', s: 'intro', v: 'titel', lbl: 'Titel', ta: false, hint: 'Gebruik *woord* voor cursief goud', pid: 'pv-intro-titel' },
+    { p: 'index', s: 'intro', v: 'tekst1', lbl: 'Eerste alinea', ta: true, pid: 'pv-intro-t1' },
+    { p: 'index', s: 'intro', v: 'tekst2', lbl: 'Tweede alinea', ta: true, pid: 'pv-intro-t2' }
+  ]},
+  features: { label: '✨ Features (3 blokken)', velden: [
+    { p: 'index', s: 'feature1', v: 'titel', lbl: 'Blok 1 titel', ta: false, pid: 'pv-f1-titel' },
+    { p: 'index', s: 'feature1', v: 'tekst', lbl: 'Blok 1 tekst', ta: true, pid: 'pv-f1-tekst' },
+    { p: 'index', s: 'feature2', v: 'titel', lbl: 'Blok 2 titel', ta: false, pid: 'pv-f2-titel' },
+    { p: 'index', s: 'feature2', v: 'tekst', lbl: 'Blok 2 tekst', ta: true, pid: 'pv-f2-tekst' },
+    { p: 'index', s: 'feature3', v: 'titel', lbl: 'Blok 3 titel', ta: false, pid: 'pv-f3-titel' },
+    { p: 'index', s: 'feature3', v: 'tekst', lbl: 'Blok 3 tekst', ta: true, pid: 'pv-f3-tekst' }
+  ]},
+  arrangementen: { label: '🛥️ Arrangementen & Prijzen', velden: [
+    { p: 'index', s: 'dining', v: 'titel', lbl: 'Dining titel', ta: false, pid: 'pv-dining-titel' },
+    { p: 'index', s: 'dining', v: 'tekst', lbl: 'Dining tekst', ta: true, pid: 'pv-dining-tekst' },
+    { p: 'index', s: 'dining', v: 'prijs', lbl: 'Dining prijs (bijv. € 695)', ta: false, pid: 'pv-dining-prijs' },
+    { p: 'index', s: 'wellness', v: 'titel', lbl: 'Wellness titel', ta: false, pid: 'pv-wellness-titel' },
+    { p: 'index', s: 'wellness', v: 'tekst', lbl: 'Wellness tekst', ta: true, pid: 'pv-wellness-tekst' },
+    { p: 'index', s: 'wellness', v: 'prijs', lbl: 'Wellness prijs', ta: false, pid: 'pv-wellness-prijs' },
+    { p: 'index', s: 'sauna', v: 'titel', lbl: 'Sauna titel', ta: false, pid: 'pv-sauna-titel' },
+    { p: 'index', s: 'sauna', v: 'tekst', lbl: 'Sauna tekst', ta: true, pid: 'pv-sauna-tekst' },
+    { p: 'index', s: 'sauna', v: 'prijs', lbl: 'Sauna prijs', ta: false, pid: 'pv-sauna-prijs' },
+    { p: 'index', s: 'massage', v: 'prijs', lbl: 'Massage bijprijs', ta: false }
+  ]},
+  reviews: { label: '⭐ Reviews', velden: [
+    { p: 'index', s: 'review1', v: 'tekst', lbl: 'Review 1 tekst', ta: true, pid: 'pv-r1' },
+    { p: 'index', s: 'review1', v: 'naam', lbl: 'Review 1 naam', ta: false, pid: 'pv-r1n' },
+    { p: 'index', s: 'review2', v: 'tekst', lbl: 'Review 2 tekst', ta: true, pid: 'pv-r2' },
+    { p: 'index', s: 'review2', v: 'naam', lbl: 'Review 2 naam', ta: false, pid: 'pv-r2n' },
+    { p: 'index', s: 'review3', v: 'tekst', lbl: 'Review 3 tekst', ta: true, pid: 'pv-r3' },
+    { p: 'index', s: 'review3', v: 'naam', lbl: 'Review 3 naam', ta: false, pid: 'pv-r3n' }
+  ]},
+  quote: { label: '💬 Quote balk', velden: [{ p: 'index', s: 'quote', v: 'tekst', lbl: 'Quote tekst', ta: true, pid: 'pv-quote' }] },
+  cta: { label: '🎯 Call-to-action', velden: [
+    { p: 'index', s: 'cta', v: 'titel', lbl: 'Titel', ta: false, hint: 'Gebruik *woord* voor cursief goud', pid: 'pv-cta-titel' },
+    { p: 'index', s: 'cta', v: 'tekst', lbl: 'Tekst', ta: true, pid: 'pv-cta-tekst' }
+  ]},
+  contact: { label: '📞 Contactgegevens', velden: [
+    { p: 'algemeen', s: 'contact', v: 'telefoon', lbl: 'Telefoonnummer', ta: false, pid: 'pv-tel' },
+    { p: 'algemeen', s: 'contact', v: 'email', lbl: 'E-mailadres', ta: false, pid: 'pv-email' },
+    { p: 'algemeen', s: 'contact', v: 'adres', lbl: 'Adres', ta: false, pid: 'pv-adres' },
+    { p: 'algemeen', s: 'contact', v: 'whatsapp', lbl: 'WhatsApp nummer', ta: false }
+  ]}
 };
 
-function openSec(key){
-  if(event)event.stopPropagation();
-  gekozenSec=key;
-  document.querySelectorAll('.ws-blok').forEach(function(el){el.classList.remove('actief');});
-  var blok=document.getElementById('ws-'+key);
-  if(blok){blok.classList.add('actief');blok.scrollIntoView({behavior:'smooth',block:'center'});}
-  var def=SECS_DEF[key];if(!def)return;
-  document.getElementById('ed-panel-title').textContent=def.label;
-  document.getElementById('ed-panel-sub').textContent='Pas de velden aan en klik Opslaan';
-  var html='';
-  def.velden.forEach(function(veld){
-    var w=getT(veld.p,veld.s,veld.v)||'';
-    var pid=veld.pid?',\''+veld.pid+'\'':'';
-    html+='<div style="background:var(--bc);padding:12px 14px;margin-bottom:8px;border:1px solid rgba(200,169,110,.07)"><label style="font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:5px">'+veld.lbl+(veld.hint?' <span style="color:rgba(200,169,110,.38);font-size:.42rem;text-transform:none">'+veld.hint+'</span>':'')+'</label>';
-    if(veld.ta){
-      html+='<textarea style="width:100%;background:var(--b);border:1px solid rgba(200,169,110,.18);color:var(--w);padding:8px 11px;font-family:var(--fb);font-size:.73rem;outline:none;border-radius:0;resize:vertical;min-height:68px;line-height:1.9" oninput="veldGew(\''+veld.p+'\',\''+veld.s+'\',\''+veld.v+'\',this.value'+pid+')" onfocus="this.style.borderColor=\'var(--g)\'" onblur="this.style.borderColor=\'rgba(200,169,110,.18)\'">'+w+'</textarea>';
+function updatePreview() {
+  function stel(id, waarde, alsHTML) {
+    var el = document.getElementById(id);
+    if (!el || !waarde) return;
+    var rendered = waarde.replace(/\*([^*]+)\*/g, '<em style="font-style:italic;color:var(--g)">$1</em>');
+    if (alsHTML) el.innerHTML = rendered; else el.textContent = waarde;
+  }
+  stel('pv-hero-titel', haalTekst('index', 'hero', 'titel'), true);
+  stel('pv-hero-sub', haalTekst('index', 'hero', 'subtitel'), false);
+  stel('pv-hero-k1', haalTekst('index', 'hero', 'knop1'), false);
+  stel('pv-hero-k2', haalTekst('index', 'hero', 'knop2'), false);
+  stel('pv-intro-titel', haalTekst('index', 'intro', 'titel'), true);
+  stel('pv-intro-t1', haalTekst('index', 'intro', 'tekst1'), false);
+  stel('pv-intro-t2', haalTekst('index', 'intro', 'tekst2'), false);
+  stel('pv-f1-titel', haalTekst('index', 'feature1', 'titel'), false);
+  stel('pv-f1-tekst', haalTekst('index', 'feature1', 'tekst'), false);
+  stel('pv-f2-titel', haalTekst('index', 'feature2', 'titel'), false);
+  stel('pv-f2-tekst', haalTekst('index', 'feature2', 'tekst'), false);
+  stel('pv-f3-titel', haalTekst('index', 'feature3', 'titel'), false);
+  stel('pv-f3-tekst', haalTekst('index', 'feature3', 'tekst'), false);
+  stel('pv-dining-titel', haalTekst('index', 'dining', 'titel'), true);
+  stel('pv-dining-tekst', haalTekst('index', 'dining', 'tekst'), false);
+  stel('pv-dining-prijs', haalTekst('index', 'dining', 'prijs'), false);
+  stel('pv-wellness-titel', haalTekst('index', 'wellness', 'titel'), true);
+  stel('pv-wellness-tekst', haalTekst('index', 'wellness', 'tekst'), false);
+  stel('pv-wellness-prijs', haalTekst('index', 'wellness', 'prijs'), false);
+  stel('pv-sauna-titel', haalTekst('index', 'sauna', 'titel'), true);
+  stel('pv-sauna-tekst', haalTekst('index', 'sauna', 'tekst'), false);
+  stel('pv-sauna-prijs', haalTekst('index', 'sauna', 'prijs'), false);
+  var q = haalTekst('index', 'quote', 'tekst'); if (q) document.getElementById('pv-quote').textContent = '"' + q + '"';
+  stel('pv-cta-titel', haalTekst('index', 'cta', 'titel'), true);
+  stel('pv-cta-tekst', haalTekst('index', 'cta', 'tekst'), false);
+  stel('pv-r1', haalTekst('index', 'review1', 'tekst'), false);
+  stel('pv-r1n', haalTekst('index', 'review1', 'naam'), false);
+  stel('pv-r2', haalTekst('index', 'review2', 'tekst'), false);
+  stel('pv-r2n', haalTekst('index', 'review2', 'naam'), false);
+  stel('pv-r3', haalTekst('index', 'review3', 'tekst'), false);
+  stel('pv-r3n', haalTekst('index', 'review3', 'naam'), false);
+  stel('pv-tel', haalTekst('algemeen', 'contact', 'telefoon'), false);
+  stel('pv-email', haalTekst('algemeen', 'contact', 'email'), false);
+  stel('pv-adres', haalTekst('algemeen', 'contact', 'adres'), false);
+  api('/rest/v1/beschikbaarheid?select=totaal_nachten,geboekte_nachten&limit=1').then(function(r) { return r.json(); }).then(function(d) { if (d && d[0]) document.getElementById('pv-teller').textContent = d[0].totaal_nachten - d[0].geboekte_nachten; }).catch(function() {});
+}
+
+function kiesSectie(key) {
+  gekozenSectie = key;
+  document.querySelectorAll('.ws-sectie').forEach(function(el) { el.classList.remove('gekozen'); });
+  var blok = document.getElementById('ws-' + key);
+  if (blok) { blok.classList.add('gekozen'); blok.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  var def = SECTIE_DEFINITIES[key];
+  if (!def) return;
+  document.getElementById('edit-kop-sub').textContent = def.label;
+  document.getElementById('ed-hint').textContent = '✓ ' + def.label;
+  var html = '';
+  def.velden.forEach(function(veld) {
+    var w = haalTekst(veld.p, veld.s, veld.v) || '';
+    var pid = veld.pid ? ",'" + veld.pid + "'" : '';
+    html += '<div class="veld-blok"><label>' + veld.lbl + (veld.hint ? ' <span style="color:rgba(200,169,110,.38);font-size:.42rem;text-transform:none;letter-spacing:.07em">' + veld.hint + '</span>' : '') + '</label>';
+    if (veld.ta) {
+      html += '<textarea oninput="veldGewijzigd(\'' + veld.p + '\',\'' + veld.s + '\',\'' + veld.v + '\',this.value' + pid + ')" onfocus="this.style.borderColor=\'var(--g)\'" onblur="this.style.borderColor=\'rgba(200,169,110,.18)\'" rows="3">' + w + '</textarea>';
     } else {
-      html+='<input type="text" style="width:100%;background:var(--b);border:1px solid rgba(200,169,110,.18);color:var(--w);padding:8px 11px;font-family:var(--fb);font-size:.73rem;outline:none;border-radius:0" oninput="veldGew(\''+veld.p+'\',\''+veld.s+'\',\''+veld.v+'\',this.value'+pid+')" onfocus="this.style.borderColor=\'var(--g)\'" onblur="this.style.borderColor=\'rgba(200,169,110,.18)\'" value="'+w.replace(/"/g,'&quot;')+'"/>';
+      html += '<input type="text" oninput="veldGewijzigd(\'' + veld.p + '\',\'' + veld.s + '\',\'' + veld.v + '\',this.value' + pid + ')" onfocus="this.style.borderColor=\'var(--g)\'" onblur="this.style.borderColor=\'rgba(200,169,110,.18)\'" value="' + w.replace(/"/g, '&quot;') + '"/>';
     }
-    html+='</div>';
+    html += '</div>';
   });
-  document.getElementById('ed-body').innerHTML=html;
-  document.getElementById('ed-ft').style.display='block';
-  document.getElementById('op-btn').disabled=false;
+  document.getElementById('edit-body').innerHTML = html;
+  document.getElementById('edit-voet').style.display = 'block';
+  document.getElementById('opslaan-knop').disabled = false;
 }
 
-function veldGew(p,s,v,val,previewId){
-  if(!gw[p])gw[p]={};if(!gw[p][s])gw[p][s]={};gw[p][s][v]=val;
-  if(!alleTeksten[p])alleTeksten[p]={};if(!alleTeksten[p][s])alleTeksten[p][s]={};alleTeksten[p][s][v]=val;
-  if(previewId){var el=document.getElementById(previewId);if(el){var r=val.replace(/\*([^*]+)\*/g,'<em style="font-style:italic;color:var(--g)">$1</em>');if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.value=val;else el.innerHTML=r;}}
-  updatePrev();
+function veldGewijzigd(p, s, v, waarde, previewId) {
+  if (!gewijzigdeVelden[p]) gewijzigdeVelden[p] = {};
+  if (!gewijzigdeVelden[p][s]) gewijzigdeVelden[p][s] = {};
+  gewijzigdeVelden[p][s][v] = waarde;
+  if (!alleTeksten[p]) alleTeksten[p] = {};
+  if (!alleTeksten[p][s]) alleTeksten[p][s] = {};
+  alleTeksten[p][s][v] = waarde;
+  if (previewId) {
+    var el = document.getElementById(previewId);
+    if (el) {
+      var rendered = waarde.replace(/\*([^*]+)\*/g, '<em style="font-style:italic;color:var(--g)">$1</em>');
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.value = waarde;
+      else el.innerHTML = rendered;
+    }
+  }
+  updatePreview();
 }
 
-function slaOp(){
-  var btn=document.getElementById('op-btn');btn.textContent='Opslaan...';btn.disabled=true;
-  var prs=[];
-  Object.keys(gw).forEach(function(p){Object.keys(gw[p]).forEach(function(s){Object.keys(gw[p][s]).forEach(function(v){prs.push(api('/rest/v1/pagina_inhoud',{method:'POST',headers:{'Prefer':'resolution=merge-duplicates'},body:JSON.stringify({pagina:p,sectie:s,veld:v,waarde:gw[p][s][v],updated_at:new Date().toISOString()})}));});});});
-  Promise.all(prs).then(function(){gw={};toon('Opgeslagen! Wijzigingen zijn nu live op de website ✓','ok');btn.textContent='Opslaan op website \u2192';btn.disabled=false;});
+function slaOp() {
+  var btn = document.getElementById('opslaan-knop');
+  btn.textContent = 'Opslaan...'; btn.disabled = true;
+  var beloftes = [];
+  Object.keys(gewijzigdeVelden).forEach(function(p) {
+    Object.keys(gewijzigdeVelden[p]).forEach(function(s) {
+      Object.keys(gewijzigdeVelden[p][s]).forEach(function(v) {
+        beloftes.push(api('/rest/v1/pagina_inhoud', { method: 'POST', headers: { 'Prefer': 'resolution=merge-duplicates' }, body: JSON.stringify({ pagina: p, sectie: s, veld: v, waarde: gewijzigdeVelden[p][s][v], updated_at: new Date().toISOString() }) }));
+      });
+    });
+  });
+  Promise.all(beloftes).then(function() {
+    gewijzigdeVelden = {};
+    toon('✓ Opgeslagen! Wijzigingen zijn nu live op de website.', 'ok');
+    btn.textContent = 'Opslaan op website →'; btn.disabled = false;
+  });
 }
 
-// Oude kiesSec alias voor backwards compat
-function kiesSec(key){openSec(key);}
+// ================================================================
+// FOTOS
+// ================================================================
+function toonFotos() {
+  var g = document.getElementById('foto-grid');
+  if (!alleFotos.length) { g.innerHTML = '<div class="leeg"><span>🖼️</span><p>Nog geen foto\'s</p></div>'; return; }
+  g.innerHTML = alleFotos.map(function(f) {
+    return '<div style="background:var(--bc);border:1px solid rgba(200,169,110,.09);overflow:hidden"><img src="' + f.url + '" style="width:100%;aspect-ratio:4/3;object-fit:cover;filter:brightness(.75);display:block" onerror="this.style.background=\'#1a1a1a\';this.style.minHeight=\'90px\'"/><div style="padding:9px 11px"><div style="font-size:.6rem;color:var(--w);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (f.naam || 'Naamloos') + '</div><div style="font-size:.5rem;color:rgba(200,169,110,.43);margin-bottom:7px">' + (f.pagina || 'Algemeen') + (f.sectie ? ' · ' + f.sectie : '') + '</div><div style="display:flex;gap:5px"><button style="flex:1;background:transparent;border:1px solid rgba(200,169,110,.15);color:var(--wd);padding:4px;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer" onclick="navigator.clipboard.writeText(\'' + f.url + '\').then(function(){toon(\'URL gekopieerd!\',\'ok\')})">📋 URL</button><button style="background:transparent;border:1px solid rgba(224,82,82,.2);color:var(--red);padding:4px 7px;font-size:.48rem;cursor:pointer" onclick="verwijderFoto(\'' + f.id + '\')">🗑</button></div></div></div>';
+  }).join('');
+}
+function voorbeeldFoto() { var u = document.getElementById('foto-url').value; if (u.indexOf('http') === 0) { document.getElementById('foto-voorbeeld').style.display = 'block'; document.getElementById('foto-voorbeeld-img').src = u; } else document.getElementById('foto-voorbeeld').style.display = 'none'; }
+function slaFoto() {
+  var url = document.getElementById('foto-url').value.trim();
+  if (!url) { toon('Voer een URL in', 'fout'); return; }
+  api('/rest/v1/media', { method: 'POST', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ naam: document.getElementById('foto-naam').value || 'Foto', url: url, pagina: document.getElementById('foto-pagina').value || null, sectie: document.getElementById('foto-sectie').value || null }) })
+    .then(function(r) { if (r.ok) { toon('Foto opgeslagen ✓', 'ok'); sluitModal('m-foto'); ['foto-naam', 'foto-url', 'foto-sectie'].forEach(function(i) { document.getElementById(i).value = ''; }); document.getElementById('foto-voorbeeld').style.display = 'none'; laadFotos(); } else toon('Fout', 'fout'); });
+}
+function verwijderFoto(id) { if (!confirm('Foto verwijderen?')) return; api('/rest/v1/media?id=eq.' + id, { method: 'DELETE' }).then(function() { toon('Verwijderd', 'ok'); laadFotos(); }); }
 
-function toonFotos(){var g=document.getElementById('foto-grid');if(!alleFotos.length){g.innerHTML='<div class="leeg"><span>🖼️</span><p>Nog geen foto\'s</p></div>';return;}g.innerHTML=alleFotos.map(function(f){return'<div style="background:var(--bc);border:1px solid rgba(200,169,110,.09);overflow:hidden"><img src="'+f.url+'" style="width:100%;aspect-ratio:4/3;object-fit:cover;filter:brightness(.75);display:block" onerror="this.style.background=\'#1a1a1a\';this.style.minHeight=\'90px\'"/><div style="padding:9px 11px"><div style="font-size:.6rem;color:var(--w);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(f.naam||'Naamloos')+'</div><div style="font-size:.5rem;color:rgba(200,169,110,.43);margin-bottom:7px">'+(f.pagina||'Algemeen')+(f.sectie?' · '+f.sectie:'')+'</div><div style="display:flex;gap:5px"><button style="flex:1;background:transparent;border:1px solid rgba(200,169,110,.15);color:var(--wd);padding:4px;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer" onclick="navigator.clipboard.writeText(\''+f.url+'\').then(function(){toon(\'URL gekopieerd!\',\'ok\')})">📋 URL</button><button style="background:transparent;border:1px solid rgba(224,82,82,.2);color:var(--red);padding:4px 7px;font-size:.48rem;cursor:pointer" onclick="delFoto(\''+f.id+'\')">🗑</button></div></div></div>';}).join('');}
-function prvFoto(){var u=document.getElementById('fm-u').value;if(u.indexOf('http')===0){document.getElementById('fp').style.display='block';document.getElementById('fp-i').src=u;}else document.getElementById('fp').style.display='none';}
-function slaFoto(){var url=document.getElementById('fm-u').value.trim();if(!url){toon('Voer een URL in','err');return;}api('/rest/v1/media',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({naam:document.getElementById('fm-n').value||'Foto',url:url,pagina:document.getElementById('fm-p').value||null,sectie:document.getElementById('fm-s').value||null})}).then(function(r){if(r.ok){toon('Foto opgeslagen ✓','ok');sluitM('m-foto');['fm-n','fm-u','fm-s'].forEach(function(i){document.getElementById(i).value='';});document.getElementById('fp').style.display='none';laadFotos();}else toon('Fout','err');});}
-function delFoto(id){if(!confirm('Foto verwijderen?'))return;api('/rest/v1/media?id=eq.'+id,{method:'DELETE'}).then(function(){toon('Verwijderd','ok');laadFotos();});}
+// ================================================================
+// PAGINAS
+// ================================================================
+function toonPaginas() {
+  var g = document.getElementById('pagina-grid');
+  if (!allePaginas.length) { g.innerHTML = '<div class="leeg"><span>📄</span><p>Nog geen pagina\'s</p></div>'; return; }
+  g.innerHTML = allePaginas.map(function(p) {
+    return '<div class="pagina-kaart"><h3>' + p.titel + '</h3><p>secretnights.nl/pagina/' + p.slug + '<br/>' + fmtDatum(p.created_at) + '</p><div style="display:flex;gap:6px;align-items:center"><span class="pub-badge ' + (p.gepubliceerd ? 'live' : 'concept') + '">' + (p.gepubliceerd ? 'Live' : 'Concept') + '</span><button class="btn-uit" style="padding:5px 11px;font-size:.5rem" onclick="openBewerkPagina(\'' + p.id + '\')">✏️</button></div></div>';
+  }).join('');
+}
+function slaaPagina() {
+  var slug = document.getElementById('pagina-slug').value.trim(), titel = document.getElementById('pagina-titel').value.trim();
+  if (!slug || !titel) { toon('Vul naam en titel in', 'fout'); return; }
+  api('/rest/v1/extra_paginas', { method: 'POST', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ slug: slug, titel: titel, inhoud: document.getElementById('pagina-inhoud').value, gepubliceerd: document.getElementById('pagina-pub').checked }) })
+    .then(function(r) { if (r.ok) { toon('Pagina aangemaakt ✓', 'ok'); sluitModal('m-pagina'); laadPaginas(); } else toon('Naam al in gebruik?', 'fout'); });
+}
+function openBewerkPagina(id) {
+  var p = null; for (var i = 0; i < allePaginas.length; i++) { if (allePaginas[i].id === id) { p = allePaginas[i]; break; } }
+  if (!p) return;
+  document.getElementById('bp-id').value = p.id; document.getElementById('bp-titel').value = p.titel; document.getElementById('bp-inhoud').value = p.inhoud || ''; document.getElementById('bp-pub').checked = p.gepubliceerd;
+  openModal('m-bewerk-pagina');
+}
+function bijwerkPagina() {
+  var id = document.getElementById('bp-id').value;
+  api('/rest/v1/extra_paginas?id=eq.' + id, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ titel: document.getElementById('bp-titel').value, inhoud: document.getElementById('bp-inhoud').value, gepubliceerd: document.getElementById('bp-pub').checked, updated_at: new Date().toISOString() }) })
+    .then(function(r) { if (r.ok) { toon('Opgeslagen ✓', 'ok'); sluitModal('m-bewerk-pagina'); laadPaginas(); } else toon('Fout', 'fout'); });
+}
+function verwijderPagina() {
+  if (!confirm('Permanent verwijderen?')) return;
+  api('/rest/v1/extra_paginas?id=eq.' + document.getElementById('bp-id').value, { method: 'DELETE' }).then(function() { toon('Verwijderd', 'ok'); sluitModal('m-bewerk-pagina'); laadPaginas(); });
+}
 
-function toonPaginas(){var g=document.getElementById('p-grid');if(!allePaginas.length){g.innerHTML='<div class="leeg"><span>📄</span><p>Nog geen pagina\'s</p></div>';return;}g.innerHTML=allePaginas.map(function(p){return'<div class="pcard"><h3>'+p.titel+'</h3><p>secretnights.nl/pagina/'+p.slug+'<br/>'+fmtD(p.created_at)+'</p><div style="display:flex;gap:6px;align-items:center"><span class="pub '+(p.gepubliceerd?'live':'concept')+'">'+(p.gepubliceerd?'Live':'Concept')+'</span><button class="bo" style="padding:5px 11px;font-size:.5rem" onclick="openBP(\''+p.id+'\')">✏️</button></div></div>';}).join('');}
-function slaaPagina(){var sl=document.getElementById('pm-sl').value.trim(),ti=document.getElementById('pm-ti').value.trim();if(!sl||!ti){toon('Vul naam en titel in','err');return;}api('/rest/v1/extra_paginas',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({slug:sl,titel:ti,inhoud:document.getElementById('pm-in').value,gepubliceerd:document.getElementById('pm-pu').checked})}).then(function(r){if(r.ok){toon('Aangemaakt ✓','ok');sluitM('m-np');laadPaginas();}else toon('Naam al in gebruik?','err');});}
-function openBP(id){var p=null;for(var i=0;i<allePaginas.length;i++){if(allePaginas[i].id===id){p=allePaginas[i];break;}}if(!p)return;document.getElementById('ep-id').value=p.id;document.getElementById('ep-ti').value=p.titel;document.getElementById('ep-in').value=p.inhoud||'';document.getElementById('ep-pu').checked=p.gepubliceerd;openM('m-ep');}
-function bijwerkPagina(){var id=document.getElementById('ep-id').value;api('/rest/v1/extra_paginas?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({titel:document.getElementById('ep-ti').value,inhoud:document.getElementById('ep-in').value,gepubliceerd:document.getElementById('ep-pu').checked,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok){toon('Opgeslagen ✓','ok');sluitM('m-ep');laadPaginas();}else toon('Fout','err');});}
-function verwijderPagina(){if(!confirm('Permanent verwijderen?'))return;api('/rest/v1/extra_paginas?id=eq.'+document.getElementById('ep-id').value,{method:'DELETE'}).then(function(){toon('Verwijderd','ok');sluitM('m-ep');laadPaginas();});}
+// ================================================================
+// BETAALMETHODES
+// ================================================================
+function toonBetaal() {
+  var l = document.getElementById('betaal-lijst');
+  if (!alleBetaal.length) { l.innerHTML = '<div class="leeg"><span>💳</span><p>Geen methodes</p></div>'; return; }
+  l.innerHTML = alleBetaal.map(function(b) {
+    return '<div class="betaal-rij"><div class="betaal-icoon">' + (b.icon || '💰') + '</div><div class="betaal-info"><div class="betaal-naam">' + b.naam + '</div><div class="betaal-type">' + b.type + (b.mollie_id ? ' · Mollie: ' + b.mollie_id : '') + '</div></div><label class="tg"><input type="checkbox" ' + (b.actief ? 'checked' : '') + ' onchange="wisselBetaal(\'' + b.id + '\',this.checked)"/><div class="tg-baan"></div></label><button class="tbl-btn gevaar" onclick="verwijderBetaal(\'' + b.id + '\')">🗑</button></div>';
+  }).join('');
+}
+function slaaBetaal() {
+  var naam = document.getElementById('bm-naam').value.trim(); if (!naam) { toon('Naam vereist', 'fout'); return; }
+  api('/rest/v1/betaalmethodes', { method: 'POST', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ naam: naam, type: document.getElementById('bm-type').value, icon: document.getElementById('bm-icoon').value || '💰', mollie_id: document.getElementById('bm-mollie').value || null, actief: true, volgorde: alleBetaal.length + 1 }) })
+    .then(function(r) { if (r.ok) { toon('Toegevoegd ✓', 'ok'); sluitModal('m-betaal'); laadBetaal(); } else toon('Fout', 'fout'); });
+}
+function wisselBetaal(id, aan) { api('/rest/v1/betaalmethodes?id=eq.' + id, { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ actief: aan }) }).then(function() { toon(aan ? 'Aan ✓' : 'Uit', 'ok'); }); }
+function verwijderBetaal(id) { if (!confirm('Verwijderen?')) return; api('/rest/v1/betaalmethodes?id=eq.' + id, { method: 'DELETE' }).then(function() { toon('Verwijderd', 'ok'); laadBetaal(); }); }
+function slaaMollie() {
+  var key = document.getElementById('mollie-key').value.trim();
+  if (key.indexOf('live_') !== 0 && key.indexOf('test_') !== 0) { toon('Ongeldige Mollie key (begint met live_ of test_)', 'fout'); return; }
+  api('/rest/v1/website_instellingen?id=eq.1', { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ mollie_api_key: key, updated_at: new Date().toISOString() }) })
+    .then(function(r) { if (r.ok) { toon('Mollie key opgeslagen ✓', 'ok'); laadInstellingen(); } else toon('Fout', 'fout'); });
+}
+function wisselMollie(aan) {
+  api('/rest/v1/website_instellingen?id=eq.1', { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ mollie_actief: aan, updated_at: new Date().toISOString() }) })
+    .then(function(r) { if (r.ok) { document.getElementById('mollie-lbl').textContent = aan ? 'Aan' : 'Uit'; toon(aan ? 'Mollie ACTIEF ✓' : 'Mollie uitgeschakeld', 'ok'); laadInstellingen(); } else toon('Fout', 'fout'); });
+}
 
-function toonBetaal(){var l=document.getElementById('b-lijst');if(!alleBetaal.length){l.innerHTML='<div class="leeg"><span>💳</span><p>Geen methodes</p></div>';return;}l.innerHTML=alleBetaal.map(function(b){return'<div class="pr"><div class="pr-ico">'+(b.icon||'💰')+'</div><div class="pr-inf"><div class="pr-nm">'+b.naam+'</div><div class="pr-tp">'+b.type+(b.mollie_id?' · '+b.mollie_id:'')+'</div></div><label class="tg"><input type="checkbox" '+(b.actief?'checked':'')+' onchange="toggleBetaal(\''+b.id+'\',this.checked)"/><div class="tg-t"></div></label><button class="ab d" onclick="delBetaal(\''+b.id+'\')">🗑</button></div>';}).join('');}
-function slaaBetaal(){var n=document.getElementById('bm-n').value.trim();if(!n){toon('Naam vereist','err');return;}api('/rest/v1/betaalmethodes',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({naam:n,type:document.getElementById('bm-t').value,icon:document.getElementById('bm-i').value||'💰',mollie_id:document.getElementById('bm-m').value||null,actief:true,volgorde:alleBetaal.length+1})}).then(function(r){if(r.ok){toon('Toegevoegd ✓','ok');sluitM('m-betaal');laadBetaal();}else toon('Fout','err');});}
-function toggleBetaal(id,aan){api('/rest/v1/betaalmethodes?id=eq.'+id,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({actief:aan})}).then(function(){toon(aan?'Aan ✓':'Uit','ok');});}
-function delBetaal(id){if(!confirm('Verwijderen?'))return;api('/rest/v1/betaalmethodes?id=eq.'+id,{method:'DELETE'}).then(function(){toon('Verwijderd','ok');laadBetaal();});}
-function slaaMollie(){var k=document.getElementById('mk').value.trim();if(k.indexOf('live_')!==0&&k.indexOf('test_')!==0){toon('Ongeldige key (begint met live_ of test_)','err');return;}api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({mollie_api_key:k,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok){toon('Mollie key opgeslagen ✓','ok');laadInst();}else toon('Fout','err');});}
-function toggleMollie(aan){api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({mollie_actief:aan,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok){document.getElementById('m-lbl').textContent=aan?'Aan':'Uit';toon(aan?'Mollie ACTIEF ✓':'Uitgeschakeld','ok');laadInst();}else toon('Fout','err');});}
+// ================================================================
+// BESCHIKBAARHEID
+// ================================================================
+function aanpasNachten(n) { totNachten = Math.max(1, Math.min(99, totNachten + n)); document.getElementById('nachten-display').textContent = totNachten; }
+function slaaNachten() {
+  api('/rest/v1/beschikbaarheid?id=eq.1', { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ totaal_nachten: totNachten }) })
+    .then(function(r) { if (r.ok) { toon('Opgeslagen ✓', 'ok'); laadBeschikbaar(); } else toon('Fout', 'fout'); });
+}
+function resetGeboekt() {
+  if (!confirm('Teller resetten naar 0?')) return;
+  api('/rest/v1/beschikbaarheid?id=eq.1', { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ geboekte_nachten: 0 }) }).then(function() { toon('Gereset ✓', 'ok'); laadBeschikbaar(); });
+}
 
-function updateSiteLbl(aan){var s=document.getElementById('site-st');if(s){s.textContent=aan?'Online':'Offline';s.className=aan?'s-aan':'s-uit';}var l=document.getElementById('s-st-lbl');if(l){l.textContent=aan?'✅ Website is ONLINE':'🔴 Website is OFFLINE';l.style.color=aan?'var(--grn)':'var(--red)';}document.getElementById('site-sw').checked=aan;document.getElementById('s-sw2').checked=aan;}
-function updateResLbl(aan){var l=document.getElementById('r-st-lbl');if(l){l.textContent=aan?'✅ Reserveren is AAN':'🚫 Reserveren is UIT';l.style.color=aan?'var(--grn)':'var(--red)';}document.getElementById('r-sw').checked=aan;}
-function toggleSite(aan){api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({website_actief:aan,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok){updateSiteLbl(aan);toon(aan?'Website ONLINE ✓':'Website OFFLINE','ok');laadInst();}else toon('Fout bij opslaan','err');});}
-function slaaSite(){api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({offline_bericht:document.getElementById('s-msg').value,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok)toon('Opgeslagen ✓','ok');else toon('Fout','err');});}
-function toggleRes(aan){api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({reserveren_actief:aan,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok){updateResLbl(aan);toon(aan?'Reserveren AAN ✓':'Reserveren UIT','ok');}else toon('Fout','err');});}
-function slaaRes(){api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({reserveren_bericht:document.getElementById('r-msg').value,updated_at:new Date().toISOString()})}).then(function(r){if(r.ok)toon('Opgeslagen ✓','ok');else toon('Fout','err');});}
+// ================================================================
+// WEBSITE / RESERVEREN AAN-UIT
+// ================================================================
+function updateSiteLbl(aan) {
+  var st = document.getElementById('site-status'); if (st) { st.textContent = aan ? 'Online' : 'Offline'; st.style.color = aan ? 'var(--grn)' : 'var(--red)'; }
+  var l = document.getElementById('site-sw-lbl'); if (l) { l.textContent = aan ? '✅ Website is ONLINE' : '🔴 Website is OFFLINE'; l.style.color = aan ? 'var(--grn)' : 'var(--red)'; }
+  document.getElementById('site-schakelaar').checked = aan; document.getElementById('site-sw2').checked = aan;
+}
+function updateResLbl(aan) {
+  var l = document.getElementById('reserveer-sw-lbl'); if (l) { l.textContent = aan ? '✅ Reserveren is AAN' : '🚫 Reserveren is UIT'; l.style.color = aan ? 'var(--grn)' : 'var(--red)'; }
+  document.getElementById('reserveer-sw').checked = aan;
+}
+function wisselSite(aan) {
+  api('/rest/v1/website_instellingen?id=eq.1', { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ website_actief: aan, updated_at: new Date().toISOString() }) })
+    .then(function(r) { if (r.ok) { updateSiteLbl(aan); toon(aan ? 'Website ONLINE ✓' : 'Website OFFLINE', 'ok'); laadInstellingen(); } else toon('Fout bij opslaan', 'fout'); });
+}
+function slaaSite() {
+  api('/rest/v1/website_instellingen?id=eq.1', { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ offline_bericht: document.getElementById('offline-bericht').value, updated_at: new Date().toISOString() }) })
+    .then(function(r) { if (r.ok) toon('Opgeslagen ✓', 'ok'); else toon('Fout', 'fout'); });
+}
+function wisselReserveren(aan) {
+  api('/rest/v1/website_instellingen?id=eq.1', { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ reserveren_actief: aan, updated_at: new Date().toISOString() }) })
+    .then(function(r) { if (r.ok) { updateResLbl(aan); toon(aan ? 'Reserveren AAN ✓' : 'Reserveren UIT', 'ok'); } else toon('Fout', 'fout'); });
+}
+function slaaReserveren() {
+  api('/rest/v1/website_instellingen?id=eq.1', { method: 'PATCH', headers: { 'Prefer': 'return=minimal' }, body: JSON.stringify({ reserveren_bericht: document.getElementById('reserveer-bericht').value, updated_at: new Date().toISOString() }) })
+    .then(function(r) { if (r.ok) toon('Opgeslagen ✓', 'ok'); else toon('Fout', 'fout'); });
+}
 
-function aanpas(n){totN=Math.max(1,Math.min(99,totN+n));document.getElementById('tot-d').textContent=totN;}
-function slaaTot(){api('/rest/v1/beschikbaarheid?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({totaal_nachten:totN})}).then(function(r){if(r.ok){toon('Opgeslagen ✓','ok');laadBeschikbaar();}else toon('Fout','err');});}
-function resetBoek(){if(!confirm('Teller resetten naar 0?'))return;api('/rest/v1/beschikbaarheid?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({geboekte_nachten:0})}).then(function(){toon('Gereset ✓','ok');laadBeschikbaar();});}
+// ================================================================
+// MODALS
+// ================================================================
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function sluitModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-achtergrond').forEach(function(o) { o.addEventListener('click', function(e) { if (e.target === o) o.classList.remove('open'); }); });
 
-function openM(id){document.getElementById(id).classList.add('on');}
-function sluitM(id){document.getElementById(id).classList.remove('on');}
-document.querySelectorAll('.mo').forEach(function(o){o.addEventListener('click',function(e){if(e.target===
+// ================================================================
+// TOAST
+// ================================================================
+function toon(bericht, type) {
+  var t = document.getElementById('toast-melding');
+  t.textContent = bericht;
+  t.className = 'toast toon' + (type ? ' ' + type : '');
+  setTimeout(function() { t.classList.remove('toon'); }, 3800);
+}
+
+// Zorg dat eerste pagina zichtbaar is
+document.querySelectorAll('.pagina').forEach(function(p) { p.style.display = 'none'; });
+var dash = document.getElementById('pg-dashboard');
+if (dash) { dash.classList.add('actief'); dash.style.display = 'flex'; }
+</script>
+</body>
+</html>
