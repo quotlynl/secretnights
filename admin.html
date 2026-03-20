@@ -93,11 +93,11 @@ body{background:var(--b);color:var(--w);font-family:var(--fb);font-weight:300;mi
 .site-preview{overflow-y:auto;background:#000}
 /* Website secties in preview */
 .ws-nav-prev{background:rgba(10,10,10,.98);border-bottom:1px solid rgba(200,169,110,.12);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
-.ws-sectie{position:relative;cursor:pointer;transition:outline .15s}
-.ws-sectie:hover{outline:2px solid rgba(200,169,110,.5)}
+.ws-sectie{position:relative;cursor:default;transition:outline .15s}
+.ws-sectie:hover .potlood-knop{opacity:1}
 .ws-sectie.gekozen{outline:3px solid var(--g)}
-.potlood-knop{position:absolute;top:10px;right:10px;z-index:10;background:var(--g);color:var(--b);border:none;width:36px;height:36px;border-radius:50%;font-size:.9rem;cursor:pointer;opacity:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4)}
-.ws-sectie:hover .potlood-knop,.ws-sectie.gekozen .potlood-knop{opacity:1}
+.potlood-knop{position:absolute;top:10px;right:10px;z-index:10;background:var(--g);color:var(--b);border:none;width:36px;height:36px;border-radius:50%;font-size:.9rem;cursor:pointer;opacity:.35;transition:opacity .2s,transform .2s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.ws-sectie:hover .potlood-knop,.ws-sectie.gekozen .potlood-knop,.potlood-knop:hover{opacity:1}
 /* Editor paneel rechts */
 .edit-paneel{overflow-y:auto;background:var(--bs);display:flex;flex-direction:column;border-left:1px solid rgba(200,169,110,.1)}
 .edit-kop{padding:16px 18px;border-bottom:1px solid rgba(200,169,110,.1);flex-shrink:0;background:var(--bc)}
@@ -350,8 +350,8 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
               <span style="border:1px solid var(--g);color:var(--g);padding:4px 12px;font-size:.46rem;letter-spacing:.14em;text-transform:uppercase">Reserveer</span>
             </div>
             <!-- Hero -->
-            <div class="ws-sectie" id="ws-hero" onclick="kiesSectie('hero')">
-              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('hero')">✏️</button>
+            <div class="ws-sectie" id="ws-hero">
+              <button class="potlood-knop" onclick="kiesSectie('hero')">✏️</button>
               <div style="background:linear-gradient(180deg,rgba(10,10,10,.5) 0%,rgba(10,10,10,.05) 45%,rgba(10,10,10,.92) 100%),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-V8-34-1.jpg') center/cover;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:36px 28px">
                 <span style="font-size:.44rem;letter-spacing:.38em;text-transform:uppercase;color:var(--g);margin-bottom:14px;display:block">Bijzondere Overnachtingen op het Water</span>
                 <h1 id="pv-hero-titel" style="font-family:var(--fd);font-size:clamp(1.6rem,4vw,3rem);font-weight:300;color:var(--w);line-height:1.05">Jouw <em style="font-style:italic;color:var(--g)">geheime</em> nacht begint hier</h1>
@@ -366,8 +366,8 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
               <span style="font-family:var(--fd);font-size:.8rem;font-style:italic;color:var(--b)">Secret Nights</span>
             </div>
             <!-- Intro -->
-            <div class="ws-sectie" id="ws-intro" onclick="kiesSectie('intro')">
-              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('intro')">✏️</button>
+            <div class="ws-sectie" id="ws-intro">
+              <button class="potlood-knop" onclick="kiesSectie('intro')">✏️</button>
               <div style="background:#111;padding:44px 28px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center">
                 <div>
                   <h2 id="pv-intro-titel" style="font-family:var(--fd);font-size:1.7rem;font-weight:300;color:var(--w);line-height:1.1;margin-bottom:14px">Jij kiest de nacht. <em style="font-style:italic;color:var(--g)">Wij kiezen de plek.</em></h2>
@@ -378,8 +378,8 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
               </div>
             </div>
             <!-- Features -->
-            <div class="ws-sectie" id="ws-features" onclick="kiesSectie('features')">
-              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('features')">✏️</button>
+            <div class="ws-sectie" id="ws-features">
+              <button class="potlood-knop" onclick="kiesSectie('features')">✏️</button>
               <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,.12)">
                 <div style="background:#131313;padding:32px 24px;text-align:center"><div style="font-size:1.4rem;margin-bottom:12px">🌿</div><h3 id="pv-f1-titel" style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:8px">Natuur &amp; Rust</h3><p id="pv-f1-tekst" style="font-size:.62rem;line-height:1.9;color:var(--wd)">Wakker worden op het water, omringd door ongerepte natuur.</p></div>
                 <div style="background:#131313;padding:32px 24px;text-align:center"><div style="font-size:1.4rem;margin-bottom:12px">🛁</div><h3 id="pv-f2-titel" style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:8px">Wellness op het Water</h3><p id="pv-f2-tekst" style="font-size:.62rem;line-height:1.9;color:var(--wd)">Privé-sauna, massage of gewoon genieten.</p></div>
@@ -387,8 +387,8 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
               </div>
             </div>
             <!-- Arrangementen -->
-            <div class="ws-sectie" id="ws-arrangementen" onclick="kiesSectie('arrangementen')">
-              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('arrangementen')">✏️</button>
+            <div class="ws-sectie" id="ws-arrangementen">
+              <button class="potlood-knop" onclick="kiesSectie('arrangementen')">✏️</button>
               <div style="background:#111;padding:40px 28px">
                 <div style="margin-bottom:28px"><span style="font-size:.5rem;letter-spacing:.38em;text-transform:uppercase;color:var(--g)">Selecteer jouw beleving</span><h2 style="font-family:var(--fd);font-size:1.9rem;font-weight:300;margin-top:6px">Kies je <em style="font-style:italic;color:var(--g)">arrangement</em></h2></div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(200,169,110,.1)">
@@ -402,8 +402,8 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
               </div>
             </div>
             <!-- Reviews -->
-            <div class="ws-sectie" id="ws-reviews" onclick="kiesSectie('reviews')">
-              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('reviews')">✏️</button>
+            <div class="ws-sectie" id="ws-reviews">
+              <button class="potlood-knop" onclick="kiesSectie('reviews')">✏️</button>
               <div style="background:#111;padding:40px 28px">
                 <h2 style="font-family:var(--fd);font-size:1.9rem;font-weight:300;margin-bottom:28px">Wat gasten <em style="font-style:italic;color:var(--g)">zeggen</em></h2>
                 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,.08)">
@@ -414,13 +414,13 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
               </div>
             </div>
             <!-- Quote -->
-            <div class="ws-sectie" id="ws-quote" onclick="kiesSectie('quote')">
-              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('quote')">✏️</button>
+            <div class="ws-sectie" id="ws-quote">
+              <button class="potlood-knop" onclick="kiesSectie('quote')">✏️</button>
               <div style="background:var(--g);padding:44px 28px;text-align:center"><blockquote id="pv-quote" style="font-family:var(--fd);font-size:clamp(1.2rem,2.5vw,1.9rem);font-style:italic;font-weight:300;color:var(--b);line-height:1.4;max-width:600px;margin:0 auto">"Niet weten waar je naartoe gaat is deel van de magie."</blockquote><cite style="display:block;margin-top:14px;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,10,10,.45);font-style:normal">— Secretnights</cite></div>
             </div>
             <!-- CTA -->
-            <div class="ws-sectie" id="ws-cta" onclick="kiesSectie('cta')">
-              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('cta')">✏️</button>
+            <div class="ws-sectie" id="ws-cta">
+              <button class="potlood-knop" onclick="kiesSectie('cta')">✏️</button>
               <div style="background:var(--b);padding:56px 28px;text-align:center">
                 <h2 id="pv-cta-titel" style="font-family:var(--fd);font-size:1.8rem;font-weight:300;margin-bottom:10px">Klaar voor jouw <em style="font-style:italic;color:var(--g)">geheime nacht?</em></h2>
                 <p id="pv-cta-tekst" style="font-size:.66rem;color:var(--wd);line-height:2;max-width:440px;margin:0 auto 24px">Slechts 12 Secret Nights per seizoen beschikbaar.</p>
@@ -428,8 +428,8 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
               </div>
             </div>
             <!-- Contact -->
-            <div class="ws-sectie" id="ws-contact" onclick="kiesSectie('contact')">
-              <button class="potlood-knop" onclick="event.stopPropagation();kiesSectie('contact')">✏️</button>
+            <div class="ws-sectie" id="ws-contact">
+              <button class="potlood-knop" onclick="kiesSectie('contact')">✏️</button>
               <div style="background:#111;padding:16px 28px;border-top:1px solid rgba(200,169,110,.12)">
                 <p style="font-size:.6rem;color:rgba(245,240,232,.36);line-height:2.2">📞 <span id="pv-tel" style="color:var(--g)">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="pv-email" style="color:var(--g)">info[at]secretnights.nl</span> &nbsp;·&nbsp; 📍 <span id="pv-adres" style="color:var(--g)">Kazernestraat, Oss</span></p>
               </div>
