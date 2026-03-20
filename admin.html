@@ -673,10 +673,34 @@ var alleRes=[],alleFotos=[],allePaginas=[],alleBetaal=[],alleTeksten={};
 var resF='alle',kJ=new Date().getFullYear(),kM=new Date().getMonth(),totN=12;
 var gekozenSec=null,gw={};
 
-function login(){var i=document.getElementById('pw').value,j=localStorage.getItem('sn_ww')||WW;if(i===j){sessionStorage.setItem('sn_ok','1');document.getElementById('L').style.display='none';document.getElementById('A').style.display='flex';laadAlles();}else{document.getElementById('lf').textContent='Onjuist wachtwoord.';document.getElementById('pw').value='';setTimeout(function(){document.getElementById('lf').textContent='';},3000);}}
-document.getElementById('pw').addEventListener('keydown',function(e){if(e.key==='Enter')login();});
+function login(){
+  var ingevoerd=document.getElementById('pw').value;
+  var opgeslagen=localStorage.getItem('sn_ww');
+  var juist=opgeslagen?opgeslagen:WW;
+  if(ingevoerd===juist){
+    sessionStorage.setItem('sn_ok','1');
+    document.getElementById('L').style.display='none';
+    document.getElementById('A').style.display='flex';
+    laadAlles();
+  } else {
+    document.getElementById('lf').textContent='Onjuist wachtwoord. Probeer opnieuw.';
+    document.getElementById('pw').value='';
+    document.getElementById('pw').focus();
+    setTimeout(function(){document.getElementById('lf').textContent='';},3000);
+  }
+}
 function uitloggen(){sessionStorage.removeItem('sn_ok');location.reload();}
-if(sessionStorage.getItem('sn_ok')==='1'){document.getElementById('L').style.display='none';document.getElementById('A').style.display='flex';setTimeout(laadAlles,50);}
+
+// Auto-login check - wacht tot DOM volledig geladen is
+window.addEventListener('DOMContentLoaded',function(){
+  if(sessionStorage.getItem('sn_ok')==='1'){
+    document.getElementById('L').style.display='none';
+    document.getElementById('A').style.display='flex';
+    setTimeout(laadAlles,100);
+  } else {
+    document.getElementById('pw').focus();
+  }
+});
 function wijzigWw(){var p1=document.getElementById('nw1').value,p2=document.getElementById('nw2').value;if(p1.length<8){toon('Minimaal 8 tekens','err');return;}if(p1!==p2){toon('Wachtwoorden komen niet overeen','err');return;}localStorage.setItem('sn_ww',p1);WW=p1;document.getElementById('nw1').value='';document.getElementById('nw2').value='';toon('Wachtwoord gewijzigd ✓','ok');}
 
 function api(pad,o){o=o||{};return fetch(SB+pad,{method:o.method||'GET',headers:Object.assign({'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},o.headers||{}),body:o.body||undefined});}
