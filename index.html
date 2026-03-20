@@ -782,7 +782,7 @@ async function checkSiteStatus(){
         if(nav)nav.style.top='44px';
       }
     }
-  }catch(e){console.log('Status check failed',e)}
+  }catch(e){/* stil falen - website werkt gewoon door */}
 }
 
 // COOKIE
@@ -952,9 +952,35 @@ async function doPay(){
   }
 }
 
+// BEZOEK REGISTREREN
+function registreerBezoek(){
+  try{
+    var apparaat=window.innerWidth<=768?'mobiel':'desktop';
+    sbFetch('/rest/v1/bezoeken',{
+      method:'POST',
+      headers:{'Prefer':'return=minimal'},
+      body:JSON.stringify({pagina:'index',apparaat:apparaat})
+    }).catch(function(){});
+  }catch(e){}
+}
+
 // INIT
 checkSiteStatus();
 loadAvail();
+registreerBezoek();
+// BEZOEKER TRACKING
+(function(){
+  try{
+    var app=navigator.userAgent;
+    var apparaat=app.match(/Mobile|Android|iPhone|iPad/i)?'mobiel':'desktop';
+    var ref=document.referrer||null;
+    fetch('https://eugdqjclpptbneburqtn.supabase.co/rest/v1/bezoeken',{
+      method:'POST',
+      headers:{'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1Z2RxamNscHB0Ym5lYnVycXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTc2MDMsImV4cCI6MjA4OTU3MzYwM30.oXpk_sw_f3NGb6Q6Wx-TQfiYXFtnT_29iwkFKl5EqeA','Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify({pagina:location.pathname,referrer:ref,apparaat:apparaat})
+    }).catch(function(){});
+  }catch(e){}
+})();
 const di=document.getElementById('f-date');if(di)di.min=new Date().toISOString().split('T')[0];
 </script>
 </body>

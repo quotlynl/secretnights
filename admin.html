@@ -224,6 +224,13 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
 .toast.err{border-color:var(--red);color:var(--red)}
 .toast.ok{border-color:var(--grn)}
 .xbtn{background:transparent;border:1px solid rgba(200,169,110,.22);color:var(--g);padding:7px 14px;font-family:var(--fb);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+/* PENCIL EDITOR STYLES */
+.ws-blok{position:relative;cursor:pointer;transition:outline .15s}
+.ws-blok:hover{outline:2px solid rgba(200,169,110,.5)}
+.ws-blok.actief{outline:3px solid var(--g)}
+.pencil-btn{position:absolute;top:10px;right:10px;z-index:15;background:var(--g);color:var(--b);border:none;width:34px;height:34px;border-radius:50%;font-size:.85rem;cursor:pointer;opacity:0;transition:opacity .2s,transform .2s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.ws-blok:hover .pencil-btn,.ws-blok.actief .pencil-btn{opacity:1}
+.pencil-btn:hover{transform:scale(1.1)}
 .xbtn:hover{background:rgba(200,169,110,.08)}
 @media(max-width:900px){.side{display:none}.sr{grid-template-columns:repeat(2,1fr)}.scroll{padding:16px}.ed-lay{grid-template-columns:1fr}.ed-site{display:none}}
 @media(max-width:480px){.sr{grid-template-columns:1fr}.f2{grid-template-columns:1fr}}
@@ -339,13 +346,129 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
     <!-- VISUELE EDITOR -->
     <div class="pg" id="pg-editor" style="display:none;flex-direction:column">
       <div class="ph" style="flex-shrink:0">
-        <div><h1>Visuele <em>Editor</em></h1><p>Klik op een sectie van de website om die aan te passen</p></div>
+        <div><h1>Visuele <em>Editor</em></h1><p>Klik op een ✏️ potlood om een sectie te bewerken</p></div>
         <div style="display:flex;gap:8px;align-items:center">
-          <span id="ed-hint" style="font-size:.56rem;color:rgba(200,169,110,.4);letter-spacing:.07em">← Klik op een sectie</span>
-          <button class="bg" id="op-btn" onclick="slaOp()" disabled>Opslaan →</button>
+          <span id="op-saved" style="font-size:.58rem;color:var(--grn);display:none">✓ Opgeslagen!</span>
+          <button class="bg" id="op-btn" onclick="slaOp()" disabled>Opslaan op website →</button>
         </div>
       </div>
-      <div class="ed-lay">
+      <!-- EDITOR LAYOUT: website preview links, edit panel rechts -->
+      <div style="display:grid;grid-template-columns:1fr 380px;flex:1;overflow:hidden;min-height:0">
+      <!-- WEBSITE PREVIEW MET POTLOOD KNOPPEN -->
+      <div style="overflow-y:auto;background:#000;position:relative" id="ed-preview">
+        <!-- NAV preview -->
+        <div style="background:rgba(10,10,10,.98);border-bottom:1px solid rgba(200,169,110,.12);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20">
+          <span style="font-family:var(--fd);font-size:.9rem;letter-spacing:.25em;color:var(--g);text-transform:uppercase">Secret<em style="font-style:italic;color:rgba(245,240,232,.5)">nights</em></span>
+          <div style="display:flex;gap:16px"><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">Mysterie</span><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">Arrangementen</span><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">FAQ</span></div>
+        </div>
+        <!-- Elke sectie is klikbaar met potlood -->
+        <div id="ws-hero" class="ws-blok" onclick="openSec('hero')" title="Hero sectie bewerken">
+          <button class="pencil-btn">✏️</button>
+          <div style="background:linear-gradient(180deg,rgba(10,10,10,.5) 0%,rgba(10,10,10,.05) 45%,rgba(10,10,10,.92) 100%),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-V8-34-1.jpg') center/cover;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:36px 28px">
+            <span style="font-size:.44rem;letter-spacing:.38em;text-transform:uppercase;color:var(--g);margin-bottom:14px;display:block">Bijzondere Overnachtingen op het Water</span>
+            <h1 id="p-hero-titel" style="font-family:var(--fd);font-size:clamp(1.6rem,4vw,3rem);font-weight:300;color:var(--w);line-height:1.05">Jouw <em style="font-style:italic;color:var(--g)">geheime</em> nacht begint hier</h1>
+            <p id="p-hero-sub" style="font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.5);margin-top:10px;line-height:2">Een mysterieuze ligplek · Een privé-boot · Een beleving die je nooit vergeet</p>
+            <div style="display:flex;gap:8px;margin-top:18px;justify-content:center"><div style="background:var(--g);color:var(--b);padding:8px 20px;font-size:.5rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase" id="p-hero-k1">Reserveer je Night</div><div style="border:1px solid rgba(245,240,232,.28);color:var(--w);padding:8px 20px;font-size:.5rem;letter-spacing:.16em;text-transform:uppercase" id="p-hero-k2">Ontdek het Mysterie</div></div>
+          </div>
+        </div>
+        <!-- COUNTER -->
+        <div style="background:var(--g);padding:12px 32px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap">
+          <span style="font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--b);font-weight:600">Nog slechts</span>
+          <span style="font-family:var(--fd);font-size:2.4rem;font-weight:300;color:var(--b);line-height:1" id="p-cnt">—</span>
+          <span style="font-family:var(--fd);font-size:.8rem;font-style:italic;color:var(--b)">Secret Nights</span>
+        </div>
+        <!-- INTRO -->
+        <div id="ws-intro" class="ws-blok" onclick="openSec('intro')" title="Mysterie sectie bewerken">
+          <button class="pencil-btn">✏️</button>
+          <div style="background:#111;padding:44px 32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center">
+            <div>
+              <h2 id="p-intro-titel" style="font-family:var(--fd);font-size:1.7rem;font-weight:300;color:var(--w);line-height:1.1;margin-bottom:14px">Jij kiest de nacht. <em style="font-style:italic;color:var(--g)">Wij kiezen de plek.</em></h2>
+              <p id="p-intro-t1" style="font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:10px">Secretnights brengt je naar een geheime ligplek ergens in de Nederlandse natuur.</p>
+              <p id="p-intro-t2" style="font-size:.64rem;color:var(--wd);line-height:2">Verwacht rust, ruimte en een uitzicht dat je adem beneemt.</p>
+            </div>
+            <div style="background:linear-gradient(135deg,rgba(26,18,8,.9),rgba(13,13,13,.9)),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-slaapbank-sfeer-uitzicht-natuur.jpg') center/cover;aspect-ratio:3/4;border:1px solid rgba(200,169,110,.14)"></div>
+          </div>
+        </div>
+        <!-- FEATURES -->
+        <div id="ws-features" class="ws-blok" onclick="openSec('features')" title="Features bewerken">
+          <button class="pencil-btn">✏️</button>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,.12)">
+            <div style="background:#131313;padding:36px 28px;text-align:center"><div style="font-size:1.4rem;margin-bottom:14px">🌿</div><h3 id="p-f1-titel" style="font-family:var(--fd);font-size:1.25rem;font-weight:300;margin-bottom:9px">Natuur &amp; Rust</h3><p id="p-f1-tekst" style="font-size:.64rem;line-height:1.9;color:var(--wd)">Wakker worden op het water, omringd door ongerepte natuur.</p></div>
+            <div style="background:#131313;padding:36px 28px;text-align:center"><div style="font-size:1.4rem;margin-bottom:14px">🛁</div><h3 id="p-f2-titel" style="font-family:var(--fd);font-size:1.25rem;font-weight:300;margin-bottom:9px">Wellness op het Water</h3><p id="p-f2-tekst" style="font-size:.64rem;line-height:1.9;color:var(--wd)">Privé-sauna, massage in de open lucht of gewoon genieten.</p></div>
+            <div style="background:#131313;padding:36px 28px;text-align:center"><div style="font-size:1.4rem;margin-bottom:14px">🍽️</div><h3 id="p-f3-titel" style="font-family:var(--fd);font-size:1.25rem;font-weight:300;margin-bottom:9px">Culinaire Ervaring</h3><p id="p-f3-tekst" style="font-size:.64rem;line-height:1.9;color:var(--wd)">Een privé-kok bereidt een exclusief menu aan boord.</p></div>
+          </div>
+        </div>
+        <!-- ARRANGEMENTEN -->
+        <div id="ws-arrangementen" class="ws-blok" onclick="openSec('arrangementen')" title="Arrangementen bewerken">
+          <button class="pencil-btn">✏️</button>
+          <div style="background:#111;padding:44px 32px">
+            <div style="margin-bottom:32px"><span style="font-size:.52rem;letter-spacing:.4em;text-transform:uppercase;color:var(--g)">Selecteer jouw beleving</span><h2 style="font-family:var(--fd);font-size:2rem;font-weight:300;margin-top:8px">Kies je <em style="font-style:italic;color:var(--g)">arrangement</em></h2></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(200,169,110,.1)">
+              <div style="background:#131313;padding:36px 32px;grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center">
+                <div><div style="font-family:var(--fd);font-size:3rem;font-weight:300;color:rgba(200,169,110,.1)">01</div><h3 id="p-dining-titel" style="font-family:var(--fd);font-size:1.5rem;font-weight:300;margin-bottom:10px"><em style="font-style:italic;color:var(--g)">Dining</em> Experience</h3><p id="p-dining-tekst" style="font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:14px">Een privé-kok neemt de volledige culinaire beleving voor zijn rekening.</p><span id="p-dining-prijs" style="font-family:var(--fd);font-size:.88rem;color:var(--gl)">Vanaf € 695 per nacht</span></div>
+                <div style="background:linear-gradient(135deg,rgba(26,18,8,.8),rgba(13,13,13,.8)),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-terras-strand-ontbijt.jpg') center/cover;aspect-ratio:1;border:1px solid rgba(200,169,110,.1)"></div>
+              </div>
+              <div style="background:#131313;padding:32px"><div style="font-family:var(--fd);font-size:3rem;font-weight:300;color:rgba(200,169,110,.1)">02</div><h3 id="p-wellness-titel" style="font-family:var(--fd);font-size:1.5rem;font-weight:300;margin-bottom:10px">Natuurlijk <em style="font-style:italic;color:var(--g)">Wellness</em></h3><p id="p-wellness-tekst" style="font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:14px">Totale ontspanning op het water.</p><span id="p-wellness-prijs" style="font-family:var(--fd);font-size:.88rem;color:var(--gl)">Vanaf € 450 per nacht</span></div>
+              <div style="background:#131313;padding:32px"><div style="font-family:var(--fd);font-size:3rem;font-weight:300;color:rgba(200,169,110,.1)">03</div><h3 id="p-sauna-titel" style="font-family:var(--fd);font-size:1.5rem;font-weight:300;margin-bottom:10px">Sauna <em style="font-style:italic;color:var(--g)">Boot</em></h3><p id="p-sauna-tekst" style="font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:14px">Een exclusieve privé-sauna midden in de natuur.</p><span id="p-sauna-prijs" style="font-family:var(--fd);font-size:.88rem;color:var(--gl)">Vanaf € 550 per nacht</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- REVIEWS -->
+        <div id="ws-reviews" class="ws-blok" onclick="openSec('reviews')" title="Reviews bewerken">
+          <button class="pencil-btn">✏️</button>
+          <div style="background:#111;padding:44px 32px">
+            <h2 style="font-family:var(--fd);font-size:2rem;font-weight:300;margin-bottom:32px">Wat gasten <em style="font-style:italic;color:var(--g)">zeggen</em></h2>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,.08)">
+              <div style="background:#131313;padding:36px 30px"><div style="color:var(--g);font-size:.62rem;margin-bottom:14px">★ ★ ★ ★ ★</div><p id="p-r1-tekst" style="font-family:var(--fd);font-size:1rem;font-style:italic;line-height:1.75;margin-bottom:16px">"De locatie nam onze adem weg."</p><span id="p-r1-naam" style="font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Sarah &amp; Tom</span></div>
+              <div style="background:#131313;padding:36px 30px"><div style="color:var(--g);font-size:.62rem;margin-bottom:14px">★ ★ ★ ★ ★</div><p id="p-r2-tekst" style="font-family:var(--fd);font-size:1rem;font-style:italic;line-height:1.75;margin-bottom:16px">"De privé-kok was een openbaring."</p><span id="p-r2-naam" style="font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Familie De Groot</span></div>
+              <div style="background:#131313;padding:36px 30px"><div style="color:var(--g);font-size:.62rem;margin-bottom:14px">★ ★ ★ ★ ★</div><p id="p-r3-tekst" style="font-family:var(--fd);font-size:1rem;font-style:italic;line-height:1.75;margin-bottom:16px">"Sauna bij zonsondergang, water in."</p><span id="p-r3-naam" style="font-size:.54rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Charlotte V.</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- QUOTE -->
+        <div id="ws-quote" class="ws-blok" onclick="openSec('quote')" title="Quote bewerken">
+          <button class="pencil-btn">✏️</button>
+          <div style="background:var(--g);padding:44px 32px;text-align:center">
+            <blockquote id="p-quote-tekst" style="font-family:var(--fd);font-size:clamp(1.2rem,2.5vw,1.9rem);font-style:italic;font-weight:300;color:var(--b);line-height:1.4;max-width:600px;margin:0 auto">"Niet weten waar je naartoe gaat is deel van de magie."</blockquote>
+            <cite style="display:block;margin-top:14px;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,10,10,.45);font-style:normal">— Secretnights</cite>
+          </div>
+        </div>
+        <!-- CTA -->
+        <div id="ws-cta" class="ws-blok" onclick="openSec('cta')" title="Call-to-action bewerken">
+          <button class="pencil-btn">✏️</button>
+          <div style="background:var(--b);padding:60px 32px;text-align:center">
+            <h2 id="p-cta-titel" style="font-family:var(--fd);font-size:1.8rem;font-weight:300;margin-bottom:10px">Klaar voor jouw <em style="font-style:italic;color:var(--g)">geheime nacht?</em></h2>
+            <p id="p-cta-tekst" style="font-size:.66rem;color:var(--wd);line-height:2;max-width:440px;margin:0 auto 24px">Slechts 12 Secret Nights per seizoen beschikbaar.</p>
+            <div style="display:inline-block;background:var(--g);color:var(--b);padding:10px 26px;font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Reserveer Nu</div>
+          </div>
+        </div>
+        <!-- CONTACT / FOOTER -->
+        <div id="ws-contact" class="ws-blok" onclick="openSec('contact')" title="Contactgegevens bewerken">
+          <button class="pencil-btn">✏️</button>
+          <div style="background:#111;padding:16px 32px;border-top:1px solid rgba(200,169,110,.12)">
+            <p style="font-size:.6rem;color:rgba(245,240,232,.36);line-height:2.2">📞 <span id="p-tel" style="color:var(--g)">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="p-em" style="color:var(--g)">info@secretnights.nl</span> &nbsp;·&nbsp; 📍 <span id="p-ad" style="color:var(--g)">Kazernestraat, Oss</span></p>
+          </div>
+        </div>
+      </div>
+      <!-- EDIT PANEL RECHTS -->
+      <div style="overflow-y:auto;background:var(--bs);display:flex;flex-direction:column;border-left:1px solid rgba(200,169,110,.1)" id="ed-panel-wrap">
+        <div style="padding:16px 18px;border-bottom:1px solid rgba(200,169,110,.1);flex-shrink:0;background:var(--bc)">
+          <div style="font-family:var(--fd);font-size:1.1rem;font-weight:300" id="ed-panel-title">Selecteer een sectie</div>
+          <div style="font-size:.58rem;color:var(--wd);margin-top:3px" id="ed-panel-sub">Klik op een ✏️ potlood om te bewerken</div>
+        </div>
+        <div style="flex:1;padding:16px 18px;overflow-y:auto" id="ed-body">
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:280px;color:rgba(245,240,232,.18);text-align:center;gap:12px">
+            <span style="font-size:2.5rem">✏️</span>
+            <p style="font-size:.64rem;letter-spacing:.08em;line-height:2">Klik op een ✏️ potlood<br/>naast een sectie van<br/>de website om te bewerken</p>
+          </div>
+        </div>
+        <div style="padding:14px 18px;border-top:1px solid rgba(200,169,110,.1);flex-shrink:0;display:none" id="ed-ft">
+          <button class="bg" style="width:100%" onclick="slaOp()">💾 Opslaan op website →</button>
+          <div style="background:rgba(200,169,110,.04);border:1px solid rgba(200,169,110,.09);padding:9px 12px;font-size:.6rem;color:var(--wd);line-height:1.9;margin-top:10px">💡 Gebruik <code style="background:var(--bc);padding:1px 4px;color:var(--g)">*woord*</code> voor <em style="font-style:italic;color:var(--g)">cursief goud</em>. Wijzigingen zijn live na opslaan.</div>
+        </div>
+      </div>
+      </div>
+    </div>
         <div class="ed-site">
           <div class="ws-nav">
             <span class="ws-nav-logo">Secret<em>nights</em></span>
@@ -392,7 +515,7 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
           <div class="ws-sec" id="sec-contact" onclick="kiesSec('contact')">
             <div class="ws-edit-hint">✏️ Contactgegevens</div>
             <div class="ws-contact">
-              <p>📞 <span id="pv-tel">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="pv-em">info@secretnights.nl</span> &nbsp;·&nbsp; 📍 <span id="pv-ad">Kazernestraat, Oss</span></p>
+              <p>📞 <span id="pv-tel">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="pv-em"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bdd4d3dbd2fdced8decfd8c9d3d4dad5c9ce93d3d1">[email&#160;protected]</a></span> &nbsp;·&nbsp; 📍 <span id="pv-ad">Kazernestraat, Oss</span></p>
             </div>
           </div>
         </div>
@@ -542,7 +665,7 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
 <div class="mo" id="m-res"><div class="mw"><div class="mh"><h2>Reservering <em>details</em></h2><button class="mx" onclick="sluitM('m-res')">✕</button></div><div class="mb" id="rm-b"></div><div class="ma" id="rm-a"></div></div></div>
 <div class="toast" id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var SB='https://eugdqjclpptbneburqtn.supabase.co';
 var KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1Z2RxamNscHB0Ym5lYnVycXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTc2MDMsImV4cCI6MjA4OTU3MzYwM30.oXpk_sw_f3NGb6Q6Wx-TQfiYXFtnT_29iwkFKl5EqeA';
 var WW='Secretnights2026!';
@@ -604,10 +727,107 @@ function kPrev(){kM--;if(kM<0){kM=11;kJ--;}toonKal();}
 function kNext(){kM++;if(kM>11){kM=0;kJ++;}toonKal();}
 
 var SECS={hero:{lbl:'Hero',p:'index',s:'hero',velden:[['titel','Hoofdtitel',false,'Gebruik *woord* voor cursief goud'],['subtitel','Subtitel',true]]},intro:{lbl:'Mysterie sectie',p:'index',s:'intro',velden:[['titel','Titel',false,'Gebruik *woord* voor cursief goud'],['tekst1','Alinea 1',true],['tekst2','Alinea 2',true]]},quote:{lbl:'Quote balk',p:'index',s:'quote',velden:[['tekst','Quote tekst',true]]},cta:{lbl:'Call-to-action',p:'index',s:'cta',velden:[['titel','Titel',false,'Gebruik *woord* voor cursief goud'],['tekst','Tekst',true]]},contact:{lbl:'Contactgegevens',p:'algemeen',s:'contact',velden:[['telefoon','Telefoonnummer',false],['email','E-mailadres',false],['adres','Adres',false],['whatsapp','WhatsApp nummer',false]]}};
-function updatePrev(){var ht=getT('index','hero','titel');if(ht)document.getElementById('pv-ht').innerHTML=ht.replace(/\*([^*]+)\*/g,'<em>$1</em>');var hs=getT('index','hero','subtitel');if(hs)document.getElementById('pv-hs').textContent=hs;var it=getT('index','intro','titel');if(it)document.getElementById('pv-it').innerHTML=it.replace(/\*([^*]+)\*/g,'<em>$1</em>');var i1=getT('index','intro','tekst1');if(i1)document.getElementById('pv-i1').textContent=i1;var i2=getT('index','intro','tekst2');if(i2)document.getElementById('pv-i2').textContent=i2;var q=getT('index','quote','tekst');if(q)document.getElementById('pv-q').textContent='"'+q+'"';var ct=getT('index','cta','titel');if(ct)document.getElementById('pv-ct').innerHTML=ct.replace(/\*([^*]+)\*/g,'<em>$1</em>');var cp=getT('index','cta','tekst');if(cp)document.getElementById('pv-cp').textContent=cp;var tel=getT('algemeen','contact','telefoon');if(tel)document.getElementById('pv-tel').textContent=tel;var em=getT('algemeen','contact','email');if(em)document.getElementById('pv-em').textContent=em;var ad=getT('algemeen','contact','adres');if(ad)document.getElementById('pv-ad').textContent=ad;api('/rest/v1/beschikbaarheid?select=totaal_nachten,geboekte_nachten&limit=1').then(function(r){return r.json();}).then(function(d){if(d&&d[0])document.getElementById('pv-cnt').textContent=d[0].totaal_nachten-d[0].geboekte_nachten;}).catch(function(){});}
-function kiesSec(key){gekozenSec=key;document.querySelectorAll('.ws-sec').forEach(function(el){el.classList.remove('gekozen');});document.getElementById('sec-'+key).classList.add('gekozen');var def=SECS[key];var html='';def.velden.forEach(function(v){var w=getT(def.p,def.s,v[0]);html+='<div class="vb"><label>'+v[1]+(v[3]?' <span style="color:rgba(200,169,110,.38);font-size:.42rem;text-transform:none;letter-spacing:.07em">'+v[3]+'</span>':'')+'</label>';if(v[2]){html+='<textarea oninput="veldGew(\''+def.p+'\',\''+def.s+'\',\''+v[0]+'\',this.value)" rows="3">'+w+'</textarea>';}else{html+='<input type="text" oninput="veldGew(\''+def.p+'\',\''+def.s+'\',\''+v[0]+'\',this.value)" value="'+w.replace(/"/g,'&quot;')+'"/>';}html+='</div>';});document.getElementById('ed-body').innerHTML=html;document.getElementById('ed-ft').style.display='block';document.getElementById('op-btn').disabled=false;document.getElementById('ed-hint').textContent='✓ '+def.lbl+' geselecteerd';document.getElementById('sec-'+key).scrollIntoView({behavior:'smooth',block:'center'});}
-function veldGew(p,s,v,val){if(!gw[p])gw[p]={};if(!gw[p][s])gw[p][s]={};gw[p][s][v]=val;if(!alleTeksten[p])alleTeksten[p]={};if(!alleTeksten[p][s])alleTeksten[p][s]={};alleTeksten[p][s][v]=val;updatePrev();}
-function slaOp(){var btn=document.getElementById('op-btn');btn.textContent='Opslaan...';btn.disabled=true;var prs=[];Object.keys(gw).forEach(function(p){Object.keys(gw[p]).forEach(function(s){Object.keys(gw[p][s]).forEach(function(v){prs.push(api('/rest/v1/pagina_inhoud',{method:'POST',headers:{'Prefer':'resolution=merge-duplicates'},body:JSON.stringify({pagina:p,sectie:s,veld:v,waarde:gw[p][s][v],updated_at:new Date().toISOString()})}));});});});Promise.all(prs).then(function(){gw={};toon('Opgeslagen op de website ✓','ok');btn.textContent='Opslaan →';btn.disabled=false;});}
+function upd(id,val,isHtml){var el=document.getElementById(id);if(!el||!val)return;var r=val.replace(/\*([^*]+)\*/g,'<em style="font-style:italic;color:var(--g)">$1</em>');if(isHtml)el.innerHTML=r;else el.textContent=val;}
+function updatePrev(){
+  upd('p-hero-titel',getT('index','hero','titel'),true);
+  upd('p-hero-sub',getT('index','hero','subtitel'),false);
+  upd('p-hero-k1',getT('index','hero','knop1'),false);
+  upd('p-hero-k2',getT('index','hero','knop2'),false);
+  upd('p-intro-titel',getT('index','intro','titel'),true);
+  upd('p-intro-t1',getT('index','intro','tekst1'),false);
+  upd('p-intro-t2',getT('index','intro','tekst2'),false);
+  upd('p-f1-titel',getT('index','feature1','titel'),false);
+  upd('p-f1-tekst',getT('index','feature1','tekst'),false);
+  upd('p-f2-titel',getT('index','feature2','titel'),false);
+  upd('p-f2-tekst',getT('index','feature2','tekst'),false);
+  upd('p-f3-titel',getT('index','feature3','titel'),false);
+  upd('p-f3-tekst',getT('index','feature3','tekst'),false);
+  upd('p-dining-titel',getT('index','dining','titel'),true);
+  upd('p-dining-tekst',getT('index','dining','tekst'),false);
+  upd('p-dining-prijs',getT('index','dining','prijs'),false);
+  upd('p-wellness-titel',getT('index','wellness','titel'),true);
+  upd('p-wellness-tekst',getT('index','wellness','tekst'),false);
+  upd('p-wellness-prijs',getT('index','wellness','prijs'),false);
+  upd('p-sauna-titel',getT('index','sauna','titel'),true);
+  upd('p-sauna-tekst',getT('index','sauna','tekst'),false);
+  upd('p-sauna-prijs',getT('index','sauna','prijs'),false);
+  upd('p-r1-tekst',getT('index','review1','tekst'),false);
+  upd('p-r1-naam',getT('index','review1','naam'),false);
+  upd('p-r2-tekst',getT('index','review2','tekst'),false);
+  upd('p-r2-naam',getT('index','review2','naam'),false);
+  upd('p-r3-tekst',getT('index','review3','tekst'),false);
+  upd('p-r3-naam',getT('index','review3','naam'),false);
+  upd('p-quote-tekst',getT('index','quote','tekst'),false);
+  upd('p-cta-titel',getT('index','cta','titel'),true);
+  upd('p-cta-tekst',getT('index','cta','tekst'),false);
+  upd('p-tel',getT('algemeen','contact','telefoon'),false);
+  upd('p-em',getT('algemeen','contact','email'),false);
+  upd('p-ad',getT('algemeen','contact','adres'),false);
+  // Oude preview elementen (backward compat)
+  upd('pv-ht',getT('index','hero','titel'),true);
+  upd('pv-hs',getT('index','hero','subtitel'),false);
+  upd('pv-it',getT('index','intro','titel'),true);
+  upd('pv-i1',getT('index','intro','tekst1'),false);
+  upd('pv-i2',getT('index','intro','tekst2'),false);
+  upd('pv-ct',getT('index','cta','titel'),true);
+  upd('pv-cp',getT('index','cta','tekst'),false);
+  var qel=document.getElementById('p-quote-tekst');if(qel){var q=getT('index','quote','tekst');if(q)qel.textContent='"'+q+'"';}
+  api('/rest/v1/beschikbaarheid?select=totaal_nachten,geboekte_nachten&limit=1').then(function(r){return r.json();}).then(function(d){if(d&&d[0]){var r=d[0].totaal_nachten-d[0].geboekte_nachten;var e1=document.getElementById('p-cnt');var e2=document.getElementById('pv-cnt');if(e1)e1.textContent=r;if(e2)e2.textContent=r;}}).catch(function(){});
+}
+// SECTIE DEFINITIES - alles aanpasbaar
+var SECS_DEF={
+  hero:{label:'🦸 Hero',velden:[{p:'index',s:'hero',v:'titel',lbl:'Hoofdtitel',ta:false,hint:'Gebruik *woord* voor cursief goud',pid:'p-hero-titel'},{p:'index',s:'hero',v:'subtitel',lbl:'Subtitel',ta:true,pid:'p-hero-sub'},{p:'index',s:'hero',v:'knop1',lbl:'Knop 1',ta:false,pid:'p-hero-k1'},{p:'index',s:'hero',v:'knop2',lbl:'Knop 2',ta:false,pid:'p-hero-k2'}]},
+  intro:{label:'🌊 Mysterie sectie',velden:[{p:'index',s:'intro',v:'titel',lbl:'Titel',ta:false,hint:'Gebruik *woord* voor cursief goud',pid:'p-intro-titel'},{p:'index',s:'intro',v:'tekst1',lbl:'Alinea 1',ta:true,pid:'p-intro-t1'},{p:'index',s:'intro',v:'tekst2',lbl:'Alinea 2',ta:true,pid:'p-intro-t2'}]},
+  features:{label:'✨ Features',velden:[{p:'index',s:'feature1',v:'titel',lbl:'Blok 1 titel',ta:false,pid:'p-f1-titel'},{p:'index',s:'feature1',v:'tekst',lbl:'Blok 1 tekst',ta:true,pid:'p-f1-tekst'},{p:'index',s:'feature2',v:'titel',lbl:'Blok 2 titel',ta:false,pid:'p-f2-titel'},{p:'index',s:'feature2',v:'tekst',lbl:'Blok 2 tekst',ta:true,pid:'p-f2-tekst'},{p:'index',s:'feature3',v:'titel',lbl:'Blok 3 titel',ta:false,pid:'p-f3-titel'},{p:'index',s:'feature3',v:'tekst',lbl:'Blok 3 tekst',ta:true,pid:'p-f3-tekst'}]},
+  arrangementen:{label:'🛥️ Arrangementen & Prijzen',velden:[{p:'index',s:'dining',v:'titel',lbl:'Dining titel',ta:false,pid:'p-dining-titel'},{p:'index',s:'dining',v:'tekst',lbl:'Dining tekst',ta:true,pid:'p-dining-tekst'},{p:'index',s:'dining',v:'prijs',lbl:'Dining prijs',ta:false,pid:'p-dining-prijs'},{p:'index',s:'wellness',v:'titel',lbl:'Wellness titel',ta:false,pid:'p-wellness-titel'},{p:'index',s:'wellness',v:'tekst',lbl:'Wellness tekst',ta:true,pid:'p-wellness-tekst'},{p:'index',s:'wellness',v:'prijs',lbl:'Wellness prijs',ta:false,pid:'p-wellness-prijs'},{p:'index',s:'sauna',v:'titel',lbl:'Sauna titel',ta:false,pid:'p-sauna-titel'},{p:'index',s:'sauna',v:'tekst',lbl:'Sauna tekst',ta:true,pid:'p-sauna-tekst'},{p:'index',s:'sauna',v:'prijs',lbl:'Sauna prijs',ta:false,pid:'p-sauna-prijs'},{p:'index',s:'massage',v:'prijs',lbl:'Massage bijprijs',ta:false}]},
+  reviews:{label:'⭐ Reviews',velden:[{p:'index',s:'review1',v:'tekst',lbl:'Review 1 tekst',ta:true,pid:'p-r1-tekst'},{p:'index',s:'review1',v:'naam',lbl:'Review 1 naam',ta:false,pid:'p-r1-naam'},{p:'index',s:'review2',v:'tekst',lbl:'Review 2 tekst',ta:true,pid:'p-r2-tekst'},{p:'index',s:'review2',v:'naam',lbl:'Review 2 naam',ta:false,pid:'p-r2-naam'},{p:'index',s:'review3',v:'tekst',lbl:'Review 3 tekst',ta:true,pid:'p-r3-tekst'},{p:'index',s:'review3',v:'naam',lbl:'Review 3 naam',ta:false,pid:'p-r3-naam'}]},
+  quote:{label:'💬 Quote balk',velden:[{p:'index',s:'quote',v:'tekst',lbl:'Quote tekst',ta:true,pid:'p-quote-tekst'}]},
+  cta:{label:'🎯 Call-to-action',velden:[{p:'index',s:'cta',v:'titel',lbl:'Titel',ta:false,hint:'Gebruik *woord* voor cursief goud',pid:'p-cta-titel'},{p:'index',s:'cta',v:'tekst',lbl:'Tekst',ta:true,pid:'p-cta-tekst'}]},
+  contact:{label:'📞 Contactgegevens',velden:[{p:'algemeen',s:'contact',v:'telefoon',lbl:'Telefoonnummer',ta:false,pid:'p-tel'},{p:'algemeen',s:'contact',v:'email',lbl:'E-mail',ta:false,pid:'p-em'},{p:'algemeen',s:'contact',v:'adres',lbl:'Adres',ta:false,pid:'p-ad'},{p:'algemeen',s:'contact',v:'whatsapp',lbl:'WhatsApp nummer',ta:false}]}
+};
+
+function openSec(key){
+  if(event)event.stopPropagation();
+  gekozenSec=key;
+  document.querySelectorAll('.ws-blok').forEach(function(el){el.classList.remove('actief');});
+  var blok=document.getElementById('ws-'+key);
+  if(blok){blok.classList.add('actief');blok.scrollIntoView({behavior:'smooth',block:'center'});}
+  var def=SECS_DEF[key];if(!def)return;
+  document.getElementById('ed-panel-title').textContent=def.label;
+  document.getElementById('ed-panel-sub').textContent='Pas de velden aan en klik Opslaan';
+  var html='';
+  def.velden.forEach(function(veld){
+    var w=getT(veld.p,veld.s,veld.v)||'';
+    var pid=veld.pid?',\''+veld.pid+'\'':'';
+    html+='<div style="background:var(--bc);padding:12px 14px;margin-bottom:8px;border:1px solid rgba(200,169,110,.07)"><label style="font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--g);display:block;margin-bottom:5px">'+veld.lbl+(veld.hint?' <span style="color:rgba(200,169,110,.38);font-size:.42rem;text-transform:none">'+veld.hint+'</span>':'')+'</label>';
+    if(veld.ta){
+      html+='<textarea style="width:100%;background:var(--b);border:1px solid rgba(200,169,110,.18);color:var(--w);padding:8px 11px;font-family:var(--fb);font-size:.73rem;outline:none;border-radius:0;resize:vertical;min-height:68px;line-height:1.9" oninput="veldGew(\''+veld.p+'\',\''+veld.s+'\',\''+veld.v+'\',this.value'+pid+')" onfocus="this.style.borderColor=\'var(--g)\'" onblur="this.style.borderColor=\'rgba(200,169,110,.18)\'">'+w+'</textarea>';
+    } else {
+      html+='<input type="text" style="width:100%;background:var(--b);border:1px solid rgba(200,169,110,.18);color:var(--w);padding:8px 11px;font-family:var(--fb);font-size:.73rem;outline:none;border-radius:0" oninput="veldGew(\''+veld.p+'\',\''+veld.s+'\',\''+veld.v+'\',this.value'+pid+')" onfocus="this.style.borderColor=\'var(--g)\'" onblur="this.style.borderColor=\'rgba(200,169,110,.18)\'" value="'+w.replace(/"/g,'&quot;')+'"/>';
+    }
+    html+='</div>';
+  });
+  document.getElementById('ed-body').innerHTML=html;
+  document.getElementById('ed-ft').style.display='block';
+  document.getElementById('op-btn').disabled=false;
+}
+
+function veldGew(p,s,v,val,previewId){
+  if(!gw[p])gw[p]={};if(!gw[p][s])gw[p][s]={};gw[p][s][v]=val;
+  if(!alleTeksten[p])alleTeksten[p]={};if(!alleTeksten[p][s])alleTeksten[p][s]={};alleTeksten[p][s][v]=val;
+  if(previewId){var el=document.getElementById(previewId);if(el){var r=val.replace(/\*([^*]+)\*/g,'<em style="font-style:italic;color:var(--g)">$1</em>');if(el.tagName==='INPUT'||el.tagName==='TEXTAREA')el.value=val;else el.innerHTML=r;}}
+  updatePrev();
+}
+
+function slaOp(){
+  var btn=document.getElementById('op-btn');btn.textContent='Opslaan...';btn.disabled=true;
+  var prs=[];
+  Object.keys(gw).forEach(function(p){Object.keys(gw[p]).forEach(function(s){Object.keys(gw[p][s]).forEach(function(v){prs.push(api('/rest/v1/pagina_inhoud',{method:'POST',headers:{'Prefer':'resolution=merge-duplicates'},body:JSON.stringify({pagina:p,sectie:s,veld:v,waarde:gw[p][s][v],updated_at:new Date().toISOString()})}));});});});
+  Promise.all(prs).then(function(){gw={};toon('Opgeslagen! Wijzigingen zijn nu live op de website ✓','ok');btn.textContent='Opslaan op website \u2192';btn.disabled=false;});
+}
+
+// Oude kiesSec alias voor backwards compat
+function kiesSec(key){openSec(key);}
 
 function toonFotos(){var g=document.getElementById('foto-grid');if(!alleFotos.length){g.innerHTML='<div class="leeg"><span>🖼️</span><p>Nog geen foto\'s</p></div>';return;}g.innerHTML=alleFotos.map(function(f){return'<div style="background:var(--bc);border:1px solid rgba(200,169,110,.09);overflow:hidden"><img src="'+f.url+'" style="width:100%;aspect-ratio:4/3;object-fit:cover;filter:brightness(.75);display:block" onerror="this.style.background=\'#1a1a1a\';this.style.minHeight=\'90px\'"/><div style="padding:9px 11px"><div style="font-size:.6rem;color:var(--w);margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(f.naam||'Naamloos')+'</div><div style="font-size:.5rem;color:rgba(200,169,110,.43);margin-bottom:7px">'+(f.pagina||'Algemeen')+(f.sectie?' · '+f.sectie:'')+'</div><div style="display:flex;gap:5px"><button style="flex:1;background:transparent;border:1px solid rgba(200,169,110,.15);color:var(--wd);padding:4px;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer" onclick="navigator.clipboard.writeText(\''+f.url+'\').then(function(){toon(\'URL gekopieerd!\',\'ok\')})">📋 URL</button><button style="background:transparent;border:1px solid rgba(224,82,82,.2);color:var(--red);padding:4px 7px;font-size:.48rem;cursor:pointer" onclick="delFoto(\''+f.id+'\')">🗑</button></div></div></div>';}).join('');}
 function prvFoto(){var u=document.getElementById('fm-u').value;if(u.indexOf('http')===0){document.getElementById('fp').style.display='block';document.getElementById('fp-i').src=u;}else document.getElementById('fp').style.display='none';}
@@ -640,8 +860,4 @@ function resetBoek(){if(!confirm('Teller resetten naar 0?'))return;api('/rest/v1
 
 function openM(id){document.getElementById(id).classList.add('on');}
 function sluitM(id){document.getElementById(id).classList.remove('on');}
-document.querySelectorAll('.mo').forEach(function(o){o.addEventListener('click',function(e){if(e.target===o)o.classList.remove('on');});});
-function toon(b,t){var el=document.getElementById('toast');el.textContent=b;el.className='toast on'+(t?' '+t:'');setTimeout(function(){el.classList.remove('on');},3800);}
-</script>
-</body>
-</html>
+document.querySelectorAll('.mo').forEach(function(o){o.addEventListener('click',function(e){if(e.target===
