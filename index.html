@@ -486,7 +486,7 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
     <div class="gold-line"></div>
     <p>Secretnights brengt je naar een geheime ligplek ergens in de Nederlandse natuur. Waar precies? Dat verklappen we pas nadat je hebt geboekt.</p>
     <p>Verwacht rust, ruimte en een uitzicht dat je adem beneemt. Een privé-boot, volledig uitgerust — alleen voor jou.</p>
-    <p style="font-size:.68rem;color:rgba(245,240,232,.34);font-style:italic;line-height:2;margin-top:4px">📞 06 300 66 444 · info@secretnights.nl · Ook via WhatsApp</p>
+    <p style="font-size:.68rem;color:rgba(245,240,232,.34);font-style:italic;line-height:2;margin-top:4px">📞 06 300 66 444 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6801060e07281b0d0b1a0d1c06010f001c1b460604">[email&#160;protected]</a> · Ook via WhatsApp</p>
     <a href="#" class="btn-p openB" style="margin-top:20px">Plan je Secret Night</a>
   </div>
   <div class="intro-frame reveal">
@@ -614,7 +614,7 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
     <div class="f-col"><h5>Arrangementen</h5><ul><li>Dining Experience</li><li>Natuurlijk Wellness</li><li>Sauna Boot</li><li>Op Maat</li></ul></div>
     <div class="f-col"><h5>Informatie</h5><ul><li><a href="over-ons.html">Over ons</a></li><li><a href="faq.html">FAQ</a></li><li><a href="#">Privacybeleid</a></li><li><a href="#">Algemene Voorwaarden</a></li></ul></div>
     <div class="f-col"><h5>Contact</h5><ul>
-      <li><a href="mailto:info@secretnights.nl">info@secretnights.nl</a></li>
+      <li><a href="/cdn-cgi/l/email-protection#1d74737b725d6e787e6f786973747a75696e337371"><span class="__cf_email__" data-cfemail="0e676068614e7d6b6d7c6b7a606769667a7d206062">[email&#160;protected]</span></a></li>
       <li><a href="tel:0630066444">06 300 66 444</a></li>
       <li><a href="https://wa.me/310630066444">WhatsApp</a></li>
       <li>Kazernestraat, Oss</li>
@@ -765,9 +765,9 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
   </div>
 </div>
 
-<script>
-const SB_URL='https://fxaqsorekbsiqdnwhkwa.supabase.co';
-const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ4YXFzb3Jla2JzaXFkbndoa3dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0NTgwNzYsImV4cCI6MjA4NzAzNDA3Nn0.1JyZcw0G3owob853H2MiYG1qw5v7W2sqUFzkjuxgtZo';
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const SB_URL='https://eugdqjclpptbneburqtn.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1Z2RxamNscHB0Ym5lYnVycXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTc2MDMsImV4cCI6MjA4OTU3MzYwM30.oXpk_sw_f3NGb6Q6Wx-TQfiYXFtnT_29iwkFKl5EqeA';
 
 // COOKIE
 function setCookie(val){localStorage.setItem('sn_cookie',val);document.getElementById('cookieBanner').classList.remove('show')}
@@ -915,17 +915,4 @@ async function doPay(){
     document.getElementById('succDet').innerHTML=`<p>🚤 <strong>${bn[sBoat]}</strong> — ${pn[sPkg]}</p><p>📅 <strong>${datum}</strong> · ${data.personen} personen</p><p>💰 Totaal: <strong>€${tot},-</strong></p><p>📧 Bevestiging → <strong>${data.email}</strong></p>`;
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     document.getElementById('pSucc').classList.add('active');
-    document.getElementById('stepBar').style.display='none';
-    loadAvail();
-  }catch(e){
-    toast('Er ging iets mis. Bel 06 300 66 444.','error');
-    btn.innerHTML='🔒 Bevestig & Betaal';btn.disabled=false;chkPay();
-  }
-}
-
-// INIT
-loadAvail();
-const di=document.getElementById('f-date');if(di)di.min=new Date().toISOString().split('T')[0];
-</script>
-</body>
-</html>
+    

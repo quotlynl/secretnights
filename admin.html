@@ -3,350 +3,597 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>CMS Beheer – Secretnights</title>
+<title>CMS – Secretnights</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-:root{--gold:#c8a96e;--gl:#e8d5a3;--black:#0a0a0a;--bs:#111111;--bm:#181818;--bc:#141414;--white:#f5f0e8;--wd:rgba(245,240,232,.65);--fd:'Cormorant Garamond',serif;--fb:'Montserrat',sans-serif;--green:#4caf82;--red:#e05252;--orange:#e08c52;--blue:#5294e2}
+:root{--gold:#c8a96e;--gl:#e8d5a3;--black:#0a0a0a;--bs:#111111;--bc:#161616;--bm:#1c1c1c;--white:#f5f0e8;--wd:rgba(245,240,232,.65);--fd:'Cormorant Garamond',serif;--fb:'Montserrat',sans-serif;--green:#4caf82;--red:#e05252;--orange:#e08c52;--blue:#5294e2}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--black);color:var(--white);font-family:var(--fb);font-weight:300;min-height:100vh}
-#loginScreen{position:fixed;inset:0;z-index:1000;background:var(--black);display:flex;align-items:center;justify-content:center}
+
+/* LOGIN */
+#loginScreen{position:fixed;inset:0;z-index:1000;background:var(--black);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px}
 #loginScreen.hidden{display:none}
-.login-box{background:var(--bs);border:1px solid rgba(200,169,110,.2);padding:52px 48px;width:100%;max-width:420px;text-align:center}
-.l-logo{font-family:var(--fd);font-size:1.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.login-box{background:var(--bs);border:1px solid rgba(200,169,110,.22);padding:52px 48px;width:100%;max-width:400px;text-align:center}
+.l-logo{font-family:var(--fd);font-size:1.7rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:5px}
 .l-logo span{font-style:italic;color:var(--white)}
-.l-sub{font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,240,232,.3);margin-bottom:36px;display:block}
+.l-sub{font-size:.54rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(245,240,232,.28);margin-bottom:34px;display:block}
+.l-label{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;text-align:left;margin-bottom:7px}
 .l-input{width:100%;background:var(--black);border:1px solid rgba(200,169,110,.25);color:var(--white);padding:13px 16px;font-family:var(--fb);font-size:.82rem;outline:none;margin-bottom:14px;border-radius:0;transition:border-color .3s}
 .l-input:focus{border-color:var(--gold)}
-.l-btn{width:100%;background:var(--gold);color:var(--black);border:none;padding:14px;font-family:var(--fb);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background .3s}
+.l-btn{width:100%;background:var(--gold);color:var(--black);border:none;padding:14px;font-family:var(--fb);font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background .3s}
 .l-btn:hover{background:var(--gl)}
-.l-err{font-size:.68rem;color:var(--red);margin-top:10px;min-height:18px}
-#app{display:none;min-height:100vh;flex-direction:column}
+.l-err{font-size:.66rem;color:var(--red);margin-top:9px;min-height:18px}
+
+/* APP */
+#app{display:none;height:100vh;flex-direction:column}
 #app.visible{display:flex}
-.topbar{background:var(--bs);border-bottom:1px solid rgba(200,169,110,.15);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:58px;position:sticky;top:0;z-index:100;flex-shrink:0}
-.tb-logo{font-family:var(--fd);font-size:1.2rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
-.tb-logo span{font-style:italic;color:var(--white)}
-.tb-badge{background:var(--gold);color:var(--black);font-size:.44rem;letter-spacing:.15em;text-transform:uppercase;padding:3px 8px;font-weight:700;margin-left:10px;vertical-align:middle}
-.tb-right{display:flex;align-items:center;gap:14px}
-.tb-link{font-size:.6rem;color:rgba(200,169,110,.5);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;transition:color .3s}
+
+/* TOPBAR */
+.topbar{background:var(--bs);border-bottom:1px solid rgba(200,169,110,.15);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;flex-shrink:0;z-index:50}
+.tb-brand{font-family:var(--fd);font-size:1.15rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+.tb-brand span{font-style:italic;color:rgba(245,240,232,.5)}
+.tb-cms{background:var(--gold);color:var(--black);font-size:.42rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:2px 7px;margin-left:8px;vertical-align:middle}
+.tb-right{display:flex;align-items:center;gap:12px}
+/* WEBSITE STATUS TOGGLE */
+.site-toggle{display:flex;align-items:center;gap:10px;background:var(--bc);border:1px solid rgba(200,169,110,.18);padding:6px 14px}
+.site-toggle-label{font-size:.56rem;letter-spacing:.15em;text-transform:uppercase}
+.site-toggle-label.on{color:var(--green)}
+.site-toggle-label.off{color:var(--red)}
+.sw{position:relative;width:46px;height:24px;flex-shrink:0}
+.sw input{opacity:0;width:0;height:0;position:absolute}
+.sw-track{position:absolute;inset:0;background:rgba(224,82,82,.25);border:1px solid rgba(224,82,82,.3);cursor:pointer;transition:all .35s;border-radius:12px}
+.sw input:checked+.sw-track{background:rgba(76,175,130,.2);border-color:var(--green)}
+.sw-track::before{content:'';position:absolute;width:18px;height:18px;background:var(--red);border-radius:50%;left:2px;top:2px;transition:all .35s}
+.sw input:checked+.sw-track::before{transform:translateX(22px);background:var(--green)}
+.tb-link{font-size:.58rem;color:rgba(200,169,110,.45);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .3s}
 .tb-link:hover{color:var(--gold)}
-.logout-btn{background:transparent;border:1px solid rgba(200,169,110,.2);color:var(--gold);padding:6px 14px;font-family:var(--fb);font-size:.56rem;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.logout-btn{background:transparent;border:1px solid rgba(200,169,110,.18);color:var(--gold);padding:6px 12px;font-family:var(--fb);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .logout-btn:hover{background:rgba(200,169,110,.1)}
+
+/* BODY LAYOUT */
 .app-body{display:flex;flex:1;overflow:hidden}
-.sidebar{width:230px;background:var(--bs);border-right:1px solid rgba(200,169,110,.1);overflow-y:auto;flex-shrink:0}
-.nav-st{font-size:.48rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(245,240,232,.2);padding:20px 22px 7px;margin-top:6px}
-.nav-item{display:flex;align-items:center;gap:10px;padding:11px 22px;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,240,232,.42);cursor:pointer;transition:all .3s;border-left:2px solid transparent}
+
+/* SIDEBAR */
+.sidebar{width:220px;background:var(--bs);border-right:1px solid rgba(200,169,110,.1);overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.nav-st{font-size:.45rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,240,232,.18);padding:18px 20px 6px}
+.nav-item{display:flex;align-items:center;gap:9px;padding:10px 20px;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,240,232,.4);cursor:pointer;transition:all .3s;border-left:2px solid transparent}
 .nav-item:hover{color:var(--white);background:rgba(200,169,110,.04)}
-.nav-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(200,169,110,.07)}
-.nav-icon{font-size:.95rem;width:18px;text-align:center}
-.main{flex:1;overflow-y:auto;padding:28px 32px;background:var(--black)}
-.page{display:none}
-.page.active{display:block}
-.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px}
-.ph h1{font-family:var(--fd);font-size:2rem;font-weight:300}
-.ph h1 em{font-style:italic;color:var(--gold)}
-.ph-sub{font-size:.66rem;color:var(--wd);margin-top:4px;letter-spacing:.06em}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
-.sc{background:var(--bs);border:1px solid rgba(200,169,110,.12);padding:22px 20px;position:relative;overflow:hidden}
-.sc::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px}
-.sc.gold::after{background:var(--gold)}.sc.green::after{background:var(--green)}.sc.blue::after{background:var(--blue)}.sc.orange::after{background:var(--orange)}
-.sc-label{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.35);margin-bottom:9px;display:block}
-.sc-val{font-family:var(--fd);font-size:2.4rem;font-weight:300;color:var(--white);line-height:1}
-.sc-sub{font-size:.58rem;color:rgba(245,240,232,.25);margin-top:5px}
-.card{background:var(--bs);border:1px solid rgba(200,169,110,.12);padding:24px 26px;margin-bottom:16px}
-.card-title{font-family:var(--fd);font-size:1.25rem;font-weight:300;margin-bottom:4px}
-.card-title em{font-style:italic;color:var(--gold)}
-.card-sub{font-size:.64rem;color:var(--wd);margin-bottom:20px;line-height:1.8}
-.page-tabs{display:flex;gap:0;margin-bottom:24px;border-bottom:1px solid rgba(200,169,110,.12);overflow-x:auto}
-.ptab{padding:11px 20px;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.42);cursor:pointer;border-bottom:2px solid transparent;transition:all .3s;white-space:nowrap}
-.ptab:hover{color:var(--white)}
-.ptab.active{color:var(--gold);border-bottom-color:var(--gold)}
-.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-.fg label{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.fg input,.fg textarea,.fg select{background:var(--black);border:1px solid rgba(200,169,110,.2);color:var(--white);padding:11px 14px;font-family:var(--fb);font-size:.76rem;outline:none;transition:border-color .3s;border-radius:0;width:100%}
+.nav-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(200,169,110,.06)}
+.nav-icon{width:17px;text-align:center;font-size:.9rem}
+
+/* MAIN AREA */
+.main{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.page{display:none;flex:1;overflow:hidden;flex-direction:column}
+.page.active{display:flex}
+
+/* PAGE HEADER */
+.page-hd{padding:20px 28px;border-bottom:1px solid rgba(200,169,110,.1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;flex-wrap:wrap;gap:10px}
+.page-hd h1{font-family:var(--fd);font-size:1.7rem;font-weight:300}
+.page-hd h1 em{font-style:italic;color:var(--gold)}
+.page-hd p{font-size:.62rem;color:var(--wd);margin-top:3px}
+
+/* BUTTONS */
+.btn-gold{background:var(--gold);color:var(--black);border:none;padding:10px 24px;font-family:var(--fb);font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .3s}
+.btn-gold:hover{background:var(--gl)}
+.btn-gold:disabled{opacity:.35;cursor:not-allowed}
+.btn-outline{background:transparent;border:1px solid rgba(200,169,110,.22);color:var(--wd);padding:9px 18px;font-family:var(--fb);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+.btn-red{background:transparent;border:1px solid rgba(224,82,82,.3);color:var(--red);padding:9px 18px;font-family:var(--fb);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.btn-red:hover{background:rgba(224,82,82,.1)}
+
+/* FORM */
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:13px}
+.fg label{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.fg input,.fg textarea,.fg select{background:var(--black);border:1px solid rgba(200,169,110,.2);color:var(--white);padding:10px 13px;font-family:var(--fb);font-size:.74rem;outline:none;transition:border-color .3s;border-radius:0;width:100%}
 .fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--gold)}
-.fg textarea{resize:vertical;min-height:90px;line-height:1.8}
+.fg textarea{resize:vertical;min-height:80px;line-height:1.9}
 .fg select option{background:#1a1a1a}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.save-btn{background:var(--gold);color:var(--black);border:none;padding:11px 28px;font-family:var(--fb);font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .3s;display:inline-block;text-decoration:none}
-.save-btn:hover{background:var(--gl)}
-.save-btn:disabled{opacity:.4;cursor:not-allowed}
-.del-btn{background:transparent;border:1px solid rgba(224,82,82,.3);color:var(--red);padding:9px 18px;font-family:var(--fb);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s}
-.del-btn:hover{background:rgba(224,82,82,.1)}
-.sec-btn{background:transparent;border:1px solid rgba(200,169,110,.22);color:var(--wd);padding:9px 18px;font-family:var(--fb);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s}
-.sec-btn:hover{border-color:var(--gold);color:var(--gold)}
-.section-block{background:var(--bc);border:1px solid rgba(200,169,110,.1);margin-bottom:10px;overflow:hidden}
-.section-hd{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .3s}
-.section-hd:hover{background:rgba(200,169,110,.04)}
-.section-hd h3{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--white)}
-.sec-arr{color:var(--gold);transition:transform .3s;font-size:.8rem}
-.section-block.open .sec-arr{transform:rotate(180deg)}
-.section-body{display:none;padding:20px;border-top:1px solid rgba(200,169,110,.08)}
-.section-block.open .section-body{display:block}
-.field-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;padding:10px 14px;background:rgba(200,169,110,.03);border:1px solid rgba(200,169,110,.07)}
-.field-label{font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(200,169,110,.6);width:110px;flex-shrink:0;padding-top:3px;line-height:1.6}
-.field-input{flex:1;background:var(--black);border:1px solid rgba(200,169,110,.18);color:var(--white);padding:8px 12px;font-family:var(--fb);font-size:.74rem;outline:none;transition:border-color .3s;border-radius:0;width:100%}
-.field-input:focus{border-color:var(--gold)}
-textarea.field-input{min-height:70px;resize:vertical;line-height:1.8}
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
-.photo-item{background:var(--bc);border:1px solid rgba(200,169,110,.12);overflow:hidden}
-.photo-img{width:100%;aspect-ratio:4/3;object-fit:cover;filter:brightness(.75);display:block}
-.photo-body{padding:10px 12px}
-.photo-name{font-size:.62rem;color:var(--white);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.photo-page{font-size:.52rem;color:rgba(200,169,110,.5);letter-spacing:.1em;margin-bottom:8px}
-.photo-acts{display:flex;gap:6px}
-.photo-btn{flex:1;background:transparent;border:1px solid rgba(200,169,110,.18);color:var(--wd);padding:5px;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s;text-align:center}
-.photo-btn:hover{border-color:var(--gold);color:var(--gold)}
-.photo-btn.del:hover{border-color:var(--red);color:var(--red)}
-.pages-list{display:flex;flex-direction:column;gap:10px}
-.page-row{background:var(--bc);border:1px solid rgba(200,169,110,.12);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.page-row h3{font-family:var(--fd);font-size:1.15rem;font-weight:300;margin-bottom:4px}
-.page-row p{font-size:.62rem;color:var(--wd);letter-spacing:.06em}
-.badge-pub{font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;padding:3px 9px;font-weight:600}
-.badge-pub.ja{background:rgba(76,175,130,.12);color:var(--green);border:1px solid rgba(76,175,130,.2)}
-.badge-pub.nee{background:rgba(200,169,110,.08);color:rgba(200,169,110,.5);border:1px solid rgba(200,169,110,.15)}
-.pay-list{display:flex;flex-direction:column;gap:10px}
-.pay-row{background:var(--bc);border:1px solid rgba(200,169,110,.12);padding:18px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.pay-icon{font-size:1.4rem;width:36px;text-align:center;flex-shrink:0}
-.pay-info{flex:1}
-.pay-name{font-size:.78rem;color:var(--white);font-weight:400}
-.pay-type{font-size:.58rem;color:rgba(200,169,110,.5);letter-spacing:.1em;text-transform:uppercase}
-.toggle{position:relative;width:42px;height:22px;flex-shrink:0}
-.toggle input{opacity:0;width:0;height:0;position:absolute}
-.toggle-track{position:absolute;inset:0;background:rgba(200,169,110,.15);border:1px solid rgba(200,169,110,.2);cursor:pointer;transition:all .3s;border-radius:11px}
-.toggle input:checked+.toggle-track{background:var(--gold);border-color:var(--gold)}
-.toggle-track::before{content:'';position:absolute;width:16px;height:16px;background:var(--white);border-radius:50%;left:2px;top:2px;transition:transform .3s}
-.toggle input:checked+.toggle-track::before{transform:translateX(20px)}
-.table-wrap{background:var(--bs);border:1px solid rgba(200,169,110,.12);overflow:auto}
-table{width:100%;border-collapse:collapse;min-width:700px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:20px 28px;flex-shrink:0}
+.sc{background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:20px 18px;position:relative}
+.sc::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2px}
+.sc.g::after{background:var(--gold)}.sc.gr::after{background:var(--green)}.sc.b::after{background:var(--blue)}.sc.o::after{background:var(--orange)}
+.sc-lbl{font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.32);margin-bottom:8px;display:block}
+.sc-val{font-family:var(--fd);font-size:2.2rem;font-weight:300;line-height:1}
+.sc-sub{font-size:.56rem;color:rgba(245,240,232,.22);margin-top:5px}
+
+/* SCROLL AREA */
+.scroll{flex:1;overflow-y:auto;padding:24px 28px}
+
+/* ========== VISUAL PAGE EDITOR ========== */
+.editor-layout{display:grid;grid-template-columns:1fr 380px;gap:0;flex:1;overflow:hidden}
+.preview-pane{overflow-y:auto;background:#0d0d0d;border-right:1px solid rgba(200,169,110,.1);padding:0}
+.editor-pane{overflow-y:auto;background:var(--bs);padding:20px}
+.section-preview{position:relative;cursor:pointer;border:2px solid transparent;transition:border-color .3s;margin-bottom:4px}
+.section-preview:hover{border-color:rgba(200,169,110,.5)}
+.section-preview.selected{border-color:var(--gold)}
+.section-preview .edit-overlay{position:absolute;top:8px;right:8px;background:var(--gold);color:var(--black);font-size:.48rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;opacity:0;transition:opacity .3s;pointer-events:none}
+.section-preview:hover .edit-overlay{opacity:1}
+.section-preview.selected .edit-overlay{opacity:1;background:var(--gl)}
+
+/* PREVIEW SECTIONS */
+.prev-hero{background:#0a0a0a;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;padding:32px;position:relative;overflow:hidden}
+.prev-hero-img{position:absolute;inset:0;background:linear-gradient(135deg,#1a1208,#0a0a0a);opacity:.7}
+.prev-hero-content{position:relative;z-index:2}
+.prev-label{font-size:.48rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
+.prev-h1{font-family:var(--fd);font-size:2.4rem;font-weight:300;line-height:1.05;color:var(--white)}
+.prev-h1 em{font-style:italic;color:var(--gold)}
+.prev-sub{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.55);margin-top:12px;line-height:2}
+.prev-intro{background:#111;padding:36px 32px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.prev-intro-text h2{font-family:var(--fd);font-size:1.6rem;font-weight:300;color:var(--white);line-height:1.2;margin-bottom:12px}
+.prev-intro-text h2 em{font-style:italic;color:var(--gold)}
+.prev-intro-text p{font-size:.68rem;color:var(--wd);line-height:2;margin-bottom:8px}
+.prev-intro-img{background:linear-gradient(135deg,#1a1208,#0d0d0d);aspect-ratio:3/4;border:1px solid rgba(200,169,110,.15)}
+.prev-quote{background:var(--gold);padding:28px 32px;text-align:center}
+.prev-quote blockquote{font-family:var(--fd);font-size:1.4rem;font-style:italic;font-weight:300;color:#0a0a0a;line-height:1.4}
+.prev-cta{background:#0a0a0a;padding:48px 32px;text-align:center}
+.prev-cta h2{font-family:var(--fd);font-size:1.8rem;font-weight:300;margin-bottom:12px}
+.prev-cta h2 em{font-style:italic;color:var(--gold)}
+.prev-cta p{font-size:.7rem;color:var(--wd);line-height:2;max-width:400px;margin:0 auto 20px}
+.prev-btn{display:inline-block;background:var(--gold);color:#0a0a0a;padding:11px 28px;font-family:var(--fb);font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.prev-contact{background:#111;padding:24px 32px;border-top:1px solid rgba(200,169,110,.12)}
+.prev-contact p{font-size:.66rem;color:rgba(245,240,232,.4);line-height:2.2}
+.prev-contact span{color:var(--gold)}
+
+/* EDIT PANEL */
+.edit-panel-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;color:rgba(245,240,232,.2);text-align:center;gap:12px}
+.edit-panel-empty span{font-size:2rem}
+.edit-panel-empty p{font-size:.66rem;letter-spacing:.1em;line-height:1.9}
+.edit-section-title{font-family:var(--fd);font-size:1.3rem;font-weight:300;margin-bottom:4px;padding-bottom:12px;border-bottom:1px solid rgba(200,169,110,.12);margin-bottom:16px}
+.edit-section-title em{font-style:italic;color:var(--gold)}
+.field-group{background:var(--bc);padding:14px 16px;margin-bottom:8px;border:1px solid rgba(200,169,110,.08)}
+.field-group label{font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.field-group input,.field-group textarea{width:100%;background:var(--black);border:1px solid rgba(200,169,110,.18);color:var(--white);padding:9px 12px;font-family:var(--fb);font-size:.74rem;outline:none;transition:border-color .3s;border-radius:0}
+.field-group input:focus,.field-group textarea:focus{border-color:var(--gold)}
+.field-group textarea{resize:vertical;min-height:75px;line-height:1.9}
+.save-bar{padding:14px 20px;border-top:1px solid rgba(200,169,110,.1);display:flex;gap:8px;background:var(--bs);flex-shrink:0}
+
+/* TABLE */
+.tbl-wrap{background:var(--bs);border:1px solid rgba(200,169,110,.1);overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:680px}
 thead{background:var(--bc)}
-th{padding:11px 14px;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;text-align:left;white-space:nowrap}
-td{padding:13px 14px;font-size:.7rem;color:var(--wd);border-top:1px solid rgba(200,169,110,.07);vertical-align:middle}
-tr:hover td{background:rgba(200,169,110,.03);color:var(--white)}
-.sbadge{display:inline-block;padding:3px 9px;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
-.sbadge.bevestigd{background:rgba(76,175,130,.12);color:var(--green);border:1px solid rgba(76,175,130,.2)}
-.sbadge.geannuleerd{background:rgba(224,82,82,.1);color:var(--red);border:1px solid rgba(224,82,82,.15)}
-.sbadge.afgerond{background:rgba(200,169,110,.1);color:var(--gold);border:1px solid rgba(200,169,110,.2)}
-.act-btn{background:transparent;border:1px solid rgba(200,169,110,.18);color:var(--wd);padding:4px 9px;font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s}
-.act-btn:hover{border-color:var(--gold);color:var(--gold)}
-.act-btn.d:hover{border-color:var(--red);color:var(--red)}
-.modal-ov{position:fixed;inset:0;z-index:500;background:rgba(10,10,10,.92);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
+th{padding:10px 13px;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700;text-align:left;white-space:nowrap}
+td{padding:12px 13px;font-size:.68rem;color:var(--wd);border-top:1px solid rgba(200,169,110,.06);vertical-align:middle}
+tr:hover td{background:rgba(200,169,110,.025);color:var(--white)}
+.sb{display:inline-block;padding:2px 9px;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.sb.bevestigd{background:rgba(76,175,130,.12);color:var(--green);border:1px solid rgba(76,175,130,.18)}
+.sb.geannuleerd{background:rgba(224,82,82,.1);color:var(--red);border:1px solid rgba(224,82,82,.14)}
+.sb.afgerond{background:rgba(200,169,110,.1);color:var(--gold);border:1px solid rgba(200,169,110,.18)}
+.sb.betaald{background:rgba(76,175,130,.12);color:var(--green);border:1px solid rgba(76,175,130,.18)}
+.sb.open{background:rgba(224,140,82,.1);color:var(--orange);border:1px solid rgba(224,140,82,.18)}
+.act{background:transparent;border:1px solid rgba(200,169,110,.15);color:var(--wd);padding:3px 8px;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.act:hover{border-color:var(--gold);color:var(--gold)}
+.act.d:hover{border-color:var(--red);color:var(--red)}
+
+/* MODAL */
+.modal-ov{position:fixed;inset:0;z-index:600;background:rgba(10,10,10,.93);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:20px}
 .modal-ov.open{display:flex}
-.modal{background:var(--bs);border:1px solid rgba(200,169,110,.22);width:100%;max-width:640px;max-height:90vh;overflow-y:auto;animation:mu .3s ease}
-@keyframes mu{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.modal-hd{padding:22px 26px;border-bottom:1px solid rgba(200,169,110,.12);display:flex;justify-content:space-between;align-items:center}
-.modal-hd h2{font-family:var(--fd);font-size:1.4rem;font-weight:300}
+.modal{background:var(--bs);border:1px solid rgba(200,169,110,.22);width:100%;max-width:600px;max-height:92vh;overflow-y:auto;animation:mu .3s ease}
+@keyframes mu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.modal-hd{padding:20px 24px;border-bottom:1px solid rgba(200,169,110,.1);display:flex;justify-content:space-between;align-items:center}
+.modal-hd h2{font-family:var(--fd);font-size:1.35rem;font-weight:300}
 .modal-hd h2 em{font-style:italic;color:var(--gold)}
-.modal-close{background:none;border:1px solid rgba(200,169,110,.22);color:var(--gold);width:28px;height:28px;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;transition:all .3s}
-.modal-close:hover{background:var(--gold);color:var(--black)}
-.modal-body{padding:24px 26px}
-.modal-acts{padding:0 26px 24px;display:flex;gap:8px;flex-wrap:wrap}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.cal-dhd{text-align:center;font-size:.5rem;letter-spacing:.18em;color:rgba(245,240,232,.28);padding:5px 0}
-.cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.66rem;color:var(--wd);border:1px solid rgba(200,169,110,.06);min-height:40px}
+.mc{background:none;border:1px solid rgba(200,169,110,.2);color:var(--gold);width:28px;height:28px;cursor:pointer;font-size:.8rem;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.mc:hover{background:var(--gold);color:var(--black)}
+.modal-body{padding:22px 24px}
+.modal-acts{padding:0 24px 22px;display:flex;gap:8px;flex-wrap:wrap}
+
+/* MOLLIE SETUP */
+.mollie-box{background:var(--bc);border:1px solid rgba(200,169,110,.12);padding:22px;margin-bottom:14px}
+.mollie-box h3{font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:6px}
+.mollie-box h3 em{font-style:italic;color:var(--gold)}
+.mollie-box p{font-size:.68rem;color:var(--wd);line-height:2;margin-bottom:14px}
+.step-row{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid rgba(200,169,110,.07)}
+.step-row:last-child{border-bottom:none}
+.step-num{width:24px;height:24px;border-radius:50%;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.3);display:flex;align-items:center;justify-content:center;font-size:.56rem;color:var(--gold);font-weight:700;flex-shrink:0}
+.step-content p{font-size:.68rem;color:var(--wd);line-height:1.9}
+.step-content a{color:var(--gold);text-decoration:none}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.status-dot.on{background:var(--green)}
+.status-dot.off{background:var(--red)}
+
+/* BETAAL METHODE LIJST */
+.pay-row{background:var(--bc);border:1px solid rgba(200,169,110,.1);padding:16px 20px;display:flex;align-items:center;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+.pay-icon{font-size:1.3rem;width:34px;text-align:center;flex-shrink:0}
+.pay-info{flex:1}
+.pay-name{font-size:.76rem;color:var(--white);font-weight:500}
+.pay-desc{font-size:.56rem;color:rgba(200,169,110,.5);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.toggle{position:relative;width:44px;height:23px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.tgl-track{position:absolute;inset:0;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.18);cursor:pointer;transition:all .35s;border-radius:11px}
+.toggle input:checked+.tgl-track{background:rgba(76,175,130,.2);border-color:var(--green)}
+.tgl-track::before{content:'';position:absolute;width:17px;height:17px;background:rgba(245,240,232,.4);border-radius:50%;left:2px;top:2px;transition:transform .35s}
+.toggle input:checked+.tgl-track::before{transform:translateX(21px);background:var(--green)}
+
+/* KALENDER */
+.cal-dhd{text-align:center;font-size:.48rem;letter-spacing:.15em;color:rgba(245,240,232,.25);padding:5px 0}
+.cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.64rem;color:var(--wd);border:1px solid rgba(200,169,110,.05);min-height:38px}
 .cal-day.today{border-color:var(--gold);color:var(--gold)}
-.cal-day.booked{background:rgba(200,169,110,.07);border-color:rgba(200,169,110,.2);color:var(--white)}
-.cal-day.booked::after{content:'●';font-size:.4rem;color:var(--gold);display:block}
-.cal-day.other{opacity:.18}
-.toast{position:fixed;bottom:22px;right:22px;z-index:900;background:var(--bs);border-left:3px solid var(--gold);padding:12px 18px;font-size:.68rem;max-width:280px;line-height:1.8;transform:translateX(120%);transition:transform .4s;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+.cal-day.booked{background:rgba(200,169,110,.06);border-color:rgba(200,169,110,.18);color:var(--white)}
+.cal-day.booked::after{content:'●';font-size:.38rem;color:var(--gold);display:block}
+.cal-day.other{opacity:.15}
+
+/* INFO BOX */
+.info-box{background:rgba(200,169,110,.05);border:1px solid rgba(200,169,110,.14);padding:13px 16px;font-size:.68rem;color:var(--wd);line-height:2;margin-bottom:16px}
+.info-box a{color:var(--gold);text-decoration:none}
+.info-box strong{color:var(--white)}
+
+/* PAGES GRID */
+.pages-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.page-card{background:var(--bc);border:1px solid rgba(200,169,110,.1);padding:20px 18px;transition:border-color .3s}
+.page-card:hover{border-color:rgba(200,169,110,.3)}
+.page-card h3{font-family:var(--fd);font-size:1.1rem;font-weight:300;margin-bottom:5px}
+.page-card p{font-size:.6rem;color:var(--wd);letter-spacing:.06em;margin-bottom:12px}
+.page-card .acts{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.pub-badge{font-size:.48rem;letter-spacing:.13em;text-transform:uppercase;padding:2px 8px;font-weight:700}
+.pub-badge.live{background:rgba(76,175,130,.12);color:var(--green);border:1px solid rgba(76,175,130,.18)}
+.pub-badge.concept{background:rgba(200,169,110,.08);color:rgba(200,169,110,.5);border:1px solid rgba(200,169,110,.14)}
+
+/* EMPTY */
+.empty-s{text-align:center;padding:44px 20px;color:rgba(245,240,232,.2)}
+.empty-s span{font-size:2rem;display:block;margin-bottom:10px}
+.empty-s p{font-size:.64rem;letter-spacing:.1em}
+.loading-r{text-align:center;padding:32px;color:rgba(245,240,232,.25);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;z-index:1000;background:var(--bs);border-left:3px solid var(--gold);padding:11px 16px;font-size:.66rem;max-width:270px;line-height:1.8;transform:translateX(130%);transition:transform .4s;box-shadow:0 6px 28px rgba(0,0,0,.6)}
 .toast.show{transform:translateX(0)}
-.toast.err{border-color:var(--red)}
+.toast.err{border-color:var(--red);color:var(--red)}
 .toast.ok{border-color:var(--green)}
-.empty-s{text-align:center;padding:48px 20px;color:rgba(245,240,232,.25)}
-.empty-s span{font-size:2.2rem;display:block;margin-bottom:12px}
-.loading-r{text-align:center;padding:36px;color:rgba(245,240,232,.28);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase}
-.info-box{background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.15);padding:14px 18px;font-size:.7rem;color:var(--wd);line-height:2;margin-bottom:20px}
-.info-box a{color:var(--gold)}
-@media(max-width:900px){.sidebar{display:none}.stats-row{grid-template-columns:repeat(2,1fr)}.main{padding:20px 16px}}
-@media(max-width:480px){.stats-row{grid-template-columns:1fr}.frow{grid-template-columns:1fr}}
+
+/* OFFLINE OVERLAY (on index.html) */
+.offline-banner{background:rgba(224,82,82,.1);border:1px solid rgba(224,82,82,.25);padding:12px 18px;display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.offline-banner p{font-size:.7rem;color:var(--red);line-height:1.8}
+
+@media(max-width:900px){
+  .sidebar{display:none}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .editor-layout{grid-template-columns:1fr}
+  .preview-pane{display:none}
+  .frow{grid-template-columns:1fr}
+}
+@media(max-width:480px){.stats-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-box">
     <div class="l-logo">Secret<span>nights</span></div>
     <span class="l-sub">Website Beheer · CMS</span>
-    <label style="font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;text-align:left;margin-bottom:7px">Wachtwoord</label>
+    <label class="l-label">Wachtwoord</label>
     <input class="l-input" type="password" id="pwInput" placeholder="••••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
     <button class="l-btn" onclick="doLogin()">Inloggen →</button>
     <div class="l-err" id="loginErr"></div>
   </div>
 </div>
 
+<!-- APP -->
 <div id="app">
+
+  <!-- TOPBAR -->
   <div class="topbar">
-    <div><span class="tb-logo">Secret<span>nights</span></span><span class="tb-badge">CMS</span></div>
+    <div style="display:flex;align-items:center">
+      <span class="tb-brand">Secret<span>nights</span></span>
+      <span class="tb-cms">CMS</span>
+    </div>
     <div class="tb-right">
-      <a href="index.html" target="_blank" class="tb-link">↗ Bekijk website</a>
+      <!-- WEBSITE AAN/UIT -->
+      <div class="site-toggle" id="siteToggleBox" title="Website aan of uit zetten">
+        <span class="site-toggle-label" id="siteLabel">Website</span>
+        <label class="sw">
+          <input type="checkbox" id="siteSwitch" onchange="toggleWebsite(this.checked)"/>
+          <div class="sw-track"></div>
+        </label>
+        <span class="site-toggle-label" id="siteLabelStatus">—</span>
+      </div>
+      <a href="index.html" target="_blank" class="tb-link">↗ Bekijk site</a>
       <button class="logout-btn" onclick="logout()">Uitloggen</button>
     </div>
   </div>
+
   <div class="app-body">
+    <!-- SIDEBAR -->
     <div class="sidebar">
       <div class="nav-st">Overzicht</div>
       <div class="nav-item active" onclick="showP('dashboard',this)"><span class="nav-icon">📊</span>Dashboard</div>
       <div class="nav-item" onclick="showP('reserveringen',this)"><span class="nav-icon">📋</span>Reserveringen</div>
       <div class="nav-item" onclick="showP('kalender',this)"><span class="nav-icon">📅</span>Kalender</div>
-      <div class="nav-st">Website</div>
-      <div class="nav-item" onclick="showP('teksten',this)"><span class="nav-icon">✏️</span>Teksten</div>
+      <div class="nav-st">Website Bewerken</div>
+      <div class="nav-item" onclick="showP('visueel',this)"><span class="nav-icon">🖥️</span>Visuele Editor</div>
       <div class="nav-item" onclick="showP('fotos',this)"><span class="nav-icon">🖼️</span>Foto's</div>
-      <div class="nav-item" onclick="showP('paginas',this)"><span class="nav-icon">📄</span>Pagina's</div>
+      <div class="nav-item" onclick="showP('paginas',this)"><span class="nav-icon">📄</span>Extra Pagina's</div>
       <div class="nav-st">Instellingen</div>
       <div class="nav-item" onclick="showP('betaalmethodes',this)"><span class="nav-icon">💳</span>Betaalmethodes</div>
       <div class="nav-item" onclick="showP('beschikbaarheid',this)"><span class="nav-icon">🔢</span>Beschikbaarheid</div>
+      <div class="nav-item" onclick="showP('instellingen',this)"><span class="nav-icon">⚙️</span>Instellingen</div>
     </div>
+
+    <!-- MAIN -->
     <div class="main">
 
-      <!-- DASHBOARD -->
+      <!-- ===== DASHBOARD ===== -->
       <div class="page active" id="page-dashboard">
-        <div class="ph"><div><h1>Welkom <em>terug</em> 👋</h1><p class="ph-sub">Live overzicht van Secretnights</p></div><button class="sec-btn" onclick="loadAll()">↻ Vernieuwen</button></div>
+        <div class="page-hd">
+          <div><h1>Welkom <em>terug</em> 👋</h1><p>Live overzicht van secretnights.nl</p></div>
+          <button class="btn-outline" onclick="loadAll()">↻ Vernieuwen</button>
+        </div>
         <div class="stats-row">
-          <div class="sc gold"><span class="sc-label">Reserveringen</span><div class="sc-val" id="st-total">—</div><div class="sc-sub">Totaal</div></div>
-          <div class="sc green"><span class="sc-label">Bevestigd</span><div class="sc-val" id="st-bev">—</div><div class="sc-sub">Actief</div></div>
-          <div class="sc blue"><span class="sc-label">Beschikbaar</span><div class="sc-val" id="st-bes">—</div><div class="sc-sub">Nachten over</div></div>
-          <div class="sc orange"><span class="sc-label">Omzet</span><div class="sc-val" id="st-omz">—</div><div class="sc-sub">Alle boekingen</div></div>
+          <div class="sc g"><span class="sc-lbl">Reserveringen</span><div class="sc-val" id="st-res">—</div><div class="sc-sub">Totaal</div></div>
+          <div class="sc gr"><span class="sc-lbl">Bevestigd</span><div class="sc-val" id="st-bev">—</div><div class="sc-sub">Actief</div></div>
+          <div class="sc b"><span class="sc-lbl">Beschikbaar</span><div class="sc-val" id="st-vrij">—</div><div class="sc-sub">Nachten</div></div>
+          <div class="sc o"><span class="sc-lbl">Omzet</span><div class="sc-val" id="st-omz">—</div><div class="sc-sub">Alle boekingen</div></div>
         </div>
-        <div class="card"><div class="card-title">Recente <em>boekingen</em></div><div id="dash-tbl" class="table-wrap"><div class="loading-r">Laden...</div></div></div>
+        <div class="scroll">
+          <div id="offline-dash"></div>
+          <div style="font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.28);margin-bottom:12px">Recente boekingen</div>
+          <div class="tbl-wrap" id="dash-tbl"><div class="loading-r">Laden...</div></div>
+        </div>
       </div>
 
-      <!-- RESERVERINGEN -->
+      <!-- ===== RESERVERINGEN ===== -->
       <div class="page" id="page-reserveringen">
-        <div class="ph"><h1>Alle <em>Reserveringen</em></h1></div>
-        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
-          <button class="sec-btn" id="rf-alle" onclick="setRF('alle',this)" style="border-color:var(--gold);color:var(--gold)">Alle</button>
-          <button class="sec-btn" id="rf-bevestigd" onclick="setRF('bevestigd',this)">Bevestigd</button>
-          <button class="sec-btn" id="rf-afgerond" onclick="setRF('afgerond',this)">Afgerond</button>
-          <button class="sec-btn" id="rf-geannuleerd" onclick="setRF('geannuleerd',this)">Geannuleerd</button>
-          <input id="rsearch" type="text" placeholder="Zoek naam of email..." oninput="renderRes()" style="background:var(--bc);border:1px solid rgba(200,169,110,.18);color:var(--white);padding:7px 12px;font-family:var(--fb);font-size:.7rem;outline:none;margin-left:auto;width:200px;transition:border-color .3s" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(200,169,110,.18)'"/>
+        <div class="page-hd"><div><h1>Alle <em>Reserveringen</em></h1></div></div>
+        <div style="padding:14px 28px;border-bottom:1px solid rgba(200,169,110,.08);display:flex;gap:7px;flex-wrap:wrap;align-items:center;flex-shrink:0">
+          <button class="act" id="rf-alle" onclick="setRF('alle',this)" style="border-color:var(--gold);color:var(--gold)">Alle</button>
+          <button class="act" id="rf-bevestigd" onclick="setRF('bevestigd',this)">Bevestigd</button>
+          <button class="act" id="rf-afgerond" onclick="setRF('afgerond',this)">Afgerond</button>
+          <button class="act" id="rf-geannuleerd" onclick="setRF('geannuleerd',this)">Geannuleerd</button>
+          <input id="rsrch" type="text" placeholder="Zoek naam of email..." oninput="renderRes()" style="margin-left:auto;background:var(--bc);border:1px solid rgba(200,169,110,.16);color:var(--white);padding:6px 11px;font-family:var(--fb);font-size:.68rem;outline:none;width:190px"/>
         </div>
-        <div class="table-wrap" id="res-tbl"><div class="loading-r">Laden...</div></div>
+        <div class="scroll" style="padding:20px 28px">
+          <div class="tbl-wrap" id="res-tbl"><div class="loading-r">Laden...</div></div>
+        </div>
       </div>
 
-      <!-- KALENDER -->
+      <!-- ===== KALENDER ===== -->
       <div class="page" id="page-kalender">
-        <div class="ph"><h1><em>Kalender</em></h1></div>
-        <div class="card" style="max-width:520px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-            <button class="sec-btn" onclick="calPrev()">← Vorige</button>
-            <span style="font-family:var(--fd);font-size:1.1rem" id="calTitle">—</span>
-            <button class="sec-btn" onclick="calNext()">Volgende →</button>
+        <div class="page-hd"><h1><em>Kalender</em></h1></div>
+        <div class="scroll">
+          <div style="background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:24px;max-width:500px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px">
+              <button class="btn-outline" onclick="calPrev()" style="padding:6px 12px">←</button>
+              <span style="font-family:var(--fd);font-size:1.1rem" id="calTitle">—</span>
+              <button class="btn-outline" onclick="calNext()" style="padding:6px 12px">→</button>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:4px">
+              <div class="cal-dhd">Ma</div><div class="cal-dhd">Di</div><div class="cal-dhd">Wo</div><div class="cal-dhd">Do</div><div class="cal-dhd">Vr</div><div class="cal-dhd">Za</div><div class="cal-dhd">Zo</div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px" id="calGrid"></div>
+            <div style="margin-top:13px;padding-top:11px;border-top:1px solid rgba(200,169,110,.08);font-size:.6rem;color:rgba(245,240,232,.28)"><span style="color:var(--gold)">●</span> Geboekte datum</div>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:4px">
-            <div class="cal-dhd">Ma</div><div class="cal-dhd">Di</div><div class="cal-dhd">Wo</div><div class="cal-dhd">Do</div><div class="cal-dhd">Vr</div><div class="cal-dhd">Za</div><div class="cal-dhd">Zo</div>
-          </div>
-          <div class="cal-grid" id="calGrid"></div>
-          <div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(200,169,110,.1);font-size:.62rem;color:rgba(245,240,232,.32)"><span style="color:var(--gold)">●</span> Geboekte datum</div>
         </div>
       </div>
 
-      <!-- TEKSTEN -->
-      <div class="page" id="page-teksten">
-        <div class="ph"><div><h1>Teksten <em>bewerken</em></h1><p class="ph-sub">Pas de teksten op je website aan per sectie</p></div><button class="save-btn" onclick="saveAllTeksten()" id="saveAllBtn">Opslaan →</button></div>
-        <div class="page-tabs">
-          <div class="ptab active" onclick="setTTab('index',this)">🏠 Hoofdpagina</div>
-          <div class="ptab" onclick="setTTab('over-ons',this)">👥 Over ons</div>
-          <div class="ptab" onclick="setTTab('faq',this)">❓ FAQ</div>
-          <div class="ptab" onclick="setTTab('algemeen',this)">⚙️ Contactgegevens</div>
+      <!-- ===== VISUELE EDITOR ===== -->
+      <div class="page" id="page-visueel">
+        <div class="page-hd">
+          <div><h1>Visuele <em>Editor</em></h1><p>Klik op een sectie om de teksten aan te passen</p></div>
+          <button class="btn-gold" id="saveVisBtn" onclick="saveVisueel()" disabled>Opslaan →</button>
         </div>
-        <div id="tekst-editor"><div class="loading-r">Laden...</div></div>
+        <div class="editor-layout">
+          <!-- PREVIEW -->
+          <div class="preview-pane">
+            <!-- HERO -->
+            <div class="section-preview" onclick="selectSection('hero')" id="prev-hero">
+              <div class="edit-overlay">✏️ Bewerken</div>
+              <div class="prev-hero">
+                <div class="prev-hero-img"></div>
+                <div class="prev-hero-content">
+                  <span class="prev-label">Bijzondere Overnachtingen op het Water</span>
+                  <h1 class="prev-h1" id="prv-hero-titel">Jouw <em>geheime</em> nacht begint hier</h1>
+                  <p class="prev-sub" id="prv-hero-sub">Een mysterieuze ligplek · Een privé-boot · Een beleving die je nooit vergeet</p>
+                </div>
+              </div>
+            </div>
+            <!-- INTRO -->
+            <div class="section-preview" onclick="selectSection('intro')" id="prev-intro">
+              <div class="edit-overlay">✏️ Bewerken</div>
+              <div class="prev-intro">
+                <div class="prev-intro-text">
+                  <h2 id="prv-intro-titel">Jij kiest de nacht. <em>Wij kiezen de plek.</em></h2>
+                  <p id="prv-intro-t1">Secretnights brengt je naar een geheime ligplek ergens in de Nederlandse natuur.</p>
+                  <p id="prv-intro-t2">Verwacht rust, ruimte en een uitzicht dat je adem beneemt.</p>
+                </div>
+                <div class="prev-intro-img"></div>
+              </div>
+            </div>
+            <!-- QUOTE -->
+            <div class="section-preview" onclick="selectSection('quote')" id="prev-quote">
+              <div class="edit-overlay">✏️ Bewerken</div>
+              <div class="prev-quote">
+                <blockquote id="prv-quote-tekst">"Niet weten waar je naartoe gaat is deel van de magie — aankomen is de rest."</blockquote>
+              </div>
+            </div>
+            <!-- CTA -->
+            <div class="section-preview" onclick="selectSection('cta')" id="prev-cta">
+              <div class="edit-overlay">✏️ Bewerken</div>
+              <div class="prev-cta">
+                <h2 id="prv-cta-titel">Klaar voor jouw <em>geheime nacht?</em></h2>
+                <p id="prv-cta-tekst">Slechts 12 Secret Nights per seizoen. Kies je arrangement en ontvang de geheime locatie in je mailbox.</p>
+                <div class="prev-btn">Reserveer Nu</div>
+              </div>
+            </div>
+            <!-- CONTACT -->
+            <div class="section-preview" onclick="selectSection('contact')" id="prev-contact">
+              <div class="edit-overlay">✏️ Bewerken</div>
+              <div class="prev-contact">
+                <p>📞 <span id="prv-tel">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="prv-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6d04030b022d1e080e1f081903040a05191e430301">[email&#160;protected]</a></span> &nbsp;·&nbsp; 📍 <span id="prv-adres">Kazernestraat, Oss</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- EDITOR PANE -->
+          <div class="editor-pane" id="editorPane">
+            <div class="edit-panel-empty">
+              <span>👈</span>
+              <p>Klik op een sectie<br/>in de preview om<br/>teksten te bewerken</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- FOTOS -->
+      <!-- ===== FOTO'S ===== -->
       <div class="page" id="page-fotos">
-        <div class="ph"><div><h1>Foto's <em>beheren</em></h1><p class="ph-sub">Voeg foto-URL's toe of vervang ze</p></div><button class="save-btn" onclick="openM('fotoModal')">+ Foto toevoegen</button></div>
-        <div class="info-box">💡 Gebruik foto's van je eigen website of upload ze naar een service zoals <a href="https://imgur.com" target="_blank">imgur.com</a> of <a href="https://cloudinary.com" target="_blank">cloudinary.com</a> en plak de URL hier.</div>
-        <div class="photo-grid" id="foto-grid"><div class="loading-r">Laden...</div></div>
+        <div class="page-hd"><div><h1>Foto's <em>beheren</em></h1><p>Voeg foto-URL's toe of vervang ze</p></div><button class="btn-gold" onclick="openM('fotoModal')">+ Foto toevoegen</button></div>
+        <div class="scroll">
+          <div class="info-box">💡 Upload foto's op <a href="https://imgur.com" target="_blank">imgur.com</a> (gratis), kopieer de directe link en plak die hier. Of gebruik de URL's van de huidige website.</div>
+          <div id="foto-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px"><div class="loading-r">Laden...</div></div>
+        </div>
       </div>
 
-      <!-- PAGINAS -->
+      <!-- ===== PAGINA'S ===== -->
       <div class="page" id="page-paginas">
-        <div class="ph"><div><h1>Extra <em>Pagina's</em></h1><p class="ph-sub">Maak nieuwe pagina's voor de website</p></div><button class="save-btn" onclick="openM('paginaModal')">+ Nieuwe pagina</button></div>
-        <div class="info-box">💡 Nieuwe pagina's zijn bereikbaar via <strong style="color:var(--gold)">secretnights.nl/pagina/[naam]</strong> zodra je ze publiceert. Gebruik dit voor bijv. Algemene Voorwaarden of Privacybeleid.</div>
-        <div class="pages-list" id="pages-list"><div class="loading-r">Laden...</div></div>
+        <div class="page-hd"><div><h1>Extra <em>Pagina's</em></h1><p>Maak nieuwe pagina's aan voor de website</p></div><button class="btn-gold" onclick="openM('newPaginaModal')">+ Nieuwe pagina</button></div>
+        <div class="scroll">
+          <div class="info-box">💡 Pagina's zijn bereikbaar op <strong>secretnights.nl/pagina/[naam]</strong>. Handig voor Privacybeleid, Algemene Voorwaarden etc.</div>
+          <div class="pages-grid" id="pages-grid"><div class="loading-r">Laden...</div></div>
+        </div>
       </div>
 
-      <!-- BETAALMETHODES -->
+      <!-- ===== BETAALMETHODES ===== -->
       <div class="page" id="page-betaalmethodes">
-        <div class="ph"><div><h1><em>Betaalmethodes</em></h1><p class="ph-sub">Beheer welke betaalmethodes klanten kunnen gebruiken</p></div><button class="save-btn" onclick="openM('betaalModal')">+ Methode toevoegen</button></div>
-        <div class="info-box">💡 <strong style="color:var(--gold)">Echte betalingen activeren met Mollie:</strong> Maak een account op <a href="https://mollie.com" target="_blank">mollie.com</a> → Dashboard → Developers → API keys. Stuur je Live key naar je ontwikkelaar, dan worden boekingen automatisch betaald.</div>
-        <div class="pay-list" id="pay-list"><div class="loading-r">Laden...</div></div>
-      </div>
+        <div class="page-hd"><div><h1><em>Betaalmethodes</em></h1><p>Beheer en koppel echte betalingen via Mollie</p></div></div>
+        <div class="scroll">
 
-      <!-- BESCHIKBAARHEID -->
-      <div class="page" id="page-beschikbaarheid">
-        <div class="ph"><h1><em>Beschikbaarheid</em></h1></div>
-        <div class="card" style="max-width:460px">
-          <div class="card-title">Beschikbare <em>nachten</em></div>
-          <p class="card-sub">Dit getal staat op de website. Geboekte nachten worden automatisch afgetrokken.</p>
-          <div style="display:flex;align-items:center;gap:18px;margin-bottom:22px">
-            <button onclick="adjT(-1)" style="background:var(--bc);border:1px solid rgba(200,169,110,.22);color:var(--gold);width:40px;height:40px;font-size:1.4rem;cursor:pointer;transition:all .3s" onmouseover="this.style.background='var(--gold)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--bc)';this.style.color='var(--gold)'">−</button>
-            <span id="totalDisp" style="font-family:var(--fd);font-size:3.2rem;font-weight:300;min-width:60px;text-align:center">—</span>
-            <button onclick="adjT(1)" style="background:var(--bc);border:1px solid rgba(200,169,110,.22);color:var(--gold);width:40px;height:40px;font-size:1.4rem;cursor:pointer;transition:all .3s" onmouseover="this.style.background='var(--gold)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--bc)';this.style.color='var(--gold)'">+</button>
+          <!-- MOLLIE SETUP -->
+          <div class="mollie-box">
+            <h3>Mollie <em>koppelen</em></h3>
+            <p>Met Mollie ontvang je echte betalingen via iDEAL, creditcard en meer. Klanten betalen direct bij boeking. Geld staat binnen 1-2 werkdagen op je rekening.</p>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;padding:12px 14px;background:var(--black);border:1px solid rgba(200,169,110,.12)">
+              <div class="status-dot" id="mollie-dot"></div>
+              <span style="font-size:.68rem;color:var(--wd)" id="mollie-status-txt">Status laden...</span>
+            </div>
+            <div class="step-row"><div class="step-num">1</div><div class="step-content"><p>Maak een gratis account op <a href="https://mollie.com" target="_blank">mollie.com</a> en verifieer je bedrijf</p></div></div>
+            <div class="step-row"><div class="step-num">2</div><div class="step-content"><p>Ga naar <strong>Dashboard → Developers → API keys</strong> en kopieer je <strong>Live API key</strong> (begint met <code style="background:var(--bc);padding:1px 5px;color:var(--gold)">live_</code>)</p></div></div>
+            <div class="step-row"><div class="step-num">3</div><div class="step-content"><p>Plak de key hieronder en klik opslaan</p></div></div>
+            <div style="margin-top:18px">
+              <div class="fg"><label>Mollie Live API Key</label><input type="password" id="mollieKey" placeholder="live_xxxxxxxxxxxxxxxxxx" style="font-family:monospace"/></div>
+              <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
+                <button class="btn-gold" onclick="saveMollieKey()">Opslaan & activeren →</button>
+                <label class="toggle" style="margin-left:8px" title="Mollie aan/uit">
+                  <input type="checkbox" id="mollieSwitch" onchange="toggleMollie(this.checked)"/>
+                  <div class="tgl-track"></div>
+                </label>
+                <span style="font-size:.6rem;color:var(--wd)" id="mollie-toggle-lbl">Uit</span>
+              </div>
+            </div>
           </div>
-          <button class="save-btn" onclick="saveTotal()">Opslaan →</button>
-        </div>
-        <div class="card" style="max-width:460px">
-          <div class="card-title">Live <em>status</em></div>
-          <p id="avail-st" style="font-size:.72rem;color:var(--wd);line-height:2.4">Laden...</p>
-          <button class="del-btn" style="margin-top:14px" onclick="resetGeboekt()">Reset geboekte teller naar 0</button>
+
+          <!-- BETAALMETHODES LIJST -->
+          <div style="font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,240,232,.28);margin-bottom:12px;margin-top:24px">Beschikbare methodes</div>
+          <div id="pay-list"><div class="loading-r">Laden...</div></div>
+          <button class="btn-outline" style="margin-top:12px" onclick="openM('betaalModal')">+ Methode toevoegen</button>
         </div>
       </div>
 
-    </div>
+      <!-- ===== BESCHIKBAARHEID ===== -->
+      <div class="page" id="page-beschikbaarheid">
+        <div class="page-hd"><h1><em>Beschikbaarheid</em></h1></div>
+        <div class="scroll">
+          <div style="background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:26px;max-width:440px;margin-bottom:14px">
+            <div style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:5px">Beschikbare <em style="font-style:italic;color:var(--gold)">nachten</em></div>
+            <p style="font-size:.66rem;color:var(--wd);line-height:2;margin-bottom:20px">Dit getal verschijnt live op de website. Geboekte nachten worden automatisch afgetrokken.</p>
+            <div style="display:flex;align-items:center;gap:18px;margin-bottom:22px">
+              <button onclick="adjT(-1)" style="background:var(--bc);border:1px solid rgba(200,169,110,.2);color:var(--gold);width:40px;height:40px;font-size:1.4rem;cursor:pointer" onmouseover="this.style.background='var(--gold)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--bc)';this.style.color='var(--gold)'">−</button>
+              <span id="totalDisp" style="font-family:var(--fd);font-size:3rem;font-weight:300;min-width:55px;text-align:center">—</span>
+              <button onclick="adjT(1)" style="background:var(--bc);border:1px solid rgba(200,169,110,.2);color:var(--gold);width:40px;height:40px;font-size:1.4rem;cursor:pointer" onmouseover="this.style.background='var(--gold)';this.style.color='var(--black)'" onmouseout="this.style.background='var(--bc)';this.style.color='var(--gold)'">+</button>
+            </div>
+            <button class="btn-gold" onclick="saveTotal()">Opslaan →</button>
+          </div>
+          <div style="background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:22px;max-width:440px">
+            <div style="font-family:var(--fd);font-size:1.1rem;font-weight:300;margin-bottom:12px">Live <em style="font-style:italic;color:var(--gold)">status</em></div>
+            <p id="avail-st" style="font-size:.7rem;color:var(--wd);line-height:2.4">Laden...</p>
+            <button class="btn-red" style="margin-top:14px" onclick="resetGeboekt()">Reset geboekte teller naar 0</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== INSTELLINGEN ===== -->
+      <div class="page" id="page-instellingen">
+        <div class="page-hd"><h1>Website <em>Instellingen</em></h1></div>
+        <div class="scroll">
+          <div style="background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:24px;max-width:560px;margin-bottom:14px">
+            <div style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:5px">Website <em style="font-style:italic;color:var(--gold)">aan/uit</em></div>
+            <p style="font-size:.66rem;color:var(--wd);line-height:2;margin-bottom:18px">Zet de website tijdelijk offline voor onderhoud. Bezoekers zien dan een bericht in plaats van de site.</p>
+            <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+              <label class="toggle">
+                <input type="checkbox" id="siteSwitch2" onchange="toggleWebsite(this.checked);document.getElementById('siteSwitch').checked=this.checked"/>
+                <div class="tgl-track"></div>
+              </label>
+              <span style="font-size:.72rem;color:var(--wd)" id="site-status-lbl">Laden...</span>
+            </div>
+            <div class="fg"><label>Offline bericht voor bezoekers</label><textarea id="offline-msg" rows="3" placeholder="We zijn momenteel offline voor onderhoud..."></textarea></div>
+            <button class="btn-gold" onclick="saveInstellingen()">Opslaan →</button>
+          </div>
+          <div style="background:var(--bs);border:1px solid rgba(200,169,110,.1);padding:24px;max-width:560px">
+            <div style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:5px">Wachtwoord <em style="font-style:italic;color:var(--gold)">wijzigen</em></div>
+            <p style="font-size:.66rem;color:var(--wd);line-height:2;margin-bottom:16px">Verander het wachtwoord voor dit beheerderspaneel.</p>
+            <div class="fg"><label>Nieuw wachtwoord</label><input type="password" id="newPw1" placeholder="Minimaal 8 tekens"/></div>
+            <div class="fg"><label>Herhaal wachtwoord</label><input type="password" id="newPw2" placeholder="Herhaal wachtwoord"/></div>
+            <button class="btn-gold" onclick="changePw()">Wachtwoord wijzigen →</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /main -->
   </div>
 </div>
 
 <!-- FOTO MODAL -->
 <div class="modal-ov" id="fotoModal">
   <div class="modal">
-    <div class="modal-hd"><h2>Foto <em>toevoegen</em></h2><button class="modal-close" onclick="closeM('fotoModal')">✕</button></div>
+    <div class="modal-hd"><h2>Foto <em>toevoegen</em></h2><button class="mc" onclick="closeM('fotoModal')">✕</button></div>
     <div class="modal-body">
-      <div class="fg"><label>Naam</label><input type="text" id="fm-naam" placeholder="Bijv. Hero achtergrond"/></div>
-      <div class="fg"><label>Foto URL *</label><input type="text" id="fm-url" placeholder="https://..." oninput="prevFoto()"/></div>
-      <div id="fp" style="display:none;margin:8px 0"><img id="fp-img" style="width:100%;max-height:160px;object-fit:cover;border:1px solid rgba(200,169,110,.15);filter:brightness(.75)" src="" alt=""/></div>
+      <div class="fg"><label>Naam / omschrijving</label><input type="text" id="fm-naam" placeholder="Bijv. Hero achtergrond boot"/></div>
+      <div class="fg"><label>Foto URL *</label><input type="text" id="fm-url" placeholder="https://i.imgur.com/..." oninput="prevFoto()"/></div>
+      <div id="fp" style="display:none;margin:8px 0"><img id="fp-img" style="width:100%;max-height:150px;object-fit:cover;border:1px solid rgba(200,169,110,.14);filter:brightness(.75)" src="" alt=""/></div>
       <div class="frow">
         <div class="fg"><label>Pagina</label><select id="fm-pagina"><option value="">Algemeen</option><option value="index">Hoofdpagina</option><option value="over-ons">Over ons</option><option value="faq">FAQ</option></select></div>
         <div class="fg"><label>Sectie</label><input type="text" id="fm-sectie" placeholder="hero, galerij..."/></div>
       </div>
     </div>
-    <div class="modal-acts"><button class="save-btn" onclick="saveFoto()">Opslaan →</button><button class="sec-btn" onclick="closeM('fotoModal')">Annuleren</button></div>
+    <div class="modal-acts"><button class="btn-gold" onclick="saveFoto()">Opslaan →</button><button class="btn-outline" onclick="closeM('fotoModal')">Annuleren</button></div>
   </div>
 </div>
 
-<!-- PAGINA MODAL -->
-<div class="modal-ov" id="paginaModal">
+<!-- NIEUWE PAGINA MODAL -->
+<div class="modal-ov" id="newPaginaModal">
   <div class="modal">
-    <div class="modal-hd"><h2>Pagina <em>aanmaken</em></h2><button class="modal-close" onclick="closeM('paginaModal')">✕</button></div>
+    <div class="modal-hd"><h2>Pagina <em>aanmaken</em></h2><button class="mc" onclick="closeM('newPaginaModal')">✕</button></div>
     <div class="modal-body">
-      <div class="info-box" style="margin-bottom:14px">URL wordt: <strong style="color:var(--gold)">secretnights.nl/pagina/[naam]</strong></div>
-      <div class="fg"><label>Naam in URL *</label><input type="text" id="pm-slug" placeholder="algemene-voorwaarden" oninput="this.value=this.value.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')"/></div>
+      <div class="info-box" style="margin-bottom:14px">URL: <strong>secretnights.nl/pagina/[naam]</strong></div>
+      <div class="fg"><label>URL naam *</label><input type="text" id="pm-slug" placeholder="algemene-voorwaarden" oninput="this.value=this.value.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')"/></div>
       <div class="fg"><label>Paginatitel *</label><input type="text" id="pm-titel" placeholder="Algemene Voorwaarden"/></div>
-      <div class="fg"><label>Inhoud</label><textarea id="pm-inhoud" rows="10" placeholder="Schrijf hier de inhoud van de pagina...&#10;&#10;Je kunt gewone tekst schrijven."></textarea></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:8px"><input type="checkbox" id="pm-pub" style="width:15px;height:15px;accent-color:var(--gold)"/><label for="pm-pub" style="font-size:.68rem;color:var(--wd);cursor:pointer">Direct publiceren</label></div>
+      <div class="fg"><label>Inhoud</label><textarea id="pm-inhoud" rows="9" placeholder="Schrijf hier de inhoud..."></textarea></div>
+      <div style="display:flex;align-items:center;gap:9px;margin-top:6px"><input type="checkbox" id="pm-pub" style="width:14px;height:14px;accent-color:var(--gold)"/><label for="pm-pub" style="font-size:.66rem;color:var(--wd);cursor:pointer">Direct publiceren</label></div>
     </div>
-    <div class="modal-acts"><button class="save-btn" onclick="savePagina()">Aanmaken →</button><button class="sec-btn" onclick="closeM('paginaModal')">Annuleren</button></div>
+    <div class="modal-acts"><button class="btn-gold" onclick="savePagina()">Aanmaken →</button><button class="btn-outline" onclick="closeM('newPaginaModal')">Annuleren</button></div>
   </div>
 </div>
 
-<!-- PAGINA EDIT MODAL -->
-<div class="modal-ov" id="editModal">
+<!-- EDIT PAGINA MODAL -->
+<div class="modal-ov" id="editPaginaModal">
   <div class="modal" style="max-width:700px">
-    <div class="modal-hd"><h2>Pagina <em>bewerken</em></h2><button class="modal-close" onclick="closeM('editModal')">✕</button></div>
+    <div class="modal-hd"><h2>Pagina <em>bewerken</em></h2><button class="mc" onclick="closeM('editPaginaModal')">✕</button></div>
     <div class="modal-body">
-      <div class="fg"><label>Titel</label><input type="text" id="em-titel"/></div>
-      <div class="fg"><label>Inhoud</label><textarea id="em-inhoud" rows="12"></textarea></div>
-      <input type="hidden" id="em-id"/>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:10px"><input type="checkbox" id="em-pub" style="width:15px;height:15px;accent-color:var(--gold)"/><label for="em-pub" style="font-size:.68rem;color:var(--wd);cursor:pointer">Gepubliceerd</label></div>
+      <div class="fg"><label>Titel</label><input type="text" id="epm-titel"/></div>
+      <div class="fg"><label>Inhoud</label><textarea id="epm-inhoud" rows="14"></textarea></div>
+      <input type="hidden" id="epm-id"/>
+      <div style="display:flex;align-items:center;gap:9px;margin-top:8px"><input type="checkbox" id="epm-pub" style="width:14px;height:14px;accent-color:var(--gold)"/><label for="epm-pub" style="font-size:.66rem;color:var(--wd);cursor:pointer">Gepubliceerd</label></div>
     </div>
-    <div class="modal-acts"><button class="save-btn" onclick="updatePagina()">Opslaan →</button><button class="del-btn" onclick="deletePagina()">Verwijderen</button><button class="sec-btn" onclick="closeM('editModal')">Annuleren</button></div>
+    <div class="modal-acts"><button class="btn-gold" onclick="updatePagina()">Opslaan →</button><button class="btn-red" onclick="deletePagina()">Verwijderen</button><button class="btn-outline" onclick="closeM('editPaginaModal')">Annuleren</button></div>
   </div>
 </div>
 
 <!-- BETAAL MODAL -->
 <div class="modal-ov" id="betaalModal">
   <div class="modal">
-    <div class="modal-hd"><h2>Betaalmethode <em>toevoegen</em></h2><button class="modal-close" onclick="closeM('betaalModal')">✕</button></div>
+    <div class="modal-hd"><h2>Betaalmethode <em>toevoegen</em></h2><button class="mc" onclick="closeM('betaalModal')">✕</button></div>
     <div class="modal-body">
       <div class="frow">
         <div class="fg"><label>Naam *</label><input type="text" id="bm-naam" placeholder="Bancontact"/></div>
@@ -354,75 +601,264 @@ tr:hover td{background:rgba(200,169,110,.03);color:var(--white)}
       </div>
       <div class="fg"><label>Type</label><select id="bm-type"><option value="ideal">iDEAL</option><option value="card">Creditcard</option><option value="paypal">PayPal</option><option value="bancontact">Bancontact</option><option value="klarna">Klarna</option><option value="other">Anders</option></select></div>
       <div class="fg"><label>Mollie methode ID (optioneel)</label><input type="text" id="bm-mollie" placeholder="bancontact"/></div>
-      <div class="info-box">🔑 Mollie koppelen? Ga naar <a href="https://mollie.com" target="_blank">mollie.com</a> → Dashboard → Developers → API keys. Kopieer je Live key en stuur die naar je ontwikkelaar.</div>
     </div>
-    <div class="modal-acts"><button class="save-btn" onclick="saveBetaal()">Toevoegen →</button><button class="sec-btn" onclick="closeM('betaalModal')">Annuleren</button></div>
+    <div class="modal-acts"><button class="btn-gold" onclick="saveBetaal()">Toevoegen →</button><button class="btn-outline" onclick="closeM('betaalModal')">Annuleren</button></div>
   </div>
 </div>
 
 <!-- RES DETAIL MODAL -->
 <div class="modal-ov" id="resModal">
-  <div class="modal"><div class="modal-hd"><h2>Reservering <em>details</em></h2><button class="modal-close" onclick="closeM('resModal')">✕</button></div><div class="modal-body" id="resModalBody"></div><div class="modal-acts" id="resModalActs"></div></div>
+  <div class="modal"><div class="modal-hd"><h2>Reservering <em>details</em></h2><button class="mc" onclick="closeM('resModal')">✕</button></div><div class="modal-body" id="rmBody"></div><div class="modal-acts" id="rmActs"></div></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<script>
-const SB='https://fxaqsorekbsiqdnwhkwa.supabase.co';
-const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ4YXFzb3Jla2JzaXFkbndoa3dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE0NTgwNzYsImV4cCI6MjA4NzAzNDA3Nn0.1JyZcw0G3owob853H2MiYG1qw5v7W2sqUFzkjuxgtZo';
-const PW='Secretnights2026!';
-let allRes=[],allFotos=[],allPaginas=[],allBetaal=[],teksten={};
-let resF='alle',calY=new Date().getFullYear(),calM=new Date().getMonth(),totalN=12,curTab='index';
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const SB='https://eugdqjclpptbneburqtn.supabase.co';
+const KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1Z2RxamNscHB0Ym5lYnVycXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTc2MDMsImV4cCI6MjA4OTU3MzYwM30.oXpk_sw_f3NGb6Q6Wx-TQfiYXFtnT_29iwkFKl5EqeA';
+let PW=localStorage.getItem('sn_pw')||'Secretnights2026!';
 
-function doLogin(){if(document.getElementById('pwInput').value===PW){localStorage.setItem('sn_cms','1');document.getElementById('loginScreen').classList.add('hidden');document.getElementById('app').classList.add('visible');loadAll();}else{document.getElementById('loginErr').textContent='Onjuist wachtwoord.';document.getElementById('pwInput').value='';setTimeout(()=>document.getElementById('loginErr').textContent='',3000)}}
+let allRes=[],allFotos=[],allPaginas=[],allBetaal=[],allTeksten={},siteSettings={};
+let resF='alle',calY=new Date().getFullYear(),calM=new Date().getMonth(),totalN=12;
+let curSection=null,changedFields={};
+
+// AUTH
+function doLogin(){
+  if(document.getElementById('pwInput').value===PW){
+    localStorage.setItem('sn_cms','1');
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('app').classList.add('visible');
+    loadAll();
+  } else {
+    document.getElementById('loginErr').textContent='Onjuist wachtwoord.';
+    document.getElementById('pwInput').value='';
+    setTimeout(()=>document.getElementById('loginErr').textContent='',3000);
+  }
+}
 function logout(){localStorage.removeItem('sn_cms');location.reload()}
-if(localStorage.getItem('sn_cms')){document.getElementById('loginScreen').classList.add('hidden');document.getElementById('app').classList.add('visible');setTimeout(loadAll,80)}
+if(localStorage.getItem('sn_cms')){
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('app').classList.add('visible');
+  setTimeout(loadAll,80);
+}
+function changePw(){
+  const p1=document.getElementById('newPw1').value,p2=document.getElementById('newPw2').value;
+  if(p1.length<8){toast('Wachtwoord minimaal 8 tekens','err');return}
+  if(p1!==p2){toast('Wachtwoorden komen niet overeen','err');return}
+  PW=p1;localStorage.setItem('sn_pw',PW);
+  document.getElementById('newPw1').value='';document.getElementById('newPw2').value='';
+  toast('Wachtwoord gewijzigd ✓','ok');
+}
 
+// API
 async function api(path,opts={}){return fetch(SB+path,{headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json',...(opts.headers||{})},...opts})}
 
-async function loadAll(){await Promise.all([loadRes(),loadAvail(),loadFotos(),loadPaginas(),loadBetaal()]);renderDash();renderRes();renderKal();renderFotos();renderPaginas();renderBetaal()}
+// LOAD ALL
+async function loadAll(){
+  await Promise.all([loadRes(),loadAvail(),loadFotos(),loadPaginas(),loadBetaal(),loadInstellingen(),loadTeksten()]);
+  renderDash();renderRes();renderKal();renderFotos();renderPaginas();renderBetaal();
+}
+
 async function loadRes(){try{const r=await api('/rest/v1/reserveringen?select=*&order=created_at.desc');allRes=await r.json();if(!Array.isArray(allRes))allRes=[];}catch{allRes=[]}}
-async function loadAvail(){try{const r=await api('/rest/v1/beschikbaarheid?select=*&limit=1');const d=await r.json();if(d&&d[0]){totalN=d[0].totaal_nachten;document.getElementById('totalDisp').textContent=totalN;const rest=totalN-d[0].geboekte_nachten;document.getElementById('st-bes').textContent=rest;document.getElementById('avail-st').innerHTML=`Totaal: <strong style="color:var(--white)">${totalN}</strong> &nbsp;|&nbsp; Geboekt: <strong style="color:var(--white)">${d[0].geboekte_nachten}</strong> &nbsp;|&nbsp; Beschikbaar: <strong style="color:var(--gold)">${rest}</strong>`;}}catch{}}
+async function loadAvail(){try{const r=await api('/rest/v1/beschikbaarheid?select=*&limit=1');const d=await r.json();if(d&&d[0]){totalN=d[0].totaal_nachten;document.getElementById('totalDisp').textContent=totalN;const rest=totalN-d[0].geboekte_nachten;document.getElementById('st-vrij').textContent=rest;document.getElementById('avail-st').innerHTML=`Totaal: <strong style="color:var(--white)">${totalN}</strong> &nbsp;|&nbsp; Geboekt: <strong style="color:var(--white)">${d[0].geboekte_nachten}</strong> &nbsp;|&nbsp; Beschikbaar: <strong style="color:var(--gold)">${rest}</strong>`;}}catch{}}
 async function loadFotos(){try{const r=await api('/rest/v1/media?select=*&order=created_at.desc');allFotos=await r.json();if(!Array.isArray(allFotos))allFotos=[];}catch{allFotos=[]}}
 async function loadPaginas(){try{const r=await api('/rest/v1/extra_paginas?select=*&order=created_at.desc');allPaginas=await r.json();if(!Array.isArray(allPaginas))allPaginas=[];}catch{allPaginas=[]}}
 async function loadBetaal(){try{const r=await api('/rest/v1/betaalmethodes?select=*&order=volgorde');allBetaal=await r.json();if(!Array.isArray(allBetaal))allBetaal=[];}catch{allBetaal=[]}}
-async function loadTeksten(p){try{const r=await api(`/rest/v1/pagina_inhoud?pagina=eq.${p}&select=*`);const d=await r.json();teksten[p]=Array.isArray(d)?d:[];renderTekstenEditor(p);}catch{}}
 
-function showP(name,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));document.getElementById('page-'+name).classList.add('active');el.classList.add('active');if(name==='teksten')loadTeksten(curTab);if(name==='kalender')renderKal()}
+async function loadInstellingen(){
+  try{
+    const r=await api('/rest/v1/website_instellingen?id=eq.1&select=*');
+    const d=await r.json();
+    if(d&&d[0]){
+      siteSettings=d[0];
+      const on=d[0].website_actief;
+      document.getElementById('siteSwitch').checked=on;
+      document.getElementById('siteSwitch2').checked=on;
+      updateSiteLabel(on);
+      if(d[0].offline_bericht)document.getElementById('offline-msg').value=d[0].offline_bericht;
+      if(d[0].mollie_api_key)document.getElementById('mollieKey').value=d[0].mollie_api_key;
+      document.getElementById('mollieSwitch').checked=d[0].mollie_actief||false;
+      document.getElementById('mollie-toggle-lbl').textContent=d[0].mollie_actief?'Aan':'Uit';
+      const dot=document.getElementById('mollie-dot');
+      const txt=document.getElementById('mollie-status-txt');
+      if(d[0].mollie_actief&&d[0].mollie_api_key){dot.classList.add('on');txt.textContent='Mollie is actief — echte betalingen zijn ingeschakeld';}
+      else{dot.classList.add('off');txt.textContent='Mollie is niet actief — betalingen worden gesimuleerd';}
+      // Offline banner op dashboard
+      const db=document.getElementById('offline-dash');
+      if(!on&&db){db.innerHTML=`<div class="offline-banner"><p>⚠️ <strong>Website is momenteel OFFLINE.</strong> Bezoekers zien het offline bericht. Zet de website aan via de schakelaar bovenin.</p></div>`;}
+      else if(db){db.innerHTML='';}
+    }
+  }catch{}
+}
+
+async function loadTeksten(){
+  try{
+    const r=await api('/rest/v1/pagina_inhoud?select=*');
+    const d=await r.json();
+    if(Array.isArray(d)){
+      allTeksten={};
+      d.forEach(item=>{
+        if(!allTeksten[item.pagina])allTeksten[item.pagina]={};
+        if(!allTeksten[item.pagina][item.sectie])allTeksten[item.pagina][item.sectie]={};
+        allTeksten[item.pagina][item.sectie][item.veld]=item.waarde;
+      });
+      updatePreview();
+    }
+  }catch{}
+}
+
+function getT(p,s,v){return(allTeksten[p]&&allTeksten[p][s]&&allTeksten[p][s][v])||''}
+
+// UPDATE PREVIEW
+function updatePreview(){
+  const h=getT('index','hero','titel');if(h){document.getElementById('prv-hero-titel').innerHTML=h.replace(/\*([^*]+)\*/g,'<em>$1</em>')}
+  const hs=getT('index','hero','subtitel');if(hs)document.getElementById('prv-hero-sub').textContent=hs;
+  const it=getT('index','intro','titel');if(it){document.getElementById('prv-intro-titel').innerHTML=it.replace(/\*([^*]+)\*/g,'<em>$1</em>')}
+  const i1=getT('index','intro','tekst1');if(i1)document.getElementById('prv-intro-t1').textContent=i1;
+  const i2=getT('index','intro','tekst2');if(i2)document.getElementById('prv-intro-t2').textContent=i2;
+  const q=getT('index','quote','tekst');if(q)document.getElementById('prv-quote-tekst').textContent=`"${q}"`;
+  const ct=getT('index','cta','titel');if(ct){document.getElementById('prv-cta-titel').innerHTML=ct.replace(/\*([^*]+)\*/g,'<em>$1</em>')}
+  const cp=getT('index','cta','tekst');if(cp)document.getElementById('prv-cta-tekst').textContent=cp;
+  const tel=getT('algemeen','contact','telefoon');if(tel)document.getElementById('prv-tel').textContent=tel;
+  const em=getT('algemeen','contact','email');if(em)document.getElementById('prv-email').textContent=em;
+  const ad=getT('algemeen','contact','adres');if(ad)document.getElementById('prv-adres').textContent=ad;
+}
+
+// VISUAL EDITOR SECTIONS
+const SECTION_DEF={
+  hero:{label:'Hero sectie (bovenste balk)',pagina:'index',velden:[{key:'titel',lbl:'Hoofdtitel',hint:'Gebruik *tekst* voor cursief goud'},  {key:'subtitel',lbl:'Subtitel / tagline',type:'textarea'}]},
+  intro:{label:'Mysterie sectie',pagina:'index',velden:[{key:'titel',lbl:'Titel',hint:'Gebruik *tekst* voor cursief goud'},{key:'tekst1',lbl:'Eerste alinea',type:'textarea'},{key:'tekst2',lbl:'Tweede alinea',type:'textarea'}]},
+  quote:{label:'Quote balk (goud)',pagina:'index',velden:[{key:'tekst',lbl:'Quote tekst',type:'textarea'}]},
+  cta:{label:'Onderste call-to-action',pagina:'index',velden:[{key:'titel',lbl:'Titel',hint:'Gebruik *tekst* voor cursief goud'},{key:'tekst',lbl:'Beschrijvende tekst',type:'textarea'}]},
+  contact:{label:'Contactgegevens (footer)',pagina:'algemeen',velden:[{key:'telefoon',lbl:'Telefoonnummer'},{key:'email',lbl:'E-mailadres'},{key:'adres',lbl:'Adres'},{key:'whatsapp',lbl:'WhatsApp nummer (alleen cijfers)'}]},
+};
+
+function selectSection(key){
+  curSection=key;changedFields={};
+  document.querySelectorAll('.section-preview').forEach(el=>el.classList.remove('selected'));
+  document.getElementById('prev-'+key).classList.add('selected');
+  const def=SECTION_DEF[key];
+  const pagina=def.pagina;
+  const sectie=key==='contact'?'contact':key;
+  document.getElementById('editorPane').innerHTML=`
+    <div class="edit-section-title">${def.label} <em style="display:block;font-size:.9rem;margin-top:2px;color:rgba(200,169,110,.5)">Bewerk de velden hieronder</em></div>
+    ${def.velden.map(v=>`
+      <div class="field-group">
+        <label>${v.lbl}${v.hint?` <span style="color:rgba(200,169,110,.4);font-size:.44rem;letter-spacing:.1em;text-transform:none;font-weight:300;margin-left:6px">${v.hint}</span>`:''}</label>
+        ${v.type==='textarea'?
+          `<textarea oninput="fieldChange('${pagina}','${sectie}','${v.key}',this.value)" rows="3">${getT(pagina,sectie,v.key)}</textarea>`:
+          `<input type="text" oninput="fieldChange('${pagina}','${sectie}','${v.key}',this.value)" value="${getT(pagina,sectie,v.key).replace(/"/g,'&quot;')}"/>`
+        }
+      </div>`).join('')}
+    <div style="margin-top:16px;padding:10px 12px;background:rgba(200,169,110,.05);border:1px solid rgba(200,169,110,.1);font-size:.62rem;color:var(--wd);line-height:1.9">
+      💡 Gebruik <code style="background:var(--bc);padding:1px 5px;color:var(--gold)">*woord*</code> om een woord cursief goud te maken in titels.
+    </div>`;
+  document.getElementById('saveVisBtn').disabled=false;
+}
+
+function fieldChange(pagina,sectie,veld,val){
+  if(!changedFields[pagina])changedFields[pagina]={};
+  if(!changedFields[pagina][sectie])changedFields[pagina][sectie]={};
+  changedFields[pagina][sectie][veld]=val;
+  // Live update preview
+  if(!allTeksten[pagina])allTeksten[pagina]={};
+  if(!allTeksten[pagina][sectie])allTeksten[pagina][sectie]={};
+  allTeksten[pagina][sectie][veld]=val;
+  updatePreview();
+}
+
+async function saveVisueel(){
+  const btn=document.getElementById('saveVisBtn');btn.textContent='Opslaan...';btn.disabled=true;
+  const promises=[];
+  for(const [pagina,secties] of Object.entries(changedFields)){
+    for(const [sectie,velden] of Object.entries(secties)){
+      for(const [veld,waarde] of Object.entries(velden)){
+        promises.push(api('/rest/v1/pagina_inhoud',{method:'POST',headers:{'Prefer':'resolution=merge-duplicates'},body:JSON.stringify({pagina,sectie,veld,waarde,updated_at:new Date().toISOString()})}));
+      }
+    }
+  }
+  await Promise.all(promises);
+  changedFields={};
+  toast('Teksten opgeslagen op de website ✓','ok');
+  btn.textContent='Opslaan →';btn.disabled=!curSection;
+  await loadTeksten();
+}
+
+// WEBSITE AAN/UIT
+function updateSiteLabel(on){
+  const lbl=document.getElementById('siteLabelStatus');
+  const lbl2=document.getElementById('site-status-lbl');
+  if(lbl){lbl.textContent=on?'Online':'Offline';lbl.className='site-toggle-label '+(on?'on':'off')}
+  if(lbl2){lbl2.textContent=on?'✅ Website is ONLINE — bezoekers kunnen de site bezoeken':'🔴 Website is OFFLINE — bezoekers zien het offline bericht';lbl2.style.color=on?'var(--green)':'var(--red)'}
+  document.getElementById('siteSwitch').checked=on;
+  document.getElementById('siteSwitch2').checked=on;
+}
+async function toggleWebsite(on){
+  const r=await api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({website_actief:on,updated_at:new Date().toISOString()})});
+  if(r.ok){updateSiteLabel(on);toast(on?'Website is nu ONLINE ✓':'Website is nu OFFLINE','ok');}
+  else toast('Fout bij opslaan','err');
+}
+async function saveInstellingen(){
+  const msg=document.getElementById('offline-msg').value;
+  const r=await api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({offline_bericht:msg,updated_at:new Date().toISOString()})});
+  if(r.ok)toast('Instellingen opgeslagen ✓','ok');else toast('Fout','err');
+}
+
+// MOLLIE
+async function saveMollieKey(){
+  const key=document.getElementById('mollieKey').value.trim();
+  if(!key.startsWith('live_')&&!key.startsWith('test_')){toast('Voer een geldige Mollie API key in (begint met live_ of test_)','err');return}
+  const r=await api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({mollie_api_key:key,updated_at:new Date().toISOString()})});
+  if(r.ok){toast('Mollie key opgeslagen ✓ — zet Mollie aan met de schakelaar','ok');await loadInstellingen();}else toast('Fout','err');
+}
+async function toggleMollie(on){
+  const r=await api('/rest/v1/website_instellingen?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({mollie_actief:on,updated_at:new Date().toISOString()})});
+  if(r.ok){document.getElementById('mollie-toggle-lbl').textContent=on?'Aan':'Uit';toast(on?'Mollie betalingen ACTIEF ✓':'Mollie uitgeschakeld','ok');await loadInstellingen();}else toast('Fout','err');
+}
+
+// NAVIGATION
+function showP(name,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  el.classList.add('active');
+  if(name==='kalender')renderKal();
+}
 
 // DASHBOARD
 const BN={'nature-one':'Nature One','nature-two':'Nature Two'};
 const PN={'wellness':'Wellness','dining':'Dining','sauna':'Sauna'};
 function fmtD(d){if(!d)return'—';return new Date(d).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'})}
 function renderDash(){
-  document.getElementById('st-total').textContent=allRes.length;
+  document.getElementById('st-res').textContent=allRes.length;
   document.getElementById('st-bev').textContent=allRes.filter(r=>r.status==='bevestigd').length;
   document.getElementById('st-omz').textContent='€'+allRes.reduce((s,r)=>s+(r.totaalbedrag||0),0).toLocaleString('nl');
   document.getElementById('dash-tbl').innerHTML=buildTbl(allRes.slice(0,6));
 }
 function buildTbl(data){
   if(!data.length)return`<div class="empty-s"><span>📋</span><p>Geen reserveringen</p></div>`;
-  return`<table><thead><tr><th>Naam</th><th>Boot</th><th>Pakket</th><th>Datum</th><th>Totaal</th><th>Status</th><th>Acties</th></tr></thead><tbody>${data.map(r=>`<tr>
-    <td>${r.voornaam} ${r.achternaam}<br/><span style="font-size:.58rem;color:rgba(245,240,232,.3)">${r.email}</span></td>
+  return`<table><thead><tr><th>Naam</th><th>Boot</th><th>Pakket</th><th>Datum</th><th>Totaal</th><th>Betaling</th><th>Status</th><th>Acties</th></tr></thead><tbody>${data.map(r=>`<tr>
+    <td>${r.voornaam} ${r.achternaam}<br/><span style="font-size:.56rem;color:rgba(245,240,232,.28)">${r.email}</span></td>
     <td>${BN[r.boot]||r.boot}</td><td>${PN[r.pakket]||r.pakket}${r.massage?' 💆':''}</td>
     <td>${fmtD(r.datum)}</td>
     <td style="color:var(--gold);font-family:var(--fd)">€${r.totaalbedrag},-</td>
-    <td><span class="sbadge ${r.status}">${r.status}</span></td>
+    <td><span class="sb ${r.betaal_status||'open'}">${r.betaal_status||'open'}</span></td>
+    <td><span class="sb ${r.status}">${r.status}</span></td>
     <td style="display:flex;gap:4px;flex-wrap:wrap">
-      <button class="act-btn" onclick='openRes(${JSON.stringify(r).replace(/'/g,"\\'")})'>Details</button>
-      ${r.status==='bevestigd'?`<button class="act-btn" style="border-color:var(--green);color:var(--green)" onclick="chgSt('${r.id}','afgerond')">✓</button>`:''}
-      ${r.status!=='geannuleerd'?`<button class="act-btn d" onclick="chgSt('${r.id}','geannuleerd')">✕</button>`:''}
+      <button class="act" onclick='openRes(${JSON.stringify(r).replace(/'/g,"\\'")} )'>Details</button>
+      ${r.status==='bevestigd'?`<button class="act" style="border-color:var(--green);color:var(--green)" onclick="chgSt('${r.id}','afgerond')">✓</button>`:''}
+      ${r.status!=='geannuleerd'?`<button class="act d" onclick="chgSt('${r.id}','geannuleerd')">✕</button>`:''}
     </td></tr>`).join('')}</tbody></table>`;
 }
 function setRF(f,btn){resF=f;document.querySelectorAll('[id^="rf-"]').forEach(b=>{b.style.borderColor='rgba(200,169,110,.22)';b.style.color='var(--wd)'});btn.style.borderColor='var(--gold)';btn.style.color='var(--gold)';renderRes()}
-function renderRes(){const q=(document.getElementById('rsearch')?.value||'').toLowerCase();let d=allRes;if(resF!=='alle')d=d.filter(r=>r.status===resF);if(q)d=d.filter(r=>(r.voornaam+r.achternaam+r.email).toLowerCase().includes(q));document.getElementById('res-tbl').innerHTML=buildTbl(d)}
-async function chgSt(id,status){const r=await api(`/rest/v1/reserveringen?id=eq.${id}`,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({status})});if(r.ok){toast('Status gewijzigd ✓','ok');await loadRes();renderDash();renderRes();}else toast('Fout','err')}
+function renderRes(){const q=(document.getElementById('rsrch')?.value||'').toLowerCase();let d=allRes;if(resF!=='alle')d=d.filter(r=>r.status===resF);if(q)d=d.filter(r=>(r.voornaam+r.achternaam+r.email).toLowerCase().includes(q));document.getElementById('res-tbl').innerHTML=buildTbl(d)}
+async function chgSt(id,status){const r=await api(`/rest/v1/reserveringen?id=eq.${id}`,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({status})});if(r.ok){toast('Gewijzigd ✓','ok');await loadRes();renderDash();renderRes();}else toast('Fout','err')}
 function openRes(r){
   const bm={'nature-one':'Nature One (Biesbosch)','nature-two':'Nature Two (Bommelerwaard)'};
   const pm={'wellness':'Natuurlijk Wellness','dining':'Dining Experience','sauna':'Sauna Boot'};
-  const rows=[['Naam',r.voornaam+' '+r.achternaam],['E-mail',`<a href="mailto:${r.email}" style="color:var(--gold)">${r.email}</a>`],['Telefoon',`<a href="tel:${r.telefoon}" style="color:var(--gold)">${r.telefoon}</a>`],['Boot',bm[r.boot]||r.boot],['Arrangement',pm[r.pakket]||r.pakket],['Massage',r.massage?'Ja (+€85)':'Nee'],['Datum',fmtD(r.datum)],['Personen',r.personen],['Betaalmethode',r.betaalmethode||'—'],['Wensen',r.wensen||'—'],['Status',`<span class="sbadge ${r.status}">${r.status}</span>`],['Totaal',`<span style="font-family:var(--fd);font-size:1.4rem;color:var(--gold)">€${r.totaalbedrag},-</span>`],['Aanbetaling',`€${Math.round(r.totaalbedrag*.3)},-`]];
-  document.getElementById('resModalBody').innerHTML=rows.map(([l,v])=>`<div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(200,169,110,.07)"><span style="font-size:.54rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.35)">${l}</span><span style="font-size:.72rem;color:var(--white);text-align:right;max-width:240px">${v}</span></div>`).join('');
-  document.getElementById('resModalActs').innerHTML=`<a href="mailto:${r.email}" class="save-btn">✉ Mail gast</a>${r.status!=='geannuleerd'?`<button class="del-btn" onclick="chgSt('${r.id}','geannuleerd');closeM('resModal')">✕ Annuleer</button>`:''}<button class="sec-btn" onclick="closeM('resModal')">Sluiten</button>`;
+  const rows=[['Naam',r.voornaam+' '+r.achternaam],['E-mail',`<a href="mailto:${r.email}" style="color:var(--gold)">${r.email}</a>`],['Telefoon',`<a href="tel:${r.telefoon}" style="color:var(--gold)">${r.telefoon}</a>`],['Boot',bm[r.boot]||r.boot],['Arrangement',pm[r.pakket]||r.pakket],['Massage',r.massage?'Ja (+€85)':'Nee'],['Datum',fmtD(r.datum)],['Personen',r.personen],['Betaalmethode',r.betaalmethode||'—'],['Betaalstatus',`<span class="sb ${r.betaal_status||'open'}">${r.betaal_status||'open'}</span>`],['Wensen',r.wensen||'—'],['Status',`<span class="sb ${r.status}">${r.status}</span>`],['Totaal',`<span style="font-family:var(--fd);font-size:1.3rem;color:var(--gold)">€${r.totaalbedrag},-</span>`],['Aanbetaling',`€${Math.round(r.totaalbedrag*.3)},-`]];
+  document.getElementById('rmBody').innerHTML=rows.map(([l,v])=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(200,169,110,.06)"><span style="font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.32)">${l}</span><span style="font-size:.7rem;color:var(--white);text-align:right;max-width:230px">${v}</span></div>`).join('');
+  document.getElementById('rmActs').innerHTML=`<a href="mailto:${r.email}" class="btn-gold" style="text-decoration:none">✉ Mail gast</a>${r.status!=='geannuleerd'?`<button class="btn-red" onclick="chgSt('${r.id}','geannuleerd');closeM('resModal')">✕ Annuleer</button>`:''}<button class="btn-outline" onclick="closeM('resModal')">Sluiten</button>`;
   openM('resModal');
 }
 
@@ -442,65 +878,19 @@ function renderKal(){
 function calPrev(){calM--;if(calM<0){calM=11;calY--}renderKal()}
 function calNext(){calM++;if(calM>11){calM=0;calY++}renderKal()}
 
-// TEKSTEN
-const SECTIES={
-  'index':[
-    {key:'hero',label:'🦸 Hero (bovenste sectie)',velden:[['titel','Hoofdtitel'],['subtitel','Subtitel']]},
-    {key:'intro',label:'📖 Mysterie sectie',velden:[['titel','Titel'],['tekst1','Tekst 1'],['tekst2','Tekst 2']]},
-    {key:'quote',label:'💬 Quote balk',velden:[['tekst','Quote tekst']]},
-    {key:'cta',label:'🎯 Onderste call-to-action',velden:[['titel','Titel'],['tekst','Tekst']]},
-  ],
-  'over-ons':[
-    {key:'hero',label:'🦸 Hero sectie',velden:[['titel','Titel']]},
-    {key:'story',label:'📖 Het verhaal',velden:[['titel','Titel'],['tekst1','Alinea 1'],['tekst2','Alinea 2']]},
-  ],
-  'faq':[
-    {key:'hero',label:'🦸 Hero sectie',velden:[['titel','Titel'],['subtitel','Subtitel']]},
-  ],
-  'algemeen':[
-    {key:'contact',label:'📞 Contactgegevens',velden:[['telefoon','Telefoonnummer'],['email','E-mailadres'],['adres','Adres'],['whatsapp','WhatsApp nummer']]},
-  ]
-};
-function getTval(p,s,v){const items=teksten[p]||[];const f=items.find(i=>i.sectie===s&&i.veld===v);return f?f.waarde:''}
-function setTTab(tab,el){curTab=tab;document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));el.classList.add('active');loadTeksten(tab)}
-function renderTekstenEditor(pagina){
-  const secs=SECTIES[pagina]||[];
-  document.getElementById('tekst-editor').innerHTML=secs.map(s=>`
-    <div class="section-block" id="sb-${s.key}">
-      <div class="section-hd" onclick="this.parentElement.classList.toggle('open')">
-        <h3>${s.label}</h3><span class="sec-arr">▼</span>
-      </div>
-      <div class="section-body">
-        ${s.velden.map(([v,l])=>`
-          <div class="field-row">
-            <span class="field-label">${l}</span>
-            ${v.includes('tekst')||v.includes('inhoud')?
-              `<textarea class="field-input" data-p="${pagina}" data-s="${s.key}" data-v="${v}" rows="3">${getTval(pagina,s.key,v)}</textarea>`:
-              `<input type="text" class="field-input" data-p="${pagina}" data-s="${s.key}" data-v="${v}" value="${getTval(pagina,s.key,v).replace(/"/g,'&quot;')}"/>`
-            }
-          </div>`).join('')}
-      </div>
-    </div>`).join('');
-}
-async function saveAllTeksten(){
-  const btn=document.getElementById('saveAllBtn');btn.textContent='Opslaan...';btn.disabled=true;
-  const inputs=document.querySelectorAll('.field-input');
-  await Promise.all(Array.from(inputs).map(inp=>api('/rest/v1/pagina_inhoud',{method:'POST',headers:{'Prefer':'resolution=merge-duplicates'},body:JSON.stringify({pagina:inp.dataset.p,sectie:inp.dataset.s,veld:inp.dataset.v,waarde:inp.value||inp.textContent||'',updated_at:new Date().toISOString()})})));
-  toast('Alle teksten opgeslagen! ✓','ok');btn.textContent='Opslaan →';btn.disabled=false;
-}
-
 // FOTOS
 function renderFotos(){
-  if(!allFotos.length){document.getElementById('foto-grid').innerHTML=`<div class="empty-s"><span>🖼️</span><p>Nog geen foto's toegevoegd</p></div>`;return}
-  document.getElementById('foto-grid').innerHTML=allFotos.map(f=>`
-    <div class="photo-item">
-      <img class="photo-img" src="${f.url}" alt="${f.naam||''}" onerror="this.style.background='#1a1a1a';this.style.minHeight='120px'"/>
-      <div class="photo-body">
-        <div class="photo-name">${f.naam||'Naamloos'}</div>
-        <div class="photo-page">${f.pagina||'Algemeen'}${f.sectie?' · '+f.sectie:''}</div>
-        <div class="photo-acts">
-          <button class="photo-btn" onclick="navigator.clipboard.writeText('${f.url}').then(()=>toast('URL gekopieerd!','ok'))">📋 URL</button>
-          <button class="photo-btn del" onclick="delFoto('${f.id}')">🗑</button>
+  const g=document.getElementById('foto-grid');
+  if(!allFotos.length){g.innerHTML=`<div class="empty-s"><span>🖼️</span><p>Nog geen foto's</p></div>`;return}
+  g.innerHTML=allFotos.map(f=>`
+    <div style="background:var(--bc);border:1px solid rgba(200,169,110,.1);overflow:hidden">
+      <img src="${f.url}" style="width:100%;aspect-ratio:4/3;object-fit:cover;filter:brightness(.75);display:block" onerror="this.style.background='#1a1a1a';this.style.minHeight='100px'"/>
+      <div style="padding:10px 12px">
+        <div style="font-size:.62rem;color:var(--white);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${f.naam||'Naamloos'}</div>
+        <div style="font-size:.52rem;color:rgba(200,169,110,.45);letter-spacing:.08em;margin-bottom:8px">${f.pagina||'Algemeen'}${f.sectie?' · '+f.sectie:''}</div>
+        <div style="display:flex;gap:6px">
+          <button style="flex:1;background:transparent;border:1px solid rgba(200,169,110,.16);color:var(--wd);padding:4px;font-size:.5rem;letter-spacing:.09em;text-transform:uppercase;cursor:pointer" onclick="navigator.clipboard.writeText('${f.url}').then(()=>toast('URL gekopieerd!','ok'))">📋 Kopieer URL</button>
+          <button style="background:transparent;border:1px solid rgba(224,82,82,.22);color:var(--red);padding:4px 8px;font-size:.5rem;cursor:pointer" onclick="delFoto('${f.id}')">🗑</button>
         </div>
       </div>
     </div>`).join('');
@@ -509,60 +899,52 @@ function prevFoto(){const u=document.getElementById('fm-url').value;if(u.startsW
 async function saveFoto(){
   const url=document.getElementById('fm-url').value.trim();if(!url){toast('Voer een URL in','err');return}
   const r=await api('/rest/v1/media',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({naam:document.getElementById('fm-naam').value||'Foto',url,pagina:document.getElementById('fm-pagina').value||null,sectie:document.getElementById('fm-sectie').value||null})});
-  if(r.ok){toast('Foto opgeslagen ✓','ok');closeM('fotoModal');['fm-naam','fm-url','fm-sectie'].forEach(id=>document.getElementById(id).value='');document.getElementById('fp').style.display='none';await loadFotos();renderFotos();}else toast('Fout','err');
+  if(r.ok){toast('Foto opgeslagen ✓','ok');closeM('fotoModal');['fm-naam','fm-url','fm-sectie'].forEach(i=>document.getElementById(i).value='');document.getElementById('fp').style.display='none';await loadFotos();renderFotos();}else toast('Fout','err');
 }
 async function delFoto(id){if(!confirm('Foto verwijderen?'))return;await api(`/rest/v1/media?id=eq.${id}`,{method:'DELETE'});toast('Verwijderd','ok');await loadFotos();renderFotos()}
 
 // PAGINAS
 function renderPaginas(){
-  if(!allPaginas.length){document.getElementById('pages-list').innerHTML=`<div class="empty-s"><span>📄</span><p>Nog geen extra pagina's aangemaakt</p></div>`;return}
-  document.getElementById('pages-list').innerHTML=allPaginas.map(p=>`
-    <div class="page-row">
-      <div><h3>${p.titel}</h3><p>secretnights.nl/pagina/${p.slug} · ${fmtD(p.created_at)}</p></div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="badge-pub ${p.gepubliceerd?'ja':'nee'}">${p.gepubliceerd?'Live':'Concept'}</span>
-        <button class="sec-btn" onclick='openEdit(${JSON.stringify(p).replace(/'/g,"\\'")} )'>✏️ Bewerken</button>
+  const g=document.getElementById('pages-grid');
+  if(!allPaginas.length){g.innerHTML=`<div class="empty-s"><span>📄</span><p>Nog geen pagina's aangemaakt</p></div>`;return}
+  g.innerHTML=allPaginas.map(p=>`
+    <div class="page-card">
+      <h3>${p.titel}</h3>
+      <p>secretnights.nl/pagina/${p.slug}<br/>${fmtD(p.created_at)}</p>
+      <div class="acts">
+        <span class="pub-badge ${p.gepubliceerd?'live':'concept'}">${p.gepubliceerd?'Live':'Concept'}</span>
+        <button class="btn-outline" style="padding:6px 12px;font-size:.52rem" onclick='openEditPagina(${JSON.stringify(p).replace(/'/g,"\\'")} )'>✏️ Bewerken</button>
       </div>
     </div>`).join('');
 }
-async function savePagina(){
-  const slug=document.getElementById('pm-slug').value.trim(),titel=document.getElementById('pm-titel').value.trim();
-  if(!slug||!titel){toast('Vul naam en titel in','err');return}
-  const r=await api('/rest/v1/extra_paginas',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({slug,titel,inhoud:document.getElementById('pm-inhoud').value,gepubliceerd:document.getElementById('pm-pub').checked})});
-  if(r.ok){toast('Pagina aangemaakt ✓','ok');closeM('paginaModal');await loadPaginas();renderPaginas();}else toast('Fout — naam al in gebruik?','err');
-}
-function openEdit(p){document.getElementById('em-id').value=p.id;document.getElementById('em-titel').value=p.titel;document.getElementById('em-inhoud').value=p.inhoud||'';document.getElementById('em-pub').checked=p.gepubliceerd;openM('editModal')}
-async function updatePagina(){const id=document.getElementById('em-id').value;const r=await api(`/rest/v1/extra_paginas?id=eq.${id}`,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({titel:document.getElementById('em-titel').value,inhoud:document.getElementById('em-inhoud').value,gepubliceerd:document.getElementById('em-pub').checked,updated_at:new Date().toISOString()})});if(r.ok){toast('Opgeslagen ✓','ok');closeM('editModal');await loadPaginas();renderPaginas();}else toast('Fout','err')}
-async function deletePagina(){if(!confirm('Pagina permanent verwijderen?'))return;const id=document.getElementById('em-id').value;await api(`/rest/v1/extra_paginas?id=eq.${id}`,{method:'DELETE'});toast('Verwijderd','ok');closeM('editModal');await loadPaginas();renderPaginas()}
+async function savePagina(){const slug=document.getElementById('pm-slug').value.trim(),titel=document.getElementById('pm-titel').value.trim();if(!slug||!titel){toast('Vul naam en titel in','err');return}const r=await api('/rest/v1/extra_paginas',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({slug,titel,inhoud:document.getElementById('pm-inhoud').value,gepubliceerd:document.getElementById('pm-pub').checked})});if(r.ok){toast('Pagina aangemaakt ✓','ok');closeM('newPaginaModal');await loadPaginas();renderPaginas();}else toast('Naam al in gebruik?','err')}
+function openEditPagina(p){document.getElementById('epm-id').value=p.id;document.getElementById('epm-titel').value=p.titel;document.getElementById('epm-inhoud').value=p.inhoud||'';document.getElementById('epm-pub').checked=p.gepubliceerd;openM('editPaginaModal')}
+async function updatePagina(){const id=document.getElementById('epm-id').value;const r=await api(`/rest/v1/extra_paginas?id=eq.${id}`,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({titel:document.getElementById('epm-titel').value,inhoud:document.getElementById('epm-inhoud').value,gepubliceerd:document.getElementById('epm-pub').checked,updated_at:new Date().toISOString()})});if(r.ok){toast('Opgeslagen ✓','ok');closeM('editPaginaModal');await loadPaginas();renderPaginas();}else toast('Fout','err')}
+async function deletePagina(){if(!confirm('Pagina permanent verwijderen?'))return;const id=document.getElementById('epm-id').value;await api(`/rest/v1/extra_paginas?id=eq.${id}`,{method:'DELETE'});toast('Verwijderd','ok');closeM('editPaginaModal');await loadPaginas();renderPaginas()}
 
 // BETAALMETHODES
 function renderBetaal(){
-  if(!allBetaal.length){document.getElementById('pay-list').innerHTML=`<div class="empty-s"><span>💳</span><p>Geen betaalmethodes</p></div>`;return}
-  document.getElementById('pay-list').innerHTML=allBetaal.map(b=>`
+  const l=document.getElementById('pay-list');
+  if(!allBetaal.length){l.innerHTML=`<div class="empty-s"><span>💳</span><p>Geen methodes</p></div>`;return}
+  l.innerHTML=allBetaal.map(b=>`
     <div class="pay-row">
       <div class="pay-icon">${b.icon||'💰'}</div>
-      <div class="pay-info"><div class="pay-name">${b.naam}</div><div class="pay-type">${b.type}${b.mollie_id?' · Mollie: '+b.mollie_id:''}</div></div>
-      <span style="font-size:.64rem;color:var(--wd);margin-right:4px">${b.actief?'Aan':'Uit'}</span>
-      <label class="toggle"><input type="checkbox" ${b.actief?'checked':''} onchange="toggleBetaal('${b.id}',this.checked)"/><div class="toggle-track"></div></label>
-      <button class="act-btn d" onclick="delBetaal('${b.id}')">🗑</button>
+      <div class="pay-info"><div class="pay-name">${b.naam}</div><div class="pay-desc">${b.type}${b.mollie_id?' · Mollie: '+b.mollie_id:''}</div></div>
+      <span style="font-size:.6rem;color:var(--wd);margin-right:4px">${b.actief?'Aan':'Uit'}</span>
+      <label class="toggle"><input type="checkbox" ${b.actief?'checked':''} onchange="tglBetaal('${b.id}',this.checked)"/><div class="tgl-track"></div></label>
+      <button class="act d" onclick="delBetaal('${b.id}')">🗑</button>
     </div>`).join('');
 }
 async function saveBetaal(){const naam=document.getElementById('bm-naam').value.trim();if(!naam){toast('Naam vereist','err');return}const r=await api('/rest/v1/betaalmethodes',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify({naam,type:document.getElementById('bm-type').value,icon:document.getElementById('bm-icon').value||'💰',mollie_id:document.getElementById('bm-mollie').value||null,actief:true,volgorde:allBetaal.length+1})});if(r.ok){toast('Toegevoegd ✓','ok');closeM('betaalModal');await loadBetaal();renderBetaal();}else toast('Fout','err')}
-async function toggleBetaal(id,actief){await api(`/rest/v1/betaalmethodes?id=eq.${id}`,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({actief})});toast(actief?'Ingeschakeld ✓':'Uitgeschakeld','ok')}
+async function tglBetaal(id,actief){await api(`/rest/v1/betaalmethodes?id=eq.${id}`,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({actief})});toast(actief?'Aan ✓':'Uit','ok')}
 async function delBetaal(id){if(!confirm('Verwijderen?'))return;await api(`/rest/v1/betaalmethodes?id=eq.${id}`,{method:'DELETE'});toast('Verwijderd','ok');await loadBetaal();renderBetaal()}
 
 // BESCHIKBAARHEID
 function adjT(n){totalN=Math.max(1,Math.min(99,totalN+n));document.getElementById('totalDisp').textContent=totalN}
 async function saveTotal(){const r=await api('/rest/v1/beschikbaarheid?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({totaal_nachten:totalN})});if(r.ok){toast('Opgeslagen ✓','ok');loadAvail();}else toast('Fout','err')}
-async function resetGeboekt(){if(!confirm('Teller resetten naar 0?'))return;await api('/rest/v1/beschikbaarheid?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({geboekte_nachten:0})});toast('Gereset ✓','ok');loadAvail()}
+async function resetGeboekt(){if(!confirm('Teller resetten?'))return;await api('/rest/v1/beschikbaarheid?id=eq.1',{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({geboekte_nachten:0})});toast('Gereset ✓','ok');loadAvail()}
 
 // MODALS
 function openM(id){document.getElementById(id).classList.add('open')}
 function closeM(id){document.getElementById(id).classList.remove('open')}
-document.querySelectorAll('.modal-ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')}));
-
-// TOAST
-function toast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(type?' '+type:'');setTimeout(()=>t.classList.remove('show'),3800)}
-</script>
-</body>
-</html>
+document.querySelectorAll('.modal-ov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remo
