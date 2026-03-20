@@ -89,15 +89,13 @@ body{background:var(--b);color:var(--w);font-family:var(--fb);font-weight:300;mi
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 
 /* VISUELE EDITOR */
-.editor-lay{display:grid;grid-template-columns:1fr 360px;flex:1;overflow:hidden;min-height:0}
-.site-preview{overflow-y:auto;background:#000}
+.editor-lay{display:grid;grid-template-columns:1fr 360px;flex:1;overflow:hidden;min-height:0;position:relative}
+.site-preview{overflow:hidden;background:#000;position:relative}
 /* Website secties in preview */
-.ws-nav-prev{background:rgba(10,10,10,.98);border-bottom:1px solid rgba(200,169,110,.12);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
-.ws-sectie{position:relative;cursor:default;transition:outline .15s}
-.ws-sectie:hover .potlood-knop{opacity:1}
-.ws-sectie.gekozen{outline:3px solid var(--g)}
-.potlood-knop{position:absolute;top:10px;right:10px;z-index:10;background:var(--g);color:var(--b);border:none;width:36px;height:36px;border-radius:50%;font-size:.9rem;cursor:pointer;opacity:.35;transition:opacity .2s,transform .2s;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4)}
-.ws-sectie:hover .potlood-knop,.ws-sectie.gekozen .potlood-knop,.potlood-knop:hover{opacity:1}
+/* Overlay potlood knoppen op de iframe */
+.overlay-potlood{position:absolute;right:14px;background:var(--g);color:var(--b);border:none;padding:7px 14px;font-family:var(--fb);font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;pointer-events:all;border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.5);transition:all .2s;white-space:nowrap;opacity:.75}
+.overlay-potlood:hover{opacity:1;transform:scale(1.05);background:var(--gl)}
+.overlay-potlood.actief{opacity:1;background:var(--gl);box-shadow:0 2px 16px rgba(200,169,110,.4)}
 /* Editor paneel rechts */
 .edit-paneel{overflow-y:auto;background:var(--bs);display:flex;flex-direction:column;border-left:1px solid rgba(200,169,110,.1)}
 .edit-kop{padding:16px 18px;border-bottom:1px solid rgba(200,169,110,.1);flex-shrink:0;background:var(--bc)}
@@ -341,101 +339,26 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
           </div>
         </div>
         <div class="editor-lay">
-          <!-- WEBSITE PREVIEW -->
+          <!-- WEBSITE PREVIEW - echte website in iframe -->
           <div class="site-preview">
-            <!-- Nav -->
-            <div class="ws-nav-prev">
-              <span style="font-family:var(--fd);font-size:.9rem;letter-spacing:.25em;color:var(--g);text-transform:uppercase">Secret<em style="font-style:italic;color:rgba(245,240,232,.5)">nights</em></span>
-              <div style="display:flex;gap:16px"><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">Mysterie</span><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">Arrangementen</span><span style="font-size:.46rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.38)">FAQ</span></div>
-              <span style="border:1px solid var(--g);color:var(--g);padding:4px 12px;font-size:.46rem;letter-spacing:.14em;text-transform:uppercase">Reserveer</span>
-            </div>
-            <!-- Hero -->
-            <div class="ws-sectie" id="ws-hero">
-              <button class="potlood-knop" onclick="kiesSectie('hero')">✏️</button>
-              <div style="background:linear-gradient(180deg,rgba(10,10,10,.5) 0%,rgba(10,10,10,.05) 45%,rgba(10,10,10,.92) 100%),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-V8-34-1.jpg') center/cover;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:36px 28px">
-                <span style="font-size:.44rem;letter-spacing:.38em;text-transform:uppercase;color:var(--g);margin-bottom:14px;display:block">Bijzondere Overnachtingen op het Water</span>
-                <h1 id="pv-hero-titel" style="font-family:var(--fd);font-size:clamp(1.6rem,4vw,3rem);font-weight:300;color:var(--w);line-height:1.05">Jouw <em style="font-style:italic;color:var(--g)">geheime</em> nacht begint hier</h1>
-                <p id="pv-hero-sub" style="font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.5);margin-top:10px;line-height:2">Een mysterieuze ligplek · Een privé-boot · Een beleving die je nooit vergeet</p>
-                <div style="display:flex;gap:8px;margin-top:18px;justify-content:center"><span style="background:var(--g);color:var(--b);padding:8px 20px;font-size:.5rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase" id="pv-hero-k1">Reserveer je Night</span><span style="border:1px solid rgba(245,240,232,.28);color:var(--w);padding:8px 20px;font-size:.5rem;letter-spacing:.16em;text-transform:uppercase" id="pv-hero-k2">Ontdek het Mysterie</span></div>
-              </div>
-            </div>
-            <!-- Counter -->
-            <div style="background:var(--g);padding:12px 28px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap">
-              <span style="font-size:.5rem;letter-spacing:.22em;text-transform:uppercase;color:var(--b);font-weight:600">Nog slechts</span>
-              <span id="pv-teller" style="font-family:var(--fd);font-size:2.4rem;font-weight:300;color:var(--b);line-height:1">—</span>
-              <span style="font-family:var(--fd);font-size:.8rem;font-style:italic;color:var(--b)">Secret Nights</span>
-            </div>
-            <!-- Intro -->
-            <div class="ws-sectie" id="ws-intro">
-              <button class="potlood-knop" onclick="kiesSectie('intro')">✏️</button>
-              <div style="background:#111;padding:44px 28px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center">
-                <div>
-                  <h2 id="pv-intro-titel" style="font-family:var(--fd);font-size:1.7rem;font-weight:300;color:var(--w);line-height:1.1;margin-bottom:14px">Jij kiest de nacht. <em style="font-style:italic;color:var(--g)">Wij kiezen de plek.</em></h2>
-                  <p id="pv-intro-t1" style="font-size:.64rem;color:var(--wd);line-height:2;margin-bottom:10px">Secretnights brengt je naar een geheime ligplek in de Nederlandse natuur.</p>
-                  <p id="pv-intro-t2" style="font-size:.64rem;color:var(--wd);line-height:2">Verwacht rust, ruimte en een uitzicht dat je adem beneemt.</p>
-                </div>
-                <div style="background:linear-gradient(135deg,rgba(26,18,8,.85),rgba(13,13,13,.85)),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-slaapbank-sfeer-uitzicht-natuur.jpg') center/cover;aspect-ratio:3/4;border:1px solid rgba(200,169,110,.14)"></div>
-              </div>
-            </div>
-            <!-- Features -->
-            <div class="ws-sectie" id="ws-features">
-              <button class="potlood-knop" onclick="kiesSectie('features')">✏️</button>
-              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,.12)">
-                <div style="background:#131313;padding:32px 24px;text-align:center"><div style="font-size:1.4rem;margin-bottom:12px">🌿</div><h3 id="pv-f1-titel" style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:8px">Natuur &amp; Rust</h3><p id="pv-f1-tekst" style="font-size:.62rem;line-height:1.9;color:var(--wd)">Wakker worden op het water, omringd door ongerepte natuur.</p></div>
-                <div style="background:#131313;padding:32px 24px;text-align:center"><div style="font-size:1.4rem;margin-bottom:12px">🛁</div><h3 id="pv-f2-titel" style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:8px">Wellness op het Water</h3><p id="pv-f2-tekst" style="font-size:.62rem;line-height:1.9;color:var(--wd)">Privé-sauna, massage of gewoon genieten.</p></div>
-                <div style="background:#131313;padding:32px 24px;text-align:center"><div style="font-size:1.4rem;margin-bottom:12px">🍽️</div><h3 id="pv-f3-titel" style="font-family:var(--fd);font-size:1.2rem;font-weight:300;margin-bottom:8px">Culinaire Ervaring</h3><p id="pv-f3-tekst" style="font-size:.62rem;line-height:1.9;color:var(--wd)">Een privé-kok bereidt een exclusief menu aan boord.</p></div>
-              </div>
-            </div>
-            <!-- Arrangementen -->
-            <div class="ws-sectie" id="ws-arrangementen">
-              <button class="potlood-knop" onclick="kiesSectie('arrangementen')">✏️</button>
-              <div style="background:#111;padding:40px 28px">
-                <div style="margin-bottom:28px"><span style="font-size:.5rem;letter-spacing:.38em;text-transform:uppercase;color:var(--g)">Selecteer jouw beleving</span><h2 style="font-family:var(--fd);font-size:1.9rem;font-weight:300;margin-top:6px">Kies je <em style="font-style:italic;color:var(--g)">arrangement</em></h2></div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(200,169,110,.1)">
-                  <div style="background:#131313;padding:32px;grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center">
-                    <div><div style="font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(200,169,110,.1)">01</div><h3 id="pv-dining-titel" style="font-family:var(--fd);font-size:1.4rem;font-weight:300;margin-bottom:8px"><em style="font-style:italic;color:var(--g)">Dining</em> Experience</h3><p id="pv-dining-tekst" style="font-size:.62rem;color:var(--wd);line-height:2;margin-bottom:12px">Een privé-kok neemt de culinaire beleving voor zijn rekening.</p><span id="pv-dining-prijs" style="font-family:var(--fd);font-size:.85rem;color:var(--gl)">Vanaf € 695 per nacht</span></div>
-                    <div style="background:linear-gradient(135deg,rgba(26,18,8,.8),rgba(13,13,13,.8)),url('https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-terras-strand-ontbijt.jpg') center/cover;aspect-ratio:1;border:1px solid rgba(200,169,110,.1)"></div>
-                  </div>
-                  <div style="background:#131313;padding:28px"><div style="font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(200,169,110,.1)">02</div><h3 id="pv-wellness-titel" style="font-family:var(--fd);font-size:1.4rem;font-weight:300;margin-bottom:8px">Natuurlijk <em style="font-style:italic;color:var(--g)">Wellness</em></h3><p id="pv-wellness-tekst" style="font-size:.62rem;color:var(--wd);line-height:2;margin-bottom:12px">Totale ontspanning op het water.</p><span id="pv-wellness-prijs" style="font-family:var(--fd);font-size:.85rem;color:var(--gl)">Vanaf € 450 per nacht</span></div>
-                  <div style="background:#131313;padding:28px"><div style="font-family:var(--fd);font-size:2.8rem;font-weight:300;color:rgba(200,169,110,.1)">03</div><h3 id="pv-sauna-titel" style="font-family:var(--fd);font-size:1.4rem;font-weight:300;margin-bottom:8px">Sauna <em style="font-style:italic;color:var(--g)">Boot</em></h3><p id="pv-sauna-tekst" style="font-size:.62rem;color:var(--wd);line-height:2;margin-bottom:12px">Privé-sauna midden in de natuur.</p><span id="pv-sauna-prijs" style="font-family:var(--fd);font-size:.85rem;color:var(--gl)">Vanaf € 550 per nacht</span></div>
-                </div>
-              </div>
-            </div>
-            <!-- Reviews -->
-            <div class="ws-sectie" id="ws-reviews">
-              <button class="potlood-knop" onclick="kiesSectie('reviews')">✏️</button>
-              <div style="background:#111;padding:40px 28px">
-                <h2 style="font-family:var(--fd);font-size:1.9rem;font-weight:300;margin-bottom:28px">Wat gasten <em style="font-style:italic;color:var(--g)">zeggen</em></h2>
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(200,169,110,.08)">
-                  <div style="background:#131313;padding:32px 26px"><div style="color:var(--g);font-size:.6rem;margin-bottom:12px">★ ★ ★ ★ ★</div><p id="pv-r1" style="font-family:var(--fd);font-size:.95rem;font-style:italic;line-height:1.75;margin-bottom:14px">"De locatie nam onze adem weg."</p><span id="pv-r1n" style="font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Sarah &amp; Tom</span></div>
-                  <div style="background:#131313;padding:32px 26px"><div style="color:var(--g);font-size:.6rem;margin-bottom:12px">★ ★ ★ ★ ★</div><p id="pv-r2" style="font-family:var(--fd);font-size:.95rem;font-style:italic;line-height:1.75;margin-bottom:14px">"De privé-kok was een openbaring."</p><span id="pv-r2n" style="font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Familie De Groot</span></div>
-                  <div style="background:#131313;padding:32px 26px"><div style="color:var(--g);font-size:.6rem;margin-bottom:12px">★ ★ ★ ★ ★</div><p id="pv-r3" style="font-family:var(--fd);font-size:.95rem;font-style:italic;line-height:1.75;margin-bottom:14px">"Sauna bij zonsondergang, water in."</p><span id="pv-r3n" style="font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--g)">— Charlotte V.</span></div>
-                </div>
-              </div>
-            </div>
-            <!-- Quote -->
-            <div class="ws-sectie" id="ws-quote">
-              <button class="potlood-knop" onclick="kiesSectie('quote')">✏️</button>
-              <div style="background:var(--g);padding:44px 28px;text-align:center"><blockquote id="pv-quote" style="font-family:var(--fd);font-size:clamp(1.2rem,2.5vw,1.9rem);font-style:italic;font-weight:300;color:var(--b);line-height:1.4;max-width:600px;margin:0 auto">"Niet weten waar je naartoe gaat is deel van de magie."</blockquote><cite style="display:block;margin-top:14px;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,10,10,.45);font-style:normal">— Secretnights</cite></div>
-            </div>
-            <!-- CTA -->
-            <div class="ws-sectie" id="ws-cta">
-              <button class="potlood-knop" onclick="kiesSectie('cta')">✏️</button>
-              <div style="background:var(--b);padding:56px 28px;text-align:center">
-                <h2 id="pv-cta-titel" style="font-family:var(--fd);font-size:1.8rem;font-weight:300;margin-bottom:10px">Klaar voor jouw <em style="font-style:italic;color:var(--g)">geheime nacht?</em></h2>
-                <p id="pv-cta-tekst" style="font-size:.66rem;color:var(--wd);line-height:2;max-width:440px;margin:0 auto 24px">Slechts 12 Secret Nights per seizoen beschikbaar.</p>
-                <span style="background:var(--g);color:var(--b);padding:10px 26px;font-size:.54rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase">Reserveer Nu</span>
-              </div>
-            </div>
-            <!-- Contact -->
-            <div class="ws-sectie" id="ws-contact">
-              <button class="potlood-knop" onclick="kiesSectie('contact')">✏️</button>
-              <div style="background:#111;padding:16px 28px;border-top:1px solid rgba(200,169,110,.12)">
-                <p style="font-size:.6rem;color:rgba(245,240,232,.36);line-height:2.2">📞 <span id="pv-tel" style="color:var(--g)">06 300 66 444</span> &nbsp;·&nbsp; ✉️ <span id="pv-email" style="color:var(--g)">info[at]secretnights.nl</span> &nbsp;·&nbsp; 📍 <span id="pv-adres" style="color:var(--g)">Kazernestraat, Oss</span></p>
-              </div>
+            <!-- Iframe met echte website -->
+            <iframe id="site-iframe" src="index.html" style="width:100%;height:100%;border:none;display:block"></iframe>
+            <!-- Potlood overlay knoppen bovenop de iframe -->
+            <div id="potlood-overlay" style="position:absolute;inset:0;pointer-events:none;z-index:5">
+              <!-- Elke sectie krijgt een potlood op de juiste positie -->
+              <!-- pointer-events:none op de overlay zelf zodat de iframe klikbaar blijft -->
+              <!-- Alleen de potlood knoppen zelf hebben pointer-events:all -->
+              <button class="overlay-potlood" style="top:120px" onclick="kiesSectie('hero')" title="Hero bewerken">✏️ Hero</button>
+              <button class="overlay-potlood" style="top:420px" onclick="kiesSectie('intro')" title="Mysterie sectie bewerken">✏️ Mysterie</button>
+              <button class="overlay-potlood" style="top:700px" onclick="kiesSectie('features')" title="Features bewerken">✏️ Features</button>
+              <button class="overlay-potlood" style="top:1000px" onclick="kiesSectie('arrangementen')" title="Arrangementen bewerken">✏️ Arrangementen</button>
+              <button class="overlay-potlood" style="top:1600px" onclick="kiesSectie('reviews')" title="Reviews bewerken">✏️ Reviews</button>
+              <button class="overlay-potlood" style="top:1950px" onclick="kiesSectie('quote')" title="Quote bewerken">✏️ Quote</button>
+              <button class="overlay-potlood" style="top:2150px" onclick="kiesSectie('cta')" title="CTA bewerken">✏️ Call-to-action</button>
+              <button class="overlay-potlood" style="top:2450px" onclick="kiesSectie('contact')" title="Contactgegevens bewerken">✏️ Contact</button>
             </div>
           </div>
-          <!-- EDIT PANEEL -->
+                    <!-- EDIT PANEEL -->
           <div class="edit-paneel">
             <div class="edit-kop"><h3>Teksten <em>bewerken</em></h3><p id="edit-kop-sub">Klik op ✏️ om een sectie te bewerken</p></div>
             <div class="edit-body" id="edit-body">
@@ -991,9 +914,9 @@ function updatePreview() {
 
 function kiesSectie(key) {
   gekozenSectie = key;
-  document.querySelectorAll('.ws-sectie').forEach(function(el) { el.classList.remove('gekozen'); });
-  var blok = document.getElementById('ws-' + key);
-  if (blok) { blok.classList.add('gekozen'); blok.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  // Markeer het actieve potlood knopje
+  document.querySelectorAll('.overlay-potlood').forEach(function(el) { el.classList.remove('actief'); });
+  event.target.classList.add('actief');
   var def = SECTIE_DEFINITIES[key];
   if (!def) return;
   document.getElementById('edit-kop-sub').textContent = def.label;
