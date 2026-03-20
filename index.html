@@ -18,7 +18,7 @@ a{cursor:none}
 /* CURSOR */
 .cursor{position:fixed;width:10px;height:10px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s}
 .cursor-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(200,169,110,.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
-@media(pointer:coarse){.cursor,.cursor-ring{display:none}body{cursor:auto}a,button{cursor:pointer}}
+@media(pointer:coarse){.cursor,.cursor-ring{display:none}body,a{cursor:auto}button{cursor:pointer}}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:24px 60px;background:linear-gradient(to bottom,rgba(10,10,10,.98),transparent);transition:all .4s}
@@ -30,15 +30,11 @@ nav.scrolled{background:rgba(10,10,10,.98);border-bottom:1px solid rgba(200,169,
 .nav-links a:hover{color:var(--gold)}
 .nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 26px;font-family:var(--fb);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;transition:all .3s;text-decoration:none}
 .nav-cta:hover{background:var(--gold);color:var(--black)}
-
-/* HAMBURGER */
-.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:none}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;cursor:pointer}
 .hamburger span{width:24px;height:1px;background:var(--white);transition:all .3s;display:block}
 .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
 .hamburger.active span:nth-child(2){opacity:0}
 .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
-
-/* MOBILE NAV */
 .mobile-nav{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,.98);z-index:190;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;transform:translateX(100%);transition:transform .4s ease}
 .mobile-nav.open{transform:translateX(0)}
 .mobile-nav a{font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--white);text-decoration:none;letter-spacing:.1em;transition:color .3s}
@@ -184,14 +180,16 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
 .footer-bottom{border-top:1px solid rgba(200,169,110,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .footer-bottom p{font-size:.58rem;color:rgba(245,240,232,.18)}
 
-/* WABT */
-.wa-btn{position:fixed;bottom:24px;right:24px;z-index:300;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.4);text-decoration:none;transition:transform .3s,box-shadow .3s}
+/* WHATSAPP */
+.wa-btn{position:fixed;bottom:24px;right:24px;z-index:300;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.4);text-decoration:none;transition:transform .3s}
 .wa-btn:hover{transform:scale(1.1)}
 .wa-btn svg{width:26px;height:26px;fill:white}
 
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .85s ease,transform .85s ease}
+/* REVEAL - zichtbaar by default, animatie als bonus */
+.reveal{opacity:1;transform:translateY(0);transition:opacity .85s ease,transform .85s ease}
+.reveal.hidden{opacity:0;transform:translateY(32px)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
 /* TOAST */
@@ -199,25 +197,25 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
 .toast.show{transform:translateX(0)}
 .toast.error{border-color:#e05252;color:#e05252}
 
-/* COOKIE BANNER */
+/* COOKIE */
 .cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:800;background:rgba(17,17,17,.98);border-top:1px solid rgba(200,169,110,.2);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;transform:translateY(100%);transition:transform .5s ease;flex-wrap:wrap}
 .cookie-banner.show{transform:translateY(0)}
 .cookie-text{font-size:.7rem;color:var(--wd);line-height:1.8;max-width:600px}
 .cookie-text a{color:var(--gold);text-decoration:none}
 .cookie-acts{display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap}
-.cookie-acc{background:var(--gold);color:var(--black);border:none;padding:10px 22px;font-family:var(--fb);font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:none;transition:all .3s}
+.cookie-acc{background:var(--gold);color:var(--black);border:none;padding:10px 22px;font-family:var(--fb);font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .cookie-acc:hover{background:var(--gl)}
-.cookie-dec{background:transparent;color:var(--wd);border:1px solid rgba(245,240,232,.2);padding:10px 22px;font-family:var(--fb);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;cursor:none;transition:all .3s}
+.cookie-dec{background:transparent;color:var(--wd);border:1px solid rgba(245,240,232,.2);padding:10px 22px;font-family:var(--fb);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .cookie-dec:hover{border-color:var(--gold);color:var(--gold)}
 
-/* ===== BOOKING MODAL ===== */
+/* BOOKING MODAL */
 .b-ov{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;background:rgba(10,10,10,.94);backdrop-filter:blur(12px);padding:16px}
 .b-ov.open{display:flex}
 .b-modal{background:var(--bs);border:1px solid rgba(200,169,110,.22);width:100%;max-width:880px;max-height:92vh;overflow-y:auto;position:relative;animation:fadeUp .4s ease}
-.mh{padding:32px 44px 0;border-bottom:1px solid rgba(200,169,110,.12);display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:22px}
+.mh{padding:32px 44px 22px;border-bottom:1px solid rgba(200,169,110,.12);display:flex;justify-content:space-between;align-items:flex-start}
 .mtitle{font-family:var(--fd);font-size:2rem;font-weight:300}
 .mtitle em{font-style:italic;color:var(--gold)}
-.mclose{background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold);width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:none;font-size:.95rem;transition:all .3s;flex-shrink:0}
+.mclose{background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold);width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.95rem;transition:all .3s;flex-shrink:0}
 .mclose:hover{background:var(--gold);color:var(--black)}
 .mb{padding:32px 44px 44px}
 
@@ -230,8 +228,6 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
 .step.active .slbl{color:var(--gold)}
 .sline{flex:1;height:1px;background:rgba(200,169,110,.15);margin:0 8px;transition:background .4s;min-width:10px}
 .step.done .sline{background:var(--gold)}
-
-/* PANELS */
 .panel{display:none}
 .panel.active{display:block}
 .ptitle{font-family:var(--fd);font-size:1.55rem;font-weight:300;margin-bottom:6px}
@@ -239,7 +235,7 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
 
 /* BOAT CARDS */
 .boat-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.boat-card{border:1px solid rgba(200,169,110,.18);transition:all .35s;position:relative;overflow:hidden;background:var(--bc)}
+.boat-card{border:1px solid rgba(200,169,110,.18);transition:all .35s;position:relative;overflow:hidden;background:var(--bc);cursor:pointer}
 .boat-card.sel{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
 .bcp{height:190px;overflow:hidden}
 .bcp img{width:100%;height:100%;object-fit:cover;filter:brightness(.34) contrast(1.28) saturate(.5);transition:filter .4s}
@@ -253,7 +249,7 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
 
 /* PKG CARDS */
 .pkg-cards{display:grid;gap:9px}
-.pkg-card{border:1px solid rgba(200,169,110,.18);padding:22px 26px;transition:all .3s;display:grid;grid-template-columns:1fr auto;align-items:center;gap:18px;background:var(--bc)}
+.pkg-card{border:1px solid rgba(200,169,110,.18);padding:22px 26px;transition:all .3s;display:grid;grid-template-columns:1fr auto;align-items:center;gap:18px;background:var(--bc);cursor:pointer}
 .pkg-card.sel{border-color:var(--gold);background:#0e0c08}
 .pkg-card:hover{background:#0b0907}
 .pkg-card h3{font-family:var(--fd);font-size:1.32rem;font-weight:300;margin-bottom:5px}
@@ -287,24 +283,22 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
 .sr.total .sl2{color:var(--gold);font-weight:600}
 .sr.total .sv{font-family:var(--fd);font-size:1.45rem;color:var(--gold)}
 
-/* PAY */
+/* PAYMENT */
 .pay-methods{display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap}
-.pm{border:1px solid rgba(200,169,110,.2);padding:10px 16px;font-size:.68rem;color:var(--wd);transition:all .3s;display:flex;align-items:center;gap:6px;background:var(--bc);cursor:none}
+.pm{border:1px solid rgba(200,169,110,.2);padding:10px 16px;font-size:.68rem;color:var(--wd);transition:all .3s;display:flex;align-items:center;gap:6px;background:var(--bc);cursor:pointer}
 .pm.active{border-color:var(--gold);color:var(--gold);background:#0e0c08}
 .ideal-banks{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:18px}
-.bb{border:1px solid rgba(200,169,110,.15);padding:10px;text-align:center;cursor:none;font-size:.64rem;color:var(--wd);transition:all .3s;background:var(--bc)}
+.bb{border:1px solid rgba(200,169,110,.15);padding:10px;text-align:center;cursor:pointer;font-size:.64rem;color:var(--wd);transition:all .3s;background:var(--bc)}
 .bb:hover,.bb.sel{border-color:var(--gold);color:var(--gold);background:rgba(200,169,110,.05)}
 .terms-row{display:flex;align-items:flex-start;gap:10px;margin-top:16px;padding:13px 16px;border:1px solid rgba(200,169,110,.12);background:rgba(200,169,110,.02)}
 
 /* NAV BTNS */
 .mnav{display:flex;justify-content:space-between;align-items:center;margin-top:28px;padding-top:22px;border-top:1px solid rgba(200,169,110,.1)}
-.btn-back{background:transparent;border:1px solid rgba(200,169,110,.24);color:var(--wd);padding:11px 24px;font-family:var(--fb);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;cursor:none;transition:all .3s}
+.btn-back{background:transparent;border:1px solid rgba(200,169,110,.24);color:var(--wd);padding:11px 24px;font-family:var(--fb);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .btn-back:hover{border-color:var(--gold);color:var(--gold)}
-.btn-next{background:var(--gold);color:var(--black);padding:11px 30px;font-family:var(--fb);font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;border:none;cursor:none;transition:all .3s}
+.btn-next{background:var(--gold);color:var(--black);padding:11px 30px;font-family:var(--fb);font-size:.58rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s}
 .btn-next:hover:not(:disabled){background:var(--gl);transform:translateY(-1px)}
 .btn-next:disabled{opacity:.32;cursor:not-allowed;transform:none}
-
-/* LOADING SPINNER */
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading::after{content:'';display:inline-block;width:12px;height:12px;border:2px solid rgba(10,10,10,.3);border-top-color:var(--black);border-radius:50%;animation:spin .6s linear infinite;margin-left:8px;vertical-align:middle}
 
@@ -316,95 +310,35 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
 .succ-det{background:rgba(200,169,110,.07);border:1px solid rgba(200,169,110,.18);padding:20px;margin:22px 0;text-align:left}
 .succ-det p{font-size:.71rem;color:var(--gold);letter-spacing:.07em;line-height:2.1}
 
-/* =========== RESPONSIVE =========== */
-@media(max-width:1024px){
-  nav{padding:20px 36px}
-  nav.scrolled{padding:14px 36px}
-  section{padding:80px 36px}
-  .arrange-section{padding:80px 36px}
-}
+/* RESPONSIVE */
+@media(max-width:1024px){nav{padding:20px 36px}nav.scrolled{padding:14px 36px}section{padding:80px 36px}.arrange-section{padding:80px 36px}}
 @media(max-width:768px){
-  /* Nav */
-  nav{padding:18px 20px}
-  nav.scrolled{padding:14px 20px}
-  .nav-links{display:none}
-  .hamburger{display:flex}
-  .nav-cta{display:none}
-
-  /* Layout */
-  section{padding:64px 20px}
-  .arrange-section{padding:64px 20px}
-  .counter-strip{padding:18px 20px;gap:14px}
-  .cdiv{width:40px;height:1px}
-  .cdesc{display:none}
-
-  /* Hero */
+  nav{padding:18px 20px}nav.scrolled{padding:14px 20px}
+  .nav-links{display:none}.hamburger{display:flex}.nav-cta{display:none}
+  section{padding:64px 20px}.arrange-section{padding:64px 20px}
+  .counter-strip{padding:18px 20px;gap:14px}.cdiv{width:40px;height:1px}.cdesc{display:none}
   .hero h1{font-size:clamp(2.6rem,10vw,4.5rem)}
   .hero-sub{font-size:.62rem;letter-spacing:.15em}
-  .hero-acts{gap:10px}
-  .btn-p,.btn-g{padding:12px 28px;font-size:.6rem}
-
-  /* Intro */
-  .intro{grid-template-columns:1fr;gap:28px}
-  .intro-frame .photo{aspect-ratio:16/9}
-
-  /* Features */
-  .features{grid-template-columns:1fr}
-  .fp{height:180px}
-
-  /* Gallery */
-  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
-  .gi.wide,.gi.tall{grid-column:auto;grid-row:auto}
-  .gi{height:180px}
-  .gi img{height:100%}
-
-  /* Arrange */
+  .hero-acts{gap:10px}.btn-p,.btn-g{padding:12px 28px;font-size:.6rem}
+  .intro{grid-template-columns:1fr;gap:28px}.intro-frame .photo{aspect-ratio:16/9}
+  .features{grid-template-columns:1fr}.fp{height:180px}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}.gi.wide,.gi.tall{grid-column:auto;grid-row:auto}.gi{height:180px}.gi img{height:100%}
   .arrange-header{grid-template-columns:1fr;gap:16px;margin-bottom:40px}
-  .arrange-grid{grid-template-columns:1fr}
-  .ac.feat{grid-column:1;display:flex;flex-direction:column;gap:24px}
-  .aphoto{aspect-ratio:16/9}
-  .ac{padding:32px 24px}
-
-  /* Exp strip */
+  .arrange-grid{grid-template-columns:1fr}.ac.feat{grid-column:1;display:flex;flex-direction:column;gap:24px}.aphoto{aspect-ratio:16/9}.ac{padding:32px 24px}
   .exp-strip{grid-template-columns:1fr 1fr}
-
-  /* Reviews */
   .reviews-grid{grid-template-columns:1fr}
-
-  /* Footer */
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
-
-  /* CTA */
   .cta-acts{flex-direction:column;align-items:center}
-
-  /* Cookie banner */
-  .cookie-banner{padding:16px 20px;flex-direction:column;align-items:flex-start}
-  .cookie-acts{width:100%}
-  .cookie-acc,.cookie-dec{flex:1;text-align:center;padding:10px}
-
-  /* Modal */
-  .b-ov{padding:0;align-items:flex-end}
-  .b-modal{max-height:95vh;border-radius:0;border-left:none;border-right:none;border-bottom:none}
-  .mh{padding:22px 20px 18px}
-  .mb{padding:22px 20px 32px}
-  .mtitle{font-size:1.6rem}
+  .cookie-banner{padding:16px 20px;flex-direction:column;align-items:flex-start}.cookie-acts{width:100%}.cookie-acc,.cookie-dec{flex:1;text-align:center;padding:10px}
+  .b-ov{padding:0;align-items:flex-end}.b-modal{max-height:95vh;border-radius:0;border-left:none;border-right:none;border-bottom:none}
+  .mh{padding:22px 20px 18px}.mb{padding:22px 20px 32px}.mtitle{font-size:1.6rem}
   .boat-cards{grid-template-columns:1fr}
-  .pkg-card{grid-template-columns:1fr;gap:12px}
-  .pprice{text-align:left}
-  .pchk{margin-left:0}
-  .fgrid{grid-template-columns:1fr}
-  .fg.full{grid-column:1}
+  .pkg-card{grid-template-columns:1fr;gap:12px}.pprice{text-align:left}.pchk{margin-left:0}
+  .fgrid{grid-template-columns:1fr}.fg.full{grid-column:1}
   .ideal-banks{grid-template-columns:repeat(2,1fr)}
-  .steps{gap:0}
   .slbl{display:none}
 }
-@media(max-width:400px){
-  .hero h1{font-size:2.4rem}
-  .gallery-grid{grid-template-columns:1fr}
-  .gi{height:220px}
-  .exp-strip{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-}
+@media(max-width:400px){.hero h1{font-size:2.4rem}.gallery-grid{grid-template-columns:1fr}.gi{height:220px}.exp-strip{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -412,12 +346,12 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- WhatsApp -->
+<!-- WHATSAPP -->
 <a href="https://wa.me/310630066444" target="_blank" class="wa-btn" title="WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- COOKIE BANNER -->
+<!-- COOKIE -->
 <div class="cookie-banner" id="cookieBanner">
   <p class="cookie-text">🍪 Wij gebruiken cookies om jouw ervaring te verbeteren en onze website te analyseren. Lees meer in ons <a href="#">privacybeleid</a>.</p>
   <div class="cookie-acts">
@@ -475,10 +409,10 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
   <div class="cdiv"></div>
   <span class="cl" style="font-family:var(--fd);font-size:1.15rem;font-weight:300;font-style:italic">Secret Nights</span>
   <div class="cdiv"></div>
-  <p class="cdesc">Slechts een handvol nachten per seizoen.</p>
+  <p class="cdesc">Slechts een handvol nachten per seizoen beschikbaar.</p>
 </div>
 
-<!-- INTRO / MYSTERIE -->
+<!-- INTRO -->
 <section class="intro" id="mysterie">
   <div class="reveal">
     <span class="section-label">Het Mysterie</span>
@@ -486,7 +420,7 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
     <div class="gold-line"></div>
     <p>Secretnights brengt je naar een geheime ligplek ergens in de Nederlandse natuur. Waar precies? Dat verklappen we pas nadat je hebt geboekt.</p>
     <p>Verwacht rust, ruimte en een uitzicht dat je adem beneemt. Een privé-boot, volledig uitgerust — alleen voor jou.</p>
-    <p style="font-size:.68rem;color:rgba(245,240,232,.34);font-style:italic;line-height:2;margin-top:4px">📞 06 300 66 444 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6801060e07281b0d0b1a0d1c06010f001c1b460604">[email&#160;protected]</a> · Ook via WhatsApp</p>
+    <p style="font-size:.68rem;color:rgba(245,240,232,.34);font-style:italic;line-height:2;margin-top:4px">📞 06 300 66 444 · info@secretnights.nl · Ook via WhatsApp</p>
     <a href="#" class="btn-p openB" style="margin-top:20px">Plan je Secret Night</a>
   </div>
   <div class="intro-frame reveal">
@@ -501,19 +435,19 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
     <div class="fp photo"><img src="https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-Vaargebied-lith-en-de-bommelerwaard.jpg" alt="Natuur"/><div class="ov"></div></div>
     <span style="font-size:1.6rem;margin-bottom:18px;display:block">🌿</span>
     <h3>Natuur & Rust</h3>
-    <p>Wakker worden op het water, omringd door ongerepte natuur. Geen wifi, geen prikkels — alleen stilte.</p>
+    <p>Wakker worden op het water, omringd door ongerepte natuur. Geen wifi, geen prikkels — alleen stilte en ruimte.</p>
   </div>
-  <div class="fc reveal" style="transition-delay:.15s">
+  <div class="fc reveal">
     <div class="fp photo"><img src="https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-uitzicht-badkamer-natuur.jpg" alt="Wellness"/><div class="ov"></div></div>
     <span style="font-size:1.6rem;margin-bottom:18px;display:block">🛁</span>
     <h3>Wellness op het Water</h3>
     <p>Privé-sauna, massage in de open lucht of gewoon genieten. Jij bepaalt hoe luxe jouw nacht wordt.</p>
   </div>
-  <div class="fc reveal" style="transition-delay:.3s">
+  <div class="fc reveal">
     <div class="fp photo"><img src="https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-terras-strand-ontbijt.jpg" alt="Dining"/><div class="ov"></div></div>
     <span style="font-size:1.6rem;margin-bottom:18px;display:block">🍽️</span>
     <h3>Culinaire Ervaring</h3>
-    <p>Een privé-kok bereidt een exclusief menu aan boord. Vers, lokaal en onvergetelijk lekker.</p>
+    <p>Een privé-kok bereidt een exclusief menu aan boord. Vers, lokaal en onvergetelijk lekker bij zonsondergang.</p>
   </div>
 </div>
 
@@ -550,12 +484,12 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
     <div class="ac reveal">
       <div class="anum">02</div>
       <h3>Natuurlijk<br/><em>Wellness</em></h3>
-      <p>Totale ontspanning op het water. Natuur, rust en optionele wellnessbelevenissen op maat.</p>
+      <p>Totale ontspanning op het water. Natuur, rust en optionele wellnessbelevenissen volledig op maat.</p>
       <div class="tags"><span class="tag">Rustprogramma</span><span class="tag">Natuur</span><span class="tag opt">+ Massage optioneel</span></div>
       <span class="aprice">Vanaf € 450 per nacht</span><br/>
       <a href="#" class="acta openB">Reserveer →</a>
     </div>
-    <div class="ac reveal" style="transition-delay:.2s">
+    <div class="ac reveal">
       <div class="anum">03</div>
       <h3>Sauna<br/><em>Boot</em></h3>
       <p>Een exclusieve privé-sauna midden in de natuur. Stap direct van de sauna het koele water in.</p>
@@ -568,10 +502,10 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
 
 <!-- EXP STRIP -->
 <div class="exp-strip">
-  <div class="ei"><span style="font-size:1.6rem;display:block">📍</span><h4>Mysterie Locatie</h4><p>De exacte ligplek ontvang je pas na boeking.</p></div>
-  <div class="ei"><span style="font-size:1.6rem;display:block">🔒</span><h4>Volledig Privé</h4><p>Jouw boot, jouw nacht. Geen andere gasten.</p></div>
-  <div class="ei"><span style="font-size:1.6rem;display:block">✨</span><h4>Luxe Uitgerust</h4><p>Luxe badkamer, Nespresso, BBQ en terras.</p></div>
-  <div class="ei"><span style="font-size:1.6rem;display:block">🌊</span><h4>Geen Vaarbewijs</h4><p>De boot ligt gereed op de geheime locatie.</p></div>
+  <div class="ei"><span style="font-size:1.6rem;display:block">📍</span><h4>Mysterie Locatie</h4><p>De exacte ligplek ontvang je pas na boeking per e-mail.</p></div>
+  <div class="ei"><span style="font-size:1.6rem;display:block">🔒</span><h4>Volledig Privé</h4><p>Jouw boot, jouw nacht. Geen andere gasten in de buurt.</p></div>
+  <div class="ei"><span style="font-size:1.6rem;display:block">✨</span><h4>Luxe Uitgerust</h4><p>Luxe badkamer, Nespresso, BBQ en ruim terras.</p></div>
+  <div class="ei"><span style="font-size:1.6rem;display:block">🌊</span><h4>Geen Vaarbewijs</h4><p>De boot ligt gereed op de geheime locatie voor je.</p></div>
 </div>
 
 <!-- QUOTE -->
@@ -585,9 +519,21 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
   <span class="section-label reveal">Ervaringen</span>
   <h2 class="section-title reveal">Wat gasten <em>zeggen</em></h2>
   <div class="reviews-grid">
-    <div class="rvc reveal"><div class="stars">★ ★ ★ ★ ★</div><p>"De locatie nam onze adem weg. We wisten niet wat we verwachtten — en dat maakte het zo bijzonder."</p><span class="auth">— Sarah & Tom</span></div>
-    <div class="rvc reveal" style="transition-delay:.15s"><div class="stars">★ ★ ★ ★ ★</div><p>"De privé-kok was een openbaring. Het eten, het uitzicht, de stilte... dit is geen vakantie, dit is een beleving."</p><span class="auth">— Familie De Groot</span></div>
-    <div class="rvc reveal" style="transition-delay:.3s"><div class="stars">★ ★ ★ ★ ★</div><p>"Sauna bij zonsondergang, water in, sterren kijken. Kan het leven mooier? Nee."</p><span class="auth">— Charlotte V.</span></div>
+    <div class="rvc reveal">
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <p>"De locatie nam onze adem weg. We wisten niet wat we verwachtten — en dat maakte het zo bijzonder."</p>
+      <span class="auth">— Sarah & Tom</span>
+    </div>
+    <div class="rvc reveal">
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <p>"De privé-kok was een openbaring. Het eten, het uitzicht, de stilte... dit is geen vakantie, dit is een beleving."</p>
+      <span class="auth">— Familie De Groot</span>
+    </div>
+    <div class="rvc reveal">
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <p>"Sauna bij zonsondergang, water in, sterren kijken. Kan het leven mooier? Absoluut niet."</p>
+      <span class="auth">— Charlotte V.</span>
+    </div>
   </div>
 </section>
 
@@ -596,7 +542,7 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
   <div class="cta-inner">
     <span class="section-label reveal">Jouw Secret Night</span>
     <h2 class="section-title reveal">Klaar voor jouw<br/><em>geheime nacht?</em></h2>
-    <p class="reveal">Slechts <strong id="ctaNum" style="color:var(--gold)">12</strong> Secret Nights per seizoen. Kies je arrangement en ontvang de geheime locatie in je mailbox.</p>
+    <p class="reveal">Nog slechts <strong id="ctaNum" style="color:var(--gold)">12</strong> Secret Nights dit seizoen beschikbaar. Kies je arrangement en ontvang de geheime locatie in je mailbox.</p>
     <div class="cta-acts reveal">
       <a href="#" class="btn-p openB">Reserveer Nu</a>
       <a href="tel:0630066444" class="btn-g">06 300 66 444</a>
@@ -611,14 +557,23 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
       <div class="f-logo">Secret<span>nights</span></div>
       <p class="f-tag">Bijzondere overnachtingen op het water. Een mysterieuze ligplek, volledig privé — ergens in de Nederlandse natuur.</p>
     </div>
-    <div class="f-col"><h5>Arrangementen</h5><ul><li>Dining Experience</li><li>Natuurlijk Wellness</li><li>Sauna Boot</li><li>Op Maat</li></ul></div>
-    <div class="f-col"><h5>Informatie</h5><ul><li><a href="over-ons.html">Over ons</a></li><li><a href="faq.html">FAQ</a></li><li><a href="#">Privacybeleid</a></li><li><a href="#">Algemene Voorwaarden</a></li></ul></div>
-    <div class="f-col"><h5>Contact</h5><ul>
-      <li><a href="/cdn-cgi/l/email-protection#1d74737b725d6e787e6f786973747a75696e337371"><span class="__cf_email__" data-cfemail="0e676068614e7d6b6d7c6b7a606769667a7d206062">[email&#160;protected]</span></a></li>
-      <li><a href="tel:0630066444">06 300 66 444</a></li>
-      <li><a href="https://wa.me/310630066444">WhatsApp</a></li>
-      <li>Kazernestraat, Oss</li>
-    </ul></div>
+    <div class="f-col">
+      <h5>Arrangementen</h5>
+      <ul><li>Dining Experience</li><li>Natuurlijk Wellness</li><li>Sauna Boot</li><li>Op Maat</li></ul>
+    </div>
+    <div class="f-col">
+      <h5>Informatie</h5>
+      <ul><li><a href="over-ons.html">Over ons</a></li><li><a href="faq.html">FAQ</a></li><li><a href="#">Privacybeleid</a></li><li><a href="#">Algemene Voorwaarden</a></li></ul>
+    </div>
+    <div class="f-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:info@secretnights.nl">info@secretnights.nl</a></li>
+        <li><a href="tel:0630066444">06 300 66 444</a></li>
+        <li><a href="https://wa.me/310630066444">WhatsApp</a></li>
+        <li>Kazernestraat, Oss</li>
+      </ul>
+    </div>
   </div>
   <div class="footer-bottom">
     <p>© 2026 Secretnights — Bijzondere Overnachtingen op het Water</p>
@@ -647,26 +602,34 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
         <div class="step"><div class="sdot">4</div><span class="slbl">Betaling</span></div>
       </div>
 
-      <!-- P1 -->
+      <!-- STAP 1 - BOOT -->
       <div class="panel active" id="p1">
         <p class="ptitle">Kies je <em style="font-style:italic;color:var(--gold)">houseboat</em></p>
         <p class="psub">Beide boten vertrekken vanuit Noord-Brabant. De exacte geheime ligplek ontvang je na boeking.</p>
         <div class="boat-cards">
           <div class="boat-card" data-boat="nature-one" onclick="selBoat(this)">
             <div class="bcp"><img src="https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-V8-34-1.jpg" alt="Nature One"/></div>
-            <div class="bcb"><h3>Nature <em style="font-style:italic;color:var(--gold)">One</em></h3><p>Door de Biesbosch — kronkelende kreken en rijke biodiversiteit.</p><span class="from">📍 Veen, Noord-Brabant · 2–6 pers.</span></div>
+            <div class="bcb">
+              <h3>Nature <em style="font-style:italic;color:var(--gold)">One</em></h3>
+              <p>Door de Biesbosch — kronkelende kreken en rijke biodiversiteit.</p>
+              <span class="from">📍 Veen, Noord-Brabant · 2–6 pers.</span>
+            </div>
             <div class="sbadge">✓ Geselecteerd</div>
           </div>
           <div class="boat-card" data-boat="nature-two" onclick="selBoat(this)">
             <div class="bcp"><img src="https://holidayhouseboats.nl/wp-content/uploads/2025/05/HolidayHouseBoats-zelf-varen-geen-vaarbewijs.jpg" alt="Nature Two"/></div>
-            <div class="bcb"><h3>Nature <em style="font-style:italic;color:var(--gold)">Two</em></h3><p>Door de Bommelerwaard — rijke cultuur en ongerepte natuur.</p><span class="from">📍 Lith, Noord-Brabant · 2–8 pers.</span></div>
+            <div class="bcb">
+              <h3>Nature <em style="font-style:italic;color:var(--gold)">Two</em></h3>
+              <p>Door de Bommelerwaard — rijke cultuur en ongerepte natuur.</p>
+              <span class="from">📍 Lith, Noord-Brabant · 2–8 pers.</span>
+            </div>
             <div class="sbadge">✓ Geselecteerd</div>
           </div>
         </div>
         <div class="mnav"><div></div><button class="btn-next" id="n1" onclick="goP(2)" disabled>Volgende →</button></div>
       </div>
 
-      <!-- P2 -->
+      <!-- STAP 2 - PAKKET -->
       <div class="panel" id="p2">
         <p class="ptitle">Kies je <em style="font-style:italic;color:var(--gold)">arrangement</em></p>
         <p class="psub">Volledig privé, inclusief overnachting. Massage altijd optioneel bij te boeken.</p>
@@ -691,7 +654,7 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
         <div class="mnav"><button class="btn-back" onclick="goP(1)">← Terug</button><button class="btn-next" id="n2" onclick="goP(3)" disabled>Volgende →</button></div>
       </div>
 
-      <!-- P3 -->
+      <!-- STAP 3 - GEGEVENS -->
       <div class="panel" id="p3">
         <p class="ptitle">Jouw <em style="font-style:italic;color:var(--gold)">gegevens</em></p>
         <p class="psub">We selecteren de dichtstbijzijnde locatie op basis van je postcode.</p>
@@ -716,7 +679,7 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
         <div class="mnav"><button class="btn-back" onclick="goP(2)">← Terug</button><button class="btn-next" id="n3" onclick="goP(4)" disabled>Volgende →</button></div>
       </div>
 
-      <!-- P4 -->
+      <!-- STAP 4 - BETALING -->
       <div class="panel" id="p4">
         <p class="ptitle">Bevestig & <em style="font-style:italic;color:var(--gold)">Betaal</em></p>
         <div class="summ-box" id="summBox"></div>
@@ -742,7 +705,9 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
             <div class="fg full"><label>Naam op kaart</label><input type="text" placeholder="Jan de Vries"/></div>
           </div>
         </div>
-        <div id="sec-paypal" style="display:none"><div style="background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.15);padding:16px;text-align:center;font-size:.74rem;color:var(--wd);line-height:2">Je wordt doorgestuurd naar PayPal na bevestiging.</div></div>
+        <div id="sec-paypal" style="display:none">
+          <div style="background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.15);padding:16px;text-align:center;font-size:.74rem;color:var(--wd);line-height:2">Je wordt doorgestuurd naar PayPal na bevestiging.</div>
+        </div>
         <div class="terms-row">
           <input type="checkbox" id="termsChk" style="width:15px;height:15px;accent-color:var(--gold);margin-top:2px" onchange="chkPay()">
           <label for="termsChk" style="font-size:.66rem;color:var(--wd);line-height:1.8">Ik ga akkoord met de <a href="#" style="color:var(--gold)">algemene voorwaarden</a>. Ik begrijp dat de exacte locatie na betaling per e-mail wordt onthuld.</label>
@@ -758,14 +723,14 @@ footer{background:var(--bs);border-top:1px solid rgba(200,169,110,.15);padding:5
           <div class="succ-det" id="succDet"></div>
           <p>Binnen 24 uur ontvang je een bevestigingsmail — inclusief de <strong style="color:var(--gold)">geheime locatie</strong>.</p>
           <p style="color:rgba(200,169,110,.5);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;margin-top:18px">Tot dan... het mysterie begint nu.</p>
-          <button class="btn-p" style="margin-top:24px;border:none" onclick="closeModal()">Sluiten</button>
+          <button class="btn-p" style="margin-top:24px;border:none;cursor:pointer" onclick="closeModal()">Sluiten</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const SB_URL='https://eugdqjclpptbneburqtn.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV1Z2RxamNscHB0Ym5lYnVycXRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTc2MDMsImV4cCI6MjA4OTU3MzYwM30.oXpk_sw_f3NGb6Q6Wx-TQfiYXFtnT_29iwkFKl5EqeA';
 
@@ -775,7 +740,11 @@ window.addEventListener('load',()=>{if(!localStorage.getItem('sn_cookie'))setTim
 
 // CURSOR
 const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-if(cur){let mx=0,my=0,rx=0,ry=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});(function loop(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})()}
+if(cur&&window.matchMedia('(pointer:fine)').matches){
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+  (function loop(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+}
 
 // NAV
 window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>50));
@@ -787,15 +756,24 @@ function toggleMenu(){
   document.body.style.overflow=document.getElementById('mobileNav').classList.contains('open')?'hidden':'';
 }
 
-// REVEAL
-document.querySelectorAll('.reveal').forEach(el=>new IntersectionObserver(e=>{if(e[0].isIntersecting)el.classList.add('visible')},{threshold:.1}).observe(el));
+// REVEAL - werkt als bonus animatie, content altijd zichtbaar
+window.addEventListener('DOMContentLoaded',()=>{
+  const reveals=document.querySelectorAll('.reveal');
+  reveals.forEach(el=>el.classList.add('hidden'));
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.remove('hidden');e.target.classList.add('visible')}});
+  },{threshold:.08});
+  reveals.forEach(el=>obs.observe(el));
+  // Fallback: als na 3 seconden nog hidden, maak zichtbaar
+  setTimeout(()=>reveals.forEach(el=>el.classList.remove('hidden')),3000);
+});
 
-// SUPABASE FETCH
+// SUPABASE
 async function sbFetch(path,opts={}){
   return fetch(SB_URL+path,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json',...(opts.headers||{})}, ...opts});
 }
 
-// LOAD AVAILABILITY
+// BESCHIKBAARHEID
 async function loadAvail(){
   try{
     const r=await sbFetch('/rest/v1/beschikbaarheid?select=totaal_nachten,geboekte_nachten&limit=1');
@@ -806,17 +784,19 @@ async function loadAvail(){
       document.getElementById('badgeNum').textContent=rem;
       const c=document.getElementById('ctaNum');if(c)c.textContent=rem;
     }
-  }catch{document.getElementById('cnum').textContent='12'}
+  }catch(e){document.getElementById('cnum').textContent='12'}
 }
 function animCount(el,target){let t0=null;(function s(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/1400,1);el.textContent=Math.floor(p*target);if(p<1)requestAnimationFrame(s);else el.textContent=target})(performance.now())}
 
 // TOAST
 function toast(msg,type='success'){const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+type+' show';setTimeout(()=>t.classList.remove('show'),4500)}
 
-// CHECK DATE AVAILABLE
+// CHECK DATUM
 async function checkDateAvail(boot,datum){
-  const r=await sbFetch(`/rest/v1/reserveringen?boot=eq.${boot}&datum=eq.${datum}&status=neq.geannuleerd&select=id`);
-  const d=await r.json();return!d||d.length===0;
+  try{
+    const r=await sbFetch(`/rest/v1/reserveringen?boot=eq.${boot}&datum=eq.${datum}&status=neq.geannuleerd&select=id`);
+    const d=await r.json();return!d||d.length===0;
+  }catch{return true}
 }
 
 // MODAL
@@ -827,7 +807,7 @@ document.getElementById('closeB').onclick=closeModal;
 ov.onclick=e=>{if(e.target===ov)closeModal()};
 document.querySelectorAll('.openB').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();openModal()}));
 
-// STATE
+// STAAT
 let sBoat=null,sPkg=null,sPkgPr=0,sBank=null,sPay='ideal';
 
 function goP(n){
@@ -859,7 +839,7 @@ function selBoat(c){document.querySelectorAll('.boat-card').forEach(x=>x.classLi
 function selPkg(c){document.querySelectorAll('.pkg-card').forEach(x=>x.classList.remove('sel'));c.classList.add('sel');sPkg=c.dataset.pkg;sPkgPr=parseInt(c.dataset.price);document.getElementById('n2').disabled=false}
 
 const rMap={'1':'Amsterdam & Noord-Holland','2':'Haarlem & Bollenstreek','3':'Utrecht & Amersfoort','4':'Zeeland & West-Brabant','5':'Midden-Brabant & Tilburg','6':'Limburg & Venlo','7':'Overijssel & Twente','8':'Flevoland & Drenthe','9':'Groningen & Friesland'};
-const bRec={'1':'Nature Two (Lith ~100km)','2':'Nature Two (Lith ~110km)','3':'Nature One (Veen ~70km) of Nature Two (Lith ~65km)','4':'Nature One (Veen ~40km)','5':'Nature One of Two (~30-35km)','6':'Nature Two (Lith ~50km)','7':'Nature Two (Lith ~120km)','8':'Nature Two (Lith ~130km)','9':'Nature Two (Lith ~160km)'};
+const bRec={'1':'Nature Two (Lith ~100km)','2':'Nature Two (Lith ~110km)','3':'Nature One (~70km) of Nature Two (~65km)','4':'Nature One (Veen ~40km)','5':'Nature One of Two (~30km)','6':'Nature Two (Lith ~50km)','7':'Nature Two (Lith ~120km)','8':'Nature Two (Lith ~130km)','9':'Nature Two (Lith ~160km)'};
 
 function pcHandle(){
   const pc=document.getElementById('f-pc').value.replace(/\s/g,'');
@@ -868,6 +848,7 @@ function pcHandle(){
   else rb.classList.remove('show');
   chk3();
 }
+
 function chk3(){
   const ok=document.getElementById('f-name').value.trim()&&document.getElementById('f-last').value.trim()&&document.getElementById('f-email').value.includes('@')&&document.getElementById('f-phone').value.trim()&&document.getElementById('f-pc').value.trim().length>=4&&document.getElementById('f-date').value&&document.getElementById('f-pers').value;
   document.getElementById('n3').disabled=!ok;
@@ -897,7 +878,6 @@ async function doPay(){
   const btn=document.getElementById('payBtn');
   const datum=document.getElementById('f-date').value;
   btn.innerHTML='<span class="loading">Controleren</span>';btn.disabled=true;
-  // Check duplicate date
   const avail=await checkDateAvail(sBoat,datum);
   if(!avail){toast(`${datum} is al geboekt voor deze boot. Kies een andere datum.`,'error');btn.innerHTML='🔒 Bevestig & Betaal';btn.disabled=false;chkPay();return}
   btn.innerHTML='<span class="loading">Verwerken</span>';
@@ -907,12 +887,23 @@ async function doPay(){
   try{
     const r=await sbFetch('/rest/v1/reserveringen',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify(data)});
     if(!r.ok)throw new Error('db');
-    // Send confirmation email
     fetch(`${SB_URL}/functions/v1/stuur-bevestigingsmail`,{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY},body:JSON.stringify(data)}).catch(()=>{});
-    // Show success
     const bn={'nature-one':'Nature One','nature-two':'Nature Two'};
     const pn={'wellness':'Natuurlijk Wellness','dining':'Dining Experience','sauna':'Sauna Boot'};
     document.getElementById('succDet').innerHTML=`<p>🚤 <strong>${bn[sBoat]}</strong> — ${pn[sPkg]}</p><p>📅 <strong>${datum}</strong> · ${data.personen} personen</p><p>💰 Totaal: <strong>€${tot},-</strong></p><p>📧 Bevestiging → <strong>${data.email}</strong></p>`;
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     document.getElementById('pSucc').classList.add('active');
-    
+    document.getElementById('stepBar').style.display='none';
+    loadAvail();
+  }catch(e){
+    toast('Er ging iets mis. Bel ons op 06 300 66 444.','error');
+    btn.innerHTML='🔒 Bevestig & Betaal';btn.disabled=false;chkPay();
+  }
+}
+
+// INIT
+loadAvail();
+const di=document.getElementById('f-date');if(di)di.min=new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>
