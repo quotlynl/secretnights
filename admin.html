@@ -8,6 +8,41 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--g:#c8a96e;--gl:#e8d5a3;--b:#0a0a0a;--bs:#111;--bc:#161616;--w:#f5f0e8;--wd:rgba(245,240,232,.65);--fd:'Cormorant Garamond',serif;--fb:'Montserrat',sans-serif;--grn:#4caf82;--red:#e05252;--org:#e08c52;--blu:#5294e2}
+/* LICHT THEMA */
+body.licht{--b:#f4f1ec;--bs:#ffffff;--bc:#f0ece3;--w:#1a1a1a;--wd:rgba(26,26,26,.7)}
+body.licht .topbar{background:#fff;border-bottom-color:rgba(200,169,110,.3)}
+body.licht .zijbalk{background:#fff;border-right-color:rgba(200,169,110,.2)}
+body.licht .nav-item:hover{background:rgba(200,169,110,.08);color:#1a1a1a}
+body.licht .nav-item.actief{background:rgba(200,169,110,.12);color:var(--g)}
+body.licht .hoofd{background:#f4f1ec}
+body.licht .pg-kop{border-bottom-color:rgba(200,169,110,.2)}
+body.licht .stat-kaart{background:#fff;border-color:rgba(200,169,110,.2)}
+body.licht .tbl{background:#fff;border-color:rgba(200,169,110,.2)}
+body.licht thead{background:#f0ece3}
+body.licht td{border-top-color:rgba(200,169,110,.1)}
+body.licht tr:hover td{background:rgba(200,169,110,.05);color:#1a1a1a}
+body.licht .kaart{background:#fff;border-color:rgba(200,169,110,.25)}
+body.licht .kaart-schakelaar{background:#f0ece3;border-color:rgba(200,169,110,.2)}
+body.licht .fg input,body.licht .fg textarea,body.licht .fg select{background:#f8f5f0;border-color:rgba(200,169,110,.3);color:#1a1a1a}
+body.licht .modal-venster{background:#fff}
+body.licht .modal-kop{border-bottom-color:rgba(200,169,110,.2)}
+body.licht .edit-paneel{background:#fff}
+body.licht .edit-kop{background:#f4f1ec;border-bottom-color:rgba(200,169,110,.15)}
+body.licht .veld-blok{background:#f4f1ec;border-color:rgba(200,169,110,.15)}
+body.licht .veld-blok input,body.licht .veld-blok textarea{background:#fff;border-color:rgba(200,169,110,.3);color:#1a1a1a}
+body.licht .edit-voet{border-top-color:rgba(200,169,110,.15)}
+body.licht .tip{background:rgba(200,169,110,.08);border-color:rgba(200,169,110,.2)}
+body.licht .staaf-wrap{background:#fff;border-color:rgba(200,169,110,.2)}
+body.licht .stat-lijstje{background:#fff;border-color:rgba(200,169,110,.2)}
+body.licht .betaal-rij{background:#f4f1ec;border-color:rgba(200,169,110,.2)}
+body.licht .site-schakelaar{background:#f0ece3;border-color:rgba(200,169,110,.25)}
+body.licht .info-box{background:rgba(200,169,110,.08);border-color:rgba(200,169,110,.2)}
+body.licht .pagina-kaart{background:#f4f1ec;border-color:rgba(200,169,110,.2)}
+body.licht .nav-kop{color:rgba(26,26,26,.35)}
+body.licht .stat-label{color:rgba(26,26,26,.45)}
+body.licht .stat-sub{color:rgba(26,26,26,.35)}
+body.licht .staaf{background:rgba(200,169,110,.2);border-top-color:rgba(200,169,110,.6)}
+body.licht .site-preview{background:#e8e4dc}
 body{background:var(--b);color:var(--w);font-family:var(--fb);font-weight:300;min-height:100vh}
 
 /* ====== LOGIN ====== */
@@ -39,6 +74,8 @@ body{background:var(--b);color:var(--w);font-family:var(--fb);font-weight:300;mi
 .tb-link{font-size:.56rem;color:rgba(200,169,110,.45);text-decoration:none;letter-spacing:.1em;text-transform:uppercase}
 .tb-link:hover{color:var(--g)}
 .uit-knop{background:transparent;border:1px solid rgba(200,169,110,.2);color:var(--g);padding:6px 12px;font-family:var(--fb);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.thema-knop{background:transparent;border:1px solid rgba(200,169,110,.2);color:var(--g);width:32px;height:32px;font-size:.9rem;cursor:pointer;border-radius:50%;transition:all .3s;display:flex;align-items:center;justify-content:center}
+.thema-knop:hover{background:rgba(200,169,110,.1)}
 
 /* LAYOUT */
 .lay{display:flex;flex:1;overflow:hidden}
@@ -240,6 +277,7 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
         <label class="schakelaar"><input type="checkbox" id="site-schakelaar" onchange="wisselSite(this.checked)"/><div class="sch-baan"></div></label>
         <span id="site-status" style="font-size:.54rem;letter-spacing:.13em;text-transform:uppercase">—</span>
       </div>
+      <button class="thema-knop" onclick="wisselThema()" id="thema-knop" title="Wissel licht/donker thema">🌙</button>
       <a href="index.html" target="_blank" class="tb-link">↗ Bekijk site</a>
       <button class="uit-knop" onclick="uitloggen()">Uitloggen</button>
     </div>
@@ -332,10 +370,16 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
       <!-- VISUELE EDITOR -->
       <div class="pagina" id="pg-editor" style="display:none;flex-direction:column">
         <div class="pg-kop" style="flex-shrink:0">
-          <div><h1>Visuele <em>Editor</em></h1><p>Klik op ✏️ naast een sectie om teksten aan te passen</p></div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <span id="ed-hint" style="font-size:.56rem;color:rgba(200,169,110,.4)">← Klik op ✏️</span>
-            <button class="btn-goud" id="opslaan-knop" onclick="slaOp()" disabled>Opslaan op website →</button>
+          <div><h1>Visuele <em>Editor</em></h1><p id="ed-modus-tekst">Navigeer vrij door de website — zet ✏️ aan om te bewerken</p></div>
+          <div style="display:flex;gap:12px;align-items:center">
+            <!-- POTLOOD MODUS SCHAKELAAR -->
+            <div style="display:flex;align-items:center;gap:8px;background:var(--bc);border:1px solid rgba(200,169,110,.18);padding:6px 14px;border-radius:20px">
+              <span style="font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wd)">Bewerken</span>
+              <label class="schakelaar" style="width:42px;height:22px"><input type="checkbox" id="bewerkModus" onchange="wisselBewerkModus(this.checked)"/><div class="sch-baan"></div></label>
+              <span id="bewerk-lbl" style="font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,169,110,.4)">Uit</span>
+            </div>
+            <span id="ed-hint" style="font-size:.56rem;color:rgba(200,169,110,.4);display:none">← Klik op ✏️</span>
+            <button class="btn-goud" id="opslaan-knop" onclick="slaOp()" disabled style="display:none">Opslaan op website →</button>
           </div>
         </div>
         <div class="editor-lay">
@@ -343,8 +387,8 @@ tr:hover td{background:rgba(200,169,110,.02);color:var(--w)}
           <div class="site-preview">
             <!-- Iframe met echte website -->
             <iframe id="site-iframe" src="index.html" style="width:100%;height:100%;border:none;display:block"></iframe>
-            <!-- Potlood overlay knoppen bovenop de iframe -->
-            <div id="potlood-overlay" style="position:absolute;inset:0;pointer-events:none;z-index:5">
+            <!-- Potlood overlay knoppen - standaard verborgen -->
+            <div id="potlood-overlay" style="position:absolute;inset:0;pointer-events:none;z-index:5;display:none">
               <!-- Elke sectie krijgt een potlood op de juiste positie -->
               <!-- pointer-events:none op de overlay zelf zodat de iframe klikbaar blijft -->
               <!-- Alleen de potlood knoppen zelf hebben pointer-events:all -->
@@ -915,6 +959,41 @@ function updatePreview() {
   api('/rest/v1/beschikbaarheid?select=totaal_nachten,geboekte_nachten&limit=1').then(function(r) { return r.json(); }).then(function(d) { if (d && d[0]) document.getElementById('pv-teller').textContent = d[0].totaal_nachten - d[0].geboekte_nachten; }).catch(function() {});
 }
 
+// THEMA WISSELEN
+function wisselThema() {
+  var licht = document.body.classList.toggle('licht');
+  localStorage.setItem('sn_thema', licht ? 'licht' : 'donker');
+  document.getElementById('thema-knop').textContent = licht ? '☀️' : '🌙';
+}
+
+// BEWERK MODUS WISSELEN
+function wisselBewerkModus(aan) {
+  var overlay = document.getElementById('potlood-overlay');
+  var hint = document.getElementById('ed-hint');
+  var opslaanKnop = document.getElementById('opslaan-knop');
+  var lbl = document.getElementById('bewerk-lbl');
+  var tekst = document.getElementById('ed-modus-tekst');
+  
+  if (aan) {
+    // Bewerkmode AAN
+    overlay.style.display = 'block';
+    hint.style.display = 'inline';
+    opslaanKnop.style.display = 'inline-block';
+    lbl.textContent = 'Aan';
+    lbl.style.color = 'var(--g)';
+    tekst.textContent = 'Klik op ✏️ naast een sectie om teksten aan te passen';
+  } else {
+    // Bewerkmode UIT - sluit ook editor en verberg alles
+    overlay.style.display = 'none';
+    hint.style.display = 'none';
+    opslaanKnop.style.display = 'none';
+    lbl.textContent = 'Uit';
+    lbl.style.color = 'rgba(200,169,110,.4)';
+    tekst.textContent = 'Navigeer vrij door de website — zet ✏️ aan om te bewerken';
+    sluitEditor();
+  }
+}
+
 function sluitEditor() {
   gekozenSectie = null;
   document.querySelectorAll('.overlay-potlood').forEach(function(el) { el.classList.remove('actief'); });
@@ -936,6 +1015,7 @@ function kiesSectie(key) {
   document.getElementById('edit-kop-sub').textContent = def.label;
   document.getElementById('ed-hint').textContent = '✓ ' + def.label;
   document.getElementById('sluit-editor').style.display = 'flex';
+  document.getElementById('opslaan-knop').style.display = 'inline-block';
   var html = '';
   def.velden.forEach(function(veld) {
     var w = haalTekst(veld.p, veld.s, veld.v) || '';
@@ -1126,6 +1206,16 @@ function toon(bericht, type) {
   t.className = 'toast toon' + (type ? ' ' + type : '');
   setTimeout(function() { t.classList.remove('toon'); }, 3800);
 }
+
+// Laad opgeslagen thema
+(function(){
+  var opgeslagenThema = localStorage.getItem('sn_thema');
+  if (opgeslagenThema === 'licht') {
+    document.body.classList.add('licht');
+    var kb = document.getElementById('thema-knop');
+    if (kb) kb.textContent = '☀️';
+  }
+})();
 
 // Zorg dat eerste pagina zichtbaar is
 document.querySelectorAll('.pagina').forEach(function(p) { p.style.display = 'none'; });
